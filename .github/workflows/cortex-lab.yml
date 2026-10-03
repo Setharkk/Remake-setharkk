@@ -1,0 +1,32 @@
+name: Cortex Lab
+on:
+  pull_request:
+    paths:
+      - 'cortex_lab_v0/**'
+      - '.github/workflows/cortex-lab.yml'
+  push:
+    paths:
+      - 'cortex_lab_v0/**'
+      - '.github/workflows/cortex-lab.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: cortex_lab_v0/requirements.txt
+      - name: Install CPU PyTorch
+        run: python -m pip install -r cortex_lab_v0/requirements.txt --index-url https://download.pytorch.org/whl/cpu
+      - name: Geometry, filesystem and learning tests
+        run: python -m unittest discover -s cortex_lab_v0/tests -v
+      - name: Comparative smoke run
+        run: python -m cortex_lab_v0.run --steps 4 --seeds 0 --device cpu --out "${{ runner.temp }}/cortex-smoke"

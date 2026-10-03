@@ -28,5 +28,17 @@ jobs:
         run: python -m pip install -r cortex_lab_v0/requirements.txt --index-url https://download.pytorch.org/whl/cpu
       - name: Geometry, filesystem and learning tests
         run: python -m unittest discover -s cortex_lab_v0/tests -v
-      - name: Comparative smoke run
-        run: python -m cortex_lab_v0.run --steps 4 --seeds 0 --device cpu --out "${{ runner.temp }}/cortex-smoke"
+      - name: Comparative learning run
+        run: python -m cortex_lab_v0.run --steps 200 --seeds 0 --device cpu --out "${{ runner.temp }}/cortex-smoke"
+      - name: Upload experiment results
+        uses: actions/upload-artifact@v4
+        with:
+          name: cortex-results-${{ matrix.os }}
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/cortex-smoke/**/summary.json
+            ${{ runner.temp }}/cortex-smoke/**/metrics.csv
+            ${{ runner.temp }}/cortex-smoke/**/experiences.jsonl
+            ${{ runner.temp }}/cortex-smoke/**/config.json
+            ${{ runner.temp }}/cortex-smoke/**/weights.pt
+            ${{ runner.temp }}/cortex-smoke/**/replay.json

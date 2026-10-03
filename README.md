@@ -15,3 +15,6 @@ d'apprentissage limité ; ces capacités générales restent à développer.
 
 Les instructions Windows, les formules, le protocole d'évaluation et les
 limites se trouvent dans le README du laboratoire.
+
+Le [premier essai mesuré](EXPERIMENT_RESULTS.md) conserve les résultats de
+la comparaison exécutée sous Windows et Linux, ainsi que ses limites.

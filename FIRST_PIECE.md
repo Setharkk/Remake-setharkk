@@ -138,6 +138,10 @@ et des snapshots du monde. Le chemin de sortie doit être neuf.
 Les observations publiques ne comprennent ni la règle cachée ni les
 prédictions de l'oracle.
 
+La [validation Windows/Linux](FIRST_PIECE_VALIDATION.md) conserve les résultats
+des 14 tests par système et de l'audit aux trois horizons. Ces résultats
+portent sur le laboratoire et un oracle figé, sans apprenant entraîné.
+
 ## Question de recherche suivante
 
 Comment construire une distinction qui explique une erreur répétée,

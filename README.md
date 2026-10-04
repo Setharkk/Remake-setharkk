@@ -9,6 +9,8 @@ Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) précise les unités,
 les horizons d'apprentissage et les limites des conclusions.
 La [première pièce](FIRST_PIECE.md) définit une mémoire qui apprend à distinguer
 et prépare son [laboratoire séquentiel](first_piece/README.md).
+La [validation Windows/Linux](FIRST_PIECE_VALIDATION.md) publie ses contrôles,
+avec 14 tests par système ; aucun nouvel apprenant n'est encore implémenté.
 
 [Cortex Lab V1](cortex_lab_v1/README.md) reste une référence expérimentale.
 Tous ses paramètres neuronaux sont des points hyperboliques appris avec un

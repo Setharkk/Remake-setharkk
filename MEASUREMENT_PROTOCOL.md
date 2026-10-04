@@ -134,3 +134,25 @@ bornée sans affirmer la stabilité future d'une règle qui change.
 Les mesures indépendantes des régimes fixes donnent cette performance.
 Les essais arrêtés pour futilité restent des essais consommés, sans
 conclusion générale d'impossibilité.
+
+## Montée à l’échelle de la première pièce
+
+Le [protocole spécifique](SCALING_PROTOCOL.md) fixe trois échelles, trois
+graines et 10 000 retours par contexte avant et après un changement caché.
+Toujours distinguer le nombre de retours du contexte et le nombre global :
+une admission à 8 365 retours dans le contexte changé peut exiger plus de
+133 000 interactions globales avec seize contextes alternés.
+
+Compter les banques proposées, les contrôles, les mises à jour d’ajustement,
+la mémoire discrète et les paramètres alloués même quand une route n’est
+pas utilisée. La taille JSON du checkpoint n’est pas une mesure de RAM.
+
+Une garde uniforme dans le temps est nécessaire si la taille du complément
+d’une validation dépend de l’ordonnancement adaptatif. Une règle correcte
+sur tous les contextes observés peut conserver deux prolongements différents
+vers un contexte neuf. Le biais de continuité doit donc être décrit et testé,
+sans appeler cette extrapolation une connaissance certaine du monde.
+
+Les résultats de bruit et les baisses temporaires de rétention sont conservés.
+La validation finale emploie des états figés et de nouvelles graines sans
+entraînement ; les contrôles de bruit sont des entraînements séparés.

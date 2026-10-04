@@ -76,3 +76,11 @@ Les contextes déjà observés atteignent la réussite parfaite, mais deux grain
 La recherche départage maintenant les scores indiscernables à 10^−12 en privilégiant une exception dans le périmètre d’erreur fixé avant validation. C’est un biais de continuité explicite : il conserve le défaut de la règle commune quand deux solutions expliquent les mêmes données. Cela ne révèle pas la règle d’un contexte vraiment inconnu et ne garantit pas son comportement. Les deux permutations de numérotation sont testées.
 
 Les seuils, capacités et budgets de validation ne sont pas changés. Le holdout de 40 millions est conservé comme diagnostic ; la version corrigée sera vérifiée avec un nouveau holdout de 50 millions.
+
+## Livraison mesurée
+
+La version finale est testée à la source 5745cb5, workflows 37214331488
+et 37214331510. Le holdout réservé à 50 millions et les contrôles de bruit
+sont exécutés par la source fa83c8c, workflow 37214674910.
+Le [rapport](FIRST_PIECE_SCALE_RESULTS.md) publie les résultats et conserve
+les diagnostics précédents, sans fusionner leurs échantillons avec le holdout final.

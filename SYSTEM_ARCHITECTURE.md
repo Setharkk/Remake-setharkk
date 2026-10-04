@@ -5,13 +5,17 @@ les futurs agents de dépendre des numéros de tâches, du masque de présence,
 des coordonnées S² ou des deux actions du laboratoire. Elles ne garantissent
 pas l'absence de toute évolution de l'architecture.
 
+La [version partagée](FIRST_PIECE_SCALE.md) conserve les mêmes contrats.
+Elle ajoute des symboles opaques et des listes d’actions configurables ;
+sa mémoire et ses règles de routage restent des détails privés de l’apprenant.
+
 ## Responsabilités
 
 | Pièce | Responsabilité | État |
 |---|---|---|
 | Contrats communs, `setharkk/contracts.py` | Messages JSON versionnés, identités, ordre logique, unités | Implémentés, version 1 |
-| Adaptateurs, `FirstPieceAdapter` et `TemporalAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
-| Première pièce neuronale | Mémoire d'événements, prédictions et modification des prototypes S² | Présence et premiers ordres d'apparition ; tentatives et remplacement bornés |
+| Adaptateurs, `FirstPieceAdapter`, `TemporalAdapter` et `SharedAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
+| Première pièce neuronale | Mémoire d'événements, prédictions et modification des prototypes S² | Présence, ordres et combinaisons bornées ; version partagée entre contextes |
 | Cortex coordinateur | Arbitrage des propositions, ressources communes, priorités, journal durable | À construire ; l'adaptateur possède déjà une seule autorité d'apprentissage |
 | Objectifs et planification | Distinguer la demande utilisateur, les objectifs exploratoires et leur valeur | À construire ; un `goal_id` peut déjà accompagner une proposition |
 | Agents | Consulter les prédictions et proposer une action au coordinateur | Agents simulés dans le test ; essaim autonome à construire |
@@ -171,3 +175,28 @@ direct sur les mêmes événements et résultats. Deux agents simulés
 contribuent au même contexte. Une reprise JSON se produit avec une action
 déjà réalisée et un résultat encore en attente ; la livraison répétée du
 résultat ne provoque pas d'apprentissage supplémentaire.
+
+## Capacités de la première pièce partagée
+
+`SharedAdapter` annonce `stream.symbol` et `stream.end`, un vocabulaire
+opaque borné, deux à seize actions et au plus trente-deux contextes. La
+requête choisit toujours un candidat effectivement prédit ; les arguments
+restent vides et la mesure est encore `lab.success/binary`.
+
+La banque S² est commune à tous les contextes. Ceux-ci possèdent des
+tampons d’observations et des statistiques d’erreur, sans réseau privé.
+La recherche peut inclure une égalité de contexte dans une combinaison
+observée, sous un budget global. Une validation prospective protège
+l’admission ; son périmètre est fixé avant les données utilisées pour décider.
+
+L’identité de reprise est `first_piece.shared-compositions-s2.v1`.
+Les bitsets de présence et d’ordre sont des chaînes hexadécimales, pas des
+entiers JSON dépassant 2^53−1. Les références historiques restent restaurables
+par leurs propres adaptateurs ; aucune conversion implicite n’est annoncée.
+
+La copie transactionnelle spécialisée isole les banques, le RNG, les
+listes de mémoire, l’épisode et les résumés mutables. Les anciens enregistrements
+sont immuables en interne et partagés en lecture. Les états exposés aux
+agents sont des copies détachées. Le verrou et la limite d’une action en
+vol restent nécessaires ; le planificateur, l’ingestion de plusieurs flux
+et le journal physique durable ne sont pas fournis par cette optimisation.

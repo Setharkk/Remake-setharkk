@@ -1,0 +1,527 @@
+{
+  "source": "5745cb5f77b138cac341f7ade925757d55255e19",
+  "main_workflow": 37214331488,
+  "legacy_workflow": 37214331510,
+  "fresh_source": "fa83c8cb3d99e310febfb9d6cf799ff71bcbab48",
+  "fresh_workflow": 37214674910,
+  "tests_per_os": 85,
+  "totals": {
+    "total_training_interactions": 1560000,
+    "total_neural_updates": 3602968
+  },
+  "main_evaluation_episodes": 59904,
+  "first_final_evaluation_episodes": 55296,
+  "independent_fresh_evaluation_episodes": 55296,
+  "noise_evaluation_episodes": 3072,
+  "adapter_probe_episodes_per_os": 576,
+  "cross_os": {
+    "numeric_values": 12553,
+    "max_abs_delta": 2.6645352591003757e-15,
+    "tolerance": 1e-10,
+    "mismatches": [],
+    "excluded_keys": "seconds, milliseconds, bytes"
+  },
+  "scales": [
+    {
+      "scale": "small",
+      "symbols": 8,
+      "contexts": 2,
+      "actions": 2,
+      "training_interactions_per_seed": 40000,
+      "intrinsic_live_dof": 64,
+      "intrinsic_peak_dof": 128,
+      "fit_records": 512,
+      "exact_scoped_admission_per_context": [
+        4359,
+        4359,
+        4359
+      ],
+      "attempts": [
+        3,
+        3,
+        3
+      ],
+      "hypotheses_max": 808,
+      "milestones": [
+        {
+          "phase": "before_change",
+          "interactions_per_context": 100,
+          "full_zero": 0.5032552083333334,
+          "full_others": 0.50390625,
+          "control_zero": 0.5032552083333334,
+          "erased_zero": 0.5032552083333334
+        },
+        {
+          "phase": "before_change",
+          "interactions_per_context": 1000,
+          "full_zero": 1,
+          "full_others": 1,
+          "control_zero": 0.4817708333333333,
+          "erased_zero": 0.498046875
+        },
+        {
+          "phase": "before_change",
+          "interactions_per_context": 10000,
+          "full_zero": 1,
+          "full_others": 1,
+          "control_zero": 0.5032552083333334,
+          "erased_zero": 0.5084635416666666
+        },
+        {
+          "phase": "after_change",
+          "interactions_per_context": 100,
+          "full_zero": 0,
+          "full_others": 1,
+          "control_zero": 0.4967447916666667,
+          "erased_zero": 0.5071614583333334
+        },
+        {
+          "phase": "after_change",
+          "interactions_per_context": 1000,
+          "full_zero": 0.3938802083333333,
+          "full_others": 0.5768229166666666,
+          "control_zero": 0.4609375,
+          "erased_zero": 0.4921875
+        },
+        {
+          "phase": "after_change",
+          "interactions_per_context": 10000,
+          "full_zero": 1,
+          "full_others": 1,
+          "control_zero": 0.5,
+          "erased_zero": 0.5123697916666666
+        }
+      ],
+      "windows": {
+        "core_training_seconds": [
+          4.434665300000063,
+          4.460244099999954
+        ],
+        "wire_milliseconds_per_episode": [
+          1.944943749998096,
+          2.0594906249993272
+        ],
+        "final_checkpoint_bytes_max": 27962,
+        "search_seconds_max": 0.01665769999999611
+      },
+      "linux": {
+        "core_training_seconds": [
+          4.366548676999997,
+          4.412248796999997
+        ],
+        "wire_milliseconds_per_episode": [
+          1.8857572343746742,
+          1.9161520781254548
+        ],
+        "final_checkpoint_bytes_max": 27959,
+        "search_seconds_max": 0.015180287999996267
+      },
+      "before_copy_optimization_windows_wire_ms": [
+        8.499003125004734,
+        9.04996249999801
+      ],
+      "before_copy_optimization_linux_wire_ms": [
+        14.873308328122725,
+        14.979765046875038
+      ]
+    },
+    {
+      "scale": "medium",
+      "symbols": 32,
+      "contexts": 8,
+      "actions": 4,
+      "training_interactions_per_seed": 160000,
+      "intrinsic_live_dof": 128,
+      "intrinsic_peak_dof": 256,
+      "fit_records": 2048,
+      "exact_scoped_admission_per_context": [
+        8392,
+        8390,
+        8396
+      ],
+      "attempts": [
+        4,
+        4,
+        4
+      ],
+      "hypotheses_max": 5746,
+      "milestones": [
+        {
+          "phase": "before_change",
+          "interactions_per_context": 100,
+          "full_zero": 0.25390625,
+          "full_others": 0.23958333333333334,
+          "control_zero": 0.25390625,
+          "erased_zero": 0.25390625
+        },
+        {
+          "phase": "before_change",
+          "interactions_per_context": 1000,
+          "full_zero": 1,
+          "full_others": 1,
+          "control_zero": 0.251953125,
+          "erased_zero": 0.2565104166666667
+        },
+        {
+          "phase": "before_change",
+          "interactions_per_context": 10000,
+          "full_zero": 1,
+          "full_others": 1,
+          "control_zero": 0.25,
+          "erased_zero": 0.2526041666666667
+        },
+        {
+          "phase": "after_change",
+          "interactions_per_context": 100,
+          "full_zero": 0,
+          "full_others": 1,
+          "control_zero": 0.2571614583333333,
+          "erased_zero": 0.23697916666666666
+        },
+        {
+          "phase": "after_change",
+          "interactions_per_context": 1000,
+          "full_zero": 0,
+          "full_others": 1,
+          "control_zero": 0.24934895833333334,
+          "erased_zero": 0.2727864583333333
+        },
+        {
+          "phase": "after_change",
+          "interactions_per_context": 10000,
+          "full_zero": 1,
+          "full_others": 1,
+          "control_zero": 0.24544270833333334,
+          "erased_zero": 0.25
+        }
+      ],
+      "windows": {
+        "core_training_seconds": [
+          20.258279900000048,
+          20.37263340000004
+        ],
+        "wire_milliseconds_per_episode": [
+          2.752271874999046,
+          2.7849484374931066
+        ],
+        "final_checkpoint_bytes_max": 265078,
+        "search_seconds_max": 0.15854280000002063
+      },
+      "linux": {
+        "core_training_seconds": [
+          20.087743696999993,
+          20.269873136999976
+        ],
+        "wire_milliseconds_per_episode": [
+          2.600182937501083,
+          2.6277275781256826
+        ],
+        "final_checkpoint_bytes_max": 265076,
+        "search_seconds_max": 0.15450765999999305
+      },
+      "before_copy_optimization_windows_wire_ms": [
+        28.303493750000186,
+        29.072659374997478
+      ],
+      "before_copy_optimization_linux_wire_ms": [
+        48.285213421868534,
+        49.07203617187328
+      ]
+    },
+    {
+      "scale": "large",
+      "symbols": 64,
+      "contexts": 16,
+      "actions": 4,
+      "training_interactions_per_seed": 320000,
+      "intrinsic_live_dof": 128,
+      "intrinsic_peak_dof": 256,
+      "fit_records": 4096,
+      "exact_scoped_admission_per_context": [
+        8365,
+        4247,
+        8358
+      ],
+      "attempts": [
+        4,
+        3,
+        4
+      ],
+      "hypotheses_max": 5748,
+      "milestones": [
+        {
+          "phase": "before_change",
+          "interactions_per_context": 100,
+          "full_zero": 0.25,
+          "full_others": 0.24609375,
+          "control_zero": 0.25,
+          "erased_zero": 0.25
+        },
+        {
+          "phase": "before_change",
+          "interactions_per_context": 1000,
+          "full_zero": 1,
+          "full_others": 1,
+          "control_zero": 0.2545572916666667,
+          "erased_zero": 0.2604166666666667
+        },
+        {
+          "phase": "before_change",
+          "interactions_per_context": 10000,
+          "full_zero": 1,
+          "full_others": 1,
+          "control_zero": 0.24934895833333334,
+          "erased_zero": 0.251953125
+        },
+        {
+          "phase": "after_change",
+          "interactions_per_context": 100,
+          "full_zero": 0,
+          "full_others": 1,
+          "control_zero": 0.24674479166666666,
+          "erased_zero": 0.236328125
+        },
+        {
+          "phase": "after_change",
+          "interactions_per_context": 1000,
+          "full_zero": 0,
+          "full_others": 1,
+          "control_zero": 0.2421875,
+          "erased_zero": 0.2591145833333333
+        },
+        {
+          "phase": "after_change",
+          "interactions_per_context": 10000,
+          "full_zero": 1,
+          "full_others": 1,
+          "control_zero": 0.24088541666666666,
+          "erased_zero": 0.2623697916666667
+        }
+      ],
+      "windows": {
+        "core_training_seconds": [
+          41.67035150000015,
+          42.668489799999975
+        ],
+        "wire_milliseconds_per_episode": [
+          3.004842187506185,
+          3.0948921874962565
+        ],
+        "final_checkpoint_bytes_max": 1589276,
+        "search_seconds_max": 0.24561529999994036
+      },
+      "linux": {
+        "core_training_seconds": [
+          40.417572616,
+          41.66690808300001
+        ],
+        "wire_milliseconds_per_episode": [
+          2.753332703122169,
+          2.7724787968734788
+        ],
+        "final_checkpoint_bytes_max": 1589269,
+        "search_seconds_max": 0.22340817099998844
+      },
+      "before_copy_optimization_windows_wire_ms": [
+        53.27962968750288,
+        54.32166250000492
+      ],
+      "before_copy_optimization_linux_wire_ms": [
+        91.33927118749784,
+        91.86568449999832
+      ]
+    }
+  ],
+  "fresh_scores": {
+    "small": {
+      "context_zero": {
+        "full": {
+          "policy_success": 1,
+          "brier": 0.000004230593724057896
+        },
+        "matched_control": {
+          "policy_success": 0.4967447916666667,
+          "brier": 0.26117471945132226
+        },
+        "order_erased": {
+          "policy_success": 0.4820963541666667,
+          "brier": 0.5157643380683143
+        }
+      },
+      "other_contexts": {
+        "full": {
+          "policy_success": 1,
+          "brier": 0.000004227946619824514
+        },
+        "matched_control": {
+          "policy_success": 0.50390625,
+          "brier": 0.26110339334644306
+        },
+        "order_erased": {
+          "policy_success": 0.5172526041666666,
+          "brier": 0.48079207023562426
+        }
+      },
+      "new_context": {
+        "full": {
+          "policy_success": 1,
+          "brier": 0.000004227371786195982
+        },
+        "matched_control": {
+          "policy_success": 0.5035807291666666,
+          "brier": 0.2618051749818158
+        },
+        "order_erased": {
+          "policy_success": 0.509765625,
+          "brier": 0.48825025546856177
+        }
+      }
+    },
+    "medium": {
+      "context_zero": {
+        "full": {
+          "policy_success": 1,
+          "brier": 0.00004752999926012197
+        },
+        "matched_control": {
+          "policy_success": 0.2529296875,
+          "brier": 0.19510180870599356
+        },
+        "order_erased": {
+          "policy_success": 0.24479166666666666,
+          "brier": 0.37230545761628014
+        }
+      },
+      "other_contexts": {
+        "full": {
+          "policy_success": 1,
+          "brier": 0.000002769724131965216
+        },
+        "matched_control": {
+          "policy_success": 0.2571614583333333,
+          "brier": 0.19433382317587858
+        },
+        "order_erased": {
+          "policy_success": 0.2626953125,
+          "brier": 0.3674336471197462
+        }
+      },
+      "new_context": {
+        "full": {
+          "policy_success": 1,
+          "brier": 0.000002769038390186173
+        },
+        "matched_control": {
+          "policy_success": 0.24544270833333334,
+          "brier": 0.19448608206138437
+        },
+        "order_erased": {
+          "policy_success": 0.2568359375,
+          "brier": 0.37035456776933057
+        }
+      }
+    },
+    "large": {
+      "context_zero": {
+        "full": {
+          "policy_success": 1,
+          "brier": 0.00003516949588368732
+        },
+        "matched_control": {
+          "policy_success": 0.2574869791666667,
+          "brier": 0.19121935934485493
+        },
+        "order_erased": {
+          "policy_success": 0.24446614583333334,
+          "brier": 0.373446136906882
+        }
+      },
+      "other_contexts": {
+        "full": {
+          "policy_success": 1,
+          "brier": 8.272809262682501e-7
+        },
+        "matched_control": {
+          "policy_success": 0.2552083333333333,
+          "brier": 0.19141273700593628
+        },
+        "order_erased": {
+          "policy_success": 0.24837239583333334,
+          "brier": 0.37514568950999455
+        }
+      },
+      "new_context": {
+        "full": {
+          "policy_success": 1,
+          "brier": 8.274911981605503e-7
+        },
+        "matched_control": {
+          "policy_success": 0.25,
+          "brier": 0.19057671029809506
+        },
+        "order_erased": {
+          "policy_success": 0.251953125,
+          "brier": 0.3733606066651222
+        }
+      }
+    }
+  },
+  "noise": {
+    "training_interactions": 60000,
+    "neural_updates": 498880,
+    "admissions": [
+      0,
+      0,
+      0
+    ],
+    "attempts": [
+      16,
+      16,
+      16
+    ],
+    "mean_success": 0.2591145833333333,
+    "mean_brier": 0.19429712802282215,
+    "chance": 0.25,
+    "constant_brier": 0.1875
+  },
+  "checkpoints_artifacts": [
+    {
+      "id": 11307842902,
+      "name": "first-piece-scale-windows-latest",
+      "size_in_bytes": 1190576,
+      "url": "https://api.github.com/repos/Setharkk/Remake-setharkk/actions/artifacts/11307842902",
+      "archive_download_url": "https://api.github.com/repos/Setharkk/Remake-setharkk/actions/artifacts/11307842902/zip",
+      "expired": false,
+      "created_at": "2026-10-04T15:52:06Z",
+      "expires_at": "2027-01-02T15:47:40Z",
+      "updated_at": "2026-10-04T15:52:06Z",
+      "digest": "sha256:c1e12264aed8ce7bb12b05b23cfa3ef30e8bfbe844ece124d14af7fc72d18a40",
+      "workflow_run": {
+        "id": 37214331488,
+        "repository_id": 1403716914,
+        "head_repository_id": 1403716914,
+        "head_branch": "main",
+        "head_sha": "5745cb5f77b138cac341f7ade925757d55255e19"
+      }
+    },
+    {
+      "id": 11307673495,
+      "name": "first-piece-scale-ubuntu-latest",
+      "size_in_bytes": 1190579,
+      "url": "https://api.github.com/repos/Setharkk/Remake-setharkk/actions/artifacts/11307673495",
+      "archive_download_url": "https://api.github.com/repos/Setharkk/Remake-setharkk/actions/artifacts/11307673495/zip",
+      "expired": false,
+      "created_at": "2026-10-04T15:51:51Z",
+      "expires_at": "2027-01-02T15:47:40Z",
+      "updated_at": "2026-10-04T15:51:51Z",
+      "digest": "sha256:5a391aebd9cc0274e72af809bcb5792f46be590dcef433c77a83c1644df8355a",
+      "workflow_run": {
+        "id": 37214331488,
+        "repository_id": 1403716914,
+        "head_repository_id": 1403716914,
+        "head_branch": "main",
+        "head_sha": "5745cb5f77b138cac341f7ade925757d55255e19"
+      }
+    }
+  ]
+}

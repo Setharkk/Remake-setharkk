@@ -10,8 +10,8 @@ sans distinction reçoit les mêmes expériences et le même budget de mises à 
 
 Les [résultats mesurés](FIRST_PIECE_LEARNING_RESULTS.md) publient les 35 tests
 Windows/Linux, les courbes à 100, 1 000 et 10 000 interactions, le transfert,
-la rétention et la reprise JSON exacte. L'apprentissage reste limité à
-une présence de symbole par tâche et aux tâches synthétiques décrites.
+la rétention et la reprise JSON exacte. Ces résultats décrivent la référence de présence,
+limitée à un symbole par tâche dans les tâches synthétiques décrites.
 
 L'[architecture commune](SYSTEM_ARCHITECTURE.md) définit les observations,
 prédictions, propositions d'agents et résultats d'actions versionnés.
@@ -24,6 +24,13 @@ d'une relation dans le même contexte. Elle conserve les contrats communs
 et le réseau neuronal sur S². Les
 [résultats temporels](FIRST_PIECE_TEMPORAL_RESULTS.md) publient les mesures
 et les limites de cette révision.
+
+La [version partagée](FIRST_PIECE_SCALE.md) travaille maintenant la montée
+à l’échelle : vocabulaire opaque, plusieurs actions, combinaisons de relations
+et mêmes poids sphériques entre les contextes. Le
+[rapport de montée à l’échelle](FIRST_PIECE_SCALE_RESULTS.md) publie les
+essais jusqu’à 64 symboles et 16 contextes, les coûts et les limites.
+Elle reste synthétique ; son budget de mémoire et de recherche est explicite.
 
 La [nouvelle base de recherche](RESEARCH_RESET.md) conserve les exigences
 du projet. Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) fixe les unités

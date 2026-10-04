@@ -44,6 +44,25 @@ bornée de premiers ordres d'apparition, des tentatives révisables et le
 remplacement d'une relation dans le même contexte. Les
 [résultats temporels](FIRST_PIECE_TEMPORAL_RESULTS.md) en donnent la portée.
 
+## Première pièce partagée et montée à l’échelle
+
+La [version partagée](FIRST_PIECE_SCALE.md) garde les neurones sur S²,
+les distances géodésiques et les mises à jour exponentielles. Elle reçoit des
+symboles opaques, expose de deux à seize actions et partage la même banque
+entre les contextes. Elle cherche des combinaisons d’au plus trois prédicats.
+Le [rapport](FIRST_PIECE_SCALE_RESULTS.md) distingue les capacités
+configurables des échelles réellement testées.
+
+Quatre actions et huit routes allouent 64 points S² en service, contrôle
+de même capacité compris, soit 128 degrés de liberté intrinsèques. Ce budget
+ne croît pas en passant de huit à seize contextes ; la mémoire discrète,
+elle, augmente avec le nombre de contextes sous une borne configurée.
+L’essai à deux actions possède la moitié de cette capacité.
+
+La bibliothèque de prédicats, les frontières d’épisode et l’exploration
+uniforme sont fournies. La continuité du programme admis est un biais
+explicite, pas une preuve de découverte d’une logique entièrement nouvelle.
+
 ## Exigence géométrique de la référence V1
 
 La V1 donne un sens vérifiable à cette exigence :
@@ -73,14 +92,14 @@ par définition ; cela ne rend pas euclidiens les paramètres qu'ils déplacent.
 
 | Exigence | État |
 |---|---|
-| Réseau lui-même non euclidien | Révision temporelle sur S², 66 tests Windows/Linux ; références de présence et V1 sur H4 conservées |
+| Réseau lui-même non euclidien | Version partagée sur S², 85 tests Windows/Linux ; références temporelle, de présence et V1 sur H4 conservées |
 | Apprendre des résultats de ses actions pendant une interaction | Implémenté dans la première pièce séquentielle et dans la référence de fichiers |
-| Apprentissage continu avec reprise complète | État temporel restaurable ; 32 tentatives par contexte, puis poursuite des mises à jour sans nouvelle recherche |
+| Apprentissage continu avec reprise complète | État partagé restaurable, y compris requête en attente ; 16 essais globaux par défaut, puis poursuite des gradients sans nouvelle recherche |
 | Objectifs proposés par l'utilisateur et objectifs choisis par le système | À développer |
 | Cortex avec un essaim d'agents comme extensions de lui-même | À développer |
 | Dialogue | À développer |
 | Agir sur des applications du PC | À développer |
-| Petit budget de paramètres | Révision temporelle : 32 degrés de liberté actifs pour deux contextes, contrôles ajustés inclus ; 64 au maximum avec deux validations ; référence de présence : 16 actifs |
+| Petit budget de paramètres | Version partagée : 128 degrés de liberté en service pour quatre actions, contrôle inclus ; 256 pendant une validation ; 64/128 pour deux actions ; références conservées |
 
 La V1 contient 34 points par modèle : 6 prototypes de bits d'observation,
 4 d'action, 8 clés de neurones, 8 valeurs de neurones et 8 prototypes de

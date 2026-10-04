@@ -7,7 +7,7 @@ La [nouvelle conception](RESEARCH_RESET.md) reprend ces exigences. Les choix
 mathématiques de la référence V1 restent décrits ci-dessous ;
 la première pièce adopte maintenant une construction sphérique distincte.
 
-## Nouvelle première pièce
+## Première pièce de présence, référence
 
 La [première pièce](FIRST_PIECE.md) utilise un petit réseau à prototypes
 sur S². Tous ses paramètres neuronaux appris sont des points sphériques ;
@@ -39,7 +39,10 @@ Les contraintes du laboratoire sont annoncées par ses capacités, sans
 imposer les numéros de tâches et actions binaires aux interfaces globales.
 Le [protocole temporel suivant](FIRST_PIECE_NEXT_PROTOCOL.md) demande
 d'apprendre l'ordre puis de remplacer une règle sans nouveau contexte.
-Cette capacité n'est pas encore implémentée.
+La [révision temporelle](FIRST_PIECE_TEMPORAL.md) implémente une famille
+bornée de premiers ordres d'apparition, des tentatives révisables et le
+remplacement d'une relation dans le même contexte. Les
+[résultats temporels](FIRST_PIECE_TEMPORAL_RESULTS.md) en donnent la portée.
 
 ## Exigence géométrique de la référence V1
 
@@ -70,14 +73,14 @@ par définition ; cela ne rend pas euclidiens les paramètres qu'ils déplacent.
 
 | Exigence | État |
 |---|---|
-| Réseau lui-même non euclidien | Première pièce sur S², 35 tests ; référence V1 sur H4 conservée |
+| Réseau lui-même non euclidien | Révision temporelle sur S², 66 tests Windows/Linux ; références de présence et V1 sur H4 conservées |
 | Apprendre des résultats de ses actions pendant une interaction | Implémenté dans la première pièce séquentielle et dans la référence de fichiers |
-| Apprentissage continu avec reprise complète | État complet de la première pièce restaurable ; expérience bornée, une proposition par tâche |
+| Apprentissage continu avec reprise complète | État temporel restaurable ; 32 tentatives par contexte, puis poursuite des mises à jour sans nouvelle recherche |
 | Objectifs proposés par l'utilisateur et objectifs choisis par le système | À développer |
 | Cortex avec un essaim d'agents comme extensions de lui-même | À développer |
 | Dialogue | À développer |
 | Agir sur des applications du PC | À développer |
-| Petit budget de paramètres | Première pièce : 16 degrés de liberté neuronaux actifs pour deux tâches ; référence V1 : 408 pour trois modèles |
+| Petit budget de paramètres | Révision temporelle : 32 degrés de liberté actifs pour deux contextes, contrôles ajustés inclus ; 64 au maximum avec deux validations ; référence de présence : 16 actifs |
 
 La V1 contient 34 points par modèle : 6 prototypes de bits d'observation,
 4 d'action, 8 clés de neurones, 8 valeurs de neurones et 8 prototypes de

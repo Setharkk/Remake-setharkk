@@ -18,9 +18,12 @@ prédictions, propositions d'agents et résultats d'actions versionnés.
 La première pièce expose cet adaptateur sans partager ses détails neuronaux.
 La [validation d'intégration](SYSTEM_INTEGRATION_VALIDATION.md) publie
 51 tests Windows/Linux et la parité avec l'apprenant direct.
-Le [protocole suivant](FIRST_PIECE_NEXT_PROTOCOL.md) cible l'ordre des
-événements et le remplacement d'une règle dans le même contexte ; il reste
-à implémenter.
+La [première pièce révisable](FIRST_PIECE_TEMPORAL.md) ajoute une mémoire
+de premier ordre d'apparition, des tentatives bornées et le remplacement
+d'une relation dans le même contexte. Elle conserve les contrats communs
+et le réseau neuronal sur S². Les
+[résultats temporels](FIRST_PIECE_TEMPORAL_RESULTS.md) publient les mesures
+et les limites de cette révision.
 
 La [nouvelle base de recherche](RESEARCH_RESET.md) conserve les exigences
 du projet. Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) fixe les unités

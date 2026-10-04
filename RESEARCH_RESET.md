@@ -58,8 +58,11 @@ les observations et leur historique une distinction qui explique cette
 différence, puis teste si elle aide sur de nouvelles expériences.
 
 La première pièce met en œuvre une forme limitée de cette hypothèse :
-proposer et conserver une présence de symbole par tâche. Les règles sont
-précisées dans sa définition ; aucune innovation scientifique n'est démontrée.
+proposer et conserver une présence de symbole par tâche. La
+[révision temporelle](FIRST_PIECE_TEMPORAL.md) ajoute des premiers ordres
+d'apparition, des tentatives bornées et un remplacement dans le même contexte.
+Les [mesures](FIRST_PIECE_TEMPORAL_RESULTS.md) en précisent la portée ;
+aucune innovation scientifique générale n'est démontrée.
 
 Une divergence de résultats peut venir du hasard ou d'une information
 inaccessible. La règle doit traiter ces cas ; elle ne doit pas créer

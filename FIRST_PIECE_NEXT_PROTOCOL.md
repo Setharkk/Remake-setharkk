@@ -1,7 +1,8 @@
 # Prochaine révision de la première pièce : ordre et remplacement
 
-Ce protocole est la prochaine expérience à implémenter. Le modèle actuel
-reste un apprenant de présence. Les [contrats communs](SYSTEM_ARCHITECTURE.md)
+Ce protocole a guidé la [révision temporelle](FIRST_PIECE_TEMPORAL.md)
+désormais implémentée et ses [mesures](FIRST_PIECE_TEMPORAL_RESULTS.md).
+L'apprenant de présence reste conservé comme référence. Les [contrats communs](SYSTEM_ARCHITECTURE.md)
 sont préparés pour que cette révision n'oblige pas les agents à manipuler
 sa mémoire interne.
 
@@ -111,6 +112,7 @@ de régimes fixes. Tout arrêt ou essai supplémentaire est compté.
 - Les mêmes contrats de prédictions, propositions et résultats restent utilisés.
 - Aucune conclusion générale d'autonomie ne repose sur cette seule tâche.
 
-Aucun de ces résultats temporels n'est encore revendiqué. Le travail
-présent fixe les frontières et les vérifications nécessaires pour que
-la prochaine modification de l'apprenant s'insère dans le même système.
+Les [résultats temporels](FIRST_PIECE_TEMPORAL_RESULTS.md) précisent les
+critères mesurés, les budgets effectivement employés et les limites.
+La révision conserve les interfaces communes ; l'absence d'interférence
+dans une mémoire neuronale partagée reste une question ultérieure.

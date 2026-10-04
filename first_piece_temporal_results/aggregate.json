@@ -1,0 +1,1107 @@
+{
+  "protocol": 1,
+  "training_source_commit": "b9c38fe8a69f248b8665e6addc685cf84f6331be",
+  "training_workflow_run": 37208231509,
+  "final_evaluation_workflow_run": 37209018245,
+  "study": {
+    "scenarios": {
+      "stationary": {
+        "horizons": {
+          "before:100": {
+            "full": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            },
+            "order_erased": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            },
+            "presence_reference": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            },
+            "without_order": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            }
+          },
+          "before:1000": {
+            "full": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            },
+            "order_erased": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            },
+            "presence_reference": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            },
+            "without_order": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            }
+          },
+          "before:10000": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.000001206025097655829,
+              "nll": 0.0010987251127827795
+            },
+            "order_erased": {
+              "policy_success": 0.492578125,
+              "brier": 0.5063037475135502,
+              "nll": 3.455978282701717
+            },
+            "presence_reference": {
+              "policy_success": 0.4921875,
+              "brier": 0.2574967340961508,
+              "nll": 0.7085055248051468
+            },
+            "without_order": {
+              "policy_success": 0.4921875,
+              "brier": 0.2576732434112724,
+              "nll": 0.7088856102633843
+            }
+          },
+          "after:100": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.0000011894581103664018,
+              "nll": 0.0010911509203954018
+            },
+            "order_erased": {
+              "policy_success": 0.49140625,
+              "brier": 0.5074800894950888,
+              "nll": 3.467170470692298
+            },
+            "presence_reference": {
+              "policy_success": 0.51171875,
+              "brier": 0.2554828495290017,
+              "nll": 0.7049247625191468
+            },
+            "without_order": {
+              "policy_success": 0.51171875,
+              "brier": 0.2559419619157053,
+              "nll": 0.7059291087985164
+            }
+          },
+          "after:1000": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.0000010629047979762698,
+              "nll": 0.0010314322918608919
+            },
+            "order_erased": {
+              "policy_success": 0.511328125,
+              "brier": 0.48765958460282965,
+              "nll": 3.3584967307770994
+            },
+            "presence_reference": {
+              "policy_success": 0.49453125,
+              "brier": 0.26337555235750815,
+              "nll": 0.7217693960433007
+            },
+            "without_order": {
+              "policy_success": 0.49453125,
+              "brier": 0.26402563025104664,
+              "nll": 0.7232166738969742
+            }
+          },
+          "after:10000": {
+            "full": {
+              "policy_success": 1,
+              "brier": 5.005021595784102e-7,
+              "nll": 0.0007076851988869636
+            },
+            "order_erased": {
+              "policy_success": 0.483984375,
+              "brier": 0.5152821763370646,
+              "nll": 3.740741388413914
+            },
+            "presence_reference": {
+              "policy_success": 0.50390625,
+              "brier": 0.2539382629668701,
+              "nll": 0.7011286789096499
+            },
+            "without_order": {
+              "policy_success": 0.50390625,
+              "brier": 0.25407095880859126,
+              "nll": 0.7013994866518851
+            }
+          }
+        },
+        "recovery": [
+          {
+            "seed": 0,
+            "exposure": null
+          },
+          {
+            "seed": 1,
+            "exposure": null
+          },
+          {
+            "seed": 2,
+            "exposure": null
+          },
+          {
+            "seed": 3,
+            "exposure": null
+          },
+          {
+            "seed": 4,
+            "exposure": null
+          }
+        ],
+        "final_admissions": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "final_replacements": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "attempts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "transfer_full": 1,
+        "retention_full": null
+      },
+      "inversion": {
+        "horizons": {
+          "before:100": {
+            "full": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            },
+            "order_erased": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            },
+            "presence_reference": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            },
+            "without_order": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            }
+          },
+          "before:1000": {
+            "full": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            },
+            "order_erased": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            },
+            "presence_reference": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            },
+            "without_order": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            }
+          },
+          "before:10000": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.000001206025097655829,
+              "nll": 0.0010987251127827795
+            },
+            "order_erased": {
+              "policy_success": 0.492578125,
+              "brier": 0.5063037475135502,
+              "nll": 3.455978282701717
+            },
+            "presence_reference": {
+              "policy_success": 0.4921875,
+              "brier": 0.2574967340961508,
+              "nll": 0.7085055248051468
+            },
+            "without_order": {
+              "policy_success": 0.4921875,
+              "brier": 0.2576732434112724,
+              "nll": 0.7088856102633843
+            }
+          },
+          "after:100": {
+            "full": {
+              "policy_success": 0,
+              "brier": 0.5448513908620288,
+              "nll": 1.4281093113184633
+            },
+            "order_erased": {
+              "policy_success": 0.50859375,
+              "brier": 0.32851526099414674,
+              "nll": 0.9362516696519307
+            },
+            "presence_reference": {
+              "policy_success": 0.51171875,
+              "brier": 0.2557002812375264,
+              "nll": 0.7048967354167945
+            },
+            "without_order": {
+              "policy_success": 0.489453125,
+              "brier": 0.2587810096000862,
+              "nll": 0.7115230811266372
+            }
+          },
+          "after:1000": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.0003966839412915474,
+              "nll": 0.0200861264286146
+            },
+            "order_erased": {
+              "policy_success": 0.511328125,
+              "brier": 0.4690982767301627,
+              "nll": 1.9118073001338018
+            },
+            "presence_reference": {
+              "policy_success": 0.49453125,
+              "brier": 0.25762838511339364,
+              "nll": 0.7088898494956586
+            },
+            "without_order": {
+              "policy_success": 0.50859375,
+              "brier": 0.2582501229708403,
+              "nll": 0.7102815215642646
+            }
+          },
+          "after:10000": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.00000413483812760687,
+              "nll": 0.0020352778589358676
+            },
+            "order_erased": {
+              "policy_success": 0.483984375,
+              "brier": 0.5139091738392421,
+              "nll": 3.196366352180612
+            },
+            "presence_reference": {
+              "policy_success": 0.50390625,
+              "brier": 0.25333860794809804,
+              "nll": 0.6998974558217643
+            },
+            "without_order": {
+              "policy_success": 0.49140625,
+              "brier": 0.255334523341585,
+              "nll": 0.7040336557506526
+            }
+          }
+        },
+        "recovery": [
+          {
+            "seed": 0,
+            "exposure": 256
+          },
+          {
+            "seed": 1,
+            "exposure": 256
+          },
+          {
+            "seed": 2,
+            "exposure": 256
+          },
+          {
+            "seed": 3,
+            "exposure": 256
+          },
+          {
+            "seed": 4,
+            "exposure": 256
+          }
+        ],
+        "final_admissions": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "final_replacements": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "attempts": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "transfer_full": 1,
+        "retention_full": 1
+      },
+      "relation_switch": {
+        "horizons": {
+          "before:100": {
+            "full": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            },
+            "order_erased": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            },
+            "presence_reference": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            },
+            "without_order": {
+              "policy_success": 0.5125,
+              "brier": 0.26961622965788473,
+              "nll": 0.7377753017546053
+            }
+          },
+          "before:1000": {
+            "full": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            },
+            "order_erased": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            },
+            "presence_reference": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            },
+            "without_order": {
+              "policy_success": 0.485546875,
+              "brier": 0.2733187569056629,
+              "nll": 0.742924360148178
+            }
+          },
+          "before:10000": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.000001206025097655829,
+              "nll": 0.0010987251127827795
+            },
+            "order_erased": {
+              "policy_success": 0.492578125,
+              "brier": 0.5063037475135502,
+              "nll": 3.455978282701717
+            },
+            "presence_reference": {
+              "policy_success": 0.4921875,
+              "brier": 0.2574967340961508,
+              "nll": 0.7085055248051468
+            },
+            "without_order": {
+              "policy_success": 0.4921875,
+              "brier": 0.2576732434112724,
+              "nll": 0.7088856102633843
+            }
+          },
+          "after:100": {
+            "full": {
+              "policy_success": 0.499609375,
+              "brier": 0.4756701906916003,
+              "nll": 1.9560162289148093
+            },
+            "order_erased": {
+              "policy_success": 0.508984375,
+              "brier": 0.46537970773554554,
+              "nll": 1.9109619980607335
+            },
+            "presence_reference": {
+              "policy_success": 0.505859375,
+              "brier": 0.2531088095789743,
+              "nll": 0.6996924799811326
+            },
+            "without_order": {
+              "policy_success": 0.51015625,
+              "brier": 0.2560317525654247,
+              "nll": 0.7057708308571204
+            }
+          },
+          "after:1000": {
+            "full": {
+              "policy_success": 0.499609375,
+              "brier": 0.26129380347483383,
+              "nll": 0.7172871447981144
+            },
+            "order_erased": {
+              "policy_success": 0.5046875,
+              "brier": 0.2580485818832844,
+              "nll": 0.7098865061443801
+            },
+            "presence_reference": {
+              "policy_success": 0.50625,
+              "brier": 0.2595646968160955,
+              "nll": 0.713936846980413
+            },
+            "without_order": {
+              "policy_success": 0.496484375,
+              "brier": 0.25821996591467544,
+              "nll": 0.7104627124413236
+            }
+          },
+          "after:10000": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.0000018240646391730054,
+              "nll": 0.0013303066861986472
+            },
+            "order_erased": {
+              "policy_success": 0.51640625,
+              "brier": 0.4823041291493649,
+              "nll": 3.209577200246664
+            },
+            "presence_reference": {
+              "policy_success": 0.4953125,
+              "brier": 0.2571159543356227,
+              "nll": 0.7081035550838525
+            },
+            "without_order": {
+              "policy_success": 0.4984375,
+              "brier": 0.2579650192717053,
+              "nll": 0.7099802387869033
+            }
+          }
+        },
+        "recovery": [
+          {
+            "seed": 0,
+            "exposure": 1536
+          },
+          {
+            "seed": 1,
+            "exposure": 5632
+          },
+          {
+            "seed": 2,
+            "exposure": 2560
+          },
+          {
+            "seed": 3,
+            "exposure": 1536
+          },
+          {
+            "seed": 4,
+            "exposure": 5632
+          }
+        ],
+        "final_admissions": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "final_replacements": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "attempts": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "transfer_full": 1,
+        "retention_full": 1
+      },
+      "noise": {
+        "horizons": {
+          "before:100": {
+            "full": {
+              "policy_success": 0.4921875,
+              "brier": 0.27334294840714735,
+              "nll": 0.7478456912963406
+            },
+            "order_erased": {
+              "policy_success": 0.4921875,
+              "brier": 0.27334294840714735,
+              "nll": 0.7478456912963406
+            },
+            "presence_reference": {
+              "policy_success": 0.4921875,
+              "brier": 0.27334294840714735,
+              "nll": 0.7478456912963406
+            },
+            "without_order": {
+              "policy_success": 0.4921875,
+              "brier": 0.27334294840714735,
+              "nll": 0.7478456912963406
+            }
+          },
+          "before:1000": {
+            "full": {
+              "policy_success": 0.497265625,
+              "brier": 0.27296209384467474,
+              "nll": 0.7446394052031717
+            },
+            "order_erased": {
+              "policy_success": 0.497265625,
+              "brier": 0.27296209384467474,
+              "nll": 0.7446394052031717
+            },
+            "presence_reference": {
+              "policy_success": 0.497265625,
+              "brier": 0.27296209384467474,
+              "nll": 0.7446394052031717
+            },
+            "without_order": {
+              "policy_success": 0.497265625,
+              "brier": 0.27296209384467474,
+              "nll": 0.7446394052031717
+            }
+          },
+          "before:10000": {
+            "full": {
+              "policy_success": 0.51328125,
+              "brier": 0.2586408649166396,
+              "nll": 0.7108141208760755
+            },
+            "order_erased": {
+              "policy_success": 0.51328125,
+              "brier": 0.2586408649166396,
+              "nll": 0.7108141208760755
+            },
+            "presence_reference": {
+              "policy_success": 0.51328125,
+              "brier": 0.25864137177910773,
+              "nll": 0.7108151808772446
+            },
+            "without_order": {
+              "policy_success": 0.51328125,
+              "brier": 0.2586408649166396,
+              "nll": 0.7108141208760755
+            }
+          }
+        },
+        "recovery": [
+          {
+            "seed": 0,
+            "exposure": null
+          },
+          {
+            "seed": 1,
+            "exposure": null
+          },
+          {
+            "seed": 2,
+            "exposure": null
+          },
+          {
+            "seed": 3,
+            "exposure": null
+          },
+          {
+            "seed": 4,
+            "exposure": null
+          }
+        ],
+        "final_admissions": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "final_replacements": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "attempts": [
+          11,
+          16,
+          16,
+          19,
+          11
+        ],
+        "transfer_full": null,
+        "retention_full": null
+      },
+      "action_only": {
+        "horizons": {
+          "before:100": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.001314789472814031,
+              "nll": 0.036595427345680165
+            },
+            "order_erased": {
+              "policy_success": 1,
+              "brier": 0.001314789472814031,
+              "nll": 0.036595427345680165
+            },
+            "presence_reference": {
+              "policy_success": 1,
+              "brier": 0.001314789472814031,
+              "nll": 0.036595427345680165
+            },
+            "without_order": {
+              "policy_success": 1,
+              "brier": 0.001314789472814031,
+              "nll": 0.036595427345680165
+            }
+          },
+          "before:1000": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.000023559549526136763,
+              "nll": 0.0048634518164440395
+            },
+            "order_erased": {
+              "policy_success": 1,
+              "brier": 0.000023559549526136763,
+              "nll": 0.0048634518164440395
+            },
+            "presence_reference": {
+              "policy_success": 1,
+              "brier": 0.000023559549526136763,
+              "nll": 0.0048634518164440395
+            },
+            "without_order": {
+              "policy_success": 1,
+              "brier": 0.000023559549526136763,
+              "nll": 0.0048634518164440395
+            }
+          },
+          "before:10000": {
+            "full": {
+              "policy_success": 1,
+              "brier": 0.0000010589836710293305,
+              "nll": 0.0010295662739201103
+            },
+            "order_erased": {
+              "policy_success": 1,
+              "brier": 0.0000010589836710293305,
+              "nll": 0.0010295662739201103
+            },
+            "presence_reference": {
+              "policy_success": 1,
+              "brier": 0.0000010591208529920717,
+              "nll": 0.001029632799818689
+            },
+            "without_order": {
+              "policy_success": 1,
+              "brier": 0.0000010589836710293305,
+              "nll": 0.0010295662739201103
+            }
+          }
+        },
+        "recovery": [
+          {
+            "seed": 0,
+            "exposure": null
+          },
+          {
+            "seed": 1,
+            "exposure": null
+          },
+          {
+            "seed": 2,
+            "exposure": null
+          },
+          {
+            "seed": 3,
+            "exposure": null
+          },
+          {
+            "seed": 4,
+            "exposure": null
+          }
+        ],
+        "final_admissions": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "final_replacements": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "attempts": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "transfer_full": null,
+        "retention_full": null
+      }
+    },
+    "totals": {
+      "world_training_interactions": 400000,
+      "other_context_interactions": 20000,
+      "total_training_interactions": 420000,
+      "temporal_neural_updates": 897856,
+      "primary_and_transfer_retention_eval_episodes": 81920,
+      "counterfactual_policy_actions": 322560,
+      "recovery_probes_in_addition": "one 128-episode evaluation per 256 interactions until threshold met",
+      "max_sampled_checkpoint_bytes": 308702,
+      "max_sampled_neural_points": 24,
+      "recovery_probe_count": 71,
+      "recovery_evaluation_episodes": 9088,
+      "recovery_counterfactual_actions": 27264,
+      "total_evaluation_episodes": 91008,
+      "total_counterfactual_policy_actions": 349824
+    },
+    "checks": {
+      "temporal_cross_platform": {
+        "numeric_values": 18555,
+        "max_abs_difference": 1.0658141036401503e-14,
+        "mismatches": []
+      },
+      "presence_regression": {
+        "windows": {
+          "numeric_values": 4241,
+          "max_abs_difference": 0,
+          "mismatches": []
+        },
+        "linux": {
+          "numeric_values": 4241,
+          "max_abs_difference": 0,
+          "mismatches": []
+        }
+      }
+    },
+    "correction": {
+      "before_source": "9c0ddbdb91d3ab8e782e64f8e6ca6c9bdc622983",
+      "before_run": 37207763620,
+      "after_source": "b9c38fe8a69f248b8665e6addc685cf84f6331be",
+      "after_run": 37208231509,
+      "inversion_before_recovery": [
+        {
+          "seed": 0,
+          "exposure": 4352
+        },
+        {
+          "seed": 1,
+          "exposure": 4352
+        },
+        {
+          "seed": 2,
+          "exposure": 4352
+        },
+        {
+          "seed": 3,
+          "exposure": 4352
+        },
+        {
+          "seed": 4,
+          "exposure": 4352
+        }
+      ],
+      "inversion_after_recovery": [
+        {
+          "seed": 0,
+          "exposure": 256
+        },
+        {
+          "seed": 1,
+          "exposure": 256
+        },
+        {
+          "seed": 2,
+          "exposure": 256
+        },
+        {
+          "seed": 3,
+          "exposure": 256
+        },
+        {
+          "seed": 4,
+          "exposure": 256
+        }
+      ],
+      "same_training_exposure": true,
+      "served_models_learning_during_validation": true
+    }
+  },
+  "final_evaluation": {
+    "scenarios": {
+      "stationary": {
+        "primary": {
+          "full": {
+            "policy_success": 1,
+            "brier": 5.008718339126652e-7,
+            "nll": 0.0007079462271379065
+          },
+          "order_erased": {
+            "policy_success": 0.5154296875,
+            "brier": 0.48388176695584734,
+            "nll": 3.5129531055322154
+          },
+          "presence_reference": {
+            "policy_success": 0.4958984375,
+            "brier": 0.2537773361271992,
+            "nll": 0.7007941575587657
+          },
+          "without_order": {
+            "policy_success": 0.4958984375,
+            "brier": 0.25386537405186294,
+            "nll": 0.7009748525777314
+          }
+        },
+        "transfer": {
+          "full": {
+            "policy_success": 1,
+            "brier": 5.008750908895685e-7,
+            "nll": 0.0007079484842059086
+          },
+          "order_erased": {
+            "policy_success": 0.5064453125,
+            "brier": 0.4928532786244645,
+            "nll": 3.5780119694970827
+          },
+          "presence_reference": {
+            "policy_success": 0.5056640625,
+            "brier": 0.25321245070736886,
+            "nll": 0.6996694656145739
+          },
+          "without_order": {
+            "policy_success": 0.5056640625,
+            "brier": 0.2532909401665846,
+            "nll": 0.6998309689707437
+          }
+        }
+      },
+      "inversion": {
+        "primary": {
+          "full": {
+            "policy_success": 1,
+            "brier": 0.000004136055923788677,
+            "nll": 0.0020355689730753176
+          },
+          "order_erased": {
+            "policy_success": 0.49765625,
+            "brier": 0.5002936201914963,
+            "nll": 3.1118315053740395
+          },
+          "presence_reference": {
+            "policy_success": 0.505859375,
+            "brier": 0.2527036638957554,
+            "nll": 0.6986176091440353
+          },
+          "without_order": {
+            "policy_success": 0.502734375,
+            "brier": 0.2543578026881907,
+            "nll": 0.702096720790937
+          }
+        },
+        "transfer": {
+          "full": {
+            "policy_success": 1,
+            "brier": 0.0000041357861990114424,
+            "nll": 0.0020355040960974673
+          },
+          "order_erased": {
+            "policy_success": 0.4998046875,
+            "brier": 0.49815399376528224,
+            "nll": 3.0985375773021895
+          },
+          "presence_reference": {
+            "policy_success": 0.4990234375,
+            "brier": 0.2530818464907265,
+            "nll": 0.6993771094822566
+          },
+          "without_order": {
+            "policy_success": 0.5029296875,
+            "brier": 0.25414779245393,
+            "nll": 0.7016599529574694
+          }
+        },
+        "retention": {
+          "full": {
+            "policy_success": 1,
+            "brier": 0.000024633043585175938,
+            "nll": 0.004970271618389066
+          },
+          "order_erased": {
+            "policy_success": 0.48828125,
+            "brier": 0.506688231460956,
+            "nll": 2.7204889328940074
+          },
+          "without_order": {
+            "policy_success": 0.496875,
+            "brier": 0.2680798446588202,
+            "nll": 0.7320514571198182
+          }
+        }
+      },
+      "relation_switch": {
+        "primary": {
+          "full": {
+            "policy_success": 1,
+            "brier": 0.0000018199042684191176,
+            "nll": 0.0013290027142006185
+          },
+          "order_erased": {
+            "policy_success": 0.4822265625,
+            "brier": 0.5163847380264401,
+            "nll": 3.4335566879745976
+          },
+          "presence_reference": {
+            "policy_success": 0.50078125,
+            "brier": 0.25525560595994373,
+            "nll": 0.7044082941579545
+          },
+          "without_order": {
+            "policy_success": 0.487109375,
+            "brier": 0.25763158049848883,
+            "nll": 0.709538789354732
+          }
+        },
+        "transfer": {
+          "full": {
+            "policy_success": 1,
+            "brier": 0.000001822833442847692,
+            "nll": 0.0013299029365463658
+          },
+          "order_erased": {
+            "policy_success": 0.5021484375,
+            "brier": 0.49652725789349644,
+            "nll": 3.305503096110897
+          },
+          "presence_reference": {
+            "policy_success": 0.4859375,
+            "brier": 0.25607420265458614,
+            "nll": 0.7062553109739608
+          },
+          "without_order": {
+            "policy_success": 0.495703125,
+            "brier": 0.25748204875638814,
+            "nll": 0.7091046596345821
+          }
+        },
+        "retention": {
+          "full": {
+            "policy_success": 1,
+            "brier": 0.00002458256132373071,
+            "nll": 0.004965022387496587
+          },
+          "order_erased": {
+            "policy_success": 0.489453125,
+            "brier": 0.5055194221036278,
+            "nll": 2.713401101499953
+          },
+          "without_order": {
+            "policy_success": 0.498828125,
+            "brier": 0.2700118867233333,
+            "nll": 0.7362264067350549
+          }
+        }
+      },
+      "noise": {
+        "primary": {
+          "full": {
+            "policy_success": 0.5005859375,
+            "brier": 0.2572587430881394,
+            "nll": 0.7080356723467325
+          },
+          "order_erased": {
+            "policy_success": 0.5005859375,
+            "brier": 0.2572587430881394,
+            "nll": 0.7080356723467325
+          },
+          "presence_reference": {
+            "policy_success": 0.5005859375,
+            "brier": 0.2572591282112452,
+            "nll": 0.7080364758807383
+          },
+          "without_order": {
+            "policy_success": 0.5005859375,
+            "brier": 0.2572587430881394,
+            "nll": 0.7080356723467325
+          }
+        }
+      },
+      "action_only": {
+        "primary": {
+          "full": {
+            "policy_success": 1,
+            "brier": 0.000001058819579239122,
+            "nll": 0.001029486766803997
+          },
+          "order_erased": {
+            "policy_success": 1,
+            "brier": 0.000001058819579239122,
+            "nll": 0.001029486766803997
+          },
+          "presence_reference": {
+            "policy_success": 1,
+            "brier": 0.0000010589514136305652,
+            "nll": 0.0010295507172953717
+          },
+          "without_order": {
+            "policy_success": 1,
+            "brier": 0.000001058819579239122,
+            "nll": 0.001029486766803997
+          }
+        }
+      }
+    },
+    "evaluation_episodes": 46080,
+    "counterfactual_actions": 179200,
+    "new_training_interactions": 0
+  },
+  "final_cross_platform": {
+    "numeric_values": 798,
+    "max_abs_difference": 2.220446049250313e-15,
+    "mismatches": []
+  },
+  "tolerance": 1e-10,
+  "excluded_cross_platform_fields": [
+    "elapsed_seconds",
+    "checkpoint_bytes"
+  ]
+}

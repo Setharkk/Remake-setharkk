@@ -1,5 +1,10 @@
 # Première pièce : distinguer des contextes à partir d'événements
 
+Ce document conserve la référence de présence. La
+[révision temporelle](FIRST_PIECE_TEMPORAL.md) et ses
+[résultats](FIRST_PIECE_TEMPORAL_RESULTS.md) décrivent l'extension désormais
+disponible pour l'ordre et les changements cachés.
+
 La première pièce contient désormais un apprenant limité et mesurable :
 il reçoit les événements un par un, apprend à prédire le résultat d'une
 action et peut conserver une distinction fondée sur son passé.
@@ -242,3 +247,15 @@ réévaluée.
 Le dialogue, les objectifs choisis par le système, la création d'agents,
 les opérations sur le PC et l'apprentissage de règles plus générales
 restent les étapes suivantes du projet.
+
+## Révision temporelle disponible
+
+La [révision temporelle](FIRST_PIECE_TEMPORAL.md) ajoute une mémoire
+bornée du premier ordre d'apparition et des tentatives révisables.
+Elle peut conserver une nouvelle relation dans le même contexte,
+sans faire croître le nombre de tâches pour absorber le changement.
+Les [résultats](FIRST_PIECE_TEMPORAL_RESULTS.md) mesurent ses capacités
+et sa rétention par contextes séparés.
+
+Ce document conserve les formules, limites et résultats de l'apprenant
+de présence initial, toujours disponible comme référence.

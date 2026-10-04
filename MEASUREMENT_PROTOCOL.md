@@ -115,3 +115,22 @@ Ce protocole guide la [nouvelle conception](RESEARCH_RESET.md) et
 est désormais appliqué dans le [rapport de la première pièce](FIRST_PIECE_LEARNING_RESULTS.md),
 avec une courbe exécutée jusqu'à 10 000 interactions par tâche. Les V0/V1
 n'ont pas été prolongées dans cette étape.
+
+## Extension à l'ordre et aux changements cachés
+
+Le [protocole temporel](FIRST_PIECE_TEMPORAL.md) reprend les horizons
+100, 1 000 et 10 000 avant et après un changement, dans le même contexte.
+Les [résultats](FIRST_PIECE_TEMPORAL_RESULTS.md) distinguent l'inversion
+des sorties du remplacement de la relation utilisée.
+
+Le délai de récupération est la première mesure, à intervalle de
+256 interactions, atteignant succès >=0.95 et Brier <=0.02 sur 128
+épisodes indépendants. Les évaluations correspondantes sont comptées
+séparément des retours qui entraînent le modèle. Cette sonde ne donne
+pas un instant exact de récupération.
+
+La moyenne de gain conditionnel sur un bloc de validation peut être
+bornée sans affirmer la stabilité future d'une règle qui change.
+Les mesures indépendantes des régimes fixes donnent cette performance.
+Les essais arrêtés pour futilité restent des essais consommés, sans
+conclusion générale d'impossibilité.

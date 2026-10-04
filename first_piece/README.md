@@ -1,4 +1,21 @@
-# Première pièce : apprenant à mémoire d'événements
+# Première pièce : apprenants à mémoire d'événements
+
+La [révision temporelle](../FIRST_PIECE_TEMPORAL.md) apprend des premiers
+ordres d'apparition, retente des distinctions dans un budget borné et
+peut remplacer une relation dans le même contexte. Ses
+[résultats mesurés](../FIRST_PIECE_TEMPORAL_RESULTS.md) donnent les courbes,
+les changements cachés, la rétention et l'évaluation finale indépendante.
+
+~~~text
+python -m unittest discover -s first_piece/tests -v
+python -m first_piece.temporal_run --seeds 0 1 2 3 4 --out temporal-run-1
+~~~
+
+Le chemin de sortie doit être neuf. `TemporalAdapter` expose les mêmes
+messages que `FirstPieceAdapter`, avec un checkpoint distinct. Les
+interfaces gardent un flux et une action en attente.
+
+Les sections suivantes conservent les commandes de la référence de présence.
 
 La [définition](../FIRST_PIECE.md) décrit maintenant l'apprenant :
 mémoire de présence alimentée événement par événement, prototypes
@@ -30,7 +47,7 @@ Le premier utilise un oracle pour contrôler le monde, et non pour
 entraîner l'apprenant. Le second rejoue la revue avant/après depuis Git
 et nécessite l'historique complet du dépôt.
 
-La découverte reste limitée à une présence de symbole par tâche.
+Dans cette référence, la découverte reste limitée à une présence de symbole par tâche.
 La courbure est fixée et le contrôle porte sur cette petite architecture.
 
 ## Interface commune du système
@@ -49,7 +66,7 @@ avec le modèle direct, la reprise avec une action en attente et
 l'absence d'apprentissage supplémentaire lors d'un résultat répété.
 Elle n'agit sur aucune application du PC.
 
-La [prochaine expérience](../FIRST_PIECE_NEXT_PROTOCOL.md), encore à
-implémenter, doit apprendre l'ordre puis une règle modifiée dans le même
-contexte. Un checkpoint de présence ne permet pas de reconstruire l'ordre
+La [révision temporelle](../FIRST_PIECE_TEMPORAL.md) met désormais en
+œuvre ce [protocole](../FIRST_PIECE_NEXT_PROTOCOL.md), dans une grammaire
+bornée de premiers ordres d'apparition. Un checkpoint de présence ne permet pas de reconstruire l'ordre
 qu'il n'avait pas enregistré : la migration devra être explicite.

@@ -10,8 +10,8 @@ pas l'absence de toute évolution de l'architecture.
 | Pièce | Responsabilité | État |
 |---|---|---|
 | Contrats communs, `setharkk/contracts.py` | Messages JSON versionnés, identités, ordre logique, unités | Implémentés, version 1 |
-| Adaptateur, `first_piece/adapter.py` | Traduire les messages vers le petit apprenant ; conserver sa frontière de reprise | Implémenté, un flux et une action en attente |
-| Première pièce neuronale | Mémoire d'événements, prédictions et modification des prototypes S² | Implémentée pour la présence d'un symbole |
+| Adaptateurs, `FirstPieceAdapter` et `TemporalAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
+| Première pièce neuronale | Mémoire d'événements, prédictions et modification des prototypes S² | Présence et premiers ordres d'apparition ; tentatives et remplacement bornés |
 | Cortex coordinateur | Arbitrage des propositions, ressources communes, priorités, journal durable | À construire ; l'adaptateur possède déjà une seule autorité d'apprentissage |
 | Objectifs et planification | Distinguer la demande utilisateur, les objectifs exploratoires et leur valeur | À construire ; un `goal_id` peut déjà accompagner une proposition |
 | Agents | Consulter les prédictions et proposer une action au coordinateur | Agents simulés dans le test ; essaim autonome à construire |
@@ -112,9 +112,8 @@ l'ordre des observations, la prédiction en attente, la requête sélectionnée,
 la révision et un cache borné des résultats terminés.
 
 Il porte un format, une version de contrat et l'identifiant
-`first_piece.presence-s2.v1`. Une incompatibilité est refusée. Le futur
-apprenant temporel aura une identité d'implémentation distincte et une
-migration explicite ; un ancien masque de présence ne reconstitue pas
+`first_piece.presence-s2.v1`. Une incompatibilité est refusée. L'apprenant temporel utilise déjà l'identité distincte
+`first_piece.first-order-s2.v1` et refuse la conversion implicite ; un ancien masque de présence ne reconstitue pas
 un ordre passé qui n'a pas été enregistré.
 
 Une même requête terminée avec le même résultat reçoit le même accusé,
@@ -141,7 +140,7 @@ il devra être mesuré et remplacé si le cortex grandit.
 
 | Limite | Où la résoudre | Condition avant l'étape dépendante |
 |---|---|---|
-| Présence sans ordre, une proposition par tâche | Première pièce | [Protocole temporel et révision](FIRST_PIECE_NEXT_PROTOCOL.md) |
+| Relations temporelles arbitraires et budget de tentatives renouvelable | Première pièce | [Révision bornée disponible](FIRST_PIECE_TEMPORAL.md), famille et budgets plus généraux à mesurer |
 | Réseaux séparés par tâche | Première pièce puis mémoire commune | Mesurer l'interférence avant de revendiquer une mémoire neuronale partagée |
 | Un flux, une action en attente | Coordinateur et états de continuation | Ordonnancement borné, corrélation des résultats et reprise testés avant agents parallèles |
 | Budgets de validation temporaires | Première pièce et coordinateur | Compter aussi les candidats, données, essais et coûts d'évaluation |
@@ -154,8 +153,8 @@ les capacités de ce prototype. Ce ne sont pas les limites globales du
 système. Les agents doivent consulter `capabilities()`, pas déduire les
 budgets depuis le stockage interne.
 
-Le futur apprenant temporel continuera à recevoir les observations dans
-l'ordre et à produire le même genre de prédiction. Le futur coordinateur
+L'apprenant temporel reçoit déjà les observations dans l'ordre et
+produit les mêmes messages de prédiction via `TemporalAdapter`. Le futur coordinateur
 pourra remplacer la limite d'un flux par des continuations explicites ;
 cette évolution devra être versionnée et testée, plutôt que simulée en
 mélangeant des épisodes dans le modèle actuel.

@@ -128,7 +128,7 @@ def run_case(kind, seed, modes=None):
                 if phase_name == "recovery" and local == 2000:
                     assert max(x["brier"] for x in curves[revised][-1]["contexts"]) <= .025, "Confidence failed to recover"
                 if phase_name in ("prolonged_noise", "mixed_noise"):
-                    assert min(x["policy_success"] for x in curves[revised][-1]["contexts"]) >= .95
+                    assert min(x["policy_success"] for x in curves[revised][-1]["contexts"]) >= .95, {"phase": phase_name, "at": core.steps, "contexts": curves[revised][-1]["contexts"], "decisions": core.decisions[-6:]}
         modes = {}
         for name, m in cores.items():
             modes[name] = {"attempts_before": before[name][0], "attempts_after": m.attempts,

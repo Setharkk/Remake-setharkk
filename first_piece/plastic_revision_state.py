@@ -14,7 +14,7 @@ INITIAL_KEYS = {"source", "at", "mapped_records", "mapped_routes",
 def validate_search(model, search):
     meta = search["validation"]
     if type(meta) is not dict or set(meta) != {
-            "horizons", "serve_mode", "served_at", "reference", "widths", "variance_checks", "refresh_checks"}:
+            "horizons", "serve_mode", "served_at", "reference", "widths", "variance_checks", "refresh_checks", "conditional_null"}:
         raise ValueError("Invalid revision validation policy")
     if (type(meta["horizons"]) is not list or any(type(n) is not int for n in meta["horizons"])
             or meta["horizons"] != list(model._horizons(search["attempt"]))):
@@ -30,6 +30,29 @@ def validate_search(model, search):
     if meta["reference"] == "frozen_plastic" and (not supported or
             not model.config["bounded_validation_ranges"] or not model.config["use_structure"]):
         raise ValueError("Unsupported frozen plastic policy")
+    null = meta["conditional_null"]
+    needed_null = supported and model.config["bounded_validation_ranges"]
+    if (null is not None) != needed_null:
+        raise ValueError("Conditional null and fit policy differ")
+    if needed_null:
+        if type(null) is not dict or set(null) != {"default", "contexts"} or type(null["contexts"]) is not dict:
+            raise ValueError("Invalid conditional null")
+        total, positive = 0, 0
+        for slot, counts in null["contexts"].items():
+            if type(slot) is not str or not slot.isdecimal() or str(int(slot)) != slot or int(slot) not in model.tasks:
+                raise ValueError("Unbound null context")
+            if type(counts) is not list or len(counts) != 2:
+                raise ValueError("Invalid null counts")
+            n = counter(counts[0], "null fit records", minimum=1)
+            y = counter(counts[1], "null positives")
+            if y > n or n > model.config["fit_per_context"]:
+                raise ValueError("Impossible null fit counts")
+            total += n
+            positive += y
+        if total != search["fit_records"] or not math.isclose(
+                _finite_number(null["default"], "null default"),
+                (positive+1)/(total+2), rel_tol=1e-12, abs_tol=1e-12):
+            raise ValueError("Conditional null fit accounting differs")
     widths = meta["widths"]
     if type(widths) is not dict or set(widths) != set(COMPARISONS):
         raise ValueError("Invalid revision gain ranges")

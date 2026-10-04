@@ -130,6 +130,9 @@ class SharedLearner:
     def _served_readout(self, episode, route):
         return (self.active, route) if self.config["use_structure"] else (self.baseline, episode["coin"])
 
+    def _control_probability(self, episode, action):
+        return self.control.probability(action, episode["coin"])
+
     def __init__(self, seed=0, *, max_tasks=32, max_symbols=64, n_actions=4,
                  max_features=3, fit_per_context=256, min_records=512,
                  replay_passes=4, max_attempts=16, cooldown=256,
@@ -488,7 +491,7 @@ class SharedLearner:
                 t["last_progress_at"] = next_step
                 t["support"][tr] += 1
                 t["improvement"] += gain
-                t["relevance"] += log_probability(proposed, outcome) - log_probability(self.control.probability(action, e["coin"]), outcome)
+                t["relevance"] += log_probability(proposed, outcome) - log_probability(self._control_probability(e, action), outcome)
             else:
                 t["other_n"] = counter(t["other_n"] + 1, "preservation interactions")
                 t["preservation"] += gain

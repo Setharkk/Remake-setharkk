@@ -69,6 +69,24 @@ class PlasticRevisionLearner(CalibratedLearner):
             return "protected"
         return "frozen_plastic" if self._frozen_reference is not None else "moving_plastic"
 
+    def _control_probability(self, episode, action):
+        if (self.trial is not None and self.attempts >= self.revision_start_attempt
+                and self.config["bounded_validation_ranges"]):
+            null = self._validation(self.attempts)["conditional_null"]
+            counts = null["contexts"].get(str(episode["task"]))
+            return null["default"] if counts is None else (counts[1]+1)/(counts[0]+2)
+        return super()._control_probability(episode, action)
+
+    @staticmethod
+    def _conditional_null(rows):
+        contexts = {}
+        for slot, mask, before, coin, action, outcome in rows:
+            counts = contexts.setdefault(str(slot), [0, 0])
+            counts[0] += 1
+            counts[1] += outcome
+        positive = sum(pair[1] for pair in contexts.values())
+        return {"default": (positive+1)/(len(rows)+2), "contexts": contexts}
+
     def _initialize_banks(self, program, rows):
         candidate, control = self._new_model(), self._new_model()
         report = {"source": "neutral", "at": self.steps, "mapped_records": 0,
@@ -154,9 +172,11 @@ class PlasticRevisionLearner(CalibratedLearner):
         new = logits(self.candidate)
         principal = self._principal_pairs(self.program, t["program"], t["scope"])
         new_routes = {s for _, s in principal}
-        control = logits(self.control)
-        widths["relevance"] = max(abs(new[s][a] - control[r][a])
-            for s in new_routes for r in range(self.active.n_routes)
+        null = self._validation(self.attempts)["conditional_null"]
+        probabilities = [null["default"]] + [(y+1)/(n+2) for n,y in null["contexts"].values()]
+        control = [log_probability(p, 1)-log_probability(p, 0) for p in probabilities]
+        widths["relevance"] = max(abs(new[s][a] - value)
+            for s in new_routes for value in control
             for a in range(self.config["n_actions"]))
         if self._reference_kind() != "moving_plastic":
             bank = self._protected["bank"] if self._reference_kind() == "protected" else self._frozen_reference["bank"]
@@ -203,9 +223,12 @@ class PlasticRevisionLearner(CalibratedLearner):
         self.searches[-1].update(initialization=initialization, validation={
             "horizons": list(self._horizons()), "serve_mode": mode,
             "served_at": self._protected["at"] if mode == "consolidated" else None,
-            "reference": self._reference_kind(), "widths": self._ranges(),
+            "reference": self._reference_kind(),
+            "conditional_null": self._conditional_null(rows) if program is not None and
+                self.config["bounded_validation_ranges"] else None,
             "variance_checks": {"relevance": {}, "improvement": {}},
             "refresh_checks": []})
+        self.searches[-1]["validation"]["widths"] = self._ranges()
 
     def _interval(self, gain, n, *, anytime=False, attempt=None, comparison=None):
         attempt = max(1, self.attempts) if attempt is None else attempt
@@ -342,7 +365,7 @@ class PlasticRevisionLearner(CalibratedLearner):
                 def logit(p):
                     return log_probability(p, 1) - log_probability(p, 0)
                 proposed = logit(self.candidate.probability(action, new_route))
-                control = logit(self.control.probability(action, e["coin"]))
+                control = logit(self._control_probability(e, action))
                 served = logit(bank.probability(action, old_route))
                 self._revision_variance["relevance"] += (proposed-control) ** 2
                 self._revision_variance["improvement"] += (proposed-served) ** 2

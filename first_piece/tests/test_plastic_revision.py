@@ -14,6 +14,7 @@ from first_piece.shared import log_probability
 from first_piece.spherical import unit, norm
 from first_piece.tests.test_shared import train, wire_symbol
 from first_piece.integration_probe import agent_proposal, observed_receipt
+from validation.renewable_probe import ShiftWorld
 
 
 def canonical(core):
@@ -114,7 +115,7 @@ class PlasticRevisionTests(unittest.TestCase):
                 gains = [log_probability(p, y)-log_probability(q, y) for y in (0, 1)]
                 self.assertLessEqual(abs(gains[1]-gains[0]), widths["improvement"]+1e-12)
                 for coin in range(8):
-                    q = core.control.probability(a, coin)
+                    q = core._control_probability({"coin": coin, "task": 0}, a)
                     gains = [log_probability(p, y)-log_probability(q, y) for y in (0, 1)]
                     self.assertLessEqual(abs(gains[1]-gains[0]), widths["relevance"]+1e-12)
 
@@ -203,8 +204,38 @@ class PlasticRevisionTests(unittest.TestCase):
             s["validation"].pop("reference")
             s["validation"].pop("variance_checks")
             s["validation"].pop("refresh_checks")
+            s["validation"].pop("conditional_null")
         new["format"], new["implementation"] = old["format"], old["implementation"]
         self.assertEqual(new, old)
+
+    def test_variable_background_noise_preserves_the_action_competence(self):
+        core = PlasticRevisionLearner(101, max_tasks=8, max_symbols=16)
+        world = ShiftWorld(401, n_symbols=16, n_contexts=4)
+        actions, labels = random.Random(8000001), random.Random(8100001)
+        for i in range(32000):
+            slot = i % 4
+            events, target = world.episode(slot)
+            action = actions.randrange(4)
+            if i < 20000:
+                outcome = int(action == target)
+            else:
+                outcome = int(labels.random() < (.1 if slot < 2 else .6))
+            for event in events:
+                core.receive(event)
+            core.learn(action, outcome)
+            if i == 19999:
+                frozen = core.checkpoint()["protected"]
+                before_admissions = core.admissions
+        self.assertEqual(core.admissions, before_admissions)
+        self.assertEqual(core.checkpoint()["protected"], frozen)
+        restored = PlasticRevisionLearner.restore(core.checkpoint())
+        for slot in range(4):
+            for _ in range(128):
+                events, target = world.episode(slot)
+                for event in events:
+                    p = restored.receive(event)
+                self.assertEqual(max(range(4), key=p.__getitem__), target)
+                restored.finish_evaluation()
 
     def test_wire_import_and_duplicate_receipt_keep_one_learning_update(self):
         old = CalibratedAdapter(actions=("left", "right"))

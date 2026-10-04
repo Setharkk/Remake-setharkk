@@ -25,6 +25,26 @@ pas changées par l'initialisation. Tous les gradients de replay sont ensuite
 identiques en nombre au budget historique. Les calculs de moyenne, sélection
 et lecture ajoutent du travail ; ils ne sont pas des gradients cachés.
 
+## Contrôle du bruit de contexte
+
+Une première exécution e3efcb9 a révélé une régression : sous des taux de
+résultat indépendants de l'action mais différents selon le contexte, un
+programme de taux de base pouvait remplacer la compétence. Le protocole
+garde ses critères et ajoute un contrôle conditionnel avant la nouvelle
+exécution ; cette correction sera séparée des premiers chiffres partiels.
+
+Pour les nouvelles validations, la pertinence compare le candidat à
+q_contexte=(positifs_fit+1)/(labels_fit+2), figé AVANT les futurs labels.
+Un contexte absent du fit reçoit le même estimateur calculé sur tout le fit.
+Ainsi, prédire seulement le taux du contexte ne démontre pas un apport
+du programme. Les banques de contrôle sphériques restent entraînées avec
+le même budget et reprises comme banques de travail. Le contrôle statistique
+conditionnel est une fréquence de labels, pas un paramètre neuronal appris.
+
+L'ablation « nouvelles bornes » regroupe la référence figée, le contrôle
+conditionnel, les regards, leurs bornes et l'examen du candidat. Elle ne
+permet pas d'attribuer leur gain à chacun de ces mécanismes isolément.
+
 ## Références et bornes
 
 Avant la première admission, la banque plastique servie est copiée et figée
@@ -37,8 +57,8 @@ L'amplitude conditionnelle vaut w_i=|logit(p_i)-logit(q_i)|, avec probabilités
 tronquées à [0,01 ; 0,99]. Une amplitude maximale W est calculée AVANT
 validation, sur toutes les actions et une sur-approximation des routes
 possibles. Les égalités de contexte prennent leur valeur réelle ; toutes
-les autres combinaisons de vérité sont incluses. Le contrôle inclut toutes
-ses routes aléatoires. Une référence mobile conserve W universel.
+les autres combinaisons de vérité sont incluses. Le contrôle conditionnel inclut tous
+ses taux de contexte et le taux de repli. Une référence mobile conserve W universel.
 
 À chaque retour principal, V_n=somme(w_i²) est calculé depuis les probabilités
 avant le label. Pour pertinence et amélioration, aux regards déclarés n :

@@ -61,9 +61,11 @@ Avant l'expérience principale, enregistrer :
 - Les budgets maximaux d'interactions, calcul, durée et mémoire.
 - Les checkpoints et la règle d'arrêt ou de prolongation.
 
-Des horizons de 100, 1 000 et 10 000 interactions illustrent une plage
-large ; ils ne sont pas encore adoptés pour Setharkk. Les valeurs
-dépendront du mécanisme, de la tâche et du coût mesuré sur le matériel.
+Les horizons de 100, 1 000 et 10 000 interactions sont désormais utilisés
+pour la [première pièce](FIRST_PIECE.md). Ses horizons de validation sont
+128, 1 024 et 4 096 nouvelles interactions. Ce choix est propre à cette
+expérience. Les valeurs des autres mécanismes dépendront de la tâche
+et du coût mesuré sur le matériel.
 Il n'existe pas ici de durée supposée suffisante pour toute architecture.
 
 Une prolongation motivée par une tendance encore positive doit être
@@ -110,4 +112,6 @@ possible de gains à un budget supérieur.
 
 Les résultats historiques et leurs revues restent inchangés.
 Ce protocole guide la [nouvelle conception](RESEARCH_RESET.md) et
-ne présente pas une expérience prolongée qui aurait déjà été exécutée.
+est désormais appliqué dans le [rapport de la première pièce](FIRST_PIECE_LEARNING_RESULTS.md),
+avec une courbe exécutée jusqu'à 10 000 interactions par tâche. Les V0/V1
+n'ont pas été prolongées dans cette étape.

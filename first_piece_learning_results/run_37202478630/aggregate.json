@@ -1,0 +1,222 @@
+{
+  "source_commit": "0c63e0e8a090c500184bd421f961ff38c888594c",
+  "workflow_run_id": 37202478630,
+  "platform_comparison": {
+    "max_absolute_difference": 9.325873406851315e-15,
+    "numeric_values_compared": 4241,
+    "tolerance": 1e-10,
+    "mismatches": 0
+  },
+  "results": {
+    "structured_curve": [
+      {
+        "interactions": 100,
+        "models": {
+          "full": {
+            "policy_success_mean": 0.509375,
+            "policy_success_range": [
+              0.46484375,
+              0.5390625
+            ],
+            "brier_mean": 0.2923223574894697
+          },
+          "without_distinction": {
+            "policy_success_mean": 0.509375,
+            "policy_success_range": [
+              0.46484375,
+              0.5390625
+            ],
+            "brier_mean": 0.2923223574894697
+          },
+          "without_memory": {
+            "policy_success_mean": 0.509375,
+            "policy_success_range": [
+              0.46484375,
+              0.5390625
+            ],
+            "brier_mean": 0.2923223574894697
+          }
+        }
+      },
+      {
+        "interactions": 1000,
+        "models": {
+          "full": {
+            "policy_success_mean": 0.47578125,
+            "policy_success_range": [
+              0.45703125,
+              0.51171875
+            ],
+            "brier_mean": 0.26394439721787666
+          },
+          "without_distinction": {
+            "policy_success_mean": 0.47578125,
+            "policy_success_range": [
+              0.45703125,
+              0.51171875
+            ],
+            "brier_mean": 0.26394439721787666
+          },
+          "without_memory": {
+            "policy_success_mean": 0.47578125,
+            "policy_success_range": [
+              0.45703125,
+              0.51171875
+            ],
+            "brier_mean": 0.26394439721787666
+          }
+        }
+      },
+      {
+        "interactions": 10000,
+        "models": {
+          "full": {
+            "policy_success_mean": 1,
+            "policy_success_range": [
+              1,
+              1
+            ],
+            "brier_mean": 0.0000012054211176676875
+          },
+          "without_distinction": {
+            "policy_success_mean": 0.4984375,
+            "policy_success_range": [
+              0.4375,
+              0.515625
+            ],
+            "brier_mean": 0.25857746545194144
+          },
+          "without_memory": {
+            "policy_success_mean": 0.49453125,
+            "policy_success_range": [
+              0.44921875,
+              0.55078125
+            ],
+            "brier_mean": 0.5043521941762087
+          }
+        }
+      }
+    ],
+    "extra_evaluations": {
+      "transfer_before_other_task": {
+        "full": {
+          "policy_success_mean": 1,
+          "policy_success_range": [
+            1,
+            1
+          ],
+          "brier_mean": 0.0000012052196390885295
+        },
+        "without_distinction": {
+          "policy_success_mean": 0.504296875,
+          "policy_success_range": [
+            0.4892578125,
+            0.54296875
+          ],
+          "brier_mean": 0.25707649217108086
+        },
+        "without_memory": {
+          "policy_success_mean": 0.4939453125,
+          "policy_success_range": [
+            0.45703125,
+            0.509765625
+          ],
+          "brier_mean": 0.5049369250624968
+        }
+      },
+      "retention_after_other_task": {
+        "full": {
+          "policy_success_mean": 1,
+          "policy_success_range": [
+            1,
+            1
+          ],
+          "brier_mean": 0.0000012059133349045791
+        },
+        "without_distinction": {
+          "policy_success_mean": 0.49921875,
+          "policy_success_range": [
+            0.494140625,
+            0.509765625
+          ],
+          "brier_mean": 0.2595440594435683
+        },
+        "without_memory": {
+          "policy_success_mean": 0.49921875,
+          "policy_success_range": [
+            0.4853515625,
+            0.5126953125
+          ],
+          "brier_mean": 0.49967514546812614
+        }
+      },
+      "new_task_transfer": {
+        "full": {
+          "policy_success_mean": 1,
+          "policy_success_range": [
+            1,
+            1
+          ],
+          "brier_mean": 0.0000012062750503840118
+        },
+        "without_distinction": {
+          "policy_success_mean": 0.5048828125,
+          "policy_success_range": [
+            0.4873046875,
+            0.5146484375
+          ],
+          "brier_mean": 0.2576694602037431
+        },
+        "without_memory": {
+          "policy_success_mean": 0.506640625,
+          "policy_success_range": [
+            0.48828125,
+            0.5185546875
+          ],
+          "brier_mean": 0.4922804071744965
+        }
+      }
+    },
+    "controls": {
+      "noise": {
+        "admitted_distinctions": 0,
+        "statuses": [
+          "inconclusive",
+          "inconclusive",
+          "inconclusive",
+          "inconclusive",
+          "inconclusive"
+        ],
+        "mean_success": 0.4984375,
+        "range_success": [
+          0.4609375,
+          0.52734375
+        ],
+        "brier_mean": 0.2587838850393667
+      },
+      "action_only": {
+        "admitted_distinctions": 0,
+        "statuses": [
+          "inconclusive",
+          "inconclusive",
+          "inconclusive",
+          "inconclusive",
+          "inconclusive"
+        ],
+        "mean_success": 1,
+        "range_success": [
+          1,
+          1
+        ],
+        "brier_mean": 0.0000010590383370709877
+      }
+    },
+    "admission_interactions": [
+      1280,
+      1280
+    ],
+    "training_interactions_total": 200000,
+    "neural_updates_total_per_learner": 210220,
+    "gate_decisions_per_learner": 50
+  }
+}

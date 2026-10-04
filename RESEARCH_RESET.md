@@ -7,9 +7,11 @@ La conception repart des exigences de l'utilisateur et d'une hypothèse
 leurs choix d'architecture ne définissent pas la nouvelle conception.
 
 Le premier travail porte sur un mécanisme d'apprentissage précis.
-Aucune nouvelle architecture n'est encore implémentée dans ce document.
-La [première pièce](FIRST_PIECE.md) précise la règle candidate d'admission
-d'une distinction et fournit le laboratoire qui permettra de l'évaluer.
+La [première pièce](FIRST_PIECE.md) implémente maintenant un mécanisme
+borné : mémoire d'événements, neurones sphériques et proposition d'une
+distinction testée contre un contrôle ajusté. Le
+[rapport d'apprentissage](FIRST_PIECE_LEARNING_RESULTS.md) conserve ses
+résultats, ses contrôles et la reprise de son état complet.
 
 ## Exigences conservées
 
@@ -25,8 +27,9 @@ Le matériel indiqué est Windows, NVIDIA RTX avec 12 Go de VRAM et 64 Go
 de RAM. Ces ressources servent de contrainte expérimentale ; elles ne
 constituent pas une validation de l'architecture à venir.
 
-Le sens opérationnel de « réseau non euclidien » devra être précisé pour
-la nouvelle construction. Une géométrie émergente devra être définie et
+La première pièce définit « réseau non euclidien » par des paramètres
+neuronaux sur S², des distances géodésiques et des mises à jour exponentielles.
+Ce choix est expérimental et sa supériorité reste à mesurer. Une géométrie émergente devra être définie et
 mesurée. L'absence d'une géométrie définie ne suffit pas à satisfaire cette
 exigence.
 
@@ -37,8 +40,9 @@ l'ensemble de trois prédicteurs et l'optimiseur V1 sont des choix des
 expériences précédentes. La nouvelle conception peut remettre ces choix
 en question.
 
-Les unités de calcul, les variables de l'état interne, les relations,
-la géométrie et les règles de modification restent à définir.
+La première pièce précise ses unités, états, géométrie et mises à jour.
+Les mécanismes plus généraux, la fusion et la suppression des distinctions
+restent à définir.
 La mécanique des fluides est une source possible de mécanismes ;
 elle n'est pas choisie comme fondement par défaut.
 
@@ -53,16 +57,17 @@ des conséquences systématiquement différentes. Le système recherche dans
 les observations et leur historique une distinction qui explique cette
 différence, puis teste si elle aide sur de nouvelles expériences.
 
-Cette proposition est un point de travail. Elle ne fixe pas encore une
-règle de mise à jour et ne constitue pas une innovation démontrée.
+La première pièce met en œuvre une forme limitée de cette hypothèse :
+proposer et conserver une présence de symbole par tâche. Les règles sont
+précisées dans sa définition ; aucune innovation scientifique n'est démontrée.
 
 Une divergence de résultats peut venir du hasard ou d'une information
 inaccessible. La règle doit traiter ces cas ; elle ne doit pas créer
 automatiquement une distinction pour chaque erreur.
 
-## Première pièce à définir
+## Questions qui guident la première pièce
 
-Le mécanisme devra répondre concrètement à cinq questions :
+La première pièce répond de façon bornée à ces cinq questions :
 
 1. Quel est son état interne, et comment représente-t-il l'historique ?
 2. Que prédit-il, et quel retour observable permet d'évaluer cette prédiction ?
@@ -72,8 +77,8 @@ Le mécanisme devra répondre concrètement à cinq questions :
 
 La règle doit être assez précise pour calculer une mise à jour sur un petit
 exemple avant de construire le dialogue et la coordination d'agents.
-Le code devra enregistrer les changements effectifs et l'état nécessaire
-à la reprise.
+Le code conserve désormais ses paramètres, compteurs, états de validation
+et mémoire en cours dans un checkpoint complet.
 
 ## Première expérience proposée
 

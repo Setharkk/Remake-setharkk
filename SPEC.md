@@ -4,10 +4,30 @@ Ces exigences reprennent les demandes de l'utilisateur. La correction
 essentielle est que le réseau lui-même doit être non euclidien.
 
 La [nouvelle conception](RESEARCH_RESET.md) reprend ces exigences. Les choix
-mathématiques et les états d'implémentation décrits ci-dessous concernent
-la référence V1 ; ils ne fixent pas l'architecture de la prochaine expérience.
+mathématiques de la référence V1 restent décrits ci-dessous ;
+la première pièce adopte maintenant une construction sphérique distincte.
 
-## Exigence géométrique du réseau
+## Nouvelle première pièce
+
+La [première pièce](FIRST_PIECE.md) utilise un petit réseau à prototypes
+sur S². Tous ses paramètres neuronaux appris sont des points sphériques ;
+la lecture utilise des distances géodésiques et les mises à jour des
+applications exponentielles de gradients tangents.
+
+Deux tâches utilisent huit points appris, vingt-quatre coordonnées et
+seize degrés de liberté intrinsèques actifs. Les modèles temporaires et
+les états non neuronaux sont comptés séparément dans sa définition.
+
+Elle reçoit les événements un par un et peut conserver une distinction
+de présence de symbole sous un budget fixé. Le
+[rapport mesuré](FIRST_PIECE_LEARNING_RESULTS.md) publie 35 tests
+Windows/Linux, le contrôle sans distinction, le transfert, la rétention
+par tâches séparées et la reprise complète du monde et de l'apprenant.
+
+Sa géométrie et ses opérations sont vérifiables ; sa supériorité sur une
+version euclidienne ou son originalité ne sont pas démontrées.
+
+## Exigence géométrique de la référence V1
 
 La V1 donne un sens vérifiable à cette exigence :
 
@@ -36,14 +56,14 @@ par définition ; cela ne rend pas euclidiens les paramètres qu'ils déplacent.
 
 | Exigence | État |
 |---|---|
-| Réseau lui-même non euclidien | Implémenté dans cortex_lab_v1 ; 35 tests réussis sous Windows et Linux, voir [validation](INTRINSIC_VALIDATION.md) |
-| Apprendre des résultats de ses actions pendant une interaction | Implémenté dans le laboratoire de fichiers |
-| Apprentissage continu avec reprise complète | À développer |
+| Réseau lui-même non euclidien | Première pièce sur S², 35 tests ; référence V1 sur H4 conservée |
+| Apprendre des résultats de ses actions pendant une interaction | Implémenté dans la première pièce séquentielle et dans la référence de fichiers |
+| Apprentissage continu avec reprise complète | État complet de la première pièce restaurable ; expérience bornée, une proposition par tâche |
 | Objectifs proposés par l'utilisateur et objectifs choisis par le système | À développer |
 | Cortex avec un essaim d'agents comme extensions de lui-même | À développer |
 | Dialogue | À développer |
 | Agir sur des applications du PC | À développer |
-| Petit budget de paramètres | V1 : 408 degrés de liberté intrinsèques pour trois modèles |
+| Petit budget de paramètres | Première pièce : 16 degrés de liberté neuronaux actifs pour deux tâches ; référence V1 : 408 pour trois modèles |
 
 La V1 contient 34 points par modèle : 6 prototypes de bits d'observation,
 4 d'action, 8 clés de neurones, 8 valeurs de neurones et 8 prototypes de

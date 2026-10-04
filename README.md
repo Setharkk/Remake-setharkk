@@ -3,17 +3,22 @@
 Projet de recherche pour un cortex neuronal courbe qui apprend des
 conséquences de ses actions et choisit des expériences.
 
-La conception repart d'une [nouvelle base de recherche](RESEARCH_RESET.md),
-avec les exigences de l'utilisateur et un mécanisme d'apprentissage à définir.
-Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) précise les unités,
-les horizons d'apprentissage et les limites des conclusions.
-La [première pièce](FIRST_PIECE.md) définit une mémoire qui apprend à distinguer
-et prépare son [laboratoire séquentiel](first_piece/README.md).
-La [validation initiale Windows/Linux](FIRST_PIECE_VALIDATION.md) publie ses contrôles,
-avec 14 tests par système ; aucun nouvel apprenant n'est encore implémenté.
-La [revue de la première pièce](CODE_REVIEW_FIRST_PIECE.md) corrige le budget
-statistique, les calculs extrêmes et la conservation des horizons après
-interruption. Ses 20 tests passent sous Windows et Linux.
+La [première pièce](FIRST_PIECE.md) contient maintenant un apprenant :
+mémoire alimentée événement par événement, prototypes neuronaux sur S²
+et distinction proposée depuis les résultats de ses actions. Un contrôle
+sans distinction reçoit les mêmes expériences et le même budget de mises à jour.
+
+Les [résultats mesurés](FIRST_PIECE_LEARNING_RESULTS.md) publient les 35 tests
+Windows/Linux, les courbes à 100, 1 000 et 10 000 interactions, le transfert,
+la rétention et la reprise JSON exacte. L'apprentissage reste limité à
+une présence de symbole par tâche et aux tâches synthétiques décrites.
+
+La [nouvelle base de recherche](RESEARCH_RESET.md) conserve les exigences
+du projet. Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) fixe les unités
+et la portée des conclusions.
+La [validation initiale](FIRST_PIECE_VALIDATION.md) et la
+[revue initiale](CODE_REVIEW_FIRST_PIECE.md) conservent les preuves du
+laboratoire avant cet apprenant.
 
 [Cortex Lab V1](cortex_lab_v1/README.md) reste une référence expérimentale.
 Tous ses paramètres neuronaux sont des points hyperboliques appris avec un

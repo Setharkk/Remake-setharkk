@@ -170,3 +170,12 @@ python -m first_piece.audit --out first_piece/lab_runs/apres_revue
 Le fichier [review_probe.py](first_piece/review_probe.py) charge la version
 examinée depuis son commit Git pour la comparer au code corrigé.
 Le chemin de sortie de l'audit doit être neuf.
+
+## Évolution après cette revue
+
+La [première pièce](FIRST_PIECE.md) implémente désormais un apprenant
+sphérique et une interface événement par événement. Le
+[rapport d'apprentissage](FIRST_PIECE_LEARNING_RESULTS.md) publie le
+contrôle sans distinction à budget égal, les 35 tests Windows/Linux,
+la rétention et la reprise de l'état complet. Les limites ci-dessus
+décrivent la version examinée ; les preuves initiales sont conservées.

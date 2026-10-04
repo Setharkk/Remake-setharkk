@@ -21,6 +21,9 @@ class SharedAdapter(FirstPieceAdapter):
         options["n_actions"] = len(actions)
         super().__init__(actions=actions, learner_options=options, **kwargs)
 
+    def _fork_learner(self):
+        return self._learner._transaction_copy()
+
     def _translate_observation(self, event):
         if event["kind"] == "stream.symbol" and set(event["payload"]) == {"value"}:
             return {"kind": "token", "token": wire.identifier(event["payload"]["value"], "symbol")}

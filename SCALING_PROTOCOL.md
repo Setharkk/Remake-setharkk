@@ -37,7 +37,7 @@ Trois graines d’entraînement, répartition alternée des contextes, actions d
 
 Évaluations sans mise à jour après 100, 1 000 et 10 000 retours par contexte, avant et après changement. Rapporter séparément contexte changé, autres contextes, contexte neuf, modèle complet, contrôle de capacité identique, intervention d’effacement de l’ordre. Une erreur au premier horizon n’est pas un échec définitif.
 
-Rapporter réussite de la politique, score de Brier sur toutes les actions, interactions globales et par contexte, nombre de paramètres réellement alloués, données mémorisées, essais, hypothèses examinées, mises à jour, temps de recherche et d’entraînement, taille JSON du checkpoint. La taille JSON n’est pas la consommation RAM. Mesurer aussi le coût de l’adaptateur transactionnel, qui copie encore l’état du cœur pour chaque événement.
+Rapporter réussite de la politique, score de Brier sur toutes les actions, interactions globales et par contexte, nombre de paramètres réellement alloués, données mémorisées, essais, hypothèses examinées, mises à jour, temps de recherche et d’entraînement, taille JSON du checkpoint. La taille JSON n’est pas la consommation RAM. Mesurer aussi le coût de l’adaptateur transactionnel, dont la copie transactionnelle doit conserver l’isolation des objets mutables sans recopier récursivement les anciens enregistrements immuables.
 
 Les tests Windows et Linux portent sur les mêmes entrées et graines. Une validation finale utilise de nouvelles graines d’évaluation sans entraînement supplémentaire. Les résultats, y compris les échecs d’adaptation ou le coût de recherche, doivent être conservés.
 
@@ -52,3 +52,11 @@ Le premier essai a passé 80 tests mais a échoué pendant la grande condition a
 Sur les trois graines de la petite condition, l’apprentissage initial réussissait mais le changement produisait un XOR de trois variables, invisible au faisceau de couples. La recherche corrigée étend aussi les couples du programme déjà admis, dans un budget fixe. Cette continuité est générique et ne donne pas au moteur la règle du monde. Elle ne résout pas la découverte initiale de n’importe quel XOR de trois variables.
 
 Les rapports partiels de cette source sont conservés comme diagnostic et ne constituent pas une validation de la décision statistique. La nouvelle version garde les mêmes tailles, horizons, tolérances et graines d’entraînement. La validation finale emploie les graines d’évaluation réservées, jamais utilisées par le premier essai interrompu.
+
+## Révision du coût de l’interface (après source 1494f58)
+
+Le second essai complet Windows réussit, mais la copie récursive coûte environ 8,5–9,0 ms par épisode dans la petite condition, 28–29 ms dans la moyenne et 53–54 ms dans la grande, contre un cœur direct beaucoup plus rapide. Ces temps concernent les runners GitHub et non le PC de l’utilisateur.
+
+L’adaptateur partagé emploie maintenant une copie transactionnelle spécialisée : RNG, vocabulaire, dictionnaires de contexte, listes de mémoire, banques neuronales et résumé de validation sont isolés ; les anciens enregistrements et décisions, jamais modifiés par le cœur, sont partagés en lecture. Les snapshots publics restent entièrement détachés. Les adaptateurs historiques gardent leur copie récursive. Les tests et la comparaison de l’interface avec le cœur direct vérifient les prédictions et l’état appris.
+
+Cette optimisation ne change ni les données d’entraînement, ni les critères d’admission. Les mêmes essais sont reproduits pour mesurer son coût et vérifier l’identité numérique.

@@ -97,6 +97,9 @@ class FirstPieceAdapter:
                 "neural_geometry": "product of S2", "receipt_window": self.receipt_window,
             }
 
+    def _fork_learner(self):
+        return copy.deepcopy(self._learner)
+
     def _translate_observation(self, event):
         return _local_event(event)
 
@@ -118,7 +121,7 @@ class FirstPieceAdapter:
                 if len(self._slots) >= self._learner.config["max_tasks"]:
                     raise ValueError("Context budget exhausted")
                 slot = len(self._slots)
-            candidate = copy.deepcopy(self._learner)
+            candidate = self._fork_learner()
             local["task"] = slot
             probabilities = candidate.receive(local)
             result = None
@@ -195,7 +198,7 @@ class FirstPieceAdapter:
                 raise ValueError("Receipt has no matching action")
             if receipt["source_id"] != pending["executor_id"]:
                 raise ValueError("Receipt is not from the designated executor")
-            candidate = copy.deepcopy(self._learner)
+            candidate = self._fork_learner()
             learned = receipt["status"] == "observed"
             if learned:
                 outcome = receipt["outcome"]

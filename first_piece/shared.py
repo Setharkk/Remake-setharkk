@@ -122,6 +122,30 @@ class SharedLearner:
         self.searches = []
         self.max_sphere_residual = 0.0
 
+    def _transaction_copy(self):
+        """Private adapter fork; existing fit rows/historical entries are immutable.
+
+        Every object mutated by receive/learn is owned by the fork. This avoids
+        recursively copying thousands of immutable rows for every wire event.
+        Public checkpoint/metrics still return fully detached copies.
+        """
+        child = copy.copy(self)
+        child.config = dict(self.config)
+        child.rng = random.Random(0)
+        child.rng.setstate(self.rng.getstate())
+        child.symbols = list(self.symbols)
+        child._symbol_ids = dict(self._symbol_ids)
+        child.tasks = {slot: {**task, "records": list(task["records"]),
+                            "losses": list(task["losses"])}
+                       for slot, task in self.tasks.items()}
+        child.episode = dict(self.episode)
+        child.program = list(self.program)
+        for name in ("active", "baseline", "candidate", "control", "trial"):
+            setattr(child, name, copy.deepcopy(getattr(self, name)))
+        child.decisions = list(self.decisions)
+        child.searches = list(self.searches)
+        return child
+
     @property
     def pair_count(self):
         return self.config["max_symbols"] * (self.config["max_symbols"] - 1) // 2

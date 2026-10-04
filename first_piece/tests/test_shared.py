@@ -180,6 +180,19 @@ class SharedLearningTests(unittest.TestCase):
                 search.pop("elapsed_seconds")
         self.assertEqual(one, two)
 
+    def test_transaction_copy_isolates_core_operations_through_admission(self):
+        source, world = SharedLearner(17, max_tasks=4), ScaleWorld(72, n_contexts=4)
+        train(source, world, 512)
+        self.assertIsNotNone(source.trial)
+        before = source.checkpoint()
+        child = source._transaction_copy()
+        train(child, world, 5000)
+        self.assertGreaterEqual(child.admissions, 1)
+        self.assertEqual(source.checkpoint(), before)
+        child.receive({"kind": "token", "task": 0, "token": "new:opaque"})
+        self.assertNotIn("new:opaque", source.symbols)
+        self.assertEqual(source.checkpoint(), before)
+
     def test_memory_neural_updates_and_attempts_are_bounded(self):
         learner = self.trained
         metrics = learner.metrics()
@@ -268,6 +281,34 @@ class SharedAdapterTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             adapter.register_action(proposal, executor_id="executor")
         self.assertEqual(adapter.checkpoint(), before)
+
+    def test_pending_trial_transaction_copy_refusals_and_snapshots_are_detached(self):
+        adapter = SharedAdapter(learner_options={"max_tasks": 4})
+        core, world = SharedLearner(5, max_tasks=4), ScaleWorld(1, n_contexts=4)
+        train(core, world, 512)
+        adapter._learner = core
+        adapter._revision = core.steps
+        adapter._slots = {f"ctx:{i}": i for i in range(4)}
+        events, target = world.episode(0)
+        for sequence, event in enumerate(events):
+            prediction = adapter.submit_observation(wire_symbol(sequence,
+                event["token"] if event["kind"] == "token" else "sealed",
+                context="ctx:0", end=event["kind"] == "surface"))
+        request = adapter.register_action(agent_proposal(prediction, 3), executor_id="executor")
+        before = adapter.checkpoint()
+        bad = observed_receipt(request, 1)
+        bad["outcome"]["value"] = True
+        with self.assertRaises(ValueError):
+            adapter.submit_receipt(bad)
+        self.assertEqual(before, adapter.checkpoint())
+        ack = adapter.submit_receipt(observed_receipt(request, int(target == 3)))
+        self.assertEqual(ack["model_revision"], 513)
+        snapshot = adapter.checkpoint()
+        snapshot["learner"]["tasks"]["0"]["records"][0][0] = "0"
+        snapshot["learner"]["candidate"]["points"][0][0] = [2, 0, 0]
+        self.assertNotEqual(snapshot, adapter.checkpoint())
+        self.assertEqual(SharedAdapter.restore(json.loads(json.dumps(adapter.checkpoint()))).checkpoint(),
+                         adapter.checkpoint())
 
     def test_rejected_new_symbol_context_and_duplicate_event_do_not_change_rng(self):
         adapter = SharedAdapter(learner_options={"max_tasks": 1, "max_symbols": 4, "min_records": 256})

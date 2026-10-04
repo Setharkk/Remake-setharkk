@@ -6,7 +6,8 @@ conséquences de ses actions et choisit des expériences.
 La nouvelle base est [Cortex Lab V1](cortex_lab_v1/README.md), dont tous les
 paramètres neuronaux sont des points hyperboliques appris avec un optimiseur
 riemannien. La [spécification](SPEC.md) formalise cette exigence et indique
-les capacités restant à construire.
+les capacités restant à construire. La [validation de la V1](INTRINSIC_VALIDATION.md)
+publie les tests Windows/Linux et les limites de son apprentissage.
 
 La première expérience de référence est [Cortex Lab V0](cortex_lab_v0/README.md) : un laboratoire
 de fichiers avec 72 paramètres par modèle et trois modèles pour estimer

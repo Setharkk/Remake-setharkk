@@ -32,7 +32,7 @@ par définition ; cela ne rend pas euclidiens les paramètres qu'ils déplacent.
 
 | Exigence | État |
 |---|---|
-| Réseau lui-même non euclidien | Implémenté dans cortex_lab_v1 ; validation CI requise |
+| Réseau lui-même non euclidien | Implémenté dans cortex_lab_v1 ; 35 tests réussis sous Windows et Linux, voir [validation](INTRINSIC_VALIDATION.md) |
 | Apprendre des résultats de ses actions pendant une interaction | Implémenté dans le laboratoire de fichiers |
 | Apprentissage continu avec reprise complète | À développer |
 | Objectifs proposés par l'utilisateur et objectifs choisis par le système | À développer |

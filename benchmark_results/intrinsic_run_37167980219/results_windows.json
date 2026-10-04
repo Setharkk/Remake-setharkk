@@ -1,0 +1,246 @@
+{
+  "code_commit_sha": "401c9c75b6e2191115df3af19364fe3df8c076cb",
+  "github_actions_run_id": 37167980219,
+  "job_id": 111334859369,
+  "platform": "windows",
+  "python": "3.11.9",
+  "torch": "2.14.1+cpu",
+  "device": "cpu",
+  "dtype": "float64",
+  "tests": {
+    "shared_laboratory": 25,
+    "intrinsic_network": 10,
+    "conclusion": "success"
+  },
+  "architecture": {
+    "name": "intrinsic_lorentz_prototypes",
+    "curvature": -1,
+    "dimension": 4,
+    "points_per_model": 34,
+    "stored_coordinates_per_model": 170,
+    "intrinsic_degrees_of_freedom_per_model": 136,
+    "ensemble_size": 3
+  },
+  "diagnostic": {
+    "steps": 200,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "updates_per_model_per_interaction": 3,
+    "training_candidates_per_seed": 24,
+    "held_out_cases_per_seed": 8
+  },
+  "training_test": {
+    "before_brier": 0.26598764640448747,
+    "after_brier": 0.024693094308388133,
+    "constraint_error": 7.105427357601002e-15
+  },
+  "runs": [
+    {
+      "seed": 0,
+      "strategy": "active",
+      "initial": {
+        "brier": 0.2512394352515877,
+        "nll": 2.840763093615406,
+        "exact_accuracy": 0.25,
+        "success_accuracy": 0.5,
+        "geodesic_parameter_displacement": 6.656171661234263e-9,
+        "max_manifold_constraint_error": 6.661338147750939e-16,
+        "riemannian_gradient_norm": 0,
+        "train_loss": 0,
+        "optimizer_updates": 0,
+        "brier_action_0": 0.2748914561098713,
+        "brier_action_1": 0.2558995604754887,
+        "brier_action_2": 0.22401729566204065,
+        "brier_action_3": 0.2501494287589503
+      },
+      "final": {
+        "brier": 0.18571973326355715,
+        "nll": 2.91092314429404,
+        "exact_accuracy": 0.5,
+        "success_accuracy": 0.5,
+        "geodesic_parameter_displacement": 1.8793355018159585,
+        "max_manifold_constraint_error": 7.105427357601002e-15,
+        "riemannian_gradient_norm": 0.059895650902401086,
+        "train_loss": 0.044976344293767116,
+        "optimizer_updates": 1800,
+        "brier_action_0": 0.09549622109138983,
+        "brier_action_1": 0.2920779098087117,
+        "brier_action_2": 0.23395057161153948,
+        "brier_action_3": 0.1213542305425876
+      }
+    },
+    {
+      "seed": 0,
+      "strategy": "random",
+      "initial": {
+        "brier": 0.2512394352515877,
+        "nll": 2.840763093615406,
+        "exact_accuracy": 0.25,
+        "success_accuracy": 0.5,
+        "geodesic_parameter_displacement": 6.656171661234263e-9,
+        "max_manifold_constraint_error": 6.661338147750939e-16,
+        "riemannian_gradient_norm": 0,
+        "train_loss": 0,
+        "optimizer_updates": 0,
+        "brier_action_0": 0.2748914561098713,
+        "brier_action_1": 0.2558995604754887,
+        "brier_action_2": 0.22401729566204065,
+        "brier_action_3": 0.2501494287589503
+      },
+      "final": {
+        "brier": 0.1434422558408892,
+        "nll": 1.8489162913745842,
+        "exact_accuracy": 0.5,
+        "success_accuracy": 0.75,
+        "geodesic_parameter_displacement": 1.8488429062349867,
+        "max_manifold_constraint_error": 7.105427357601002e-15,
+        "riemannian_gradient_norm": 0.0710416257704898,
+        "train_loss": 0.03563124054999687,
+        "optimizer_updates": 1800,
+        "brier_action_0": 0.016892518537583157,
+        "brier_action_1": 0.301817481100027,
+        "brier_action_2": 0.16883851942534756,
+        "brier_action_3": 0.08622050430059928
+      }
+    },
+    {
+      "seed": 1,
+      "strategy": "active",
+      "initial": {
+        "brier": 0.24397688912325638,
+        "nll": 2.8248762862589243,
+        "exact_accuracy": 0.125,
+        "success_accuracy": 0.625,
+        "geodesic_parameter_displacement": 6.0718123987304336e-9,
+        "max_manifold_constraint_error": 6.661338147750939e-16,
+        "riemannian_gradient_norm": 0,
+        "train_loss": 0,
+        "optimizer_updates": 0,
+        "brier_action_0": 0.24269569217535703,
+        "brier_action_1": 0.26706021520835016,
+        "brier_action_2": 0.2514310037058534,
+        "brier_action_3": 0.21472064540346492
+      },
+      "final": {
+        "brier": 0.21083324675096682,
+        "nll": 2.8589311758010774,
+        "exact_accuracy": 0.25,
+        "success_accuracy": 0.5,
+        "geodesic_parameter_displacement": 1.8058069854643208,
+        "max_manifold_constraint_error": 7.105427357601002e-15,
+        "riemannian_gradient_norm": 0.057215463026758555,
+        "train_loss": 0.08058703470076929,
+        "optimizer_updates": 1800,
+        "brier_action_0": 0.13544943859593253,
+        "brier_action_1": 0.25857543877768036,
+        "brier_action_2": 0.3105004898684982,
+        "brier_action_3": 0.1388076197617561
+      }
+    },
+    {
+      "seed": 1,
+      "strategy": "random",
+      "initial": {
+        "brier": 0.24397688912325638,
+        "nll": 2.8248762862589243,
+        "exact_accuracy": 0.125,
+        "success_accuracy": 0.625,
+        "geodesic_parameter_displacement": 6.0718123987304336e-9,
+        "max_manifold_constraint_error": 6.661338147750939e-16,
+        "riemannian_gradient_norm": 0,
+        "train_loss": 0,
+        "optimizer_updates": 0,
+        "brier_action_0": 0.24269569217535703,
+        "brier_action_1": 0.26706021520835016,
+        "brier_action_2": 0.2514310037058534,
+        "brier_action_3": 0.21472064540346492
+      },
+      "final": {
+        "brier": 0.19440583841858533,
+        "nll": 2.2604019932639883,
+        "exact_accuracy": 0.25,
+        "success_accuracy": 0.5,
+        "geodesic_parameter_displacement": 1.7919273395456157,
+        "max_manifold_constraint_error": 7.105427357601002e-15,
+        "riemannian_gradient_norm": 0.06475560658639976,
+        "train_loss": 0.1024842670497587,
+        "optimizer_updates": 1800,
+        "brier_action_0": 0.15893716152858833,
+        "brier_action_1": 0.21883722917946427,
+        "brier_action_2": 0.2447710488497498,
+        "brier_action_3": 0.15507791411653904
+      }
+    },
+    {
+      "seed": 2,
+      "strategy": "active",
+      "initial": {
+        "brier": 0.2575253488259508,
+        "nll": 2.850004997472098,
+        "exact_accuracy": 0.125,
+        "success_accuracy": 0.5,
+        "geodesic_parameter_displacement": 6.761660652923511e-9,
+        "max_manifold_constraint_error": 6.661338147750939e-16,
+        "riemannian_gradient_norm": 0,
+        "train_loss": 0,
+        "optimizer_updates": 0,
+        "brier_action_0": 0.19692026991858835,
+        "brier_action_1": 0.2722689472574138,
+        "brier_action_2": 0.3003022790518023,
+        "brier_action_3": 0.26060989907599863
+      },
+      "final": {
+        "brier": 0.20518544941723926,
+        "nll": 3.356285203003997,
+        "exact_accuracy": 0.375,
+        "success_accuracy": 0.625,
+        "geodesic_parameter_displacement": 1.806571912225084,
+        "max_manifold_constraint_error": 7.105427357601002e-15,
+        "riemannian_gradient_norm": 0.12891510096699102,
+        "train_loss": 0.06738210649795995,
+        "optimizer_updates": 1800,
+        "brier_action_0": 0.2020334356975566,
+        "brier_action_1": 0.19180276117144465,
+        "brier_action_2": 0.3040950315831896,
+        "brier_action_3": 0.12281056921676621
+      }
+    },
+    {
+      "seed": 2,
+      "strategy": "random",
+      "initial": {
+        "brier": 0.2575253488259508,
+        "nll": 2.850004997472098,
+        "exact_accuracy": 0.125,
+        "success_accuracy": 0.5,
+        "geodesic_parameter_displacement": 6.761660652923511e-9,
+        "max_manifold_constraint_error": 6.661338147750939e-16,
+        "riemannian_gradient_norm": 0,
+        "train_loss": 0,
+        "optimizer_updates": 0,
+        "brier_action_0": 0.19692026991858835,
+        "brier_action_1": 0.2722689472574138,
+        "brier_action_2": 0.3003022790518023,
+        "brier_action_3": 0.26060989907599863
+      },
+      "final": {
+        "brier": 0.20004989257266517,
+        "nll": 3.084355482047183,
+        "exact_accuracy": 0.25,
+        "success_accuracy": 0.5,
+        "geodesic_parameter_displacement": 1.7391190743856995,
+        "max_manifold_constraint_error": 7.105427357601002e-15,
+        "riemannian_gradient_norm": 0.08008372413350587,
+        "train_loss": 0.05910764709342425,
+        "optimizer_updates": 1800,
+        "brier_action_0": 0.23428416674681657,
+        "brier_action_1": 0.26918516599500447,
+        "brier_action_2": 0.22324909816928878,
+        "brier_action_3": 0.07348113937955085
+      }
+    }
+  ]
+}

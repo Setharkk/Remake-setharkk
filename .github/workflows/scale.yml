@@ -3,12 +3,15 @@ on:
   push:
     paths:
       - 'first_piece/shared.py'
+      - 'first_piece/shared_state.py'
+      - 'setharkk/contracts.py'
       - 'first_piece/shared_adapter.py'
       - 'first_piece/scale_world.py'
       - 'first_piece/scale_run.py'
       - 'first_piece/spherical.py'
       - 'first_piece/adapter.py'
       - 'first_piece/tests/test_shared.py'
+      - 'first_piece/tests/test_current_fixes.py'
       - '.github/workflows/scale.yml'
   workflow_dispatch:
 permissions:

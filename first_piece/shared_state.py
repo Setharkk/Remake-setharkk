@@ -21,7 +21,7 @@ def _scope(model, value):
 def _program(model, value, *, nullable=False):
     if nullable and value is None:
         return
-    if type(value) is not list or not value or value != sorted(set(value)):
+    if type(value) is not list or not value or any(type(f) is not int for f in value) or value != sorted(set(value)):
         raise ValueError("Invalid history program")
     if len(value) > model.config["max_features"] or any(type(f) is not int for f in value):
         raise ValueError("Invalid history predicates")
@@ -123,6 +123,8 @@ def validate_history(model):
             other = counter(entry["preservation_interactions"], "closed preservation exposure")
             if n >= HORIZONS[-1] or n + other != at - search["at"]:
                 raise ValueError("Closed trial exposure differs")
+            if decision == "expired" and (entry["scope"] is None or other < model.config["trial_stall_limit"]):
+                raise ValueError("Impossible stalled-context expiration")
             if decision == "migrated" and search["score_source"] != "legacy_active":
                 raise ValueError("Only legacy trials require migration closure")
         elif decision in ("pending", "accept", "futile", "inconclusive"):
@@ -227,6 +229,9 @@ def migrate_v1(cls, snapshot):
         raise ValueError("Invalid legacy histories")
     if any(type(e) is not dict for e in d["decisions"]):
         raise ValueError("Invalid legacy decision")
+    if d["trial"] is not None and type(d["trial"]) is not dict:
+        raise ValueError("Invalid legacy trial type")
+    cls(**d["config"])  # Reject invalid legacy configuration before inspecting shapes.
     old_search_keys = SEARCH_KEYS - {"attempt", "scope", "score_source"}
     for attempt, search in enumerate(d["searches"], 1):
         if type(search) is not dict or set(search) != old_search_keys:
@@ -245,6 +250,8 @@ def migrate_v1(cls, snapshot):
                           "relevance", "improvement", "other_n", "preservation", "support"}
         if type(t) is not dict or set(t) != old_trial_keys or not d["searches"]:
             raise ValueError("Invalid legacy trial")
+        if type(t["program"]) is not list or not t["program"] or any(type(f) is not int for f in t["program"]):
+            raise ValueError("Invalid legacy trial program")
         for field in ("fit_records", "fit_updates_per_bank", "n", "other_n"):
             counter(t[field], "legacy " + field)
         if t["n"] >= 4096 or t["fit_records"] != d["searches"][-1]["fit_records"] or t["fit_updates_per_bank"] != t["fit_records"] * d["config"]["replay_passes"]:

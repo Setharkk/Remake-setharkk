@@ -175,6 +175,8 @@ class CurrentFixes(unittest.TestCase):
             lambda s: s["active"]["counts"][0].__setitem__(0, s["active"]["counts"][0][0] + 1),
             lambda s: s["searches"].__setitem__(0, {"attempt": 999999, "scope": "wrong"}),
             lambda s: s["searches"][0].__setitem__("at", s["steps"] + 1),
+            lambda s: s["searches"][0].__setitem__("program", [{}]),
+            lambda s: s["searches"][0].__setitem__("program", [1, "bad"]),
             lambda s: s["trial"].__setitem__("last_progress_at", s["steps"] + 1),
             lambda s: s.__setitem__("neural_updates", s["neural_updates"] + 1),
         ]

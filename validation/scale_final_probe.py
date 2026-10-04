@@ -54,11 +54,17 @@ def main():
     args = parser.parse_args()
     states = Path(args.states)
     rows = []
+    migrated_checkpoints = 0
     for scale, (symbols, contexts, actions) in SCALES.items():
         for seed in (0, 1, 2):
             world = ScaleWorld(1300 + seed, n_symbols=symbols, n_contexts=contexts, n_actions=actions)
             for phase in ("before", "after"):
-                model = SharedLearner.restore(json.loads(states.joinpath(f"{scale}-{seed}-{phase}.json").read_text(encoding="utf-8")))
+                snapshot = json.loads(states.joinpath(f"{scale}-{seed}-{phase}.json").read_text(encoding="utf-8"))
+                if snapshot.get("format") == 1:
+                    # These frozen artifacts predate the lifecycle counters.
+                    snapshot = SharedLearner.migrate_checkpoint_v1(snapshot)
+                    migrated_checkpoints += 1
+                model = SharedLearner.restore(snapshot)
                 before = model.checkpoint()
                 for name, slots in (("context_zero", [0]), ("other_contexts", range(1, contexts)), ("new_context", [contexts])):
                     value = evaluation(model, world, seed=50000000 + len(rows),
@@ -69,7 +75,7 @@ def main():
     holdout = {"training_interactions": 0, "neural_updates": 0, "episodes_per_group": 1024,
                "total_evaluation_episodes": len(rows) * 1024, "seed_base": 50000000, "reports": rows}
     noise = [noise_control(seed) for seed in (0, 1, 2)]
-    result = {"fresh_holdout": holdout, "independent_noise_control": noise,
+    result = {"explicit_format1_migrations": migrated_checkpoints, "fresh_holdout": holdout, "independent_noise_control": noise,
               "noise_training_interactions": sum(r["training_interactions"] for r in noise)}
     Path(args.out).write_text(json.dumps(result, sort_keys=True), encoding="utf-8")
     print("SCALE_FRESH_JSON=" + json.dumps(result, sort_keys=True), flush=True)

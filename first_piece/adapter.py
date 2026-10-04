@@ -39,15 +39,16 @@ def _local_event(event):
 class FirstPieceAdapter:
     LEARNER_CLASS = DistinctionLearner
     IMPLEMENTATION = IMPLEMENTATION
+    MIN_ACTIONS = MAX_ACTIONS = 2
 
     def __init__(self, *, model_id="setharkk.first-piece", seed=0,
                  actions=("lab.action.0", "lab.action.1"), receipt_window=64,
                  learner_options=None):
         wire.identifier(model_id, "model id")
-        if not isinstance(actions, (tuple, list)) or len(actions) != 2:
-            raise ValueError("This adapter supports exactly two lab actions")
+        if not isinstance(actions, (tuple, list)) or not self.MIN_ACTIONS <= len(actions) <= self.MAX_ACTIONS:
+            raise ValueError("Action count outside adapter capabilities")
         actions = [wire.identifier(a, "action name") for a in actions]
-        if len(set(actions)) != 2:
+        if len(set(actions)) != len(actions):
             raise ValueError("Action names must be distinct")
         wire.counter(receipt_window, "receipt window", minimum=1)
         if receipt_window > 1024:
@@ -96,6 +97,9 @@ class FirstPieceAdapter:
                 "neural_geometry": "product of S2", "receipt_window": self.receipt_window,
             }
 
+    def _translate_observation(self, event):
+        return _local_event(event)
+
     def submit_observation(self, message):
         event = wire.observation(message)
         with self._lock:
@@ -107,7 +111,7 @@ class FirstPieceAdapter:
                 raise ValueError("This adapter owns one stream")
             if event["sequence"] != self._last_sequence + 1:
                 raise ValueError("Observation gap, conflict or old replay")
-            local = _local_event(event)
+            local = self._translate_observation(event)
             context = event["context_id"]
             slot = self._slots.get(context)
             if slot is None:
@@ -270,17 +274,17 @@ class FirstPieceAdapter:
             wire.identifier(snapshot["stream_id"], "stream id")
             if last is None or last["sequence"] != sequence or last["stream_id"] != snapshot["stream_id"] or last["context_id"] not in slots:
                 raise ValueError("Invalid observation boundary")
-            _local_event(last)
-            if (result is not None) != (last["kind"] == "lab.surface"):
+            instance._translate_observation(last)
+            if (result is not None) != (instance._translate_observation(last)["kind"] == "surface"):
                 raise ValueError("Observation and cached result differ")
-            if learner.episode["phase"] == "idle" and last["kind"] != "lab.surface":
+            if learner.episode["phase"] == "idle" and instance._translate_observation(last)["kind"] != "surface":
                 raise ValueError("Idle model has an unfinished observation")
         if result is not None:
-            if last is None or last["kind"] != "lab.surface" or any(result[k] != last[k] for k in ("event_id", "stream_id", "sequence", "context_id")) or result["model_id"] != instance.model_id or result["model_revision"] > revision:
+            if last is None or instance._translate_observation(last)["kind"] != "surface" or any(result[k] != last[k] for k in ("event_id", "stream_id", "sequence", "context_id")) or result["model_id"] != instance.model_id or result["model_revision"] > revision:
                 raise ValueError("Invalid cached prediction")
             identity = {k: result[k] for k in ("event_id", "stream_id", "sequence", "context_id")}
             expected_id = _key("prediction", {**identity, "model": instance.model_id, "revision": result["model_revision"]})
-            if result["prediction_id"] != expected_id or len(result["forecasts"]) != 2:
+            if result["prediction_id"] != expected_id or len(result["forecasts"]) != len(instance.actions):
                 raise ValueError("Invalid prediction identity")
             for i, forecast in enumerate(result["forecasts"]):
                 if forecast["candidate_id"] != f"choice.{i}" or forecast["action_name"] != instance.actions[i] or forecast["arguments"] or forecast["measure"] != "lab.success" or forecast["unit"] != "binary" or forecast["distribution"]["kind"] != "bernoulli":
@@ -292,8 +296,8 @@ class FirstPieceAdapter:
         if learner.episode["phase"] != "idle":
             if last is None or slots[last["context_id"]] != learner.episode["task"]:
                 raise ValueError("Observation and active model context differ")
-            expected_kind = "lab.surface" if learner.episode["phase"] == "feedback" else "lab.token"
-            if last["kind"] != expected_kind:
+            expected_kind = "surface" if learner.episode["phase"] == "feedback" else "token"
+            if instance._translate_observation(last)["kind"] != expected_kind:
                 raise ValueError("Observation and model phase differ")
         if prediction is not None:
             probabilities = learner.pending_probabilities()

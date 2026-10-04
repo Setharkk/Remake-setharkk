@@ -72,9 +72,12 @@ class SpherePredictor:
         self.points = [[list(initial) for _ in range(2)] for _ in range(2)]
         self.counts = [[0, 0], [0, 0]]
 
-    def probability(self, action, route):
+    def _indices(self, action, route):
         _integer(action, "action", high=1)
         _integer(route, "route", high=1)
+
+    def probability(self, action, route):
+        self._indices(action, route)
         q = self.points[route][action]
         d0, d1 = (distance(q, c) for c in self.anchors)
         score = (d0 * d0 - d1 * d1) / self.temperature
@@ -84,9 +87,8 @@ class SpherePredictor:
         return e / (1 + e)
 
     def update(self, action, outcome, route):
-        _integer(action, "action", high=1)
+        self._indices(action, route)
         _integer(outcome, "outcome", high=1)
-        _integer(route, "route", high=1)
         q = self.points[route][action]
         p = self.probability(action, route)
         l0, l1 = (log_map(q, c) for c in self.anchors)

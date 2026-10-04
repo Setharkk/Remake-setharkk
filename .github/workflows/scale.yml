@@ -1,0 +1,41 @@
+name: Shared spherical scale experiment
+on:
+  push:
+    paths:
+      - 'first_piece/shared.py'
+      - 'first_piece/shared_adapter.py'
+      - 'first_piece/scale_world.py'
+      - 'first_piece/scale_run.py'
+      - 'first_piece/spherical.py'
+      - 'first_piece/adapter.py'
+      - 'first_piece/tests/test_shared.py'
+      - '.github/workflows/scale.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scale:
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regression, scale, shared geometry and wire tests
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Acquisition and minority-context change at three scales
+        run: python -m first_piece.scale_run --out "${{ runner.temp }}/first-piece-scale" --seeds 0 1 2
+      - name: Independent final evaluation without new training
+        run: python -m first_piece.scale_run --out "${{ runner.temp }}/first-piece-scale" --final-only --eval-n 1024
+      - name: Upload all reports and resumable states
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-piece-scale-${{ matrix.os }}
+          if-no-files-found: warn
+          path: ${{ runner.temp }}/first-piece-scale/

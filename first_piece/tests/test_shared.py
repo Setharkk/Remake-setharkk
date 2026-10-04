@@ -218,6 +218,18 @@ class SharedLearningTests(unittest.TestCase):
             episode(learner, world, 1)
         self.assertEqual(len(learner.decisions), count)
 
+    def test_single_observed_context_drift_does_not_wait_for_nonexistent_complement(self):
+        learner = train(SharedLearner(91, max_tasks=2, min_records=256,
+                                      max_symbols=8, n_actions=2),
+                        ScaleWorld(31, n_symbols=8, n_contexts=1, n_actions=2), 6000)
+        self.assertTrue(learner.program)
+        world = ScaleWorld(31, n_symbols=8, n_contexts=1, n_actions=2)
+        for _ in range(16):
+            episode(learner, world, 0, changed=True)
+        self.assertIsNotNone(learner.trial)
+        self.assertIsNone(learner.trial["scope"])
+        self.assertEqual(learner.trial["other_n"], 0)
+
     def test_extends_an_admitted_xor_when_context_drift_erases_pair_gain(self):
         # Three-way parity has no marginal gain in any pair. Preserve and
         # extend the already admitted pair instead of relying on label luck.

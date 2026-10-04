@@ -60,3 +60,11 @@ Le second essai complet Windows réussit, mais la copie récursive coûte enviro
 L’adaptateur partagé emploie maintenant une copie transactionnelle spécialisée : RNG, vocabulaire, dictionnaires de contexte, listes de mémoire, banques neuronales et résumé de validation sont isolés ; les anciens enregistrements et décisions, jamais modifiés par le cœur, sont partagés en lecture. Les snapshots publics restent entièrement détachés. Les adaptateurs historiques gardent leur copie récursive. Les tests et la comparaison de l’interface avec le cœur direct vérifient les prédictions et l’état appris.
 
 Cette optimisation ne change ni les données d’entraînement, ni les critères d’admission. Les mêmes essais sont reproduits pour mesurer son coût et vérifier l’identité numérique.
+
+## Revue de l’ordonnancement des futurs agents
+
+Dans le benchmark alterné, le nombre de retours du complément est déterminé à chaque horizon principal. Dans une utilisation future, il pourrait dépendre de l’ordonnancement des agents. Une borne fixe au nombre observé ne suffirait alors pas. La garde de conservation utilise désormais une borne de Hoeffding maximale raccordée sur les intervalles [2^k, 2^(k+1)), avec allocation 6/(π²(k+1)²) entre intervalles. Elle est uniforme dans le temps et conserve l’allocation globale précédente ; elle peut attendre plus longtemps que la garde fixe.
+
+Pour n retours complémentaires, k=floor(log2 n), N=2^(k+1), M=3×3×16, la demi-largeur vaut :
+log(1/ε) × sqrt(2 N [log(2M/α)+log(π²/6)+2log(k+1)]) / n.
+Les deux tests principaux gardent leurs horizons préannoncés. Avec un seul contexte effectivement observé, l’essai porte sur tout le flux et n’attend pas de complément inexistant.

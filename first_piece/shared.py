@@ -313,6 +313,10 @@ class SharedLearner:
         return report["program"]
 
     def _start_trial(self, scope):
+        # A sole observed context has no complement to preserve. Use a global
+        # trial rather than waiting for observations that cannot exist.
+        if len(self.tasks) == 1:
+            scope = None
         self.attempts += 1
         rows = [(slot, *r) for slot in sorted(self.tasks) for r in self.tasks[slot]["records"]]
         program = self._search(rows)
@@ -335,14 +339,25 @@ class SharedLearner:
                       "other_n": 0, "preservation": 0.0,
                       "support": [0] * self.active.n_routes}
 
-    def _interval(self, gain, n):
+    def _interval(self, gain, n, *, anytime=False):
         if not n:
             return {"n": 0, "mean": 0.0, "bound": None, "lower": None}
         mean = gain / n
         # Bounded predictable log gains; conditional Hoeffding-Azuma.
         family = 3 * len(HORIZONS) * self.config["max_attempts"]
-        bound = -math.log(EPSILON) * math.sqrt(2 * math.log(2 * family / ALPHA) / n)
-        return {"n": n, "mean": mean, "bound": bound, "lower": mean - bound}
+        log_family = math.log(2 * family / ALPHA)
+        if anytime:
+            # Stitch maximal Hoeffding bounds over [2^k, 2^(k+1)).
+            # Weight epoch k by 6/(pi^2*(k+1)^2). Thus the complement may
+            # arrive on an adaptive schedule without an optional-time leak.
+            epoch = n.bit_length() - 1
+            upper_time = 1 << (epoch + 1)
+            log_family += math.log(math.pi ** 2 / 6) + 2 * math.log(epoch + 1)
+            bound = -math.log(EPSILON) * math.sqrt(2 * upper_time * log_family) / n
+        else:
+            bound = -math.log(EPSILON) * math.sqrt(2 * log_family / n)
+        return {"n": n, "mean": mean, "bound": bound, "lower": mean - bound,
+                "uniform_over_time": anytime}
 
     def _judge(self):
         t = self.trial
@@ -350,7 +365,7 @@ class SharedLearner:
             return
         relevance = self._interval(t["relevance"], t["n"])
         improvement = self._interval(t["improvement"], t["n"])
-        preservation = self._interval(t["preservation"], t["other_n"])
+        preservation = self._interval(t["preservation"], t["other_n"], anytime=True)
         support = [n for n in t["support"] if n]
         # All reachable scope routes need support, not unused allocated routes.
         supported = bool(support) and min(support) >= 16

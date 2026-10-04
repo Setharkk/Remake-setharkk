@@ -1,0 +1,33 @@
+{
+  "source_commit": "d34efaa1450e2b4e286daa16f5e645de49589d94",
+  "previous_run_id": 37202478630,
+  "current_run_id": 37206180993,
+  "tolerance": 1e-10,
+  "ignored_fields": [
+    "elapsed_seconds"
+  ],
+  "results": {
+    "cross_platform_integration": {
+      "numbers": 48,
+      "maxAbs": 0,
+      "mismatches": []
+    },
+    "cross_platform_learning": {
+      "numbers": 4241,
+      "maxAbs": 9.325873406851315e-15,
+      "mismatches": []
+    },
+    "unchanged_learning": {
+      "windows": {
+        "numbers": 4241,
+        "maxAbs": 0,
+        "mismatches": []
+      },
+      "linux": {
+        "numbers": 4241,
+        "maxAbs": 0,
+        "mismatches": []
+      }
+    }
+  }
+}

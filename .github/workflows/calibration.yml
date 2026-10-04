@@ -1,0 +1,47 @@
+name: Probability calibration without competence erasure
+on:
+  push:
+    paths:
+      - 'first_piece/**'
+      - 'setharkk/**'
+      - 'validation/calibration_probe.py'
+      - 'validation/renewable_probe.py'
+      - 'CALIBRATION_PROTOCOL.md'
+      - '.github/workflows/calibration.yml'
+  pull_request:
+    paths:
+      - 'first_piece/**'
+      - 'setharkk/**'
+      - 'validation/calibration_probe.py'
+      - 'validation/renewable_probe.py'
+      - 'CALIBRATION_PROTOCOL.md'
+      - '.github/workflows/calibration.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  competence:
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing and calibrated competence regression tests
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Predeclared calibration retention recovery and variable-rate comparison
+        run: python -m validation.calibration_probe --out "${{ runner.temp }}/calibration.json"
+      - name: Upload complete competence evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: calibration-${{ matrix.os }}
+          path: ${{ runner.temp }}/calibration.json
+          if-no-files-found: warn

@@ -11,7 +11,7 @@ from first_piece.plastic_revision import PlasticRevisionLearner, FAST_HORIZONS, 
 from first_piece.plastic_revision_adapter import PlasticRevisionAdapter
 from first_piece.scale_world import ScaleWorld
 from first_piece.shared import log_probability
-from first_piece.spherical import unit, norm
+from first_piece.spherical import unit, norm, log_map, point
 from first_piece.tests.test_shared import train, wire_symbol
 from first_piece.integration_probe import agent_proposal, observed_receipt
 from validation.renewable_probe import ShiftWorld
@@ -80,6 +80,13 @@ class PlasticRevisionTests(unittest.TestCase):
         b, other = spherical_mean([rotate(p) for p in points], [1, 3, 2])
         self.assertEqual(steps, other)
         self.assertLess(max(abs(x-y) for x, y in zip(rotate(a), b)), 1e-12)
+
+    def test_roundoff_coincident_logarithm_is_zero_not_antipodal(self):
+        q = [x * (1-2e-16) for x in unit([.3, .4, .7])]
+        point(q)
+        self.assertEqual(log_map(q, list(q)), [0.0, 0.0, 0.0])
+        with self.assertRaises(ValueError):
+            log_map(q, [-x for x in q])
 
     def test_antipodal_source_mean_has_an_explicit_neutral_fallback(self):
         core = PlasticRevisionLearner(max_tasks=4, max_symbols=16)

@@ -203,3 +203,15 @@ sont publiés tels qu'observés, avec les mêmes exigences de compétence finale
 de conservation, de ressources et de reprise. Cette petite extension ne
 constitue pas une validation générale. Le total est 5 336 000 retours
 d'apprentissage principaux par système, plus les copies de reprise.
+
+## Domaine numérique du logarithme sphérique
+
+Les délais du moteur dd993fc concordaient sur les deux systèmes, mais la
+comparaison détaillée révélait des transferts différents. Un cosinus presque
+égal à 1 pouvait donner acos(cosinus)>1e-10 alors que la tangente était
+quasi nulle ; cela déclenchait à tort l'erreur antipodale. Le logarithme
+utilise désormais atan2(norm(tangente), cosinus). Les points coïncidents
+retournent zéro et la vraie ambiguïté antipodale reste rejetée.
+Cette correction conserve la définition géodésique. Toutes les mesures
+sont réexécutées, et les premiers résultats numériques restent archivés
+comme itérations non retenues.

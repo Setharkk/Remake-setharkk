@@ -38,9 +38,12 @@ def distance(q, target):
 
 def log_map(q, target):
     cosine = max(-1.0, min(1.0, dot(q, target)))
-    angle = math.acos(cosine)
     tangent = [t - cosine * x for x, t in zip(q, target)]
     length = norm(tangent)
+    # acos(dot) loses the angle near coincident points: dot can round below
+    # one while the tangent is effectively zero. atan2 distinguishes that
+    # case from the genuinely ambiguous antipodal cut locus.
+    angle = math.atan2(length, cosine)
     if angle < 1e-10:
         return [0.0] * 3
     if length < 1e-12:

@@ -32,7 +32,9 @@ et mêmes poids sphériques entre les contextes. Le
 essais jusqu’à 64 symboles et 16 contextes, les coûts et les limites.
 Elle reste synthétique ; son budget de mémoire et de recherche est explicite.
 
-La [revue du code précédent](CODE_REVIEW_CURRENT.md) conserve les six familles de défauts reproduites. Les [corrections vérifiées](CURRENT_FIXES.md) sont maintenant livrées avec **97 tests Windows/Linux**, une comparaison avant/après, un cycle de vie borné de validation et une migration explicite des checkpoints partagés vers le format 2. Le budget de recherche reste non renouvelable ; les limites de longue durée sont annoncées.
+La [revue du code précédent](CODE_REVIEW_CURRENT.md) conserve les six familles de défauts reproduites. Les [corrections vérifiées](CURRENT_FIXES.md) sont maintenant livrées avec **97 tests Windows/Linux**, une comparaison avant/après, un cycle de vie borné de validation et une migration explicite des checkpoints partagés vers le format 2. Ce rapport décrit le moteur historique à budget fini.
+
+Le [mode renouvelable](RENEWABLE_SEARCH.md) ajoute maintenant un budget statistique sommable et un journal borné, avec **104 tests Windows/Linux**. Les [expériences longues](RENEWABLE_SEARCH_RESULTS.md) démontrent l’apprentissage après épuisement du mode fini, mais aussi deux échecs : oubli sous bruit et admission bloquée des changements minoritaires. Ces limites restent à corriger dans la première pièce.
 
 La [nouvelle base de recherche](RESEARCH_RESET.md) conserve les exigences
 du projet. Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) fixe les unités

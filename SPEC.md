@@ -63,7 +63,7 @@ La bibliothèque de prédicats, les frontières d’épisode et l’exploration
 uniforme sont fournies. La continuité du programme admis est un biais
 explicite, pas une preuve de découverte d’une logique entièrement nouvelle.
 
-La [revue du code précédent](CODE_REVIEW_CURRENT.md) et les [corrections](CURRENT_FIXES.md) documentent le seuil atteignable avec un contexte, l’expiration sans admission des validations qui n’avancent plus, les scores du modèle effectivement servi et les invariants de reprise. Les 97 tests passent sous Windows et Linux. Le cœur partagé écrit le format 2 ; les états du format 1 demandent une migration explicite, qui conserve les budgets et clôture les validations inachevées. Le plafond de seize essais reste non renouvelable.
+La [revue du code précédent](CODE_REVIEW_CURRENT.md) et les [corrections](CURRENT_FIXES.md) documentent le seuil atteignable avec un contexte, l’expiration sans admission des validations qui n’avancent plus, les scores du modèle effectivement servi et les invariants de reprise. Les 97 tests passent sous Windows et Linux. Le cœur partagé écrit le format 2 ; les états du format 1 demandent une migration explicite, qui conserve les budgets et clôture les validations inachevées. Le moteur historique conserve son plafond ; le [mode renouvelable](RENEWABLE_SEARCH.md) ajoute des blocs à risque sommable et des compteurs à vie, sous 104 tests Windows/Linux. Les [mesures longues](RENEWABLE_SEARCH_RESULTS.md) établissent la récupération après bruit initial et les limites restantes de rétention et de validation des changements.
 
 ## Exigence géométrique de la référence V1
 
@@ -94,9 +94,9 @@ par définition ; cela ne rend pas euclidiens les paramètres qu'ils déplacent.
 
 | Exigence | État |
 |---|---|
-| Réseau lui-même non euclidien | Version partagée sur S², 97 tests Windows/Linux ; références temporelle, de présence et V1 sur H4 conservées |
+| Réseau lui-même non euclidien | Version partagée et renouvelable sur S², 104 tests Windows/Linux ; références temporelle, de présence et V1 sur H4 conservées |
 | Apprendre des résultats de ses actions pendant une interaction | Implémenté dans la première pièce séquentielle et dans la référence de fichiers |
-| Apprentissage continu avec reprise complète | État partagé restaurable, y compris requête en attente ; 16 essais globaux par défaut, puis poursuite des gradients sans nouvelle recherche |
+| Apprentissage continu avec reprise complète | Mode renouvelable restaurable, requête en attente comprise ; recherche renouvelée avec risque à vie borné ; oubli sous bruit et validation insuffisante des changements minoritaires mesurés |
 | Objectifs proposés par l'utilisateur et objectifs choisis par le système | À développer |
 | Cortex avec un essaim d'agents comme extensions de lui-même | À développer |
 | Dialogue | À développer |

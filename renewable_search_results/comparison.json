@@ -1,0 +1,15 @@
+{
+  "windows_job": 111496135927,
+  "linux_job": 111496136109,
+  "engine_commit": "af0bd1d201500b0bdd8e35b159b8945579ec0fd5",
+  "numeric_fields_compared": 63598,
+  "max_absolute_difference": 4.440892098500626e-16,
+  "tolerance": 1e-10,
+  "mismatches": [],
+  "excluded_fields": [
+    "elapsed_seconds",
+    "max_checkpoint_bytes",
+    "runner",
+    "python"
+  ]
+}

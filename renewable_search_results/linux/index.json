@@ -1,0 +1,751 @@
+{
+  "protocol": "RENEWABLE_SEARCH_PROTOCOL.md",
+  "protocol_version": 1,
+  "engine_commit": "af0bd1d201500b0bdd8e35b159b8945579ec0fd5",
+  "runner": "Linux",
+  "python": "3.11.16",
+  "options": {
+    "max_tasks": 8,
+    "max_symbols": 16,
+    "n_actions": 4
+  },
+  "finite_lifetime_alpha": 0.05,
+  "fresh_renewable_lifetime_alpha": 0.05,
+  "summary": [
+    {
+      "case": "noise_then_signal",
+      "seed": 0,
+      "training_labels": 80000,
+      "final_modes": {
+        "finite": {
+          "attempts": 16,
+          "admissions": 0,
+          "policy_by_context": [
+            0.255859375,
+            0.244140625,
+            0.259765625,
+            0.24609375
+          ],
+          "brier_by_context": [
+            0.19105167869131562,
+            0.19347340968132526,
+            0.19159886820353877,
+            0.19241794186062056
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 17,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 72597
+          }
+        },
+        "renewable": {
+          "attempts": 89,
+          "admissions": 1,
+          "policy_by_context": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.0000012260808147401072,
+            0.0000012249679185058652,
+            0.0000012242286569422037,
+            0.0000012259370387170514
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 19,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 73470
+          }
+        }
+      },
+      "resume": {
+        "origin": {
+          "global_label": 7584,
+          "attempt": 17,
+          "principal_labels": 32,
+          "search_block": 2
+        },
+        "verified_future_labels": 1024,
+        "identical_except_search_wall_time": true
+      }
+    },
+    {
+      "case": "noise_then_signal",
+      "seed": 1,
+      "training_labels": 80000,
+      "final_modes": {
+        "finite": {
+          "attempts": 16,
+          "admissions": 0,
+          "policy_by_context": [
+            0.220703125,
+            0.2265625,
+            0.234375,
+            0.2265625
+          ],
+          "brier_by_context": [
+            0.19343976337347535,
+            0.19419762729426462,
+            0.1931317440669085,
+            0.1926418655885187
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 18,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 73382
+          }
+        },
+        "renewable": {
+          "attempts": 89,
+          "admissions": 1,
+          "policy_by_context": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.0000036611609092145773,
+            0.0000037373602199351254,
+            0.0000035670333435176094,
+            0.000003720152903402185
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 19,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 73193
+          }
+        }
+      },
+      "resume": {
+        "origin": {
+          "global_label": 8480,
+          "attempt": 17,
+          "principal_labels": 32,
+          "search_block": 2
+        },
+        "verified_future_labels": 1024,
+        "identical_except_search_wall_time": true
+      }
+    },
+    {
+      "case": "noise_then_signal",
+      "seed": 2,
+      "training_labels": 80000,
+      "final_modes": {
+        "finite": {
+          "attempts": 16,
+          "admissions": 0,
+          "policy_by_context": [
+            0.2578125,
+            0.20703125,
+            0.23828125,
+            0.2734375
+          ],
+          "brier_by_context": [
+            0.19086630263362578,
+            0.19340845960866193,
+            0.1920121357968209,
+            0.1909392569721759
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 17,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 73263
+          }
+        },
+        "renewable": {
+          "attempts": 85,
+          "admissions": 1,
+          "policy_by_context": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.0000012360718377057162,
+            0.000001233883811622268,
+            0.0000012366582892862139,
+            0.0000012356873113056312
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 20,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 74379
+          }
+        }
+      },
+      "resume": {
+        "origin": {
+          "global_label": 7584,
+          "attempt": 17,
+          "principal_labels": 32,
+          "search_block": 2
+        },
+        "verified_future_labels": 1024,
+        "identical_except_search_wall_time": true
+      }
+    },
+    {
+      "case": "retention",
+      "seed": 0,
+      "training_labels": 140000,
+      "final_modes": {
+        "finite": {
+          "attempts": 16,
+          "admissions": 1,
+          "policy_by_context": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.000008473454208793483,
+            0.000008478310156936322,
+            0.000008475273845385039,
+            0.000008472518322358768
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 19,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 75200
+          }
+        },
+        "renewable": {
+          "attempts": 90,
+          "admissions": 1,
+          "policy_by_context": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.000008473454208793483,
+            0.000008478310156936322,
+            0.000008475273845385039,
+            0.000008472518322358768
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 19,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 73897
+          }
+        }
+      },
+      "resume": {
+        "origin": {
+          "global_label": 35254,
+          "attempt": 17,
+          "principal_labels": 32,
+          "search_block": 2
+        },
+        "verified_future_labels": 1024,
+        "identical_except_search_wall_time": true
+      },
+      "retention_boundaries": [
+        {
+          "phase": "initial_signal",
+          "modes": {
+            "finite": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "renewable": [
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "phase": "prolonged_noise",
+          "modes": {
+            "finite": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "renewable": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "phase": "recovery",
+          "modes": {
+            "finite": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "renewable": [
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "retention",
+      "seed": 1,
+      "training_labels": 140000,
+      "final_modes": {
+        "finite": {
+          "attempts": 16,
+          "admissions": 1,
+          "policy_by_context": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.000008693945576859039,
+            0.000008711204368083165,
+            0.000008710308063547999,
+            0.000008709798314196355
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 17,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 74534
+          }
+        },
+        "renewable": {
+          "attempts": 97,
+          "admissions": 1,
+          "policy_by_context": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.000008472087843843918,
+            0.00000848838377661181,
+            0.000008488038614822197,
+            0.00000848738271633091
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 18,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 74578
+          }
+        }
+      },
+      "resume": {
+        "origin": {
+          "global_label": 31682,
+          "attempt": 17,
+          "principal_labels": 32,
+          "search_block": 2
+        },
+        "verified_future_labels": 1024,
+        "identical_except_search_wall_time": true
+      },
+      "retention_boundaries": [
+        {
+          "phase": "initial_signal",
+          "modes": {
+            "finite": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "renewable": [
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "phase": "prolonged_noise",
+          "modes": {
+            "finite": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "renewable": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "phase": "recovery",
+          "modes": {
+            "finite": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "renewable": [
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "retention",
+      "seed": 2,
+      "training_labels": 140000,
+      "final_modes": {
+        "finite": {
+          "attempts": 16,
+          "admissions": 1,
+          "policy_by_context": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.000008476270214859225,
+            0.000008474406693344324,
+            0.000008481390016053178,
+            0.000008488754541838613
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 18,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 75145
+          }
+        },
+        "renewable": {
+          "attempts": 92,
+          "admissions": 1,
+          "policy_by_context": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.000008476270214859225,
+            0.000008474406693344324,
+            0.000008481390016053178,
+            0.000008488754541838613
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 18,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 75657
+          }
+        }
+      },
+      "resume": {
+        "origin": {
+          "global_label": 31683,
+          "attempt": 17,
+          "principal_labels": 32,
+          "search_block": 2
+        },
+        "verified_future_labels": 1024,
+        "identical_except_search_wall_time": true
+      },
+      "retention_boundaries": [
+        {
+          "phase": "initial_signal",
+          "modes": {
+            "finite": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "renewable": [
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "phase": "prolonged_noise",
+          "modes": {
+            "finite": [
+              0.267578125,
+              0.24609375,
+              0.265625,
+              0.205078125
+            ],
+            "renewable": [
+              0.267578125,
+              0.24609375,
+              0.265625,
+              0.205078125
+            ]
+          }
+        },
+        {
+          "phase": "recovery",
+          "modes": {
+            "finite": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "renewable": [
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "successive_changes",
+      "seed": 0,
+      "training_labels": 280000,
+      "final_modes": {
+        "finite": {
+          "attempts": 16,
+          "admissions": 1,
+          "policy_by_context": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.28171061063419517,
+            0.03209180442734419,
+            0.03237288160449813,
+            0.032708157150125455
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 42,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 91207
+          }
+        },
+        "renewable": {
+          "attempts": 16,
+          "admissions": 1,
+          "policy_by_context": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.28171061063419517,
+            0.03209180442734419,
+            0.03237288160449813,
+            0.032708157150125455
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 42,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 91516
+          }
+        }
+      },
+      "resume": {
+        "origin": null,
+        "verified_future_labels": 0,
+        "identical_except_search_wall_time": false
+      },
+      "unchanged_context_minimum": {
+        "finite": 1,
+        "renewable": 1
+      }
+    },
+    {
+      "case": "successive_changes",
+      "seed": 1,
+      "training_labels": 280000,
+      "final_modes": {
+        "finite": {
+          "attempts": 16,
+          "admissions": 1,
+          "policy_by_context": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.2844397195151384,
+            0.030828078875503522,
+            0.030443282559964854,
+            0.030853591149563944
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 41,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 91214
+          }
+        },
+        "renewable": {
+          "attempts": 16,
+          "admissions": 1,
+          "policy_by_context": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.2845086337240153,
+            0.03080867234509829,
+            0.03042353053872093,
+            0.030834181756799747
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 42,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 91967
+          }
+        }
+      },
+      "resume": {
+        "origin": null,
+        "verified_future_labels": 0,
+        "identical_except_search_wall_time": false
+      },
+      "unchanged_context_minimum": {
+        "finite": 1,
+        "renewable": 1
+      }
+    },
+    {
+      "case": "successive_changes",
+      "seed": 2,
+      "training_labels": 280000,
+      "final_modes": {
+        "finite": {
+          "attempts": 16,
+          "admissions": 1,
+          "policy_by_context": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.2977892963115875,
+            0.02642453835013779,
+            0.02645873952471339,
+            0.026660940348979513
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 42,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 91985
+          }
+        },
+        "renewable": {
+          "attempts": 16,
+          "admissions": 1,
+          "policy_by_context": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "brier_by_context": [
+            0.2977892963115875,
+            0.02642453835013779,
+            0.02645873952471339,
+            0.026660940348979513
+          ],
+          "bounds": {
+            "max_search_history": 16,
+            "max_decision_history": 42,
+            "max_fit_records": 1024,
+            "max_allocated_points": 128,
+            "max_checkpoint_bytes": 92309
+          }
+        }
+      },
+      "resume": {
+        "origin": null,
+        "verified_future_labels": 0,
+        "identical_except_search_wall_time": false
+      },
+      "unchanged_context_minimum": {
+        "finite": 1,
+        "renewable": 1
+      }
+    }
+  ],
+  "packaging": "Cases are stored separately without loss; join case_files into the original cases array.",
+  "case_files": [
+    "noise_then_signal_seed0.json",
+    "noise_then_signal_seed1.json",
+    "noise_then_signal_seed2.json",
+    "retention_seed0.json",
+    "retention_seed1.json",
+    "retention_seed2.json",
+    "successive_changes_seed0.json",
+    "successive_changes_seed1.json",
+    "successive_changes_seed2.json"
+  ]
+}

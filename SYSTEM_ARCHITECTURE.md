@@ -14,7 +14,7 @@ sa mémoire et ses règles de routage restent des détails privés de l’appren
 | Pièce | Responsabilité | État |
 |---|---|---|
 | Contrats communs, `setharkk/contracts.py` | Messages JSON versionnés, identités, ordre logique, unités | Implémentés, version 1 |
-| Adaptateurs, `FirstPieceAdapter`, `TemporalAdapter` et `SharedAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
+| Adaptateurs, `FirstPieceAdapter`, `TemporalAdapter`, `SharedAdapter` et `RenewableAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
 | Première pièce neuronale | Mémoire d'événements, prédictions et modification des prototypes S² | Présence, ordres et combinaisons bornées ; version partagée entre contextes |
 | Cortex coordinateur | Arbitrage des propositions, ressources communes, priorités, journal durable | À construire ; l'adaptateur possède déjà une seule autorité d'apprentissage |
 | Objectifs et planification | Distinguer la demande utilisateur, les objectifs exploratoires et leur valeur | À construire ; un `goal_id` peut déjà accompagner une proposition |
@@ -200,3 +200,22 @@ sont immuables en interne et partagés en lecture. Les états exposés aux
 agents sont des copies détachées. Le verrou et la limite d’une action en
 vol restent nécessaires ; le planificateur, l’ingestion de plusieurs flux
 et le journal physique durable ne sont pas fournis par cette optimisation.
+
+## Recherche renouvelable, même autorité d'apprentissage
+
+`RenewableAdapter` conserve les contrats version 1 et la frontière d'une action
+en attente. Son cœur utilise une identité distincte et le format 3 ; un ancien
+état partagé doit suivre un import explicite. Les
+[instructions](RENEWABLE_SEARCH.md) précisent le risque historique conservé.
+
+Les agents peuvent lire les capacités du mode et les métriques de bloc, risque,
+compteurs à vie et mémoire. Ils ne remettent pas le budget à zéro et ne modifient
+pas sa taille au milieu d'une reprise. La première pièce déclenche la recherche
+automatiquement depuis les retours appris ; le coordinateur futur devra encore
+arbitrer le temps CPU et les expériences, et conserver un journal durable.
+
+Les [mesures longues](RENEWABLE_SEARCH_RESULTS.md) montrent que le renouvellement
+ne fournit pas une mémoire de compétences protégée. La garde d'admission et son
+horizon restent insuffisants pour les changements minoritaires testés. Ces
+limites appartiennent encore à la première pièce ; l'essaim ne les résoudra pas
+simplement en partageant ses poids.

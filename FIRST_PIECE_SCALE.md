@@ -2,7 +2,7 @@
 
 Cette version élargit la première pièce sans lui ajouter d’essaim, de dialogue ou d’exécuteur réel. Elle reste un laboratoire synthétique. Le [protocole](SCALING_PROTOCOL.md) fixe les budgets, les horizons et les conditions ; le [rapport](FIRST_PIECE_SCALE_RESULTS.md) publie les résultats et les limites.
 
-Les [corrections de la revue](CURRENT_FIXES.md) sont livrées : collecte atteignable, validation bornée sans progrès, scores servis cohérents et état partagé au format 2 avec migration explicite. Les résultats restent limités aux distributions et budgets annoncés ; les limites de recherche et de rétention longue persistent.
+Les [corrections de la revue](CURRENT_FIXES.md) sont livrées : collecte atteignable, validation bornée sans progrès, scores servis cohérents et état partagé au format 2 avec migration explicite. Les résultats restent limités aux distributions et budgets annoncés ; ce rapport porte sur le moteur fini. Le [mode renouvelable](RENEWABLE_SEARCH.md) retire maintenant son plafond à vie avec risque sommable et mémoire bornée. Les [résultats longs](RENEWABLE_SEARCH_RESULTS.md) exposent les échecs de rétention et de validation qui persistent.
 
 ## Ce qui change
 

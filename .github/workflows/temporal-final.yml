@@ -1,0 +1,41 @@
+name: Temporal final evaluation
+on:
+  push:
+    paths:
+      - 'validation/temporal_final_probe.py'
+      - '.github/workflows/temporal-final.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  final-evaluation:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact: first-piece-temporal-ubuntu-latest
+          - os: windows-latest
+            artifact: first-piece-temporal-windows-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read tested complete temporal checkpoints
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          run-id: 37208231509
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/temporal-tested-state
+      - name: Evaluate fresh sequences without training
+        run: python -m validation.temporal_final_probe --states "${{ runner.temp }}/temporal-tested-state" --out "${{ runner.temp }}/temporal-final.json"
+      - name: Upload independent final evaluation
+        uses: actions/upload-artifact@v4
+        with:
+          name: temporal-final-${{ matrix.os }}
+          if-no-files-found: error
+          path: ${{ runner.temp }}/temporal-final.json

@@ -41,14 +41,14 @@ def _program(model, value, *, nullable=False):
                 raise ValueError("History order is unbound")
 
 
-def _interval(model, raw, *, anytime=False, attempt=None):
+def _interval(model, raw, *, anytime=False, attempt=None, comparison=None):
     if type(raw) is not dict:
         raise ValueError("Invalid history interval")
     n = counter(raw.get("n"), "history horizon")
     mean = _finite_number(raw.get("mean"), "history gain")
     if abs(mean) > -math.log(.01) + 1e-8:
         raise ValueError("Impossible history gain")
-    expected = model._interval(mean * n, n, anytime=anytime, attempt=attempt)
+    expected = model._interval(mean * n, n, anytime=anytime, attempt=attempt, comparison=comparison)
     if set(raw) != set(expected):
         raise ValueError("Invalid interval fields")
     for key, value in expected.items():
@@ -72,7 +72,10 @@ def validate_history(model):
         _program(model, origin["last_admission"]["program"])
     previous_at = origin["archived_at"]
     for index, search in enumerate(model.searches, offset + 1):
-        if type(search) is not dict or set(search) != SEARCH_KEYS:
+        if type(search) is not dict:
+            raise ValueError("Invalid search entry type")
+        attempt = counter(search.get("attempt"), "search attempt", minimum=1)
+        if set(search) != model._search_keys(attempt):
             raise ValueError("Invalid search entry fields")
         if counter(search["attempt"], "search attempt", minimum=1) != index:
             raise ValueError("Invalid search attempt order")
@@ -83,6 +86,7 @@ def validate_history(model):
         previous_at = at
         _scope(model, search["scope"])
         _program(model, search["program"], nullable=True)
+        model._validate_search(search)
         if search["score_source"] not in ("served", "legacy_active"):
             raise ValueError("Unknown score source")
         eligible = counter(search["eligible_features"], "eligible features")
@@ -108,6 +112,7 @@ def validate_history(model):
         if attempt not in histories:
             raise ValueError("Decision refers to nonexistent attempt")
         search = model.searches[attempt - offset - 1]
+        horizons = model._horizons(attempt)
         at = counter(entry.get("at"), "decision exposure")
         if not max(previous_at, search["at"]) <= at <= model.steps:
             raise ValueError("Invalid decision chronology")
@@ -125,7 +130,7 @@ def validate_history(model):
                 raise ValueError("Invalid nonstatistical closure")
             n = counter(entry["validation_interactions"], "closed validation exposure")
             other = counter(entry["preservation_interactions"], "closed preservation exposure")
-            if n >= HORIZONS[-1] or n + other != at - search["at"]:
+            if n >= horizons[-1] or n + other != at - search["at"]:
                 raise ValueError("Closed trial exposure differs")
             if decision == "expired" and (entry["scope"] is None or other < model.config["trial_stall_limit"]):
                 raise ValueError("Impossible stalled-context expiration")
@@ -134,10 +139,10 @@ def validate_history(model):
         elif decision in ("pending", "accept", "futile", "inconclusive"):
             if set(entry) != GATE_KEYS or search["program"] is None:
                 raise ValueError("Invalid statistical decision fields")
-            n = _interval(model, entry["relevance"], attempt=attempt)
-            if n not in HORIZONS or _interval(model, entry["improvement"], attempt=attempt) != n:
+            n = _interval(model, entry["relevance"], attempt=attempt, comparison="relevance")
+            if n not in horizons or _interval(model, entry["improvement"], attempt=attempt, comparison="improvement") != n:
                 raise ValueError("Invalid predeclared horizon")
-            other = _interval(model, entry["preservation"], anytime=True, attempt=attempt)
+            other = _interval(model, entry["preservation"], anytime=True, attempt=attempt, comparison="preservation")
             if n + other != at - search["at"] or (entry["scope"] is None and other):
                 raise ValueError("Decision exposure differs")
             support = entry["route_support"]
@@ -158,9 +163,9 @@ def validate_history(model):
                     raise ValueError("Acceptance does not satisfy its gate")
             if decision == "futile" and min(entry["relevance"]["mean"], entry["improvement"]["mean"]) > cost:
                 raise ValueError("Futility condition not met")
-            if decision == "pending" and n == HORIZONS[-1]:
+            if decision == "pending" and n == horizons[-1]:
                 raise ValueError("Pending final horizon")
-            if decision == "inconclusive" and n != HORIZONS[-1]:
+            if decision == "inconclusive" and n != horizons[-1]:
                 raise ValueError("Premature final closure")
         else:
             raise ValueError("Unknown decision")
@@ -175,7 +180,7 @@ def validate_history(model):
                 raise ValueError("Live trial already closed")
         elif not entries or entries[-1]["decision"] == "pending":
             raise ValueError("Missing terminal decision")
-        if len(entries) > len(HORIZONS):
+        if len(entries) > len(model._horizons(attempt)):
             raise ValueError("Too many decisions for one attempt")
 
     t = model.trial
@@ -201,7 +206,7 @@ def validate_history(model):
         if any(t["support"][2 ** len(t["program"]):]):
             raise ValueError("Support in an unreachable route")
         observed_horizons = [e["relevance"]["n"] for e in histories[model.attempts] if "relevance" in e]
-        if observed_horizons != [n for n in HORIZONS if n <= t["n"]]:
+        if observed_horizons != [n for n in model._horizons() if n <= t["n"]]:
             raise ValueError("Trial horizon history differs")
 
     fitted = origin["archived_fit_records"] + sum(s["fit_records"] for s in model.searches if s["program"] is not None)

@@ -108,6 +108,28 @@ class SharedLearner:
     def _interval_alpha(self, attempt=None):
         return ALPHA
 
+    def _horizons(self, attempt=None):
+        return HORIZONS
+
+    def _max_looks(self):
+        return len(HORIZONS)
+
+    def _search_keys(self, attempt):
+        from .shared_state import SEARCH_KEYS
+        return SEARCH_KEYS
+
+    def _validate_search(self, search):
+        pass
+
+    def _after_restore(self):
+        pass
+
+    def _on_accept(self):
+        pass
+
+    def _served_readout(self, episode, route):
+        return (self.active, route) if self.config["use_structure"] else (self.baseline, episode["coin"])
+
     def __init__(self, seed=0, *, max_tasks=32, max_symbols=64, n_actions=4,
                  max_features=3, fit_per_context=256, min_records=512,
                  replay_passes=4, max_attempts=16, cooldown=256,
@@ -248,11 +270,8 @@ class SharedLearner:
         if self.episode["phase"] != "feedback":
             raise RuntimeError("No pending forecast")
         e = self.episode
-        if self.config["use_structure"]:
-            model = self.active
-            route = self._route(self.program, e["task"], e["mask"], e["before"]) if self.program else e["coin"]
-        else:
-            model, route = self.baseline, e["coin"]
+        route = self._route(self.program, e["task"], e["mask"], e["before"]) if self.program else e["coin"]
+        model, route = self._served_readout(e, route)
         return [model.probability(a, route) for a in range(self.config["n_actions"])]
 
     def finish_evaluation(self):
@@ -380,12 +399,12 @@ class SharedLearner:
                       "other_n": 0, "preservation": 0.0,
                       "support": [0] * self.active.n_routes}
 
-    def _interval(self, gain, n, *, anytime=False, attempt=None):
+    def _interval(self, gain, n, *, anytime=False, attempt=None, comparison=None):
         if not n:
             return {"n": 0, "mean": 0.0, "bound": None, "lower": None}
         mean = gain / n
         # Bounded predictable log gains; conditional Hoeffding-Azuma.
-        family = 3 * len(HORIZONS) * self.config["max_attempts"]
+        family = 3 * len(self._horizons(attempt)) * self.config["max_attempts"]
         log_family = math.log(2 * family / self._interval_alpha(attempt))
         if anytime:
             # Stitch maximal Hoeffding bounds over [2^k, 2^(k+1)).
@@ -402,11 +421,12 @@ class SharedLearner:
 
     def _judge(self):
         t = self.trial
-        if t["n"] not in HORIZONS:
+        horizons = self._horizons()
+        if t["n"] not in horizons:
             return
-        relevance = self._interval(t["relevance"], t["n"])
-        improvement = self._interval(t["improvement"], t["n"])
-        preservation = self._interval(t["preservation"], t["other_n"], anytime=True)
+        relevance = self._interval(t["relevance"], t["n"], comparison="relevance")
+        improvement = self._interval(t["improvement"], t["n"], comparison="improvement")
+        preservation = self._interval(t["preservation"], t["other_n"], anytime=True, comparison="preservation")
         support = [n for n in t["support"] if n]
         # All reachable scope routes need support, not unused allocated routes.
         supported = bool(support) and min(support) >= 16
@@ -416,7 +436,7 @@ class SharedLearner:
             decision = "accept"
         elif relevance["mean"] <= cost or improvement["mean"] <= cost:
             decision = "futile"
-        elif t["n"] == HORIZONS[-1]:
+        elif t["n"] == horizons[-1]:
             decision = "inconclusive"
         else:
             decision = "pending"
@@ -430,6 +450,7 @@ class SharedLearner:
             self.active, self.baseline = self.candidate, self.control
             self.program = list(t["program"])
             self.admissions += 1
+            self._on_accept()
             for task in self.tasks.values():
                 task["losses"] = []
         self.trial = self.candidate = self.control = None
@@ -455,7 +476,7 @@ class SharedLearner:
         e = self.episode
         task = self.tasks[e["task"]]
         route = self._route(self.program, e["task"], e["mask"], e["before"]) if self.program else e["coin"]
-        served_model, served_route = (self.active, route) if self.config["use_structure"] else (self.baseline, e["coin"])
+        served_model, served_route = self._served_readout(e, route)
         p = served_model.probability(action, served_route)
         if self.trial is not None:
             t = self.trial
@@ -658,7 +679,7 @@ class SharedLearner:
                 raise ValueError("Invalid trial scope")
             for name in ("fit_records", "fit_updates_per_bank", "n", "other_n"):
                 counter(t[name], name)
-            if not counter(t["fit_required_records"], "required fit records", minimum=64) <= t["fit_records"] <= model.config["fit_per_context"] * model.config["max_tasks"] or t["fit_updates_per_bank"] != t["fit_records"] * model.config["replay_passes"] or t["n"] >= HORIZONS[-1] or t["n"] + t["other_n"] > model.steps:
+            if not counter(t["fit_required_records"], "required fit records", minimum=64) <= t["fit_records"] <= model.config["fit_per_context"] * model.config["max_tasks"] or t["fit_updates_per_bank"] != t["fit_records"] * model.config["replay_passes"] or t["n"] >= model._horizons()[-1] or t["n"] + t["other_n"] > model.steps:
                 raise ValueError("Invalid trial budget")
             if type(t["support"]) is not list or len(t["support"]) != model.active.n_routes or any(type(n) is not int or n < 0 for n in t["support"]) or sum(t["support"]) != t["n"]:
                 raise ValueError("Invalid trial support")
@@ -672,7 +693,7 @@ class SharedLearner:
                     raise ValueError("Validation bank was updated on deciding data")
         model.trial = t
         for name in ("decisions", "searches"):
-            if type(d[name]) is not list or len(d[name]) > model.config["max_attempts"] * len(HORIZONS):
+            if type(d[name]) is not list or len(d[name]) > model.config["max_attempts"] * model._max_looks():
                 raise ValueError("Unbounded search history")
             setattr(model, name, d[name])
         origin = model._history_origin()
@@ -694,6 +715,7 @@ class SharedLearner:
             raise ValueError("Invalid geometry residual")
         from .shared_state import validate_history
         validate_history(model)
+        model._after_restore()
         return model
 
 

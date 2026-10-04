@@ -1,0 +1,47 @@
+name: Protected competence and extended validation
+on:
+  push:
+    paths:
+      - 'first_piece/**'
+      - 'setharkk/**'
+      - 'validation/consolidation_probe.py'
+      - 'validation/renewable_probe.py'
+      - 'CONSOLIDATION_PROTOCOL.md'
+      - '.github/workflows/consolidation.yml'
+  pull_request:
+    paths:
+      - 'first_piece/**'
+      - 'setharkk/**'
+      - 'validation/consolidation_probe.py'
+      - 'validation/renewable_probe.py'
+      - 'CONSOLIDATION_PROTOCOL.md'
+      - '.github/workflows/consolidation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  competence:
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing and protected competence regression tests
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Predeclared retention noise calibration and rule change comparison
+        run: python -m validation.consolidation_probe --out "${{ runner.temp }}/consolidation.json"
+      - name: Upload complete competence evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: consolidation-${{ matrix.os }}
+          path: ${{ runner.temp }}/consolidation.json
+          if-no-files-found: warn

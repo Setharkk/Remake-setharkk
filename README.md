@@ -36,6 +36,8 @@ La [revue du code précédent](CODE_REVIEW_CURRENT.md) conserve les six familles
 
 Le [mode renouvelable](RENEWABLE_SEARCH.md) ajoute maintenant un budget statistique sommable et un journal borné, avec **104 tests Windows/Linux**. Les [expériences longues](RENEWABLE_SEARCH_RESULTS.md) démontrent l’apprentissage après épuisement du mode fini, mais aussi deux échecs : oubli sous bruit et admission bloquée des changements minoritaires. Le [mode consolidé](CONSOLIDATION.md) corrige maintenant ces deux échecs dans le protocole testé, avec **113 tests Windows/Linux**. Les [mesures complètes](CONSOLIDATION_RESULTS.md) montrent une compétence conservée à 100 % après 80 000 retours bruités et six changements successifs admis, sur trois graines. La mémoire protégée ajoute 32 points S² pour quatre actions. Elle augmente toutefois la surconfiance sous bruit ; une première admission est aussi plus lente. Ces coûts et limites sont publiés.
 
+Le [mode calibré](CALIBRATION.md) conserve le réseau et les décisions de compétence du mode consolidé, puis ajuste ses probabilités depuis les résultats récents des actions exécutées. Le [protocole](CALIBRATION_PROTOCOL.md) sépare la conservation de la règle des scores probabilistes ; le [rapport](CALIBRATION_RESULTS.md) publie les mesures, les coûts et les limites.
+
 La [nouvelle base de recherche](RESEARCH_RESET.md) conserve les exigences
 du projet. Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) fixe les unités
 et la portée des conclusions.

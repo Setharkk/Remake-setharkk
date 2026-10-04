@@ -1,5 +1,7 @@
 # Conservation de compétences et validation : résultats
 
+Le [mode calibré](CALIBRATION.md) prolonge cette version sans changer son apprentissage de compétence. Les [mesures suivantes](CALIBRATION_RESULTS.md) examinent les probabilités sous bruit et leur récupération.
+
 **Les deux échecs précédents sont corrigés dans le protocole testé : la compétence
 reste accessible après le bruit, et les six changements du contexte minoritaire
 sont admis. Les probabilités sont toutefois moins bien calibrées pendant le bruit,

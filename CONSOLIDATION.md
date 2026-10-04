@@ -1,5 +1,7 @@
 # Première pièce : compétence protégée et validation prolongée
 
+Le [mode calibré](CALIBRATION.md) prolonge cette version sans changer son apprentissage de compétence. Les [mesures suivantes](CALIBRATION_RESULTS.md) examinent les probabilités sous bruit et leur récupération.
+
 Le mode `ConsolidatedLearner` / `ConsolidatedAdapter` ajoute une compétence
 protégée au [mode renouvelable](RENEWABLE_SEARCH.md). Il reste un laboratoire
 synthétique de prédicats bornés et de prototypes neuronaux S².

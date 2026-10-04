@@ -1,0 +1,141 @@
+{
+  "engine_commit": "bf15bec840136291ce52892c3f5a0824cdf72f5b",
+  "windows_job": 111519042425,
+  "linux_job": 111519042294,
+  "numeric_fields_compared": 89277,
+  "max_absolute_difference": 5.329070518200751e-15,
+  "tolerance": 1e-10,
+  "mismatches": [],
+  "excluded_fields": [
+    "elapsed_seconds",
+    "max_sampled_checkpoint_bytes",
+    "python",
+    "runner"
+  ],
+  "competence_journal_comparisons": {
+    "windows": [
+      {
+        "case": "noise_then_signal",
+        "seed": 0,
+        "journals_identical": true
+      },
+      {
+        "case": "noise_then_signal",
+        "seed": 1,
+        "journals_identical": true
+      },
+      {
+        "case": "noise_then_signal",
+        "seed": 2,
+        "journals_identical": true
+      },
+      {
+        "case": "retention",
+        "seed": 0,
+        "journals_identical": true
+      },
+      {
+        "case": "retention",
+        "seed": 1,
+        "journals_identical": true
+      },
+      {
+        "case": "retention",
+        "seed": 2,
+        "journals_identical": true
+      },
+      {
+        "case": "successive_changes",
+        "seed": 0,
+        "journals_identical": true
+      },
+      {
+        "case": "successive_changes",
+        "seed": 1,
+        "journals_identical": true
+      },
+      {
+        "case": "successive_changes",
+        "seed": 2,
+        "journals_identical": true
+      },
+      {
+        "case": "variable_noise",
+        "seed": 0,
+        "journals_identical": true
+      },
+      {
+        "case": "variable_noise",
+        "seed": 1,
+        "journals_identical": true
+      },
+      {
+        "case": "variable_noise",
+        "seed": 2,
+        "journals_identical": true
+      }
+    ],
+    "linux": [
+      {
+        "case": "noise_then_signal",
+        "seed": 0,
+        "journals_identical": true
+      },
+      {
+        "case": "noise_then_signal",
+        "seed": 1,
+        "journals_identical": true
+      },
+      {
+        "case": "noise_then_signal",
+        "seed": 2,
+        "journals_identical": true
+      },
+      {
+        "case": "retention",
+        "seed": 0,
+        "journals_identical": true
+      },
+      {
+        "case": "retention",
+        "seed": 1,
+        "journals_identical": true
+      },
+      {
+        "case": "retention",
+        "seed": 2,
+        "journals_identical": true
+      },
+      {
+        "case": "successive_changes",
+        "seed": 0,
+        "journals_identical": true
+      },
+      {
+        "case": "successive_changes",
+        "seed": 1,
+        "journals_identical": true
+      },
+      {
+        "case": "successive_changes",
+        "seed": 2,
+        "journals_identical": true
+      },
+      {
+        "case": "variable_noise",
+        "seed": 0,
+        "journals_identical": true
+      },
+      {
+        "case": "variable_noise",
+        "seed": 1,
+        "journals_identical": true
+      },
+      {
+        "case": "variable_noise",
+        "seed": 2,
+        "journals_identical": true
+      }
+    ]
+  }
+}

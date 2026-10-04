@@ -1,0 +1,2515 @@
+{
+  "protocol": "CALIBRATION_PROTOCOL.md",
+  "protocol_version": 1,
+  "engine_commit": "bf15bec840136291ce52892c3f5a0824cdf72f5b",
+  "runner": "Linux",
+  "python": "3.11.16",
+  "options": {
+    "max_tasks": 8,
+    "max_symbols": 16,
+    "n_actions": 4
+  },
+  "summary": [
+    {
+      "case": "noise_then_signal",
+      "seed": 0,
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "consolidated": {
+              "attempts": 87,
+              "admissions": 0,
+              "policy_by_context": [
+                0.27734375,
+                0.236328125,
+                0.248046875,
+                0.232421875
+              ],
+              "actual_training_scores": {
+                "brier": 0.1965527630335851,
+                "log_loss": 0.5869461342156663,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.19232641831987682,
+                "log_loss": 0.576155478499039,
+                "observed_success": 0.247375
+              }
+            },
+            "calibrated": {
+              "attempts": 87,
+              "admissions": 0,
+              "policy_by_context": [
+                0.27734375,
+                0.236328125,
+                0.248046875,
+                0.232421875
+              ],
+              "actual_training_scores": {
+                "brier": 0.1965527630335851,
+                "log_loss": 0.5869461342156663,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.19232641831987682,
+                "log_loss": 0.576155478499039,
+                "observed_success": 0.247375
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 89,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.10174925232551252,
+                "log_loss": 0.30843825137100817,
+                "observed_success": 0.25355
+              },
+              "tail_training_scores": {
+                "brier": 0.000023041370722981666,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.254125
+              }
+            },
+            "calibrated": {
+              "attempts": 89,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.10174925232551252,
+                "log_loss": 0.30843825137100817,
+                "observed_success": 0.25355
+              },
+              "tail_training_scores": {
+                "brier": 0.000023041370722981666,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.254125
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 16,
+          "max_decision_history": 19,
+          "max_fit_records": 1024,
+          "max_allocated_points": 128,
+          "max_sampled_checkpoint_bytes": 77938
+        },
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 19,
+          "max_fit_records": 1024,
+          "max_allocated_points": 128,
+          "max_sampled_checkpoint_bytes": 98348
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 7584,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "noise_then_signal",
+      "seed": 1,
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "consolidated": {
+              "attempts": 87,
+              "admissions": 0,
+              "policy_by_context": [
+                0.2578125,
+                0.25390625,
+                0.283203125,
+                0.248046875
+              ],
+              "actual_training_scores": {
+                "brier": 0.19653286680200446,
+                "log_loss": 0.5873846152937929,
+                "observed_success": 0.24865
+              },
+              "tail_training_scores": {
+                "brier": 0.1916011187208729,
+                "log_loss": 0.5747322482746988,
+                "observed_success": 0.245
+              }
+            },
+            "calibrated": {
+              "attempts": 87,
+              "admissions": 0,
+              "policy_by_context": [
+                0.2578125,
+                0.25390625,
+                0.283203125,
+                0.248046875
+              ],
+              "actual_training_scores": {
+                "brier": 0.19653286680200446,
+                "log_loss": 0.5873846152937929,
+                "observed_success": 0.24865
+              },
+              "tail_training_scores": {
+                "brier": 0.1916011187208729,
+                "log_loss": 0.5747322482746988,
+                "observed_success": 0.245
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 89,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0564827106867946,
+                "log_loss": 0.21919012605425423,
+                "observed_success": 0.249425
+              },
+              "tail_training_scores": {
+                "brier": 0.03908139866937827,
+                "log_loss": 0.17315973693159423,
+                "observed_success": 0.255125
+              }
+            },
+            "calibrated": {
+              "attempts": 89,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0564827106867946,
+                "log_loss": 0.21919012605425423,
+                "observed_success": 0.249425
+              },
+              "tail_training_scores": {
+                "brier": 0.03908139866937827,
+                "log_loss": 0.17315973693159423,
+                "observed_success": 0.255125
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 16,
+          "max_decision_history": 19,
+          "max_fit_records": 1024,
+          "max_allocated_points": 128,
+          "max_sampled_checkpoint_bytes": 76030
+        },
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 19,
+          "max_fit_records": 1024,
+          "max_allocated_points": 128,
+          "max_sampled_checkpoint_bytes": 95630
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 8480,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "noise_then_signal",
+      "seed": 2,
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "consolidated": {
+              "attempts": 82,
+              "admissions": 0,
+              "policy_by_context": [
+                0.251953125,
+                0.2734375,
+                0.2421875,
+                0.26171875
+              ],
+              "actual_training_scores": {
+                "brier": 0.1952122499536764,
+                "log_loss": 0.584709522844959,
+                "observed_success": 0.2464
+              },
+              "tail_training_scores": {
+                "brier": 0.1945649938431676,
+                "log_loss": 0.5813461955139442,
+                "observed_success": 0.25125
+              }
+            },
+            "calibrated": {
+              "attempts": 82,
+              "admissions": 0,
+              "policy_by_context": [
+                0.251953125,
+                0.2734375,
+                0.2421875,
+                0.26171875
+              ],
+              "actual_training_scores": {
+                "brier": 0.1952122499536764,
+                "log_loss": 0.584709522844959,
+                "observed_success": 0.2464
+              },
+              "tail_training_scores": {
+                "brier": 0.1945649938431676,
+                "log_loss": 0.5813461955139442,
+                "observed_success": 0.25125
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 85,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.09715285897920402,
+                "log_loss": 0.329459926550685,
+                "observed_success": 0.2491
+              },
+              "tail_training_scores": {
+                "brier": 0.07238255030682356,
+                "log_loss": 0.26494222425268543,
+                "observed_success": 0.253
+              }
+            },
+            "calibrated": {
+              "attempts": 85,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.09715285897920402,
+                "log_loss": 0.329459926550685,
+                "observed_success": 0.2491
+              },
+              "tail_training_scores": {
+                "brier": 0.07238255030682356,
+                "log_loss": 0.26494222425268543,
+                "observed_success": 0.253
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 16,
+          "max_decision_history": 20,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 77954
+        },
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 20,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 98709
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 7584,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "targeted",
+          "at": 49024,
+          "attempt": 85,
+          "scope": 3,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "retention",
+      "seed": 0,
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.047735197063495965,
+                "log_loss": 0.14932483824556037,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.00007276574415520345,
+                "log_loss": 0.010117403750505871,
+                "observed_success": 0.244625
+              }
+            },
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.047735197063495965,
+                "log_loss": 0.14932483824556037,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.00007276574415520345,
+                "log_loss": 0.010117403750505871,
+                "observed_success": 0.244625
+              }
+            }
+          }
+        },
+        {
+          "phase": "prolonged_noise",
+          "noise": true,
+          "modes": {
+            "consolidated": {
+              "attempts": 19,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.3690382152551366,
+                "log_loss": 1.7330565352496843,
+                "observed_success": 0.24925
+              },
+              "tail_training_scores": {
+                "brier": 0.3616018589211372,
+                "log_loss": 1.6981871735720409,
+                "observed_success": 0.25
+              }
+            },
+            "calibrated": {
+              "attempts": 19,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.1891438532724078,
+                "log_loss": 0.5677060957646788,
+                "observed_success": 0.24925
+              },
+              "tail_training_scores": {
+                "brier": 0.18880115035171333,
+                "log_loss": 0.565737686298894,
+                "observed_success": 0.25
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 19,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.00007333551266229718,
+                "log_loss": 0.010121288341215314,
+                "observed_success": 0.25095
+              },
+              "tail_training_scores": {
+                "brier": 0.00007329866161490094,
+                "log_loss": 0.010118703614752127,
+                "observed_success": 0.24575
+              }
+            },
+            "calibrated": {
+              "attempts": 19,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.001997467829263899,
+                "log_loss": 0.016816719260315093,
+                "observed_success": 0.25095
+              },
+              "tail_training_scores": {
+                "brier": 0.00007329866161490094,
+                "log_loss": 0.010118703614752127,
+                "observed_success": 0.24575
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 16,
+          "max_decision_history": 22,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 85639
+        },
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 22,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 107224
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20150,
+          "attempt": 2,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "renewal",
+          "at": 54710,
+          "attempt": 17,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "retention",
+      "seed": 1,
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.04850556253509328,
+                "log_loss": 0.1513875973299224,
+                "observed_success": 0.24805
+              },
+              "tail_training_scores": {
+                "brier": 0.00007784227918458362,
+                "log_loss": 0.010340308077121507,
+                "observed_success": 0.2435
+              }
+            },
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.04850556253509328,
+                "log_loss": 0.1513875973299224,
+                "observed_success": 0.24805
+              },
+              "tail_training_scores": {
+                "brier": 0.00007784227918458362,
+                "log_loss": 0.010340308077121507,
+                "observed_success": 0.2435
+              }
+            }
+          }
+        },
+        {
+          "phase": "prolonged_noise",
+          "noise": true,
+          "modes": {
+            "consolidated": {
+              "attempts": 46,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.37032878403913866,
+                "log_loss": 1.7258716717943516,
+                "observed_success": 0.249925
+              },
+              "tail_training_scores": {
+                "brier": 0.3708316902843326,
+                "log_loss": 1.7284786720785632,
+                "observed_success": 0.255875
+              }
+            },
+            "calibrated": {
+              "attempts": 46,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.18929542197606755,
+                "log_loss": 0.5677174069422017,
+                "observed_success": 0.249925
+              },
+              "tail_training_scores": {
+                "brier": 0.1916920864518742,
+                "log_loss": 0.5720113594800847,
+                "observed_success": 0.255875
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 46,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.00007765173871562427,
+                "log_loss": 0.010340884430282794,
+                "observed_success": 0.253325
+              },
+              "tail_training_scores": {
+                "brier": 0.00007735124731441042,
+                "log_loss": 0.010331369130311432,
+                "observed_success": 0.2545
+              }
+            },
+            "calibrated": {
+              "attempts": 46,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0017957200762059437,
+                "log_loss": 0.016466957331227067,
+                "observed_success": 0.253325
+              },
+              "tail_training_scores": {
+                "brier": 0.00007735124731441042,
+                "log_loss": 0.010331369130311432,
+                "observed_success": 0.2545
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 16,
+          "max_decision_history": 20,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 87177
+        },
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 20,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 108692
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20162,
+          "attempt": 2,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "renewal",
+          "at": 38850,
+          "attempt": 17,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "retention",
+      "seed": 2,
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.046634947957027856,
+                "log_loss": 0.14721545545586662,
+                "observed_success": 0.24765
+              },
+              "tail_training_scores": {
+                "brier": 0.00007416402664025008,
+                "log_loss": 0.01023492487942635,
+                "observed_success": 0.246375
+              }
+            },
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.046634947957027856,
+                "log_loss": 0.14721545545586662,
+                "observed_success": 0.24765
+              },
+              "tail_training_scores": {
+                "brier": 0.00007416402664025008,
+                "log_loss": 0.01023492487942635,
+                "observed_success": 0.246375
+              }
+            }
+          }
+        },
+        {
+          "phase": "prolonged_noise",
+          "noise": true,
+          "modes": {
+            "consolidated": {
+              "attempts": 57,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.3662812172691948,
+                "log_loss": 1.7122725904079537,
+                "observed_success": 0.2460625
+              },
+              "tail_training_scores": {
+                "brier": 0.3677977069745744,
+                "log_loss": 1.7197894530449553,
+                "observed_success": 0.248125
+              }
+            },
+            "calibrated": {
+              "attempts": 57,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.1873204558507603,
+                "log_loss": 0.563626000527506,
+                "observed_success": 0.2460625
+              },
+              "tail_training_scores": {
+                "brier": 0.18756333708624973,
+                "log_loss": 0.5629483499167783,
+                "observed_success": 0.248125
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 57,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.00007439754973775731,
+                "log_loss": 0.010237346922314906,
+                "observed_success": 0.251075
+              },
+              "tail_training_scores": {
+                "brier": 0.00007432233106035834,
+                "log_loss": 0.010233089998452925,
+                "observed_success": 0.2535
+              }
+            },
+            "calibrated": {
+              "attempts": 57,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0016015488931119797,
+                "log_loss": 0.01588202853653551,
+                "observed_success": 0.251075
+              },
+              "tail_training_scores": {
+                "brier": 0.00007432233106035834,
+                "log_loss": 0.010233089998452925,
+                "observed_success": 0.2535
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 16,
+          "max_decision_history": 20,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 84783
+        },
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 20,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 106289
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20163,
+          "attempt": 2,
+          "scope": 2,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "renewal",
+          "at": 47555,
+          "attempt": 17,
+          "scope": 2,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "successive_changes",
+      "seed": 0,
+      "phases": [
+        {
+          "phase": "rule_0",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02390428866629399,
+                "log_loss": 0.07972386729528257,
+                "observed_success": 0.2484
+              },
+              "tail_training_scores": {
+                "brier": 0.00007327733934676298,
+                "log_loss": 0.010122966034251469,
+                "observed_success": 0.24825
+              }
+            },
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02390428866629399,
+                "log_loss": 0.07972386729528257,
+                "observed_success": 0.2484
+              },
+              "tail_training_scores": {
+                "brier": 0.00007327733934676298,
+                "log_loss": 0.010122966034251469,
+                "observed_success": 0.24825
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_1",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 3,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.05741583535050297,
+                "log_loss": 0.275178841659252,
+                "observed_success": 0.25025
+              },
+              "tail_training_scores": {
+                "brier": 0.006833286600905307,
+                "log_loss": 0.035728926316599,
+                "observed_success": 0.253625
+              }
+            },
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02427972876254286,
+                "log_loss": 0.0848171299748631,
+                "observed_success": 0.25025
+              },
+              "tail_training_scores": {
+                "brier": 0.006833286600905307,
+                "log_loss": 0.035728926316599,
+                "observed_success": 0.253625
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_2",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 5,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.04506691981077097,
+                "log_loss": 0.18244361817498944,
+                "observed_success": 0.24515
+              },
+              "tail_training_scores": {
+                "brier": 0.005449169343908038,
+                "log_loss": 0.036336534383689355,
+                "observed_success": 0.24825
+              }
+            },
+            "calibrated": {
+              "attempts": 5,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02355899664916862,
+                "log_loss": 0.08592674729549364,
+                "observed_success": 0.24515
+              },
+              "tail_training_scores": {
+                "brier": 0.005449169343908038,
+                "log_loss": 0.036336534383689355,
+                "observed_success": 0.24825
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_3",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 7,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.054455212529202025,
+                "log_loss": 0.21148855423028848,
+                "observed_success": 0.249425
+              },
+              "tail_training_scores": {
+                "brier": 0.010029019808857722,
+                "log_loss": 0.048393333772933284,
+                "observed_success": 0.24575
+              }
+            },
+            "calibrated": {
+              "attempts": 7,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02674140778284845,
+                "log_loss": 0.09384014745135899,
+                "observed_success": 0.249425
+              },
+              "tail_training_scores": {
+                "brier": 0.010029019808857722,
+                "log_loss": 0.048393333772933284,
+                "observed_success": 0.24575
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_4",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 9,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.050046326582842755,
+                "log_loss": 0.19205318869515783,
+                "observed_success": 0.25275
+              },
+              "tail_training_scores": {
+                "brier": 0.0090340489411347,
+                "log_loss": 0.04553703525146768,
+                "observed_success": 0.256125
+              }
+            },
+            "calibrated": {
+              "attempts": 9,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02574390852842434,
+                "log_loss": 0.09119971279438305,
+                "observed_success": 0.25275
+              },
+              "tail_training_scores": {
+                "brier": 0.0090340489411347,
+                "log_loss": 0.04553703525146768,
+                "observed_success": 0.256125
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_5",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 11,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.04632446761318833,
+                "log_loss": 0.1862032333691563,
+                "observed_success": 0.249825
+              },
+              "tail_training_scores": {
+                "brier": 0.008673304163927415,
+                "log_loss": 0.04198441289381229,
+                "observed_success": 0.247
+              }
+            },
+            "calibrated": {
+              "attempts": 11,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02548367989138454,
+                "log_loss": 0.08910752002191367,
+                "observed_success": 0.249825
+              },
+              "tail_training_scores": {
+                "brier": 0.008673304163927415,
+                "log_loss": 0.04198441289381229,
+                "observed_success": 0.247
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_6",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 14,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.055476138832967876,
+                "log_loss": 0.22620458983577188,
+                "observed_success": 0.247475
+              },
+              "tail_training_scores": {
+                "brier": 0.010134713109833578,
+                "log_loss": 0.04474596799330062,
+                "observed_success": 0.2405
+              }
+            },
+            "calibrated": {
+              "attempts": 14,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02705396744310413,
+                "log_loss": 0.09241075416448771,
+                "observed_success": 0.247475
+              },
+              "tail_training_scores": {
+                "brier": 0.010134713109833578,
+                "log_loss": 0.04474596799330062,
+                "observed_success": 0.2405
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 14,
+          "max_decision_history": 30,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 92287
+        },
+        "calibrated": {
+          "max_search_history": 14,
+          "max_decision_history": 30,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 113699
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 40173,
+          "attempt": 2,
+          "scope": 0,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "successive_changes",
+      "seed": 1,
+      "phases": [
+        {
+          "phase": "rule_0",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.024291559465417417,
+                "log_loss": 0.08086498015515348,
+                "observed_success": 0.2499
+              },
+              "tail_training_scores": {
+                "brier": 0.00007756850891068043,
+                "log_loss": 0.010343450844871774,
+                "observed_success": 0.25375
+              }
+            },
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.024291559465417417,
+                "log_loss": 0.08086498015515348,
+                "observed_success": 0.2499
+              },
+              "tail_training_scores": {
+                "brier": 0.00007756850891068043,
+                "log_loss": 0.010343450844871774,
+                "observed_success": 0.25375
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_1",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 3,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.05505229579911887,
+                "log_loss": 0.26316258600433157,
+                "observed_success": 0.248825
+              },
+              "tail_training_scores": {
+                "brier": 0.007651045241499821,
+                "log_loss": 0.041822381878925785,
+                "observed_success": 0.252875
+              }
+            },
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.024983820527854344,
+                "log_loss": 0.0892701700807308,
+                "observed_success": 0.248825
+              },
+              "tail_training_scores": {
+                "brier": 0.007651045241499821,
+                "log_loss": 0.041822381878925785,
+                "observed_success": 0.252875
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_2",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 5,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.05121322889304743,
+                "log_loss": 0.19514820691227347,
+                "observed_success": 0.251725
+              },
+              "tail_training_scores": {
+                "brier": 0.009659438372495084,
+                "log_loss": 0.04597576817261696,
+                "observed_success": 0.25475
+              }
+            },
+            "calibrated": {
+              "attempts": 5,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02599234074337765,
+                "log_loss": 0.09148534348554513,
+                "observed_success": 0.251725
+              },
+              "tail_training_scores": {
+                "brier": 0.009659438372495084,
+                "log_loss": 0.04597576817261696,
+                "observed_success": 0.25475
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_3",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 7,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.04758082196094421,
+                "log_loss": 0.190652305898372,
+                "observed_success": 0.25235
+              },
+              "tail_training_scores": {
+                "brier": 0.007224905408115886,
+                "log_loss": 0.0409448041685312,
+                "observed_success": 0.250625
+              }
+            },
+            "calibrated": {
+              "attempts": 7,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02531972753477313,
+                "log_loss": 0.09020106136126112,
+                "observed_success": 0.25235
+              },
+              "tail_training_scores": {
+                "brier": 0.007224905408115886,
+                "log_loss": 0.0409448041685312,
+                "observed_success": 0.250625
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_4",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 10,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.04912603731178704,
+                "log_loss": 0.18808223817104994,
+                "observed_success": 0.24865
+              },
+              "tail_training_scores": {
+                "brier": 0.01178182589321736,
+                "log_loss": 0.0503004099829089,
+                "observed_success": 0.251
+              }
+            },
+            "calibrated": {
+              "attempts": 10,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.027302645990410095,
+                "log_loss": 0.09385607997405826,
+                "observed_success": 0.24865
+              },
+              "tail_training_scores": {
+                "brier": 0.01178182589321736,
+                "log_loss": 0.0503004099829089,
+                "observed_success": 0.251
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_5",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 11,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.07046668557073384,
+                "log_loss": 0.2770314046341588,
+                "observed_success": 0.24725
+              },
+              "tail_training_scores": {
+                "brier": 0.00009563296758560652,
+                "log_loss": 0.01159355081322453,
+                "observed_success": 0.2535
+              }
+            },
+            "calibrated": {
+              "attempts": 11,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.03440212560137977,
+                "log_loss": 0.11249464702980506,
+                "observed_success": 0.24725
+              },
+              "tail_training_scores": {
+                "brier": 0.00009563296758560652,
+                "log_loss": 0.01159355081322453,
+                "observed_success": 0.2535
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_6",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 13,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.054423758523103494,
+                "log_loss": 0.24478407748825826,
+                "observed_success": 0.251325
+              },
+              "tail_training_scores": {
+                "brier": 0.0040611202101809105,
+                "log_loss": 0.031622348403353186,
+                "observed_success": 0.252125
+              }
+            },
+            "calibrated": {
+              "attempts": 13,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.023524672965939006,
+                "log_loss": 0.08434929075817836,
+                "observed_success": 0.251325
+              },
+              "tail_training_scores": {
+                "brier": 0.0040611202101809105,
+                "log_loss": 0.031622348403353186,
+                "observed_success": 0.252125
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 13,
+          "max_decision_history": 30,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 91291
+        },
+        "calibrated": {
+          "max_search_history": 13,
+          "max_decision_history": 30,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 112591
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 40157,
+          "attempt": 2,
+          "scope": 0,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "successive_changes",
+      "seed": 2,
+      "phases": [
+        {
+          "phase": "rule_0",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.023354572030939623,
+                "log_loss": 0.07872155710333269,
+                "observed_success": 0.251075
+              },
+              "tail_training_scores": {
+                "brier": 0.0000745327155789951,
+                "log_loss": 0.010232356046063585,
+                "observed_success": 0.254875
+              }
+            },
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.023354572030939623,
+                "log_loss": 0.07872155710333269,
+                "observed_success": 0.251075
+              },
+              "tail_training_scores": {
+                "brier": 0.0000745327155789951,
+                "log_loss": 0.010232356046063585,
+                "observed_success": 0.254875
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_1",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 3,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.05335673530041982,
+                "log_loss": 0.2607656233013112,
+                "observed_success": 0.24645
+              },
+              "tail_training_scores": {
+                "brier": 0.0032982584961110833,
+                "log_loss": 0.03034095455317644,
+                "observed_success": 0.251375
+              }
+            },
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02219504988689543,
+                "log_loss": 0.08224821683947567,
+                "observed_success": 0.24645
+              },
+              "tail_training_scores": {
+                "brier": 0.0032982584961110833,
+                "log_loss": 0.03034095455317644,
+                "observed_success": 0.251375
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_2",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 5,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.047633635243065256,
+                "log_loss": 0.19010200942675673,
+                "observed_success": 0.2543
+              },
+              "tail_training_scores": {
+                "brier": 0.003474668862190679,
+                "log_loss": 0.02951486832140767,
+                "observed_success": 0.256
+              }
+            },
+            "calibrated": {
+              "attempts": 5,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.023222423607960157,
+                "log_loss": 0.08355196234881854,
+                "observed_success": 0.2543
+              },
+              "tail_training_scores": {
+                "brier": 0.003474668862190679,
+                "log_loss": 0.02951486832140767,
+                "observed_success": 0.256
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_3",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 8,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.05312272808794016,
+                "log_loss": 0.20881296751476575,
+                "observed_success": 0.249175
+              },
+              "tail_training_scores": {
+                "brier": 0.010817091260063348,
+                "log_loss": 0.04575975031067745,
+                "observed_success": 0.255
+              }
+            },
+            "calibrated": {
+              "attempts": 8,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.026331332028222597,
+                "log_loss": 0.09072865709250905,
+                "observed_success": 0.249175
+              },
+              "tail_training_scores": {
+                "brier": 0.010817091260063348,
+                "log_loss": 0.04575975031067745,
+                "observed_success": 0.255
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_4",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 9,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.06559501044379656,
+                "log_loss": 0.24965037257394884,
+                "observed_success": 0.2479
+              },
+              "tail_training_scores": {
+                "brier": 0.000023065011939859363,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.260375
+              }
+            },
+            "calibrated": {
+              "attempts": 9,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.028567849656908204,
+                "log_loss": 0.09492900038725914,
+                "observed_success": 0.2479
+              },
+              "tail_training_scores": {
+                "brier": 0.000023065011939859363,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.260375
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_5",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 11,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.05820833249040461,
+                "log_loss": 0.27646304366971536,
+                "observed_success": 0.245975
+              },
+              "tail_training_scores": {
+                "brier": 0.00835326627069772,
+                "log_loss": 0.04192394249986981,
+                "observed_success": 0.241
+              }
+            },
+            "calibrated": {
+              "attempts": 11,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.025305737067639077,
+                "log_loss": 0.08921632114234919,
+                "observed_success": 0.245975
+              },
+              "tail_training_scores": {
+                "brier": 0.00835326627069772,
+                "log_loss": 0.04192394249986981,
+                "observed_success": 0.241
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_6",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 13,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.05283018193335752,
+                "log_loss": 0.2022210165819762,
+                "observed_success": 0.249625
+              },
+              "tail_training_scores": {
+                "brier": 0.00686061083049696,
+                "log_loss": 0.04024002699067613,
+                "observed_success": 0.2405
+              }
+            },
+            "calibrated": {
+              "attempts": 13,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.025020953474323277,
+                "log_loss": 0.08927439399983479,
+                "observed_success": 0.249625
+              },
+              "tail_training_scores": {
+                "brier": 0.00686061083049696,
+                "log_loss": 0.04024002699067613,
+                "observed_success": 0.2405
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 13,
+          "max_decision_history": 29,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 90894
+        },
+        "calibrated": {
+          "max_search_history": 13,
+          "max_decision_history": 29,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 112131
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 40165,
+          "attempt": 2,
+          "scope": 0,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "variable_noise",
+      "seed": 0,
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.047735197063495965,
+                "log_loss": 0.14932483824556037,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.00007276574415520345,
+                "log_loss": 0.010117403750505871,
+                "observed_success": 0.244625
+              }
+            },
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.047735197063495965,
+                "log_loss": 0.14932483824556037,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.00007276574415520345,
+                "log_loss": 0.010117403750505871,
+                "observed_success": 0.244625
+              }
+            }
+          }
+        },
+        {
+          "phase": "mixed_noise",
+          "noise": true,
+          "modes": {
+            "consolidated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.4071256007227787,
+                "log_loss": 1.9105343515465716,
+                "observed_success": 0.34291666666666665
+              },
+              "tail_training_scores": {
+                "brier": 0.4030996600647291,
+                "log_loss": 1.8917623042877372,
+                "observed_success": 0.343
+              }
+            },
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.1725574987084585,
+                "log_loss": 0.5243953858954397,
+                "observed_success": 0.34291666666666665
+              },
+              "tail_training_scores": {
+                "brier": 0.16474594670594153,
+                "log_loss": 0.49820718061845465,
+                "observed_success": 0.343
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.00007327733934676298,
+                "log_loss": 0.010122966034251469,
+                "observed_success": 0.24825
+              },
+              "tail_training_scores": {
+                "brier": 0.00007327733934676298,
+                "log_loss": 0.010122966034251469,
+                "observed_success": 0.24825
+              }
+            },
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0102324634202407,
+                "log_loss": 0.044282514523879477,
+                "observed_success": 0.24825
+              },
+              "tail_training_scores": {
+                "brier": 0.0102324634202407,
+                "log_loss": 0.044282514523879477,
+                "observed_success": 0.24825
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 3,
+          "max_decision_history": 7,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 74739
+        },
+        "calibrated": {
+          "max_search_history": 3,
+          "max_decision_history": 7,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 96318
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20150,
+          "attempt": 2,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "variable_noise",
+      "seed": 1,
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.04850556253509328,
+                "log_loss": 0.1513875973299224,
+                "observed_success": 0.24805
+              },
+              "tail_training_scores": {
+                "brier": 0.00007784227918458362,
+                "log_loss": 0.010340308077121507,
+                "observed_success": 0.2435
+              }
+            },
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.04850556253509328,
+                "log_loss": 0.1513875973299224,
+                "observed_success": 0.24805
+              },
+              "tail_training_scores": {
+                "brier": 0.00007784227918458362,
+                "log_loss": 0.010340308077121507,
+                "observed_success": 0.2435
+              }
+            }
+          }
+        },
+        {
+          "phase": "mixed_noise",
+          "noise": true,
+          "modes": {
+            "consolidated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.4158329996561564,
+                "log_loss": 1.9399865418606617,
+                "observed_success": 0.34775
+              },
+              "tail_training_scores": {
+                "brier": 0.41749306465804226,
+                "log_loss": 1.947438675674498,
+                "observed_success": 0.349
+              }
+            },
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.17327480994656408,
+                "log_loss": 0.5265864132947544,
+                "observed_success": 0.34775
+              },
+              "tail_training_scores": {
+                "brier": 0.16741015831222292,
+                "log_loss": 0.5057180991984048,
+                "observed_success": 0.349
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.00007756850891068043,
+                "log_loss": 0.010343450844871774,
+                "observed_success": 0.25375
+              },
+              "tail_training_scores": {
+                "brier": 0.00007756850891068043,
+                "log_loss": 0.010343450844871774,
+                "observed_success": 0.25375
+              }
+            },
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010666292506962573,
+                "log_loss": 0.04616326154578831,
+                "observed_success": 0.25375
+              },
+              "tail_training_scores": {
+                "brier": 0.010666292506962573,
+                "log_loss": 0.04616326154578831,
+                "observed_success": 0.25375
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 3,
+          "max_decision_history": 7,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 74886
+        },
+        "calibrated": {
+          "max_search_history": 3,
+          "max_decision_history": 7,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 96358
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20152,
+          "attempt": 2,
+          "scope": 3,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    },
+    {
+      "case": "variable_noise",
+      "seed": 2,
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.046634947957027856,
+                "log_loss": 0.14721545545586662,
+                "observed_success": 0.24765
+              },
+              "tail_training_scores": {
+                "brier": 0.00007416402664025008,
+                "log_loss": 0.01023492487942635,
+                "observed_success": 0.246375
+              }
+            },
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.046634947957027856,
+                "log_loss": 0.14721545545586662,
+                "observed_success": 0.24765
+              },
+              "tail_training_scores": {
+                "brier": 0.00007416402664025008,
+                "log_loss": 0.01023492487942635,
+                "observed_success": 0.246375
+              }
+            }
+          }
+        },
+        {
+          "phase": "mixed_noise",
+          "noise": true,
+          "modes": {
+            "consolidated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.41873303676195006,
+                "log_loss": 1.9583948385953236,
+                "observed_success": 0.34608333333333335
+              },
+              "tail_training_scores": {
+                "brier": 0.4154746075172018,
+                "log_loss": 1.9430797170515668,
+                "observed_success": 0.3435
+              }
+            },
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.1738854606059922,
+                "log_loss": 0.5279774854366903,
+                "observed_success": 0.34608333333333335
+              },
+              "tail_training_scores": {
+                "brier": 0.16441157847193832,
+                "log_loss": 0.4972020367308494,
+                "observed_success": 0.3435
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "consolidated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0000745327155789951,
+                "log_loss": 0.010232356046063585,
+                "observed_success": 0.254875
+              },
+              "tail_training_scores": {
+                "brier": 0.0000745327155789951,
+                "log_loss": 0.010232356046063585,
+                "observed_success": 0.254875
+              }
+            },
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.00982917522767586,
+                "log_loss": 0.04328831785354279,
+                "observed_success": 0.254875
+              },
+              "tail_training_scores": {
+                "brier": 0.00982917522767586,
+                "log_loss": 0.04328831785354279,
+                "observed_success": 0.254875
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "consolidated": {
+          "max_search_history": 3,
+          "max_decision_history": 7,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 74973
+        },
+        "calibrated": {
+          "max_search_history": 3,
+          "max_decision_history": 7,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 96460
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20159,
+          "attempt": 2,
+          "scope": 2,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ]
+    }
+  ],
+  "packaging": "Full original report: remove packaging and case_files, then load cases in listed order.",
+  "case_files": [
+    "noise_then_signal_seed0.json",
+    "noise_then_signal_seed1.json",
+    "noise_then_signal_seed2.json",
+    "retention_seed0.json",
+    "retention_seed1.json",
+    "retention_seed2.json",
+    "successive_changes_seed0.json",
+    "successive_changes_seed1.json",
+    "successive_changes_seed2.json",
+    "variable_noise_seed0.json",
+    "variable_noise_seed1.json",
+    "variable_noise_seed2.json"
+  ]
+}

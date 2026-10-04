@@ -65,6 +65,19 @@ explicite, pas une preuve de découverte d’une logique entièrement nouvelle.
 
 La [revue du code précédent](CODE_REVIEW_CURRENT.md) et les [corrections](CURRENT_FIXES.md) documentent le seuil atteignable avec un contexte, l’expiration sans admission des validations qui n’avancent plus, les scores du modèle effectivement servi et les invariants de reprise. Les 97 tests passent sous Windows et Linux. Le cœur partagé écrit le format 2 ; les états du format 1 demandent une migration explicite, qui conserve les budgets et clôture les validations inachevées. Le moteur historique conserve son plafond ; le [mode renouvelable](RENEWABLE_SEARCH.md) ajoute des blocs à risque sommable et des compteurs à vie, sous 104 tests Windows/Linux. Les [mesures longues](RENEWABLE_SEARCH_RESULTS.md) établissent la récupération après bruit initial et les échecs historiques de rétention et de validation des changements. Le [mode consolidé](CONSOLIDATION.md) ajoute une banque protégée commune, remplacée seulement après une admission prospective, et cinq horizons de validation. Les [résultats](CONSOLIDATION_RESULTS.md), sous **113 tests Windows/Linux**, corrigent ces deux échecs sur trois graines à 16 symboles et quatre contextes ; la calibration sous bruit et certains délais d'admission régressent. Avec quatre actions et huit routes, cette copie ajoute 32 points S² : 96 points et 192 degrés de liberté en service après la première admission, jusqu'à 160 points et 320 degrés de liberté pendant une validation.
 
+## Lecture calibrée de la compétence
+
+Le [mode calibré](CALIBRATION.md) ajoute des statistiques de résultats récents,
+avec un cache borné par contexte. Il conserve les programmes, prototypes S²,
+gradients et gardes du mode consolidé. Les validations comparent la compétence
+brute ; elles ne certifient pas le calibrateur adaptatif.
+
+Le taux de réussite et le mélange de lecture sont des statistiques dérivées,
+pas des paramètres neuronaux supplémentaires. Leur stockage et leurs calculs
+sont déclarés séparément du budget de points S². Le [protocole](CALIBRATION_PROTOCOL.md)
+fixe les mesures de calibration, rétention, récupération et reprise avant leur
+exécution ; les [résultats](CALIBRATION_RESULTS.md) en donnent la portée.
+
 ## Exigence géométrique de la référence V1
 
 La V1 donne un sens vérifiable à cette exigence :
@@ -94,9 +107,9 @@ par définition ; cela ne rend pas euclidiens les paramètres qu'ils déplacent.
 
 | Exigence | État |
 |---|---|
-| Réseau lui-même non euclidien | Versions partagée, renouvelable et consolidée sur S², 113 tests Windows/Linux ; références temporelle, de présence et V1 sur H4 conservées |
+| Réseau lui-même non euclidien | Versions partagée, renouvelable, consolidée et calibrée sur S², 124 tests Windows/Linux ; références historiques et V1 hyperbolique conservées |
 | Apprendre des résultats de ses actions pendant une interaction | Implémenté dans la première pièce séquentielle et dans la référence de fichiers |
-| Apprentissage continu avec reprise complète | Mode consolidé restaurable, requête en attente comprise ; risque à vie borné ; rétention et six changements successifs réussis dans le protocole testé ; calibration sous bruit et délai d'admission restent limités |
+| Apprentissage continu avec reprise complète | Mode calibré restaurable, requête en attente comprise ; risque à vie borné ; rétention, six changements et baisse de surconfiance réussis dans le protocole testé ; inertie de calibration, sélection d'actions et délai d'admission restent limités |
 | Objectifs proposés par l'utilisateur et objectifs choisis par le système | À développer |
 | Cortex avec un essaim d'agents comme extensions de lui-même | À développer |
 | Dialogue | À développer |

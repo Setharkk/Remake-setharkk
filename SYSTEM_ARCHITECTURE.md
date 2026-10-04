@@ -14,7 +14,7 @@ sa mémoire et ses règles de routage restent des détails privés de l’appren
 | Pièce | Responsabilité | État |
 |---|---|---|
 | Contrats communs, `setharkk/contracts.py` | Messages JSON versionnés, identités, ordre logique, unités | Implémentés, version 1 |
-| Adaptateurs, `FirstPieceAdapter`, `TemporalAdapter`, `SharedAdapter`, `RenewableAdapter` et `ConsolidatedAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
+| Adaptateurs, `FirstPieceAdapter`, `TemporalAdapter`, `SharedAdapter`, `RenewableAdapter`, `ConsolidatedAdapter` et `CalibratedAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
 | Première pièce neuronale | Mémoire d'événements, prédictions et modification des prototypes S² | Présence, ordres et combinaisons bornées ; version partagée entre contextes |
 | Cortex coordinateur | Arbitrage des propositions, ressources communes, priorités, journal durable | À construire ; l'adaptateur possède déjà une seule autorité d'apprentissage |
 | Objectifs et planification | Distinguer la demande utilisateur, les objectifs exploratoires et leur valeur | À construire ; un `goal_id` peut déjà accompagner une proposition |
@@ -248,3 +248,33 @@ corrigés, ainsi que la surconfiance sous bruit, un délai d'admission accru et
 les coûts supplémentaires. Le coordinateur devra consulter les capacités
 et métriques plutôt que supposer les budgets des anciens modes. Les objectifs,
 le dialogue, les agents autonomes et l'exécution physique restent à construire.
+
+## Probabilité servie et compétence validée
+
+`CalibratedAdapter` conserve les contrats et la frontière d'une seule action
+en attente. Son identité est `first_piece.calibrated-compositions-s2.v1`,
+avec un cœur de format 5. Les [instructions](CALIBRATION.md) définissent
+les imports explicites et la conservation d'une prévision déjà annoncée
+jusqu'à son reçu ou sa clôture.
+
+Le modèle distingue la lecture brute de la compétence et la probabilité
+calibrée servie. La première gouverne les déclencheurs et comparaisons
+d'admission : une mauvaise règle continue à provoquer une recherche même
+si la calibration réduit sa surconfiance. Le risque statistique d'admission
+s'applique à cette compétence, sans garantir le calibrateur adaptatif.
+
+La seconde utilise les derniers résultats des actions exécutées par contexte.
+L'adaptateur publie cette probabilité dans la prévision Bernoulli ; `learn`
+retourne la probabilité annoncée avant l'observation du résultat. Les modèles
+historiques conservent leur lecture brute. La calibration ne fournit pas une
+incertitude épistémique ni une valeur d'objectif.
+
+Le calibrateur conserve un cache borné des probabilités et quatre sommes.
+Les copies transactionnelles l'isolent, et les reprises le vérifient contre
+la banque protégée et les épisodes retenus. Une admission reprojette les
+lignes récentes sur la nouvelle compétence. Ces calculs sont distincts
+des mises à jour neuronales et ne créent pas de réseau privé par agent.
+
+Le [rapport](CALIBRATION_RESULTS.md) publie calibration, conservation, délais,
+ressources et limites de sélection d'actions. Le coordinateur futur devra
+tenir compte de ces limites et des métriques annoncées.

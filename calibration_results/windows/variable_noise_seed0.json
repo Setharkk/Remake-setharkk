@@ -1,0 +1,3313 @@
+{
+  "case": "variable_noise",
+  "seed": 0,
+  "training_labels": 40000,
+  "evaluation_episodes_per_point": 2048,
+  "elapsed_seconds": 20.9318631000001,
+  "phases": [
+    {
+      "phase": "initial_signal",
+      "global_labels": 20000,
+      "labels_per_context": 5000,
+      "noise": false,
+      "context_0_shift": 0,
+      "modes": {
+        "consolidated": {
+          "attempts_before": 0,
+          "attempts_after": 1,
+          "admissions_before": 0,
+          "admissions_after": 1,
+          "actual_training_scores": {
+            "brier": 0.047735197063495965,
+            "log_loss": 0.14932483824556037,
+            "observed_success": 0.2504
+          },
+          "tail_training_scores": {
+            "brier": 0.00007276574415520345,
+            "log_loss": 0.010117403750505871,
+            "observed_success": 0.244625
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007386326506456025
+            },
+            {
+              "context": 1,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007330584540031371
+            },
+            {
+              "context": 2,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007343381756739817
+            },
+            {
+              "context": 3,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007344417037868524
+            }
+          ]
+        },
+        "calibrated": {
+          "attempts_before": 0,
+          "attempts_after": 1,
+          "admissions_before": 0,
+          "admissions_after": 1,
+          "actual_training_scores": {
+            "brier": 0.047735197063495965,
+            "log_loss": 0.14932483824556037,
+            "observed_success": 0.2504
+          },
+          "tail_training_scores": {
+            "brier": 0.00007276574415520345,
+            "log_loss": 0.010117403750505871,
+            "observed_success": 0.244625
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007386326506456025
+            },
+            {
+              "context": 1,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007330584540031371
+            },
+            {
+              "context": 2,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007343381756739817
+            },
+            {
+              "context": 3,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007344417037868524
+            }
+          ]
+        }
+      }
+    },
+    {
+      "phase": "mixed_noise",
+      "global_labels": 12000,
+      "labels_per_context": 3000,
+      "noise": true,
+      "context_0_shift": 0,
+      "modes": {
+        "consolidated": {
+          "attempts_before": 1,
+          "attempts_after": 3,
+          "admissions_before": 1,
+          "admissions_after": 1,
+          "actual_training_scores": {
+            "brier": 0.4071256007227787,
+            "log_loss": 1.9105343515465716,
+            "observed_success": 0.34291666666666665
+          },
+          "tail_training_scores": {
+            "brier": 0.4030996600647291,
+            "log_loss": 1.8917623042877372,
+            "observed_success": 0.343
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007353444287263252
+            },
+            {
+              "context": 1,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007301564515894958
+            },
+            {
+              "context": 2,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007424683346572942
+            },
+            {
+              "context": 3,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007396612162213112
+            }
+          ]
+        },
+        "calibrated": {
+          "attempts_before": 1,
+          "attempts_after": 3,
+          "admissions_before": 1,
+          "admissions_after": 1,
+          "actual_training_scores": {
+            "brier": 0.1725574987084585,
+            "log_loss": 0.5243953858954397,
+            "observed_success": 0.34291666666666665
+          },
+          "tail_training_scores": {
+            "brier": 0.16474594670594153,
+            "log_loss": 0.49820718061845465,
+            "observed_success": 0.343
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.20445346451088178
+            },
+            {
+              "context": 1,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.20727498122409915
+            },
+            {
+              "context": 2,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.251967888422792
+            },
+            {
+              "context": 3,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.31045938101776
+            }
+          ]
+        }
+      }
+    },
+    {
+      "phase": "recovery",
+      "global_labels": 8000,
+      "labels_per_context": 2000,
+      "noise": false,
+      "context_0_shift": 0,
+      "modes": {
+        "consolidated": {
+          "attempts_before": 3,
+          "attempts_after": 3,
+          "admissions_before": 1,
+          "admissions_after": 1,
+          "actual_training_scores": {
+            "brier": 0.00007327733934676298,
+            "log_loss": 0.010122966034251469,
+            "observed_success": 0.24825
+          },
+          "tail_training_scores": {
+            "brier": 0.00007327733934676298,
+            "log_loss": 0.010122966034251469,
+            "observed_success": 0.24825
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007390967439432409
+            },
+            {
+              "context": 1,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007335832717037715
+            },
+            {
+              "context": 2,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007391574683462377
+            },
+            {
+              "context": 3,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007301966310223388
+            }
+          ]
+        },
+        "calibrated": {
+          "attempts_before": 3,
+          "attempts_after": 3,
+          "admissions_before": 1,
+          "admissions_after": 1,
+          "actual_training_scores": {
+            "brier": 0.0102324634202407,
+            "log_loss": 0.044282514523879477,
+            "observed_success": 0.24825
+          },
+          "tail_training_scores": {
+            "brier": 0.0102324634202407,
+            "log_loss": 0.044282514523879477,
+            "observed_success": 0.24825
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007390967439432409
+            },
+            {
+              "context": 1,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007335832717037715
+            },
+            {
+              "context": 2,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007391574683462377
+            },
+            {
+              "context": 3,
+              "episodes": 512,
+              "policy_success": 1,
+              "brier": 0.00007301966310223388
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "curves": {
+    "consolidated": [
+      {
+        "global_labels": 20000,
+        "labels_per_context": {
+          "0": 5000,
+          "1": 5000,
+          "2": 5000,
+          "3": 5000
+        },
+        "attempts": 1,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007386326506456025
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007330584540031371
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007343381756739817
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007344417037868524
+          }
+        ],
+        "phase": "initial_signal",
+        "phase_global_labels": 20000,
+        "phase_context_labels": 5000
+      },
+      {
+        "global_labels": 22000,
+        "labels_per_context": {
+          "0": 5500,
+          "1": 5500,
+          "2": 5500,
+          "3": 5500
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007347518170537018
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007251513117204085
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007354299507263723
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007252219229564227
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 2000,
+        "phase_context_labels": 500
+      },
+      {
+        "global_labels": 24000,
+        "labels_per_context": {
+          "0": 6000,
+          "1": 6000,
+          "2": 6000,
+          "3": 6000
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007305849499496002
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007408498354696383
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007363538846947518
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007257208933491948
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 4000,
+        "phase_context_labels": 1000
+      },
+      {
+        "global_labels": 26000,
+        "labels_per_context": {
+          "0": 6500,
+          "1": 6500,
+          "2": 6500,
+          "3": 6500
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007324435298071453
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007329864074042501
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007273987353606223
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007319208115281346
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 6000,
+        "phase_context_labels": 1500
+      },
+      {
+        "global_labels": 28000,
+        "labels_per_context": {
+          "0": 7000,
+          "1": 7000,
+          "2": 7000,
+          "3": 7000
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007352122363634964
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007387202720672736
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007322379943639767
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.0000734184195643193
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 8000,
+        "phase_context_labels": 2000
+      },
+      {
+        "global_labels": 30000,
+        "labels_per_context": {
+          "0": 7500,
+          "1": 7500,
+          "2": 7500,
+          "3": 7500
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007199137393894794
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007278971808979882
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007297831288459648
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007316314362184339
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 10000,
+        "phase_context_labels": 2500
+      },
+      {
+        "global_labels": 32000,
+        "labels_per_context": {
+          "0": 8000,
+          "1": 8000,
+          "2": 8000,
+          "3": 8000
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007353444287263252
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007301564515894958
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007424683346572942
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007396612162213112
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 12000,
+        "phase_context_labels": 3000
+      },
+      {
+        "global_labels": 34000,
+        "labels_per_context": {
+          "0": 8500,
+          "1": 8500,
+          "2": 8500,
+          "3": 8500
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007368358986855139
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007287067894130152
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007431048535342498
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007203325439035597
+          }
+        ],
+        "phase": "recovery",
+        "phase_global_labels": 2000,
+        "phase_context_labels": 500
+      },
+      {
+        "global_labels": 36000,
+        "labels_per_context": {
+          "0": 9000,
+          "1": 9000,
+          "2": 9000,
+          "3": 9000
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007346307538997674
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007350957577048724
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007261771992354401
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007326293770039775
+          }
+        ],
+        "phase": "recovery",
+        "phase_global_labels": 4000,
+        "phase_context_labels": 1000
+      },
+      {
+        "global_labels": 38000,
+        "labels_per_context": {
+          "0": 9500,
+          "1": 9500,
+          "2": 9500,
+          "3": 9500
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.0000728358071279542
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007326439021159499
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007320103931680848
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007245142679880466
+          }
+        ],
+        "phase": "recovery",
+        "phase_global_labels": 6000,
+        "phase_context_labels": 1500
+      },
+      {
+        "global_labels": 40000,
+        "labels_per_context": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000,
+          "3": 10000
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007390967439432409
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007335832717037715
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007391574683462377
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007301966310223388
+          }
+        ],
+        "phase": "recovery",
+        "phase_global_labels": 8000,
+        "phase_context_labels": 2000
+      }
+    ],
+    "calibrated": [
+      {
+        "global_labels": 20000,
+        "labels_per_context": {
+          "0": 5000,
+          "1": 5000,
+          "2": 5000,
+          "3": 5000
+        },
+        "attempts": 1,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007386326506456025
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007330584540031371
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007343381756739817
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007344417037868524
+          }
+        ],
+        "phase": "initial_signal",
+        "phase_global_labels": 20000,
+        "phase_context_labels": 5000,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.265625,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.23828125,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.23828125,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.27734375,
+            "retained_contrast": 1,
+            "active": true
+          }
+        }
+      },
+      {
+        "global_labels": 22000,
+        "labels_per_context": {
+          "0": 5500,
+          "1": 5500,
+          "2": 5500,
+          "3": 5500
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.20838887058491656
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.20589675358548404
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.33106929374336536
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.30427811728169074
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 2000,
+        "phase_context_labels": 500,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.10546875,
+            "retained_contrast": 0.000001,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.1015625,
+            "retained_contrast": 0.008823412992633523,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.62890625,
+            "retained_contrast": 0.000001,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.59765625,
+            "retained_contrast": 0.0067498356819248265,
+            "active": true
+          }
+        }
+      },
+      {
+        "global_labels": 24000,
+        "labels_per_context": {
+          "0": 6000,
+          "1": 6000,
+          "2": 6000,
+          "3": 6000
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.20727498123732074
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.20018835341507707
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.31664976675589634
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.29516543438413595
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 4000,
+        "phase_context_labels": 1000,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.109375,
+            "retained_contrast": 0.000001,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.09375,
+            "retained_contrast": 0.028397030144074697,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.609375,
+            "retained_contrast": 0.000001,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.578125,
+            "retained_contrast": 0.000001,
+            "active": true
+          }
+        }
+      },
+      {
+        "global_labels": 26000,
+        "labels_per_context": {
+          "0": 6500,
+          "1": 6500,
+          "2": 6500,
+          "3": 6500
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.19430699100897894
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.2113684184973568
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.3048756838069188
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.2888978954021577
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 6000,
+        "phase_context_labels": 1500,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.10546875,
+            "retained_contrast": 0.0348070268608143,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.08203125,
+            "retained_contrast": 0.010239449500929974,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.63671875,
+            "retained_contrast": 0.04963489190861389,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.578125,
+            "retained_contrast": 0.010842712016649611,
+            "active": true
+          }
+        }
+      },
+      {
+        "global_labels": 28000,
+        "labels_per_context": {
+          "0": 7000,
+          "1": 7000,
+          "2": 7000,
+          "3": 7000
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.18749134676676246
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.20315489821094224
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.24222337877343275
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.2418538361318579
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 8000,
+        "phase_context_labels": 2000,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.1015625,
+            "retained_contrast": 0.054725105501569386,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.09765625,
+            "retained_contrast": 0.018308383616907523,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.57421875,
+            "retained_contrast": 0.09160045969855912,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.546875,
+            "retained_contrast": 0.0643172623729582,
+            "active": true
+          }
+        }
+      },
+      {
+        "global_labels": 30000,
+        "labels_per_context": {
+          "0": 7500,
+          "1": 7500,
+          "2": 7500,
+          "3": 7500
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.21441608000631382
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.2107082017878964
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.272107287312034
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.3378508225503351
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 10000,
+        "phase_context_labels": 2500,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.0859375,
+            "retained_contrast": 0.000001,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.09765625,
+            "retained_contrast": 0.000001,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.56640625,
+            "retained_contrast": 0.027764536306247246,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.66796875,
+            "retained_contrast": 0.03466840451845746,
+            "active": true
+          }
+        }
+      },
+      {
+        "global_labels": 32000,
+        "labels_per_context": {
+          "0": 8000,
+          "1": 8000,
+          "2": 8000,
+          "3": 8000
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.20445346451088178
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.20727498122409915
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.251967888422792
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.31045938101776
+          }
+        ],
+        "phase": "mixed_noise",
+        "phase_global_labels": 12000,
+        "phase_context_labels": 3000,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.09375,
+            "retained_contrast": 0.017974106239791444,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.109375,
+            "retained_contrast": 0.000001,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.50390625,
+            "retained_contrast": 0.000001,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.60546875,
+            "retained_contrast": 0.005511776354659857,
+            "active": true
+          }
+        }
+      },
+      {
+        "global_labels": 34000,
+        "labels_per_context": {
+          "0": 8500,
+          "1": 8500,
+          "2": 8500,
+          "3": 8500
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007368358986855139
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007287067894130152
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007431048535342498
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007203325439035597
+          }
+        ],
+        "phase": "recovery",
+        "phase_global_labels": 2000,
+        "phase_context_labels": 500,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.2265625,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.26953125,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.25390625,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.21484375,
+            "retained_contrast": 1,
+            "active": true
+          }
+        }
+      },
+      {
+        "global_labels": 36000,
+        "labels_per_context": {
+          "0": 9000,
+          "1": 9000,
+          "2": 9000,
+          "3": 9000
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007346307538997674
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007350957577048724
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007261771992354401
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007326293770039775
+          }
+        ],
+        "phase": "recovery",
+        "phase_global_labels": 4000,
+        "phase_context_labels": 1000,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.25,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.2734375,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.2265625,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.2421875,
+            "retained_contrast": 1,
+            "active": true
+          }
+        }
+      },
+      {
+        "global_labels": 38000,
+        "labels_per_context": {
+          "0": 9500,
+          "1": 9500,
+          "2": 9500,
+          "3": 9500
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.0000728358071279542
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007326439021159499
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007320103931680848
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007245142679880466
+          }
+        ],
+        "phase": "recovery",
+        "phase_global_labels": 6000,
+        "phase_context_labels": 1500,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.2890625,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.28125,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.21875,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.2265625,
+            "retained_contrast": 1,
+            "active": true
+          }
+        }
+      },
+      {
+        "global_labels": 40000,
+        "labels_per_context": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000,
+          "3": 10000
+        },
+        "attempts": 3,
+        "admissions": 1,
+        "contexts": [
+          {
+            "context": 0,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007390967439432409
+          },
+          {
+            "context": 1,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007335832717037715
+          },
+          {
+            "context": 2,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007391574683462377
+          },
+          {
+            "context": 3,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 0.00007301966310223388
+          }
+        ],
+        "phase": "recovery",
+        "phase_global_labels": 8000,
+        "phase_context_labels": 2000,
+        "calibration_by_context": {
+          "0": {
+            "observations": 256,
+            "background_rate": 0.21875,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "1": {
+            "observations": 256,
+            "background_rate": 0.22265625,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "2": {
+            "observations": 256,
+            "background_rate": 0.25390625,
+            "retained_contrast": 1,
+            "active": true
+          },
+          "3": {
+            "observations": 256,
+            "background_rate": 0.24609375,
+            "retained_contrast": 1,
+            "active": true
+          }
+        }
+      }
+    ]
+  },
+  "journals": {
+    "consolidated": {
+      "searches": [
+        {
+          "attempt": 1,
+          "scope": null,
+          "score_source": "served",
+          "at": 512,
+          "fit_records": 512,
+          "eligible_features": 133,
+          "pooled_features": 96,
+          "hypotheses_examined": 5746,
+          "elapsed_seconds": 0.10346849999996266,
+          "program": [
+            20,
+            58
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "plastic",
+            "served_at": null,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 9.210340371976182
+            }
+          }
+        },
+        {
+          "attempt": 2,
+          "scope": 1,
+          "score_source": "served",
+          "at": 20022,
+          "fit_records": 1024,
+          "eligible_features": 136,
+          "pooled_features": 96,
+          "hypotheses_examined": 5746,
+          "elapsed_seconds": 0.12727089999998498,
+          "program": [
+            20,
+            58
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "consolidated",
+            "served_at": 4608,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 1.3192074377605802
+            }
+          }
+        },
+        {
+          "attempt": 3,
+          "scope": 1,
+          "score_source": "served",
+          "at": 20790,
+          "fit_records": 1024,
+          "eligible_features": 136,
+          "pooled_features": 96,
+          "hypotheses_examined": 5843,
+          "elapsed_seconds": 0.13093019999996613,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "consolidated",
+            "served_at": 4608,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 6.672898275785098
+            }
+          }
+        }
+      ],
+      "decisions": [
+        {
+          "attempt": 1,
+          "at": 640,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 128,
+            "mean": 0.6319624875281978,
+            "bound": 1.8078102756913668,
+            "lower": -1.175847788163169,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.6781232011798878,
+            "bound": 1.8078102756913668,
+            "lower": -1.1296870745114789,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            32,
+            27,
+            32,
+            37,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "initial_signal",
+          "phase_global_labels": 640,
+          "phase_context_labels": 160
+        },
+        {
+          "attempt": 1,
+          "at": 1536,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 1024,
+            "mean": 0.6073669719158551,
+            "bound": 0.6391574525200436,
+            "lower": -0.03179048060418854,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 1024,
+            "mean": 0.6187042296479761,
+            "bound": 0.6391574525200436,
+            "lower": -0.020453222872067522,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            250,
+            254,
+            258,
+            262,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "initial_signal",
+          "phase_global_labels": 1536,
+          "phase_context_labels": 384
+        },
+        {
+          "attempt": 1,
+          "at": 4608,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "accept",
+          "relevance": {
+            "n": 4096,
+            "mean": 0.605019784070164,
+            "bound": 0.3195787262600218,
+            "lower": 0.2854410578101422,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 4096,
+            "mean": 0.6027357207298952,
+            "bound": 0.3195787262600218,
+            "lower": 0.2831569944698734,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            979,
+            1057,
+            1017,
+            1043,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "initial_signal",
+          "phase_global_labels": 4608,
+          "phase_context_labels": 1152
+        },
+        {
+          "attempt": 2,
+          "at": 20534,
+          "scope": 1,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "futile",
+          "relevance": {
+            "n": 128,
+            "mean": -0.7878484940020791,
+            "bound": 1.8078102756913668,
+            "lower": -2.595658769693446,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.14815435620857018,
+            "bound": 1.8078102756913668,
+            "lower": -1.6596559194827967,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 384,
+            "mean": 0.17754190081237406,
+            "bound": 0.21113913306403118,
+            "lower": -0.033597232251657116,
+            "uniform_over_time": true,
+            "range_width": 1.3192074377605802
+          },
+          "route_support": [
+            32,
+            25,
+            39,
+            32,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "mixed_noise",
+          "phase_global_labels": 534,
+          "phase_context_labels": 134
+        },
+        {
+          "attempt": 3,
+          "at": 21302,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 128,
+            "mean": 0.09185653226432705,
+            "bound": 1.8078102756913668,
+            "lower": -1.7159537434270398,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.8907547673709777,
+            "bound": 1.8078102756913668,
+            "lower": -0.9170555083203891,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 384,
+            "mean": 1.568065705068708,
+            "bound": 1.067997281280818,
+            "lower": 0.5000684237878898,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            73,
+            55,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "mixed_noise",
+          "phase_global_labels": 1302,
+          "phase_context_labels": 326
+        },
+        {
+          "attempt": 3,
+          "at": 24886,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 1024,
+            "mean": 0.07435960936367672,
+            "bound": 0.6391574525200436,
+            "lower": -0.5647978431563669,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 1024,
+            "mean": 0.9237862817562238,
+            "bound": 0.6391574525200436,
+            "lower": 0.28462882923618016,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 3072,
+            "mean": 1.4998303799097503,
+            "bound": 0.38488579630259334,
+            "lower": 1.114944583607157,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            550,
+            474,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "mixed_noise",
+          "phase_global_labels": 4886,
+          "phase_context_labels": 1222
+        },
+        {
+          "attempt": 3,
+          "at": 37174,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 4096,
+            "mean": 0.06985723295556112,
+            "bound": 0.3195787262600218,
+            "lower": -0.2497214933044607,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 4096,
+            "mean": 0.5038603958679968,
+            "bound": 0.3195787262600218,
+            "lower": 0.18428166960797498,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 12288,
+            "mean": 0.800359069017928,
+            "bound": 0.1943683510151973,
+            "lower": 0.6059907180027306,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            2058,
+            2038,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "recovery",
+          "phase_global_labels": 5174,
+          "phase_context_labels": 1294
+        }
+      ]
+    },
+    "calibrated": {
+      "searches": [
+        {
+          "attempt": 1,
+          "scope": null,
+          "score_source": "served",
+          "at": 512,
+          "fit_records": 512,
+          "eligible_features": 133,
+          "pooled_features": 96,
+          "hypotheses_examined": 5746,
+          "elapsed_seconds": 0.10243259999992915,
+          "program": [
+            20,
+            58
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "plastic",
+            "served_at": null,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 9.210340371976182
+            }
+          }
+        },
+        {
+          "attempt": 2,
+          "scope": 1,
+          "score_source": "served",
+          "at": 20022,
+          "fit_records": 1024,
+          "eligible_features": 136,
+          "pooled_features": 96,
+          "hypotheses_examined": 5746,
+          "elapsed_seconds": 0.1291287999999895,
+          "program": [
+            20,
+            58
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "consolidated",
+            "served_at": 4608,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 1.3192074377605802
+            }
+          }
+        },
+        {
+          "attempt": 3,
+          "scope": 1,
+          "score_source": "served",
+          "at": 20790,
+          "fit_records": 1024,
+          "eligible_features": 136,
+          "pooled_features": 96,
+          "hypotheses_examined": 5843,
+          "elapsed_seconds": 0.13638479999985975,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "consolidated",
+            "served_at": 4608,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 6.672898275785098
+            }
+          }
+        }
+      ],
+      "decisions": [
+        {
+          "attempt": 1,
+          "at": 640,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 128,
+            "mean": 0.6319624875281978,
+            "bound": 1.8078102756913668,
+            "lower": -1.175847788163169,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.6781232011798878,
+            "bound": 1.8078102756913668,
+            "lower": -1.1296870745114789,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            32,
+            27,
+            32,
+            37,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "initial_signal",
+          "phase_global_labels": 640,
+          "phase_context_labels": 160
+        },
+        {
+          "attempt": 1,
+          "at": 1536,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 1024,
+            "mean": 0.6073669719158551,
+            "bound": 0.6391574525200436,
+            "lower": -0.03179048060418854,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 1024,
+            "mean": 0.6187042296479761,
+            "bound": 0.6391574525200436,
+            "lower": -0.020453222872067522,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            250,
+            254,
+            258,
+            262,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "initial_signal",
+          "phase_global_labels": 1536,
+          "phase_context_labels": 384
+        },
+        {
+          "attempt": 1,
+          "at": 4608,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "accept",
+          "relevance": {
+            "n": 4096,
+            "mean": 0.605019784070164,
+            "bound": 0.3195787262600218,
+            "lower": 0.2854410578101422,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 4096,
+            "mean": 0.6027357207298952,
+            "bound": 0.3195787262600218,
+            "lower": 0.2831569944698734,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            979,
+            1057,
+            1017,
+            1043,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "initial_signal",
+          "phase_global_labels": 4608,
+          "phase_context_labels": 1152
+        },
+        {
+          "attempt": 2,
+          "at": 20534,
+          "scope": 1,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "futile",
+          "relevance": {
+            "n": 128,
+            "mean": -0.7878484940020791,
+            "bound": 1.8078102756913668,
+            "lower": -2.595658769693446,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.14815435620857018,
+            "bound": 1.8078102756913668,
+            "lower": -1.6596559194827967,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 384,
+            "mean": 0.17754190081237406,
+            "bound": 0.21113913306403118,
+            "lower": -0.033597232251657116,
+            "uniform_over_time": true,
+            "range_width": 1.3192074377605802
+          },
+          "route_support": [
+            32,
+            25,
+            39,
+            32,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "mixed_noise",
+          "phase_global_labels": 534,
+          "phase_context_labels": 134
+        },
+        {
+          "attempt": 3,
+          "at": 21302,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 128,
+            "mean": 0.09185653226432705,
+            "bound": 1.8078102756913668,
+            "lower": -1.7159537434270398,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.8907547673709777,
+            "bound": 1.8078102756913668,
+            "lower": -0.9170555083203891,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 384,
+            "mean": 1.568065705068708,
+            "bound": 1.067997281280818,
+            "lower": 0.5000684237878898,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            73,
+            55,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "mixed_noise",
+          "phase_global_labels": 1302,
+          "phase_context_labels": 326
+        },
+        {
+          "attempt": 3,
+          "at": 24886,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 1024,
+            "mean": 0.07435960936367672,
+            "bound": 0.6391574525200436,
+            "lower": -0.5647978431563669,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 1024,
+            "mean": 0.9237862817562238,
+            "bound": 0.6391574525200436,
+            "lower": 0.28462882923618016,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 3072,
+            "mean": 1.4998303799097503,
+            "bound": 0.38488579630259334,
+            "lower": 1.114944583607157,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            550,
+            474,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "mixed_noise",
+          "phase_global_labels": 4886,
+          "phase_context_labels": 1222
+        },
+        {
+          "attempt": 3,
+          "at": 37174,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 4096,
+            "mean": 0.06985723295556112,
+            "bound": 0.3195787262600218,
+            "lower": -0.2497214933044607,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 4096,
+            "mean": 0.5038603958679968,
+            "bound": 0.3195787262600218,
+            "lower": 0.18428166960797498,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 12288,
+            "mean": 0.800359069017928,
+            "bound": 0.1943683510151973,
+            "lower": 0.6059907180027306,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            2058,
+            2038,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "phase": "recovery",
+          "phase_global_labels": 5174,
+          "phase_context_labels": 1294
+        }
+      ]
+    }
+  },
+  "bounds": {
+    "consolidated": {
+      "max_search_history": 3,
+      "max_decision_history": 7,
+      "max_fit_records": 1024,
+      "max_allocated_points": 160,
+      "max_sampled_checkpoint_bytes": 74737
+    },
+    "calibrated": {
+      "max_search_history": 3,
+      "max_decision_history": 7,
+      "max_fit_records": 1024,
+      "max_allocated_points": 160,
+      "max_sampled_checkpoint_bytes": 96317
+    }
+  },
+  "resumes": [
+    {
+      "kind": "targeted",
+      "at": 20150,
+      "attempt": 2,
+      "scope": 1,
+      "principal_labels": 32,
+      "verified_future_labels": 1024
+    }
+  ],
+  "final_metrics": {
+    "consolidated": {
+      "steps": 40000,
+      "contexts": 4,
+      "symbols": 16,
+      "program": [
+        20,
+        58
+      ],
+      "attempts": 3,
+      "admissions": 1,
+      "trial_scope": 1,
+      "trial_interactions": 4802,
+      "trial_idle_interactions": 2,
+      "required_fit_records": 512,
+      "fit_wait_reason": null,
+      "status": "validating",
+      "live_points_including_control": 96,
+      "allocated_points_including_trial": 160,
+      "intrinsic_live_dof": 192,
+      "intrinsic_peak_dof": 320,
+      "fit_records": 1024,
+      "neural_updates": 100480,
+      "max_sphere_residual": 2.220446049250313e-16,
+      "decisions": [
+        {
+          "attempt": 1,
+          "at": 640,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 128,
+            "mean": 0.6319624875281978,
+            "bound": 1.8078102756913668,
+            "lower": -1.175847788163169,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.6781232011798878,
+            "bound": 1.8078102756913668,
+            "lower": -1.1296870745114789,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            32,
+            27,
+            32,
+            37,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 1,
+          "at": 1536,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 1024,
+            "mean": 0.6073669719158551,
+            "bound": 0.6391574525200436,
+            "lower": -0.03179048060418854,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 1024,
+            "mean": 0.6187042296479761,
+            "bound": 0.6391574525200436,
+            "lower": -0.020453222872067522,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            250,
+            254,
+            258,
+            262,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 1,
+          "at": 4608,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "accept",
+          "relevance": {
+            "n": 4096,
+            "mean": 0.605019784070164,
+            "bound": 0.3195787262600218,
+            "lower": 0.2854410578101422,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 4096,
+            "mean": 0.6027357207298952,
+            "bound": 0.3195787262600218,
+            "lower": 0.2831569944698734,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            979,
+            1057,
+            1017,
+            1043,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 2,
+          "at": 20534,
+          "scope": 1,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "futile",
+          "relevance": {
+            "n": 128,
+            "mean": -0.7878484940020791,
+            "bound": 1.8078102756913668,
+            "lower": -2.595658769693446,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.14815435620857018,
+            "bound": 1.8078102756913668,
+            "lower": -1.6596559194827967,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 384,
+            "mean": 0.17754190081237406,
+            "bound": 0.21113913306403118,
+            "lower": -0.033597232251657116,
+            "uniform_over_time": true,
+            "range_width": 1.3192074377605802
+          },
+          "route_support": [
+            32,
+            25,
+            39,
+            32,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 3,
+          "at": 21302,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 128,
+            "mean": 0.09185653226432705,
+            "bound": 1.8078102756913668,
+            "lower": -1.7159537434270398,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.8907547673709777,
+            "bound": 1.8078102756913668,
+            "lower": -0.9170555083203891,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 384,
+            "mean": 1.568065705068708,
+            "bound": 1.067997281280818,
+            "lower": 0.5000684237878898,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            73,
+            55,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 3,
+          "at": 24886,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 1024,
+            "mean": 0.07435960936367672,
+            "bound": 0.6391574525200436,
+            "lower": -0.5647978431563669,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 1024,
+            "mean": 0.9237862817562238,
+            "bound": 0.6391574525200436,
+            "lower": 0.28462882923618016,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 3072,
+            "mean": 1.4998303799097503,
+            "bound": 0.38488579630259334,
+            "lower": 1.114944583607157,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            550,
+            474,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 3,
+          "at": 37174,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 4096,
+            "mean": 0.06985723295556112,
+            "bound": 0.3195787262600218,
+            "lower": -0.2497214933044607,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 4096,
+            "mean": 0.5038603958679968,
+            "bound": 0.3195787262600218,
+            "lower": 0.18428166960797498,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 12288,
+            "mean": 0.800359069017928,
+            "bound": 0.1943683510151973,
+            "lower": 0.6059907180027306,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            2058,
+            2038,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "searches": [
+        {
+          "attempt": 1,
+          "scope": null,
+          "score_source": "served",
+          "at": 512,
+          "fit_records": 512,
+          "eligible_features": 133,
+          "pooled_features": 96,
+          "hypotheses_examined": 5746,
+          "elapsed_seconds": 0.10346849999996266,
+          "program": [
+            20,
+            58
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "plastic",
+            "served_at": null,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 9.210340371976182
+            }
+          }
+        },
+        {
+          "attempt": 2,
+          "scope": 1,
+          "score_source": "served",
+          "at": 20022,
+          "fit_records": 1024,
+          "eligible_features": 136,
+          "pooled_features": 96,
+          "hypotheses_examined": 5746,
+          "elapsed_seconds": 0.12727089999998498,
+          "program": [
+            20,
+            58
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "consolidated",
+            "served_at": 4608,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 1.3192074377605802
+            }
+          }
+        },
+        {
+          "attempt": 3,
+          "scope": 1,
+          "score_source": "served",
+          "at": 20790,
+          "fit_records": 1024,
+          "eligible_features": 136,
+          "pooled_features": 96,
+          "hypotheses_examined": 5843,
+          "elapsed_seconds": 0.13093019999996613,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "consolidated",
+            "served_at": 4608,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 6.672898275785098
+            }
+          }
+        }
+      ],
+      "search_mode": "consolidated",
+      "search_block": 1,
+      "attempts_per_block": 16,
+      "block_alpha": 0.025,
+      "lifetime_alpha_upper_bound": 0.05,
+      "allocated_alpha_upper_bound": 0.025,
+      "renewal": {
+        "archived_attempts": 0,
+        "archived_fit_records": 0,
+        "archived_admissions": 0,
+        "archived_at": -1,
+        "last_admission": null,
+        "terminal_counts": {
+          "accept": 0,
+          "futile": 0,
+          "inconclusive": 0,
+          "unsupported": 0,
+          "expired": 0,
+          "migrated": 0
+        },
+        "legacy_first_block": false
+      },
+      "history_search_limit": 16,
+      "history_decision_limit": 80,
+      "served_bank": "consolidated",
+      "protected_points": 32,
+      "protected_at": 4608,
+      "validation_horizons": [
+        128,
+        1024,
+        4096,
+        8192,
+        16384
+      ],
+      "policy_start_attempt": 1,
+      "import_at": null
+    },
+    "calibrated": {
+      "steps": 40000,
+      "contexts": 4,
+      "symbols": 16,
+      "program": [
+        20,
+        58
+      ],
+      "attempts": 3,
+      "admissions": 1,
+      "trial_scope": 1,
+      "trial_interactions": 4802,
+      "trial_idle_interactions": 2,
+      "required_fit_records": 512,
+      "fit_wait_reason": null,
+      "status": "validating",
+      "live_points_including_control": 96,
+      "allocated_points_including_trial": 160,
+      "intrinsic_live_dof": 192,
+      "intrinsic_peak_dof": 320,
+      "fit_records": 1024,
+      "neural_updates": 100480,
+      "max_sphere_residual": 2.220446049250313e-16,
+      "decisions": [
+        {
+          "attempt": 1,
+          "at": 640,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 128,
+            "mean": 0.6319624875281978,
+            "bound": 1.8078102756913668,
+            "lower": -1.175847788163169,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.6781232011798878,
+            "bound": 1.8078102756913668,
+            "lower": -1.1296870745114789,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            32,
+            27,
+            32,
+            37,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 1,
+          "at": 1536,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 1024,
+            "mean": 0.6073669719158551,
+            "bound": 0.6391574525200436,
+            "lower": -0.03179048060418854,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 1024,
+            "mean": 0.6187042296479761,
+            "bound": 0.6391574525200436,
+            "lower": -0.020453222872067522,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            250,
+            254,
+            258,
+            262,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 1,
+          "at": 4608,
+          "scope": null,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "accept",
+          "relevance": {
+            "n": 4096,
+            "mean": 0.605019784070164,
+            "bound": 0.3195787262600218,
+            "lower": 0.2854410578101422,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 4096,
+            "mean": 0.6027357207298952,
+            "bound": 0.3195787262600218,
+            "lower": 0.2831569944698734,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 0,
+            "mean": 0,
+            "bound": null,
+            "lower": null,
+            "range_width": 9.210340371976182
+          },
+          "route_support": [
+            979,
+            1057,
+            1017,
+            1043,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 2,
+          "at": 20534,
+          "scope": 1,
+          "program": [
+            20,
+            58
+          ],
+          "decision": "futile",
+          "relevance": {
+            "n": 128,
+            "mean": -0.7878484940020791,
+            "bound": 1.8078102756913668,
+            "lower": -2.595658769693446,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.14815435620857018,
+            "bound": 1.8078102756913668,
+            "lower": -1.6596559194827967,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 384,
+            "mean": 0.17754190081237406,
+            "bound": 0.21113913306403118,
+            "lower": -0.033597232251657116,
+            "uniform_over_time": true,
+            "range_width": 1.3192074377605802
+          },
+          "route_support": [
+            32,
+            25,
+            39,
+            32,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 3,
+          "at": 21302,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 128,
+            "mean": 0.09185653226432705,
+            "bound": 1.8078102756913668,
+            "lower": -1.7159537434270398,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 128,
+            "mean": 0.8907547673709777,
+            "bound": 1.8078102756913668,
+            "lower": -0.9170555083203891,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 384,
+            "mean": 1.568065705068708,
+            "bound": 1.067997281280818,
+            "lower": 0.5000684237878898,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            73,
+            55,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 3,
+          "at": 24886,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 1024,
+            "mean": 0.07435960936367672,
+            "bound": 0.6391574525200436,
+            "lower": -0.5647978431563669,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 1024,
+            "mean": 0.9237862817562238,
+            "bound": 0.6391574525200436,
+            "lower": 0.28462882923618016,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 3072,
+            "mean": 1.4998303799097503,
+            "bound": 0.38488579630259334,
+            "lower": 1.114944583607157,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            550,
+            474,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "attempt": 3,
+          "at": 37174,
+          "scope": 1,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "decision": "pending",
+          "relevance": {
+            "n": 4096,
+            "mean": 0.06985723295556112,
+            "bound": 0.3195787262600218,
+            "lower": -0.2497214933044607,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "improvement": {
+            "n": 4096,
+            "mean": 0.5038603958679968,
+            "bound": 0.3195787262600218,
+            "lower": 0.18428166960797498,
+            "uniform_over_time": false,
+            "range_width": 9.210340371976182
+          },
+          "preservation": {
+            "n": 12288,
+            "mean": 0.800359069017928,
+            "bound": 0.1943683510151973,
+            "lower": 0.6059907180027306,
+            "uniform_over_time": true,
+            "range_width": 6.672898275785098
+          },
+          "route_support": [
+            2058,
+            2038,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "searches": [
+        {
+          "attempt": 1,
+          "scope": null,
+          "score_source": "served",
+          "at": 512,
+          "fit_records": 512,
+          "eligible_features": 133,
+          "pooled_features": 96,
+          "hypotheses_examined": 5746,
+          "elapsed_seconds": 0.10243259999992915,
+          "program": [
+            20,
+            58
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "plastic",
+            "served_at": null,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 9.210340371976182
+            }
+          }
+        },
+        {
+          "attempt": 2,
+          "scope": 1,
+          "score_source": "served",
+          "at": 20022,
+          "fit_records": 1024,
+          "eligible_features": 136,
+          "pooled_features": 96,
+          "hypotheses_examined": 5746,
+          "elapsed_seconds": 0.1291287999999895,
+          "program": [
+            20,
+            58
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "consolidated",
+            "served_at": 4608,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 1.3192074377605802
+            }
+          }
+        },
+        {
+          "attempt": 3,
+          "scope": 1,
+          "score_source": "served",
+          "at": 20790,
+          "fit_records": 1024,
+          "eligible_features": 136,
+          "pooled_features": 96,
+          "hypotheses_examined": 5843,
+          "elapsed_seconds": 0.13638479999985975,
+          "program": [
+            58,
+            138,
+            139
+          ],
+          "validation": {
+            "horizons": [
+              128,
+              1024,
+              4096,
+              8192,
+              16384
+            ],
+            "serve_mode": "consolidated",
+            "served_at": 4608,
+            "widths": {
+              "relevance": 9.210340371976182,
+              "improvement": 9.210340371976182,
+              "preservation": 6.672898275785098
+            }
+          }
+        }
+      ],
+      "search_mode": "calibrated",
+      "search_block": 1,
+      "attempts_per_block": 16,
+      "block_alpha": 0.025,
+      "lifetime_alpha_upper_bound": 0.05,
+      "allocated_alpha_upper_bound": 0.025,
+      "renewal": {
+        "archived_attempts": 0,
+        "archived_fit_records": 0,
+        "archived_admissions": 0,
+        "archived_at": -1,
+        "last_admission": null,
+        "terminal_counts": {
+          "accept": 0,
+          "futile": 0,
+          "inconclusive": 0,
+          "unsupported": 0,
+          "expired": 0,
+          "migrated": 0
+        },
+        "legacy_first_block": false
+      },
+      "history_search_limit": 16,
+      "history_decision_limit": 80,
+      "served_bank": "consolidated",
+      "protected_points": 32,
+      "protected_at": 4608,
+      "validation_horizons": [
+        128,
+        1024,
+        4096,
+        8192,
+        16384
+      ],
+      "policy_start_attempt": 1,
+      "import_at": null,
+      "calibration_policy": "rolling-mixture-v1",
+      "validation_reference": "raw_protected_competence",
+      "search_trigger_score": "raw_competence_brier",
+      "calibration_window": 256,
+      "calibration_probability_cache": 1024,
+      "calibration_moment_scalars": 16,
+      "calibration_by_context": {
+        "0": {
+          "observations": 256,
+          "background_rate": 0.21875,
+          "retained_contrast": 1,
+          "active": true
+        },
+        "1": {
+          "observations": 256,
+          "background_rate": 0.22265625,
+          "retained_contrast": 1,
+          "active": true
+        },
+        "2": {
+          "observations": 256,
+          "background_rate": 0.25390625,
+          "retained_contrast": 1,
+          "active": true
+        },
+        "3": {
+          "observations": 256,
+          "background_rate": 0.24609375,
+          "retained_contrast": 1,
+          "active": true
+        }
+      },
+      "pending_import_at": null
+    }
+  }
+}

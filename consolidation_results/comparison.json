@@ -1,0 +1,15 @@
+{
+  "engine_commit": "c4ae9316fa84e051274c79887114147a9cdda502",
+  "windows_job": 111509625820,
+  "linux_job": 111509625688,
+  "numeric_fields_compared": 79346,
+  "max_absolute_difference": 5.329070518200751e-15,
+  "tolerance": 1e-10,
+  "mismatches": [],
+  "excluded_fields": [
+    "elapsed_seconds",
+    "max_sampled_checkpoint_bytes",
+    "runner",
+    "python"
+  ]
+}

@@ -63,7 +63,7 @@ La bibliothèque de prédicats, les frontières d’épisode et l’exploration
 uniforme sont fournies. La continuité du programme admis est un biais
 explicite, pas une preuve de découverte d’une logique entièrement nouvelle.
 
-La [revue du code précédent](CODE_REVIEW_CURRENT.md) et les [corrections](CURRENT_FIXES.md) documentent le seuil atteignable avec un contexte, l’expiration sans admission des validations qui n’avancent plus, les scores du modèle effectivement servi et les invariants de reprise. Les 97 tests passent sous Windows et Linux. Le cœur partagé écrit le format 2 ; les états du format 1 demandent une migration explicite, qui conserve les budgets et clôture les validations inachevées. Le moteur historique conserve son plafond ; le [mode renouvelable](RENEWABLE_SEARCH.md) ajoute des blocs à risque sommable et des compteurs à vie, sous 104 tests Windows/Linux. Les [mesures longues](RENEWABLE_SEARCH_RESULTS.md) établissent la récupération après bruit initial et les limites restantes de rétention et de validation des changements.
+La [revue du code précédent](CODE_REVIEW_CURRENT.md) et les [corrections](CURRENT_FIXES.md) documentent le seuil atteignable avec un contexte, l’expiration sans admission des validations qui n’avancent plus, les scores du modèle effectivement servi et les invariants de reprise. Les 97 tests passent sous Windows et Linux. Le cœur partagé écrit le format 2 ; les états du format 1 demandent une migration explicite, qui conserve les budgets et clôture les validations inachevées. Le moteur historique conserve son plafond ; le [mode renouvelable](RENEWABLE_SEARCH.md) ajoute des blocs à risque sommable et des compteurs à vie, sous 104 tests Windows/Linux. Les [mesures longues](RENEWABLE_SEARCH_RESULTS.md) établissent la récupération après bruit initial et les échecs historiques de rétention et de validation des changements. Le [mode consolidé](CONSOLIDATION.md) ajoute une banque protégée commune, remplacée seulement après une admission prospective, et cinq horizons de validation. Les [résultats](CONSOLIDATION_RESULTS.md), sous **113 tests Windows/Linux**, corrigent ces deux échecs sur trois graines à 16 symboles et quatre contextes ; la calibration sous bruit et certains délais d'admission régressent. Avec quatre actions et huit routes, cette copie ajoute 32 points S² : 96 points et 192 degrés de liberté en service après la première admission, jusqu'à 160 points et 320 degrés de liberté pendant une validation.
 
 ## Exigence géométrique de la référence V1
 
@@ -94,14 +94,14 @@ par définition ; cela ne rend pas euclidiens les paramètres qu'ils déplacent.
 
 | Exigence | État |
 |---|---|
-| Réseau lui-même non euclidien | Version partagée et renouvelable sur S², 104 tests Windows/Linux ; références temporelle, de présence et V1 sur H4 conservées |
+| Réseau lui-même non euclidien | Versions partagée, renouvelable et consolidée sur S², 113 tests Windows/Linux ; références temporelle, de présence et V1 sur H4 conservées |
 | Apprendre des résultats de ses actions pendant une interaction | Implémenté dans la première pièce séquentielle et dans la référence de fichiers |
-| Apprentissage continu avec reprise complète | Mode renouvelable restaurable, requête en attente comprise ; recherche renouvelée avec risque à vie borné ; oubli sous bruit et validation insuffisante des changements minoritaires mesurés |
+| Apprentissage continu avec reprise complète | Mode consolidé restaurable, requête en attente comprise ; risque à vie borné ; rétention et six changements successifs réussis dans le protocole testé ; calibration sous bruit et délai d'admission restent limités |
 | Objectifs proposés par l'utilisateur et objectifs choisis par le système | À développer |
 | Cortex avec un essaim d'agents comme extensions de lui-même | À développer |
 | Dialogue | À développer |
 | Agir sur des applications du PC | À développer |
-| Petit budget de paramètres | Version partagée : 128 degrés de liberté en service pour quatre actions, contrôle inclus ; 256 pendant une validation ; 64/128 pour deux actions ; références conservées |
+| Petit budget de paramètres | Quatre actions : version partagée 128 degrés de liberté en service, contrôle inclus, et 256 pendant une validation ; version consolidée 192 après admission et jusqu'à 320 pendant une validation ; références conservées |
 
 La V1 contient 34 points par modèle : 6 prototypes de bits d'observation,
 4 d'action, 8 clés de neurones, 8 valeurs de neurones et 8 prototypes de

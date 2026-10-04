@@ -14,7 +14,7 @@ sa mémoire et ses règles de routage restent des détails privés de l’appren
 | Pièce | Responsabilité | État |
 |---|---|---|
 | Contrats communs, `setharkk/contracts.py` | Messages JSON versionnés, identités, ordre logique, unités | Implémentés, version 1 |
-| Adaptateurs, `FirstPieceAdapter`, `TemporalAdapter`, `SharedAdapter` et `RenewableAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
+| Adaptateurs, `FirstPieceAdapter`, `TemporalAdapter`, `SharedAdapter`, `RenewableAdapter` et `ConsolidatedAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
 | Première pièce neuronale | Mémoire d'événements, prédictions et modification des prototypes S² | Présence, ordres et combinaisons bornées ; version partagée entre contextes |
 | Cortex coordinateur | Arbitrage des propositions, ressources communes, priorités, journal durable | À construire ; l'adaptateur possède déjà une seule autorité d'apprentissage |
 | Objectifs et planification | Distinguer la demande utilisateur, les objectifs exploratoires et leur valeur | À construire ; un `goal_id` peut déjà accompagner une proposition |
@@ -214,8 +214,37 @@ pas sa taille au milieu d'une reprise. La première pièce déclenche la recherc
 automatiquement depuis les retours appris ; le coordinateur futur devra encore
 arbitrer le temps CPU et les expériences, et conserver un journal durable.
 
-Les [mesures longues](RENEWABLE_SEARCH_RESULTS.md) montrent que le renouvellement
-ne fournit pas une mémoire de compétences protégée. La garde d'admission et son
-horizon restent insuffisants pour les changements minoritaires testés. Ces
-limites appartiennent encore à la première pièce ; l'essaim ne les résoudra pas
-simplement en partageant ses poids.
+Les [mesures longues](RENEWABLE_SEARCH_RESULTS.md) montrent les échecs historiques
+du mode renouvelable sans mémoire protégée. Le mode consolidé ci-dessous les
+corrige dans le protocole testé ; les anciens modes restent disponibles avec
+leurs propres limites et identités de reprise.
+
+## Compétence consolidée, même interface
+
+`ConsolidatedAdapter` conserve les contrats version 1, une seule autorité
+d'apprentissage et une action en attente. Son identité est
+`first_piece.consolidated-compositions-s2.v1`, avec un checkpoint de format 4.
+Les [instructions](CONSOLIDATION.md) définissent les imports explicites depuis
+les formats antérieurs, y compris la préservation des requêtes, du risque
+déjà dépensé et des validations en cours.
+
+Après une admission, une copie des prototypes S² sert les prédictions
+structurées. Elle ne reçoit plus de gradients et n'est remplacée qu'après
+une nouvelle admission. Les banques plastiques continuent leurs mises à jour.
+Les candidats sont actuellement ajustés depuis les buffers récents ;
+les poids de la banque plastique ne servent pas à les initialiser.
+Il existe une seule compétence protégée commune, sans réseau privé par agent.
+
+Les nouvelles validations fixent cinq horizons et la référence servie avant
+leurs données prospectives. Pour un remplacement ciblé, la borne de
+préservation utilise une amplitude calculée sur toutes les routes possibles
+hors du contexte ciblé. Les détails et hypothèses sont dans le
+[protocole](CONSOLIDATION_PROTOCOL.md). Un import conserve les trois horizons
+d'une ancienne validation jusqu'à sa clôture ; les cinq horizons s'appliquent
+aux nouvelles tentatives.
+
+Les [mesures](CONSOLIDATION_RESULTS.md) publient la rétention et les changements
+corrigés, ainsi que la surconfiance sous bruit, un délai d'admission accru et
+les coûts supplémentaires. Le coordinateur devra consulter les capacités
+et métriques plutôt que supposer les budgets des anciens modes. Les objectifs,
+le dialogue, les agents autonomes et l'exécution physique restent à construire.

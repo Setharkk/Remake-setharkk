@@ -1,5 +1,7 @@
 # Recherche renouvelable : résultats et limites
 
+Ce rapport conserve les résultats du mode renouvelable historique. Le [rapport de consolidation](CONSOLIDATION_RESULTS.md) publie ensuite les corrections de rétention et de changements minoritaires, ainsi que les régressions de calibration et de délai.
+
 **Le plafond à vie est retiré dans le nouveau mode et l'apprentissage après
 bruit initial fonctionne. La rétention sous bruit et l'adaptation aux
 changements minoritaires restent insuffisantes.** Les résultats ne justifient

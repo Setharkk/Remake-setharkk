@@ -1,5 +1,7 @@
 # Corrections de la première pièce — 4 octobre 2026
 
+Ce rapport conserve les corrections du moteur historique à budget fini. Les évolutions suivantes sont documentées dans le [mode renouvelable](RENEWABLE_SEARCH.md), puis le [mode consolidé](CONSOLIDATION.md) et ses [mesures](CONSOLIDATION_RESULTS.md).
+
 > Suite de ce rapport historique : le [mode renouvelable](RENEWABLE_SEARCH.md) est livré avec [mesures de longue durée](RENEWABLE_SEARCH_RESULTS.md) et 104 tests. Le moteur fini, ses six corrections et sa migration format 2 restent conservés.
 
 Les six familles de défauts de la [revue](CODE_REVIEW_CURRENT.md) sont corrigées à la source [99cf3b3](https://github.com/Setharkk/Remake-setharkk/commit/99cf3b33d78f77ea7a17fa1c74eaf0ee629e2204). Les **97 tests passent sous Windows et Linux**, et les reproductions avant/après vérifient l’apprentissage par défaut, la clôture des validations bloquées, les scores servis et la reprise.

@@ -1,5 +1,7 @@
 # Première pièce : recherche renouvelable
 
+Ce mode reste une référence restaurable. Le [mode consolidé](CONSOLIDATION.md) ajoute une mémoire protégée et une validation prolongée ; ses [résultats et coûts](CONSOLIDATION_RESULTS.md) sont publiés séparément.
+
 Le mode continu utilise `RenewableLearner` ou `RenewableAdapter`.
 Le moteur historique `SharedLearner` reste disponible comme référence à budget
 fini. Les deux partagent la même banque neuronale S², le même routage et les

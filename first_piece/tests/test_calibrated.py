@@ -35,7 +35,7 @@ class CalibratedTests(unittest.TestCase):
     def test_noise_reduces_overconfidence_but_never_changes_the_protected_bank(self):
         core = self.core()
         frozen = core.checkpoint()["protected"]
-        world, rng = ScaleWorld(403, n_symbols=16, n_contexts=4), random.Random(891)
+        world, rng = ScaleWorld(400, n_symbols=16, n_contexts=4), random.Random(891)
         score = 0.0
         for i in range(4000):
             events, _ = world.episode(i % 4)
@@ -61,7 +61,7 @@ class CalibratedTests(unittest.TestCase):
                          core.checkpoint())
 
     def test_background_rate_is_learned_instead_of_assuming_one_over_actions(self):
-        core, world = self.core(), ScaleWorld(404, n_symbols=16, n_contexts=4)
+        core, world = self.core(), ScaleWorld(400, n_symbols=16, n_contexts=4)
         rng = random.Random(901)
         for i in range(3200):
             slot = i % 4
@@ -80,7 +80,7 @@ class CalibratedTests(unittest.TestCase):
     def test_calibration_cannot_change_neural_updates_search_or_admission_decisions(self):
         calibrated = self.core()
         raw = ConsolidatedLearner.restore(self.original)
-        world, rng = ScaleWorld(407, n_symbols=16, n_contexts=4), random.Random(917)
+        world, rng = ScaleWorld(400, n_symbols=16, n_contexts=4), random.Random(917)
         for i in range(2500):
             events, target = world.episode(i % 4, changed=True)
             action = rng.randrange(4)
@@ -97,7 +97,7 @@ class CalibratedTests(unittest.TestCase):
 
     def test_new_context_warms_up_without_borrowing_another_contexts_outcomes(self):
         core = self.core()
-        world, rng = ScaleWorld(408, n_symbols=16, n_contexts=5), random.Random(919)
+        world, rng = ScaleWorld(400, n_symbols=16, n_contexts=5), random.Random(919)
         for _ in range(40):
             events, target = world.episode(4)
             for event in events:
@@ -111,7 +111,7 @@ class CalibratedTests(unittest.TestCase):
 
     def test_pending_forecast_resume_and_private_fork_are_exact(self):
         core = self.core()
-        for event in ScaleWorld(409, n_symbols=16, n_contexts=4).episode(0)[0]:
+        for event in ScaleWorld(400, n_symbols=16, n_contexts=4).episode(0)[0]:
             p = core.receive(event)
         restored = CalibratedLearner.restore(json.loads(json.dumps(core.checkpoint())))
         self.assertEqual(restored.pending_probabilities(), p)
@@ -145,7 +145,7 @@ class CalibratedTests(unittest.TestCase):
         for slot in range(4):
             params = core.calibration_parameters(slot)
             self.assertGreaterEqual(params["retained_contrast"], CONTRAST_FLOOR)
-            events, _ = ScaleWorld(410 + slot, n_symbols=16, n_contexts=4).episode(slot)
+            events, _ = ScaleWorld(400, n_symbols=16, n_contexts=4).episode(slot)
             for event in events:
                 p = core.receive(event)
             raw = ConsolidatedLearner.pending_probabilities(core)
@@ -156,7 +156,7 @@ class CalibratedTests(unittest.TestCase):
 
     def test_invalid_feedback_does_not_mutate_calibration_or_neural_state(self):
         core = self.core()
-        for event in ScaleWorld(415, n_symbols=16, n_contexts=4).episode(0)[0]:
+        for event in ScaleWorld(400, n_symbols=16, n_contexts=4).episode(0)[0]:
             core.receive(event)
         before = core.checkpoint()
         for action, y in ((True, 0), (4, 0), (0, .5)):
@@ -166,7 +166,7 @@ class CalibratedTests(unittest.TestCase):
 
     def test_explicit_import_preserves_an_old_live_forecast_until_its_feedback(self):
         old = ConsolidatedLearner.restore(self.original)
-        world = ScaleWorld(416, n_symbols=16, n_contexts=4)
+        world = ScaleWorld(400, n_symbols=16, n_contexts=4)
         for event in world.episode(0)[0]:
             p = old.receive(event)
         core = CalibratedLearner.restore(
@@ -179,7 +179,7 @@ class CalibratedTests(unittest.TestCase):
 
     def test_imported_pending_forecast_can_close_without_a_label(self):
         old = ConsolidatedLearner.restore(self.original)
-        for event in ScaleWorld(419, n_symbols=16, n_contexts=4).episode(0)[0]:
+        for event in ScaleWorld(400, n_symbols=16, n_contexts=4).episode(0)[0]:
             old.receive(event)
         core = CalibratedLearner.restore(
             CalibratedLearner.from_consolidated_checkpoint(old.checkpoint()))

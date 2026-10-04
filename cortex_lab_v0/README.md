@@ -215,7 +215,9 @@ pas une validation de ce programme. La version euclidienne y faisait mieux.
 
 Les tests Python ont passé sur les runners Windows et Linux de GitHub
 Actions lors de la première publication. La CI exécute aussi une comparaison
-de 200 expériences par condition sur une graine. Les journaux effectifs sont
+de 200 expériences par condition sur 20 graines, avec des évaluations
+à 50, 100, 150 et 200 expériences. Le protocole complet est décrit dans
+[BENCHMARK_PROTOCOL.md](../BENCHMARK_PROTOCOL.md). Les journaux effectifs sont
 accessibles dans l'onglet Actions du dépôt. Le GPU et le PC de l'utilisateur
 restent à tester séparément.
 
@@ -223,3 +225,14 @@ La CI conserve aussi les métriques, expériences et poids dans les artefacts
 cortex-results-ubuntu-latest et cortex-results-windows-latest du run Actions.
 Elle tente également d'archiver les fichiers disponibles si la comparaison
 a commencé puis échoué. L'échec du run reste indiqué dans Actions.
+
+Pour analyser un run complet de 20 graines (0 à 19), depuis la racine :
+
+~~~powershell
+.\cortex_lab_v0\.venv\Scripts\python.exe -m cortex_lab_v0.analyze "cortex_lab_v0/cortex_runs/<identifiant>"
+~~~
+
+L'analyse crée analysis.json et benchmark-rows.csv. Pour un run contenant
+d'autres graines, préciser --expected-seeds suivi de la liste utilisée.
+Les évaluations 0, 50, 100 et 200 sont nécessaires ; lancer le benchmark
+avec --evaluate-every 50.

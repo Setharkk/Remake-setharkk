@@ -30,7 +30,9 @@ jobs:
         run: python -m unittest discover -s cortex_lab_v0/tests -v
       - name: Comparative learning run
         id: experiment
-        run: python -m cortex_lab_v0.run --steps 200 --seeds 0 --device cpu --out "${{ runner.temp }}/cortex-smoke"
+        run: python -m cortex_lab_v0.run --steps 200 --seeds 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 --evaluate-every 50 --device cpu --out "${{ runner.temp }}/cortex-smoke"
+      - name: Audit learning curves and failures
+        run: python -m cortex_lab_v0.analyze "${{ runner.temp }}/cortex-smoke"
       - name: Upload experiment results
         if: ${{ always() && (steps.experiment.outcome == 'success' || steps.experiment.outcome == 'failure') }}
         uses: actions/upload-artifact@v4
@@ -39,6 +41,8 @@ jobs:
           if-no-files-found: error
           path: |
             ${{ runner.temp }}/cortex-smoke/**/summary.json
+            ${{ runner.temp }}/cortex-smoke/**/analysis.json
+            ${{ runner.temp }}/cortex-smoke/**/benchmark-rows.csv
             ${{ runner.temp }}/cortex-smoke/**/metrics.csv
             ${{ runner.temp }}/cortex-smoke/**/experiences.jsonl
             ${{ runner.temp }}/cortex-smoke/**/config.json

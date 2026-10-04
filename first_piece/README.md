@@ -1,39 +1,34 @@
-# Laboratoire de la première pièce
+# Première pièce : apprenant à mémoire d'événements
 
-La [première pièce](../FIRST_PIECE.md) est une mémoire qui apprend à
-distinguer des contextes à partir de leur historique.
+La [définition](../FIRST_PIECE.md) décrit maintenant l'apprenant :
+mémoire de présence alimentée événement par événement, prototypes
+neuronaux sur S², proposition d'une distinction depuis le passé et
+validation contre un contrôle ajusté à budget égal.
 
-Ce dossier prépare le monde séquentiel, ses contrôles et une règle
-d'admission d'une distinction proposée. Le réseau qui découvre cette
-distinction n'est pas encore implémenté.
+Les [résultats mesurés](../FIRST_PIECE_LEARNING_RESULTS.md) donnent les
+courbes, le transfert, la rétention, le bruit et la reprise.
 
 Python 3.11, bibliothèque standard uniquement :
 
 ~~~text
 python -m unittest discover -s first_piece/tests -v
-python -m first_piece.audit --out first_piece/lab_runs/essai_1
+python -m first_piece.learning_run --seeds 0 1 2 3 4 --out first_piece/lab_runs/apprentissage_1
 ~~~
 
-L'audit utilise un oracle connaissant la règle cachée. Ses résultats
-valident le laboratoire et la règle d'admission ; ils ne mesurent pas
-l'apprentissage d'un modèle.
+Les horizons d'apprentissage sont 100, 1 000 et 10 000 interactions.
+Les checkpoints conservent l'apprenant complet, le monde et les mesures.
+Le chemin de sortie doit être neuf.
 
-Les horizons 100, 1 000 et 10 000 comptent des interactions du monde.
-Le budget de 1 000 comparaisons couvre les 60 décisions de cet audit.
-Il ne constitue pas un droit à poursuivre indéfiniment les mêmes tests.
-
-L'audit conserve `progress.json` dans chaque condition à chaque horizon.
-Après interruption, les mesures déjà évaluées restent disponibles ; seul
-le statut `completed` indique une condition terminée. Ce fichier conserve
-le monde au dernier horizon évalué, sans fournir une reprise de l'audit.
-
-Le critère utilise une borne à deux queues, avec un budget alpha commun
-aux décisions d'acceptation et de rejet. Il mesure le gain de prédiction ;
-la nécessité de la distinction reste à vérifier avec un contrôle ajusté.
-
-La preuve avant/après de la revue peut être rejouée dans un clone disposant
-de l'historique Git complet :
+Le laboratoire historique sans apprenant reste accessible :
 
 ~~~text
+python -m first_piece.audit --out first_piece/lab_runs/audit_1
 python -m first_piece.review_probe --out revue-premiere-piece.json
 ~~~
+
+Le premier utilise un oracle pour contrôler le monde, et non pour
+entraîner l'apprenant. Le second rejoue la revue avant/après depuis Git
+et nécessite l'historique complet du dépôt.
+
+La découverte reste limitée à une présence de symbole par tâche.
+La courbure est fixée et le contrôle porte sur cette petite architecture.

@@ -181,7 +181,7 @@ class SharedLearningTests(unittest.TestCase):
         self.assertEqual(one, two)
 
     def test_transaction_copy_isolates_core_operations_through_admission(self):
-        source, world = SharedLearner(17, max_tasks=4), ScaleWorld(72, n_contexts=4)
+        source, world = SharedLearner(17, max_tasks=4), ScaleWorld(72, n_symbols=32, n_contexts=4)
         train(source, world, 512)
         self.assertIsNotNone(source.trial)
         before = source.checkpoint()

@@ -19,11 +19,22 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: World, evidence and checkpoint tests
         run: python -m unittest discover -s first_piece/tests -v
+      - name: Reproduce first-piece review before and after correction
+        run: python -m first_piece.review_probe --out "${{ runner.temp }}/first-piece-review.json"
+      - name: Upload first-piece review evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-piece-review-${{ matrix.os }}
+          if-no-files-found: warn
+          path: ${{ runner.temp }}/first-piece-review.json
       - name: Audit available information and noise control
         id: audit
         run: python -m first_piece.audit --seeds 0 1 2 3 4 --horizons 100 1000 10000 --out "${{ runner.temp }}/first-piece"

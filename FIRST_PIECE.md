@@ -54,7 +54,7 @@ Sur n expériences, mesurer :
 g = moyenne_i log( p_proposition(y_i | h_i,o_i,a_i)
                   / p_parent(y_i | o_i,a_i) )
 
-delta = log(1/epsilon) * sqrt( 2 * log(M/alpha) / n )
+delta = log(1/epsilon) * sqrt( 2 * log(2*M/alpha) / n )
 
 conserver si g - delta > lambda * cout_supplémentaire
 ~~~
@@ -62,7 +62,9 @@ conserver si g - delta > lambda * cout_supplémentaire
 Le gain est mesuré en nats par résultat observé. Les probabilités binaires
 sont bornées entre epsilon et 1-epsilon pour borner le score.
 Le terme delta est une borne conservative de Hoeffding, avec correction
-par union sur au plus M comparaisons annoncées. Il suppose des observations
+par union sur les deux queues de chacune des M comparaisons annoncées.
+Le facteur 2 répartit alpha entre les décisions d'acceptation et de rejet.
+Il suppose des observations
 IID du bloc de validation et des prédicteurs figés avant ce bloc.
 
 M compte toutes les propositions et tous les horizons examinés dans la
@@ -84,6 +86,14 @@ constantes universelles ou des réglages optimaux.
 La décision est **acceptée**, **rejetée**, **en attente de données** ou
 **bloquée par le budget**. Une assurance insuffisante ne devient pas
 automatiquement une déclaration d'incapacité d'apprendre.
+
+Ce test mesure un gain prédictif global. Il ne prouve pas à lui seul que
+la partition phi est nécessaire : le gain peut aussi venir de prédictions
+mieux ajustées sans nouvelle distinction. Le futur apprenant devra être
+comparé à une version sans cette distinction, ajustée avec les mêmes
+informations et le même budget. Les conditions IID, les prédictions figées
+et le nombre de comparaisons sont à faire respecter par ce futur protocole ;
+la fonction seule ne les vérifie pas.
 
 Fusionner et supprimer des distinctions demanderont leurs propres critères
 de validation et de rétention ; ces décisions ne sont pas encore codées.
@@ -134,7 +144,13 @@ python -m first_piece.audit --out first_piece/lab_runs/essai_1
 ~~~
 
 Les fichiers produits sont config.json, summary.json, observations.jsonl
-et des snapshots du monde. Le chemin de sortie doit être neuf.
+et des snapshots du monde. Chaque condition conserve aussi progress.json
+à chaque horizon évalué, avec les mesures et l'état du monde à cet horizon.
+Une interruption gérée est signalée par le statut interrupted ; un arrêt
+brutal peut laisser running. Seul completed signale une condition terminée.
+Ces diagnostics ne constituent pas une reprise complète de l'audit :
+le générateur des actions et ses accumulateurs ne sont pas restaurés.
+Le chemin de sortie doit être neuf.
 Les observations publiques ne comprennent ni la règle cachée ni les
 prédictions de l'oracle.
 

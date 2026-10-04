@@ -21,3 +21,19 @@ l'apprentissage d'un modèle.
 Les horizons 100, 1 000 et 10 000 comptent des interactions du monde.
 Le budget de 1 000 comparaisons couvre les 60 décisions de cet audit.
 Il ne constitue pas un droit à poursuivre indéfiniment les mêmes tests.
+
+L'audit conserve `progress.json` dans chaque condition à chaque horizon.
+Après interruption, les mesures déjà évaluées restent disponibles ; seul
+le statut `completed` indique une condition terminée. Ce fichier conserve
+le monde au dernier horizon évalué, sans fournir une reprise de l'audit.
+
+Le critère utilise une borne à deux queues, avec un budget alpha commun
+aux décisions d'acceptation et de rejet. Il mesure le gain de prédiction ;
+la nécessité de la distinction reste à vérifier avec un contrôle ajusté.
+
+La preuve avant/après de la revue peut être rejouée dans un clone disposant
+de l'historique Git complet :
+
+~~~text
+python -m first_piece.review_probe --out revue-premiere-piece.json
+~~~

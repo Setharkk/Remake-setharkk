@@ -110,13 +110,17 @@ class TemporalLearningTests(unittest.TestCase):
         self.assertIsNotNone(learner.tasks[0]["feature"])
         self.assertGreaterEqual(evaluate(learner, seed=1821, n=256)["models"]["full"]["policy_success"], .95)
 
-    def test_live_and_trial_predictors_are_frozen_during_validation(self):
+    def test_trial_is_frozen_but_served_models_keep_learning(self):
         learner, world = TemporalLearner(12), TemporalWorld(7)
         train(learner, world, 256)
         self.assertEqual(learner.tasks[0]["status"], "validating")
         before = {k: learner.tasks[0][k].checkpoint() for k in ("active", "baseline", "candidate", "control")}
         train(learner, world, 64)
-        self.assertEqual(before, {k: learner.tasks[0][k].checkpoint() for k in before})
+        for name in ("candidate", "control"):
+            self.assertEqual(before[name], learner.tasks[0][name].checkpoint())
+        for name in ("active", "baseline"):
+            self.assertEqual(sum(map(sum, learner.tasks[0][name].counts)),
+                             sum(map(sum, before[name]["counts"])) + 64)
 
     def test_attempt_budget_exhaustion_keeps_learning_but_stops_new_trials(self):
         learner = TemporalLearner(90, max_attempts=2)
@@ -176,6 +180,12 @@ class TemporalResumeTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 TemporalLearner.restore(bad)
         self.assertEqual(snapshot, learner.checkpoint())
+        cyclic = copy.deepcopy(snapshot)
+        cyclic["episode"] = {"phase": "tokens", "task": 0, "mask": 7,
+                             "before": (1 << PAIRS.index((0, 1))) | (1 << PAIRS.index((1, 2))),
+                             "coin": 0, "events": 3}
+        with self.assertRaises(ValueError):
+            TemporalLearner.restore(cyclic)
         learner.receive({"kind": "token", "token": 0, "task": 0})
         impossible = learner.checkpoint()
         impossible["episode"]["before"] = 1

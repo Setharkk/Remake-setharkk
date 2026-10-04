@@ -217,7 +217,8 @@ class TemporalLearner:
         state["records"] = state["records"][-self.config["warmup"]:]
         state["losses"].append((probability - outcome) ** 2)
         state["losses"] = state["losses"][-self.config["warmup"]:]
-        if state["status"] == "validating":
+        validating = state["status"] == "validating"
+        if validating:
             trial = state["trial"]
             group = feature_route(episode["mask"], episode["before"], trial["feature"])
             trial["candidate"].append(state["candidate"].probability(action, group))
@@ -225,18 +226,21 @@ class TemporalLearner:
             trial["incumbent"].append(probability)
             trial["outcomes"].append(outcome)
             trial["groups"].append(group)
+        # The served models learn online, after their prediction was scored.
+        # Frozen candidates never receive a validation label.
+        state["active"].update(action, outcome, active_route)
+        state["baseline"].update(action, outcome, episode["coin"])
+        state["neural_updates"] += 2
+        if validating:
             if len(trial["outcomes"]) in HORIZONS:
+                # Update the old model before replacement: the deciding label
+                # does not enter the newly admitted candidate's fit.
                 self._judge(state)
-            # Active and control predictors remain frozen throughout the block.
-        else:
-            state["active"].update(action, outcome, active_route)
-            state["baseline"].update(action, outcome, episode["coin"])
-            state["neural_updates"] += 2
-            if (state["status"] != "exhausted" and state["steps"] >= state["next_trial"]
-                    and len(state["records"]) == self.config["warmup"]
-                    and len(state["losses"]) == self.config["warmup"]
-                    and math.fsum(state["losses"]) / len(state["losses"]) > .12):
-                self._start_trial(state)
+        elif (state["status"] != "exhausted" and state["steps"] >= state["next_trial"]
+                and len(state["records"]) == self.config["warmup"]
+                and len(state["losses"]) == self.config["warmup"]
+                and math.fsum(state["losses"]) / len(state["losses"]) > .12):
+            self._start_trial(state)
         self.finish_evaluation()
 
     def finish_evaluation(self):

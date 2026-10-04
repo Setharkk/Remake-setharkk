@@ -48,8 +48,10 @@ de Brier moyenne du modèle courant dépasse 0.12. Ce seuil et la fenêtre
 sont des choix heuristiques annoncés, pas une théorie universelle de dérive.
 
 Le candidat et son contrôle sont figés pendant la validation. Le modèle
-courant et son contrôle restent aussi figés : le candidat doit améliorer
-le modèle réellement utilisé durant la comparaison. Les horizons sont
+courant et son contrôle continuent leurs mises à jour après chaque résultat.
+Le score du modèle courant est enregistré avant sa mise à jour : le
+candidat est comparé aux prédictions réellement utilisées, sans connaissance
+du résultat courant. Les horizons sont
 128, 1 024 et 4 096 nouveaux résultats.
 
 Deux comparaisons doivent passer :
@@ -66,7 +68,7 @@ que la relation serait impossible ou inutile pour toujours.
 À 4 096 sans conclusion suffisante, l'essai est `inconclusive`.
 
 Après une fin d'essai, 256 interactions au minimum précèdent une nouvelle
-tentative. Le modèle courant reprend ses mises à jour. Un nouvel essai
+tentative. Le modèle courant poursuit ses mises à jour. Un nouvel essai
 emploie les données récentes et un bloc prospectif neuf. Les résultats
 du bloc qui admet un candidat ne servent pas à ajuster ce même candidat.
 
@@ -82,8 +84,10 @@ laboratoire précédent. Son interprétation change ici : elle concerne
 la moyenne des gains conditionnels dans le bloc passé, pas une assertion
 IID sur un régime futur.
 
-Soit X_i le gain de log-score entre deux modèles figés, avec la
-probabilité du résultat bornée entre epsilon et 1-epsilon.
+Soit X_i le gain de log-score entre deux prédictions produites avant
+le résultat courant, avec la probabilité du résultat bornée entre
+epsilon et 1-epsilon. Le candidat et son contrôle sont figés ; le modèle
+courant peut dépendre des résultats passés, jamais du résultat courant.
 Pour epsilon=0.01, |X_i| <= L = log(1/epsilon).
 Conditionnellement au passé précédant l'épisode i, X_i a une espérance
 mu_i. Une borne de Hoeffding-Azuma pour les différences bornées donne :
@@ -134,8 +138,9 @@ une politique et une allocation statistique distinctes.
 
 Les réseaux restent séparés par contexte. Leur conservation ne démontre
 pas une absence d'interférence dans des neurones partagés.
-Le gel peut retarder l'adaptation si le monde change durant la validation ;
-l'expérience doit publier ce délai.
+Les candidats peuvent rester inadaptés si le monde change durant leur
+validation. Le modèle servi continue à apprendre ; la sélection peut
+néanmoins retarder le remplacement d'une relation et ce délai est mesuré.
 
 La reprise conserve l'ordre partiel, les fenêtres, les modèles figés et
 les générateurs aléatoires. Le format refuse une relation cyclique,

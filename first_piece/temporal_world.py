@@ -12,7 +12,7 @@ class TemporalWorld:
         _integer(task, "task", high=7)
         if phase not in ("acquisition", "transfer") or mode not in ("structured", "noise", "action_only"):
             raise ValueError("Invalid world condition")
-        if not isinstance(pair, (tuple, list)) or tuple(pair) not in ((0, 1), (2, 3)):
+        if not isinstance(pair, (tuple, list)) or len(pair) != 2 or any(type(t) is not int for t in pair) or tuple(pair) not in ((0, 1), (2, 3)):
             raise ValueError("Unsupported target relation")
         self.seed, self.rule, self.pair = seed, rule, tuple(pair)
         self.phase, self.mode, self.task = phase, mode, task
@@ -62,7 +62,7 @@ class TemporalWorld:
             raise RuntimeError("Change the world only between episodes")
         if rule is not None:
             _integer(rule, "rule", high=1)
-        if pair is not None and (not isinstance(pair, (list, tuple)) or tuple(pair) not in ((0, 1), (2, 3))):
+        if pair is not None and (not isinstance(pair, (list, tuple)) or len(pair) != 2 or any(type(t) is not int for t in pair) or tuple(pair) not in ((0, 1), (2, 3))):
             raise ValueError("Unsupported target relation")
         if rule is not None:
             self.rule = rule

@@ -14,7 +14,7 @@ Les vrais paramètres neuronaux sont des points sur S². Le routage discret comb
 - Par contexte : au plus 256 épisodes d’ajustement par défaut et 64 pertes récentes ; aucun poids neuronal privé.
 - Jusqu’à 3 prédicats ; 8 routes et 4 actions dans les deux grandes conditions : 32 points dans le modèle, 32 dans le contrôle, soit 128 degrés de liberté intrinsèques en service, indépendamment du nombre de contextes.
 - Pendant une validation, deux banques figées supplémentaires : au plus 128 points / 256 degrés de liberté intrinsèques. Les banques en service continuent d’apprendre.
-- Recherche : au plus 96 prédicats par défaut, tous les couples et extensions des 12 meilleurs couples en triples. Budget global de 16 essais. Un XOR de trois variables peut échapper à cette recherche par faisceau.
+- Recherche : au plus 96 prédicats par défaut, tous les couples et extensions des 12 meilleurs couples et des au plus 3 couples du programme déjà admis en triples. Budget global de 16 essais. Un XOR de trois variables peut échapper à cette recherche par faisceau.
 - Ajustement des deux banques proposées sur exactement les mêmes anciennes données, quatre passages mélangés. Résumés de validation de taille fixe ; aucune conservation de toutes les interactions.
 - Les grandes mémoires binaires sont sérialisées en chaînes hexadécimales canoniques, compatibles avec JSON et JavaScript.
 
@@ -44,3 +44,11 @@ Les tests Windows et Linux portent sur les mêmes entrées et graines. Une valid
 ## Limites du protocole
 
 Alphabet discret, épisodes scellés, retours binaires, une action en vol. Ni images, ni fichiers réels, ni dialogue, ni objectifs autochoisis. L’exploration uniforme et les frontières d’épisode sont fournies. La courbure est effective dans les neurones, mais son avantage sur un modèle euclidien de même capacité reste à établir. Étendre ces bornes ne démontre pas une intelligence générale.
+
+## Révision après le premier essai (source 6855d5a)
+
+Le premier essai a passé 80 tests mais a échoué pendant la grande condition au contrôle de taille du journal. La cause était une répétition d’un examen au même horizon principal, à chaque observation du complément. Cela violait aussi l’allocation préannoncée des comparaisons. Correction : seul un nouveau retour du périmètre principal autorise un examen.
+
+Sur les trois graines de la petite condition, l’apprentissage initial réussissait mais le changement produisait un XOR de trois variables, invisible au faisceau de couples. La recherche corrigée étend aussi les couples du programme déjà admis, dans un budget fixe. Cette continuité est générique et ne donne pas au moteur la règle du monde. Elle ne résout pas la découverte initiale de n’importe quel XOR de trois variables.
+
+Les rapports partiels de cette source sont conservés comme diagnostic et ne constituent pas une validation de la décision statistique. La nouvelle version garde les mêmes tailles, horizons, tolérances et graines d’entraînement. La validation finale emploie les graines d’évaluation réservées, jamais utilisées par le premier essai interrompu.

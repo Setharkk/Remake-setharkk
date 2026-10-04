@@ -190,6 +190,44 @@ class SharedLearningTests(unittest.TestCase):
         self.assertLessEqual(metrics["allocated_points_including_trial"], 128)
         self.assertEqual(metrics["intrinsic_peak_dof"], 256)
 
+    def test_scoped_horizons_are_examined_once_despite_complement_returns(self):
+        learner, world = SharedLearner(7, max_tasks=4), ScaleWorld(1, n_contexts=4)
+        train(learner, world, 512)
+        learner.trial["scope"] = 0
+        # The data are deliberately unhelpful to the improvement comparison,
+        # but 127 principal observations have not reached a declared look.
+        for _ in range(127):
+            episode(learner, world, 0)
+        self.assertEqual(learner.trial["n"], 127)
+        episode(learner, world, 0)
+        count = len(learner.decisions)
+        for _ in range(8):
+            episode(learner, world, 1)
+        self.assertEqual(len(learner.decisions), count)
+
+    def test_extends_an_admitted_xor_when_context_drift_erases_pair_gain(self):
+        # Three-way parity has no marginal gain in any pair. Preserve and
+        # extend the already admitted pair instead of relying on label luck.
+        learner = SharedLearner(max_symbols=4, max_tasks=2, min_records=256)
+        learner.symbols = ["a", "b", "c", "d"]
+        learner._symbol_ids = {s: i for i, s in enumerate(learner.symbols)}
+        learner.tasks = {slot: {"steps": 0, "records": [], "losses": []} for slot in (0, 1)}
+        fa = 4 + pair_index(0, 1, 4)
+        fb = 4 + pair_index(2, 3, 4)
+        learner.program = [fa, fb]
+        rows = []
+        for slot in (0, 1):
+            for a in (0, 1):
+                for b in (0, 1):
+                    before = (a << pair_index(0, 1, 4)) | (b << pair_index(2, 3, 4))
+                    for action in range(4):
+                        target = (a ^ b ^ slot)
+                        rows.extend([(slot, 15, before, 0, action, int(action == target))] * 32)
+        selected = learner._search(rows)
+        self.assertIn(fa, selected)
+        self.assertIn(fb, selected)
+        self.assertTrue(any(f >= learner.context_offset for f in selected))
+
     def test_xor_is_found_without_a_handwritten_xor_predicate(self):
         learner = train(SharedLearner(91, max_tasks=2, n_actions=2), ScaleWorld(31, n_contexts=2, n_actions=2), 10000)
         world = ScaleWorld(31, n_contexts=2, n_actions=2)

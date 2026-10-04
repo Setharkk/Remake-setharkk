@@ -226,7 +226,8 @@ class SharedLearner:
         pool = contexts[:32] + relations[:max(0, self.config["pool_size"] - len(contexts[:32]) - 16)] + presences[:16]
         chosen = set(pool)
         pool += sorted((f for f in eligible if f not in chosen), key=rank)[:self.config["pool_size"] - len(pool)]
-        pool = sorted(pool)
+        retained = [feature for feature in self.program if feature in eligible]
+        pool = sorted((retained + [feature for feature in pool if feature not in retained])[:self.config["pool_size"]])
         examined = 0
 
         def score(program):
@@ -268,8 +269,12 @@ class SharedLearner:
                 pairs.append(consider(pair))
         if self.config["max_features"] >= 3:
             top_pairs = sorted(pairs, reverse=True)[:self.config["pair_beam"]]
+            # Extend admitted structure even when a new XOR removes its
+            # marginal gain. This is generic continuity, not a hidden rule.
+            retained_pairs = list(itertools.combinations([f for f in self.program if f in pool], 2))
+            pairs_to_extend = list(dict.fromkeys([pair for _, _, pair in top_pairs] + retained_pairs))
             seen = set()
-            for _, _, pair in top_pairs:
+            for pair in pairs_to_extend:
                 for feature in pool:
                     triple = tuple(sorted((*pair, feature)))
                     if feature in pair or triple in seen:
@@ -386,7 +391,9 @@ class SharedLearner:
         task["records"] = task["records"][-self.config["fit_per_context"]:]
         self.episode = idle_episode()
         if self.trial is not None:
-            self._judge()
+            # A complement event must not repeat a predeclared scoped look.
+            if self.trial["scope"] is None or e["task"] == self.trial["scope"]:
+                self._judge()
         elif self.steps >= self.next_trial and self.attempts < self.config["max_attempts"]:
             enough = sum(len(t["records"]) for t in self.tasks.values()) >= self.config["min_records"]
             if enough and len(task["losses"]) == LOSS_WINDOW and math.fsum(task["losses"]) / LOSS_WINDOW > .4 * (1 / self.config["n_actions"]) * (1 - 1 / self.config["n_actions"]):

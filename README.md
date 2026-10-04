@@ -3,7 +3,12 @@
 Projet de recherche pour un cortex neuronal courbe qui apprend des
 conséquences de ses actions et choisit des expériences.
 
-La première pièce est [Cortex Lab V0](cortex_lab_v0/README.md) : un laboratoire
+La nouvelle base est [Cortex Lab V1](cortex_lab_v1/README.md), dont tous les
+paramètres neuronaux sont des points hyperboliques appris avec un optimiseur
+riemannien. La [spécification](SPEC.md) formalise cette exigence et indique
+les capacités restant à construire.
+
+La première expérience de référence est [Cortex Lab V0](cortex_lab_v0/README.md) : un laboratoire
 de fichiers avec 72 paramètres par modèle et trois modèles pour estimer
 l'incertitude. Il compare les transitions hyperboliques et euclidiennes,
 ainsi que l'exploration active et aléatoire.

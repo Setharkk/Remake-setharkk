@@ -1,0 +1,49 @@
+name: Cortex intrinsic network
+on:
+  push:
+    paths:
+      - 'cortex_lab_v1/**'
+      - '.github/workflows/cortex-intrinsic.yml'
+  pull_request:
+    paths:
+      - 'cortex_lab_v1/**'
+      - '.github/workflows/cortex-intrinsic.yml'
+permissions:
+  contents: read
+jobs:
+  intrinsic:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: cortex_lab_v1/requirements.txt
+      - name: Install CPU PyTorch
+        run: python -m pip install -r cortex_lab_v1/requirements.txt --index-url https://download.pytorch.org/whl/cpu
+      - name: Existing shared laboratory tests
+        run: python -m unittest discover -s cortex_lab_v0/tests -v
+      - name: Intrinsic network and optimizer tests
+        run: python -m unittest discover -s cortex_lab_v1/tests -v
+      - name: Intrinsic learning diagnostic
+        id: experiment
+        run: python -m cortex_lab_v1.run --steps 200 --seeds 0 1 2 --out "${{ runner.temp }}/cortex-intrinsic"
+      - name: Upload intrinsic results
+        if: ${{ always() && (steps.experiment.outcome == 'success' || steps.experiment.outcome == 'failure') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: intrinsic-results-${{ matrix.os }}
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/cortex-intrinsic/**/config.json
+            ${{ runner.temp }}/cortex-intrinsic/**/splits.json
+            ${{ runner.temp }}/cortex-intrinsic/**/summary.json
+            ${{ runner.temp }}/cortex-intrinsic/**/metrics.csv
+            ${{ runner.temp }}/cortex-intrinsic/**/experiences.jsonl
+            ${{ runner.temp }}/cortex-intrinsic/**/weights.pt
+            ${{ runner.temp }}/cortex-intrinsic/**/replay.json

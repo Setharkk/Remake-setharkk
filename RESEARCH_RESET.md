@@ -8,6 +8,8 @@ leurs choix d'architecture ne définissent pas la nouvelle conception.
 
 Le premier travail porte sur un mécanisme d'apprentissage précis.
 Aucune nouvelle architecture n'est encore implémentée dans ce document.
+La [première pièce](FIRST_PIECE.md) précise la règle candidate d'admission
+d'une distinction et fournit le laboratoire qui permettra de l'évaluer.
 
 ## Exigences conservées
 

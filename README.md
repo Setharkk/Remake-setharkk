@@ -7,6 +7,8 @@ La conception repart d'une [nouvelle base de recherche](RESEARCH_RESET.md),
 avec les exigences de l'utilisateur et un mécanisme d'apprentissage à définir.
 Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) précise les unités,
 les horizons d'apprentissage et les limites des conclusions.
+La [première pièce](FIRST_PIECE.md) définit une mémoire qui apprend à distinguer
+et prépare son [laboratoire séquentiel](first_piece/README.md).
 
 [Cortex Lab V1](cortex_lab_v1/README.md) reste une référence expérimentale.
 Tous ses paramètres neuronaux sont des points hyperboliques appris avec un

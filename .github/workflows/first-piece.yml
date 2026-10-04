@@ -1,0 +1,36 @@
+name: First piece laboratory
+on:
+  push:
+    paths:
+      - 'first_piece/**'
+      - '.github/workflows/first-piece.yml'
+  pull_request:
+    paths:
+      - 'first_piece/**'
+      - '.github/workflows/first-piece.yml'
+permissions:
+  contents: read
+jobs:
+  laboratory:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: World, evidence and checkpoint tests
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Audit available information and noise control
+        id: audit
+        run: python -m first_piece.audit --seeds 0 1 2 3 4 --horizons 100 1000 10000 --out "${{ runner.temp }}/first-piece"
+      - name: Upload laboratory audit
+        if: ${{ always() && (steps.audit.outcome == 'success' || steps.audit.outcome == 'failure') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-piece-${{ matrix.os }}
+          if-no-files-found: error
+          path: ${{ runner.temp }}/first-piece/

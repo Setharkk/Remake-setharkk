@@ -27,6 +27,20 @@ par tâches séparées et la reprise complète du monde et de l'apprenant.
 Sa géométrie et ses opérations sont vérifiables ; sa supériorité sur une
 version euclidienne ou son originalité ne sont pas démontrées.
 
+## Cohérence entre les pièces
+
+L'[architecture commune](SYSTEM_ARCHITECTURE.md) définit des messages JSON
+versionnés pour les observations, prédictions, propositions et résultats.
+La première pièce possède un adaptateur avec une seule autorité
+d'apprentissage. Des agents simulés peuvent contribuer au même modèle ;
+les objectifs, l'essaim autonome et l'exécuteur PC restent à développer.
+
+Les contraintes du laboratoire sont annoncées par ses capacités, sans
+imposer les numéros de tâches et actions binaires aux interfaces globales.
+Le [protocole temporel suivant](FIRST_PIECE_NEXT_PROTOCOL.md) demande
+d'apprendre l'ordre puis de remplacer une règle sans nouveau contexte.
+Cette capacité n'est pas encore implémentée.
+
 ## Exigence géométrique de la référence V1
 
 La V1 donne un sens vérifiable à cette exigence :

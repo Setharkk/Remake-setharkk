@@ -37,6 +37,15 @@ class StreamingWorld:
         self._awaiting_action = False
         return outcome
 
+    def abort_episode(self):
+        """Close an unlabelled simulated episode without inventing an outcome."""
+        if self._sequence is None:
+            raise RuntimeError("No active episode to abort")
+        self._world.pending = None
+        self._sequence = None
+        self._cursor = 0
+        self._awaiting_action = False
+
     def checkpoint(self):
         return {"format": 1, "mode": self.mode, "world": self._world.checkpoint(),
                 "sequence": None if self._sequence is None else list(self._sequence),

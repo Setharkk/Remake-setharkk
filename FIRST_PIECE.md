@@ -208,6 +208,23 @@ prolonger automatiquement toute l'expérience depuis son checkpoint.
 La rétention teste des réseaux séparés par identifiant de tâche. Elle
 ne mesure pas encore l'absence d'interférence dans des neurones partagés.
 
+## Raccordement aux pièces suivantes
+
+`FirstPieceAdapter` reçoit des observations versionnées et produit des
+prédictions liées à leur événement, contexte et révision du modèle.
+Les agents proposent un candidat ; le coordinateur le lie à un exécuteur.
+Le résultat observé revient par identifiant de requête. Les doublons
+n'ajoutent pas de mise à jour et une erreur technique ne devient pas
+une étiquette négative.
+
+L'[architecture commune](SYSTEM_ARCHITECTURE.md) décrit les contrats,
+les responsabilités et les limites de reprise. L'adaptateur actuel garde
+un flux et une action en attente ; il n'exécute aucune opération réelle.
+
+Le [protocole de la prochaine révision](FIRST_PIECE_NEXT_PROTOCOL.md)
+vise l'ordre des événements puis le remplacement d'une règle dans le
+même contexte. Le masque de présence actuel ne remplit pas ce protocole.
+
 ## Exécution
 
 Python 3.11, sans dépendance supplémentaire :

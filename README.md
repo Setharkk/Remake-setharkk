@@ -13,6 +13,13 @@ Windows/Linux, les courbes à 100, 1 000 et 10 000 interactions, le transfert,
 la rétention et la reprise JSON exacte. L'apprentissage reste limité à
 une présence de symbole par tâche et aux tâches synthétiques décrites.
 
+L'[architecture commune](SYSTEM_ARCHITECTURE.md) définit les observations,
+prédictions, propositions d'agents et résultats d'actions versionnés.
+La première pièce expose cet adaptateur sans partager ses détails neuronaux.
+Le [protocole suivant](FIRST_PIECE_NEXT_PROTOCOL.md) cible l'ordre des
+événements et le remplacement d'une règle dans le même contexte ; il reste
+à implémenter.
+
 La [nouvelle base de recherche](RESEARCH_RESET.md) conserve les exigences
 du projet. Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) fixe les unités
 et la portée des conclusions.

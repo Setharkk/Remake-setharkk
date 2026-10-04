@@ -32,3 +32,24 @@ et nécessite l'historique complet du dépôt.
 
 La découverte reste limitée à une présence de symbole par tâche.
 La courbure est fixée et le contrôle porte sur cette petite architecture.
+
+## Interface commune du système
+
+L'[architecture](../SYSTEM_ARCHITECTURE.md) précise les responsabilités du
+cortex, des agents et de l'exécuteur. `FirstPieceAdapter` conserve
+l'apprenant central et expose des messages versionnés ; les agents n'ont
+pas à connaître ses tâches locales, masques ou coordonnées sphériques.
+
+~~~text
+python -m first_piece.integration_probe --out integration.json
+~~~
+
+Cette sonde vérifie deux agents simulés sur le même contexte, la parité
+avec le modèle direct, la reprise avec une action en attente et
+l'absence d'apprentissage supplémentaire lors d'un résultat répété.
+Elle n'agit sur aucune application du PC.
+
+La [prochaine expérience](../FIRST_PIECE_NEXT_PROTOCOL.md), encore à
+implémenter, doit apprendre l'ordre puis une règle modifiée dans le même
+contexte. Un checkpoint de présence ne permet pas de reconstruire l'ordre
+qu'il n'avait pas enregistré : la migration devra être explicite.

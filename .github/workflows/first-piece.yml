@@ -3,10 +3,12 @@ on:
   push:
     paths:
       - 'first_piece/**'
+      - 'setharkk/**'
       - '.github/workflows/first-piece.yml'
   pull_request:
     paths:
       - 'first_piece/**'
+      - 'setharkk/**'
       - '.github/workflows/first-piece.yml'
 permissions:
   contents: read
@@ -26,6 +28,15 @@ jobs:
           python-version: '3.11'
       - name: World, evidence and checkpoint tests
         run: python -m unittest discover -s first_piece/tests -v
+      - name: Shared cortex and agents integration probe
+        run: python -m first_piece.integration_probe --out "${{ runner.temp }}/first-piece-integration.json"
+      - name: Upload integration evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-piece-integration-${{ matrix.os }}
+          if-no-files-found: warn
+          path: ${{ runner.temp }}/first-piece-integration.json
       - name: Reproduce first-piece review before and after correction
         run: python -m first_piece.review_probe --out "${{ runner.temp }}/first-piece-review.json"
       - name: Upload first-piece review evidence

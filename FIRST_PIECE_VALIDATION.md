@@ -91,3 +91,8 @@ objectifs autonomes, le dialogue et les agents restent à construire.
 La [définition de la première pièce](FIRST_PIECE.md) décrit la règle candidate.
 Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) fixe le cadre des futures
 conclusions d'apprentissage et de durée.
+
+La [revue ultérieure de la première pièce](CODE_REVIEW_FIRST_PIECE.md)
+corrige la borne à deux queues, les calculs extrêmes et la conservation
+des horizons après interruption. Elle publie les 20 tests et le nouvel
+audit ; les chiffres ci-dessus restent ceux de la validation initiale.

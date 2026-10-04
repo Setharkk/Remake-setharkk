@@ -1,0 +1,80 @@
+{
+  "job_id": 111429242366,
+  "results": {
+    "reviewed_commit": "c929d0d0ea534c6d7f4d37cd5b432c450128c9ed",
+    "corrected_commit": "ccbf2d723de3a901259e7586f2e442e94a7ea0b7",
+    "before": {
+      "both_tails_share_alpha": {
+        "passed": false,
+        "family_hoeffding_error_bound": 0.10000000000000026,
+        "required_maximum": 0.05
+      },
+      "tiny_alpha_finite_bound": {
+        "passed": false,
+        "uncertainty_bound": "inf"
+      },
+      "tiny_epsilon_finite_bound": {
+        "passed": false,
+        "uncertainty_bound": "inf"
+      },
+      "large_comparison_budget_finite_bound": {
+        "passed": false,
+        "exception": "OverflowError"
+      },
+      "wrong_endpoints_have_finite_score": {
+        "passed": false,
+        "exception": "ValueError"
+      },
+      "overflowing_cost_is_rejected": {
+        "passed": false,
+        "complexity_cost": "inf"
+      },
+      "interruption_preserves_horizon_100": {
+        "passed": false,
+        "progress_file_exists": false,
+        "preserved_horizons": [],
+        "observations_written": 125
+      }
+    },
+    "after": {
+      "both_tails_share_alpha": {
+        "passed": true,
+        "family_hoeffding_error_bound": 0.05000000000000048,
+        "required_maximum": 0.05
+      },
+      "tiny_alpha_finite_bound": {
+        "passed": true,
+        "uncertainty_bound": 17.49240153221745
+      },
+      "tiny_epsilon_finite_bound": {
+        "passed": true,
+        "uncertainty_bound": 328.60666103944817
+      },
+      "large_comparison_budget_finite_bound": {
+        "passed": true,
+        "uncertainty_bound": 19.804619025897754
+      },
+      "wrong_endpoints_have_finite_score": {
+        "passed": true,
+        "mean_log_score_gain": -45.35855467932097
+      },
+      "overflowing_cost_is_rejected": {
+        "passed": true,
+        "exception": "ValueError"
+      },
+      "interruption_preserves_horizon_100": {
+        "passed": true,
+        "progress_file_exists": true,
+        "preserved_horizons": [
+          100
+        ],
+        "observations_written": 125
+      }
+    },
+    "remaining_methodological_limit": {
+      "decision_with_irrelevant_groups": "accept",
+      "meaning": "Predictive gain alone does not prove that the proposed grouping is necessary",
+      "resolution": "Requires a fitted no-distinction control with the same inputs and training budget"
+    }
+  }
+}

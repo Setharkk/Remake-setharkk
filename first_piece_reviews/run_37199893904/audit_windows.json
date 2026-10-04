@@ -1,0 +1,1292 @@
+{
+  "source_commit": "ccbf2d723de3a901259e7586f2e442e94a7ea0b7",
+  "workflow_run_id": 37199893904,
+  "job_id": 111429242366,
+  "results": {
+    "audit_format": 2,
+    "scope": "Environment validation; oracle and constant predictors are controls, not learned results",
+    "learner_implemented": false,
+    "conditions": [
+      {
+        "seed": 0,
+        "phase": "acquisition",
+        "noise": false,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 91,
+            "elapsed_seconds": 0.003388900000004469,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              53,
+              47
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -1.4369461297416084,
+            "gain_upper": 2.803139819154496,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 733,
+            "elapsed_seconds": 0.02233649999999443,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 1000,
+            "group_counts": [
+              508,
+              492
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": 0.012680391037043992,
+            "gain_upper": 1.3535132983758436,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 3799,
+            "elapsed_seconds": 0.1392031999999972,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5063,
+              4937
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": 0.47109254726163863,
+            "gain_upper": 0.895101142151249,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 0,
+        "phase": "acquisition",
+        "noise": true,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 91,
+            "elapsed_seconds": 0.0031836999999939053,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.54,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              53,
+              47
+            ],
+            "mean_log_score_gain": -1.4306582863554673,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -3.5507012608035193,
+            "gain_upper": 0.6893846880925849,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 733,
+            "elapsed_seconds": 0.01987230000000295,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.483,
+            "decision": "reject",
+            "validation_interactions": 1000,
+            "group_counts": [
+              508,
+              492
+            ],
+            "mean_log_score_gain": -1.692580117813139,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": -2.362996571482539,
+            "gain_upper": -1.022163664143739,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 3799,
+            "elapsed_seconds": 0.1446574999999939,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.4944,
+            "decision": "reject",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5063,
+              4937
+            ],
+            "mean_log_score_gain": -1.6401957515216048,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": -1.85220004896641,
+            "gain_upper": -1.4281914540767995,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 0,
+        "phase": "transfer",
+        "noise": false,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 100,
+            "elapsed_seconds": 0.003937900000011041,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              50,
+              50
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -1.4369461297416084,
+            "gain_upper": 2.803139819154496,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 1000,
+            "elapsed_seconds": 0.024596800000011854,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 1000,
+            "group_counts": [
+              510,
+              490
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": 0.012680391037043992,
+            "gain_upper": 1.3535132983758436,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 10000,
+            "elapsed_seconds": 0.21534590000001685,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5015,
+              4985
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": 0.47109254726163863,
+            "gain_upper": 0.895101142151249,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 0,
+        "phase": "transfer",
+        "noise": true,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 100,
+            "elapsed_seconds": 0.00393390000002114,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.41,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              50,
+              50
+            ],
+            "mean_log_score_gain": -2.0280238668729638,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -4.148066841321016,
+            "gain_upper": 0.09201910757508847,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 1000,
+            "elapsed_seconds": 0.02450120000000311,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.505,
+            "decision": "reject",
+            "validation_interactions": 1000,
+            "group_counts": [
+              510,
+              490
+            ],
+            "mean_log_score_gain": -1.5914874811101778,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": -2.2619039347795775,
+            "gain_upper": -0.921071027440778,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 10000,
+            "elapsed_seconds": 0.22887880000001815,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.5046,
+            "decision": "reject",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5015,
+              4985
+            ],
+            "mean_log_score_gain": -1.5933255290502317,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": -1.805329826495037,
+            "gain_upper": -1.3813212316054264,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 1,
+        "phase": "acquisition",
+        "noise": false,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 93,
+            "elapsed_seconds": 0.0030773000000010597,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              46,
+              54
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -1.4369461297416084,
+            "gain_upper": 2.803139819154496,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 720,
+            "elapsed_seconds": 0.01632680000000164,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 1000,
+            "group_counts": [
+              477,
+              523
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": 0.012680391037043992,
+            "gain_upper": 1.3535132983758436,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 3841,
+            "elapsed_seconds": 0.12745029999999247,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 10000,
+            "group_counts": [
+              4974,
+              5026
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": 0.47109254726163863,
+            "gain_upper": 0.895101142151249,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 1,
+        "phase": "acquisition",
+        "noise": true,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 93,
+            "elapsed_seconds": 0.0038230999999768756,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.51,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              46,
+              54
+            ],
+            "mean_log_score_gain": -1.568511881859505,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -3.688554856307557,
+            "gain_upper": 0.5515310925885473,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 720,
+            "elapsed_seconds": 0.01858479999998508,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.507,
+            "decision": "reject",
+            "validation_interactions": 1000,
+            "group_counts": [
+              477,
+              523
+            ],
+            "mean_log_score_gain": -1.5822972414099088,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": -2.2527136950793087,
+            "gain_upper": -0.911880787740509,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 3841,
+            "elapsed_seconds": 0.15532509999999888,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.5093,
+            "decision": "reject",
+            "validation_interactions": 10000,
+            "group_counts": [
+              4974,
+              5026
+            ],
+            "mean_log_score_gain": -1.5717284657545991,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": -1.7837327631994044,
+            "gain_upper": -1.3597241683097938,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 1,
+        "phase": "transfer",
+        "noise": false,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 100,
+            "elapsed_seconds": 0.005794600000001537,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              51,
+              49
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -1.4369461297416084,
+            "gain_upper": 2.803139819154496,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 1000,
+            "elapsed_seconds": 0.03604999999998881,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 1000,
+            "group_counts": [
+              499,
+              501
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": 0.012680391037043992,
+            "gain_upper": 1.3535132983758436,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 10000,
+            "elapsed_seconds": 0.23533480000000395,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5013,
+              4987
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": 0.47109254726163863,
+            "gain_upper": 0.895101142151249,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 1,
+        "phase": "transfer",
+        "noise": true,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 100,
+            "elapsed_seconds": 0.004994900000014013,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.54,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              51,
+              49
+            ],
+            "mean_log_score_gain": -1.4306582863554673,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -3.5507012608035193,
+            "gain_upper": 0.6893846880925849,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 1000,
+            "elapsed_seconds": 0.027680600000024924,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.507,
+            "decision": "reject",
+            "validation_interactions": 1000,
+            "group_counts": [
+              499,
+              501
+            ],
+            "mean_log_score_gain": -1.5822972414099088,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": -2.2527136950793087,
+            "gain_upper": -0.911880787740509,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 10000,
+            "elapsed_seconds": 0.23328320000001668,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.4992,
+            "decision": "reject",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5013,
+              4987
+            ],
+            "mean_log_score_gain": -1.6181391762409585,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": -1.8301434736857638,
+            "gain_upper": -1.4061348787961532,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 2,
+        "phase": "acquisition",
+        "noise": false,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 95,
+            "elapsed_seconds": 0.004782500000004575,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              57,
+              43
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -1.4369461297416084,
+            "gain_upper": 2.803139819154496,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 741,
+            "elapsed_seconds": 0.018907600000005687,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 1000,
+            "group_counts": [
+              501,
+              499
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": 0.012680391037043992,
+            "gain_upper": 1.3535132983758436,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 3943,
+            "elapsed_seconds": 0.1432884000000172,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5004,
+              4996
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": 0.47109254726163863,
+            "gain_upper": 0.895101142151249,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 2,
+        "phase": "acquisition",
+        "noise": true,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 95,
+            "elapsed_seconds": 0.003955700000005891,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.46,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              57,
+              43
+            ],
+            "mean_log_score_gain": -1.7982678743662346,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -3.918310848814287,
+            "gain_upper": 0.32177510008181764,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 741,
+            "elapsed_seconds": 0.019466499999992948,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.492,
+            "decision": "reject",
+            "validation_interactions": 1000,
+            "group_counts": [
+              501,
+              499
+            ],
+            "mean_log_score_gain": -1.6512240391619275,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": -2.3216404928313272,
+            "gain_upper": -0.9808075854925277,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 3943,
+            "elapsed_seconds": 0.14588369999998463,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.5057,
+            "decision": "reject",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5004,
+              4996
+            ],
+            "mean_log_score_gain": -1.5882708972150836,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": -1.800275194659889,
+            "gain_upper": -1.3762665997702783,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 2,
+        "phase": "transfer",
+        "noise": false,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 100,
+            "elapsed_seconds": 0.004122200000011844,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              50,
+              50
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -1.4369461297416084,
+            "gain_upper": 2.803139819154496,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 1000,
+            "elapsed_seconds": 0.025892200000015464,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 1000,
+            "group_counts": [
+              485,
+              515
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": 0.012680391037043992,
+            "gain_upper": 1.3535132983758436,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 10000,
+            "elapsed_seconds": 0.2527177999999992,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 10000,
+            "group_counts": [
+              4991,
+              5009
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": 0.47109254726163863,
+            "gain_upper": 0.895101142151249,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 2,
+        "phase": "transfer",
+        "noise": true,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 100,
+            "elapsed_seconds": 0.006088400000010097,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.49,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              50,
+              50
+            ],
+            "mean_log_score_gain": -1.6604142788621967,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -3.780457253310249,
+            "gain_upper": 0.4596286955858555,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 1000,
+            "elapsed_seconds": 0.04225170000000844,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.474,
+            "decision": "reject",
+            "validation_interactions": 1000,
+            "group_counts": [
+              485,
+              515
+            ],
+            "mean_log_score_gain": -1.73393619646435,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": -2.4043526501337498,
+            "gain_upper": -1.0635197427949503,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 10000,
+            "elapsed_seconds": 0.29901369999998906,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.4888,
+            "decision": "reject",
+            "validation_interactions": 10000,
+            "group_counts": [
+              4991,
+              5009
+            ],
+            "mean_log_score_gain": -1.6659284226823583,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": -1.8779327201271636,
+            "gain_upper": -1.453924125237553,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 3,
+        "phase": "acquisition",
+        "noise": false,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 94,
+            "elapsed_seconds": 0.006113799999980074,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              45,
+              55
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -1.4369461297416084,
+            "gain_upper": 2.803139819154496,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 753,
+            "elapsed_seconds": 0.02959919999997851,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 1000,
+            "group_counts": [
+              485,
+              515
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": 0.012680391037043992,
+            "gain_upper": 1.3535132983758436,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 3919,
+            "elapsed_seconds": 0.15958469999998215,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5103,
+              4897
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": 0.47109254726163863,
+            "gain_upper": 0.895101142151249,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 3,
+        "phase": "acquisition",
+        "noise": true,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 94,
+            "elapsed_seconds": 0.003558400000002848,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.49,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              45,
+              55
+            ],
+            "mean_log_score_gain": -1.6604142788621967,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -3.780457253310249,
+            "gain_upper": 0.4596286955858555,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 753,
+            "elapsed_seconds": 0.01678369999999063,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.49,
+            "decision": "reject",
+            "validation_interactions": 1000,
+            "group_counts": [
+              485,
+              515
+            ],
+            "mean_log_score_gain": -1.6604142788621967,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": -2.3308307325315964,
+            "gain_upper": -0.9899978251927969,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 3919,
+            "elapsed_seconds": 0.13603100000000268,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.5012,
+            "decision": "reject",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5103,
+              4897
+            ],
+            "mean_log_score_gain": -1.6089489365406893,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": -1.8209532339854946,
+            "gain_upper": -1.396944639095884,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 3,
+        "phase": "transfer",
+        "noise": false,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 100,
+            "elapsed_seconds": 0.003940499999998792,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              46,
+              54
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -1.4369461297416084,
+            "gain_upper": 2.803139819154496,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 1000,
+            "elapsed_seconds": 0.025253699999979062,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 1000,
+            "group_counts": [
+              501,
+              499
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": 0.012680391037043992,
+            "gain_upper": 1.3535132983758436,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 10000,
+            "elapsed_seconds": 0.23621439999999438,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5007,
+              4993
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": 0.47109254726163863,
+            "gain_upper": 0.895101142151249,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 3,
+        "phase": "transfer",
+        "noise": true,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 100,
+            "elapsed_seconds": 0.003917300000011892,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.46,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              46,
+              54
+            ],
+            "mean_log_score_gain": -1.7982678743662346,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -3.918310848814287,
+            "gain_upper": 0.32177510008181764,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 1000,
+            "elapsed_seconds": 0.02451620000002208,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.51,
+            "decision": "reject",
+            "validation_interactions": 1000,
+            "group_counts": [
+              501,
+              499
+            ],
+            "mean_log_score_gain": -1.568511881859505,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": -2.2389283355289047,
+            "gain_upper": -0.8980954281901051,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 10000,
+            "elapsed_seconds": 0.22087050000001796,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.5052,
+            "decision": "reject",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5007,
+              4993
+            ],
+            "mean_log_score_gain": -1.5905684571401508,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": -1.8025727545849561,
+            "gain_upper": -1.3785641596953455,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 4,
+        "phase": "acquisition",
+        "noise": false,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 94,
+            "elapsed_seconds": 0.0031111000000123568,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              48,
+              52
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -1.4369461297416084,
+            "gain_upper": 2.803139819154496,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 730,
+            "elapsed_seconds": 0.016309500000005528,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 1000,
+            "group_counts": [
+              497,
+              503
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": 0.012680391037043992,
+            "gain_upper": 1.3535132983758436,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 3850,
+            "elapsed_seconds": 0.13080630000001747,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5091,
+              4909
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": 0.47109254726163863,
+            "gain_upper": 0.895101142151249,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 4,
+        "phase": "acquisition",
+        "noise": true,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 94,
+            "elapsed_seconds": 0.0031918999999902553,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.55,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              48,
+              52
+            ],
+            "mean_log_score_gain": -1.3847070878541214,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -3.5047500623021737,
+            "gain_upper": 0.7353358865939308,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 730,
+            "elapsed_seconds": 0.016476900000014894,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.482,
+            "decision": "reject",
+            "validation_interactions": 1000,
+            "group_counts": [
+              497,
+              503
+            ],
+            "mean_log_score_gain": -1.6971752376632734,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": -2.3675916913326733,
+            "gain_upper": -1.0267587839938734,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 3850,
+            "elapsed_seconds": 0.12957030000001168,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.4978,
+            "decision": "reject",
+            "validation_interactions": 10000,
+            "group_counts": [
+              5091,
+              4909
+            ],
+            "mean_log_score_gain": -1.6245723440311468,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": -1.8365766414759521,
+            "gain_upper": -1.4125680465863415,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 4,
+        "phase": "transfer",
+        "noise": false,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 100,
+            "elapsed_seconds": 0.0040538999999739644,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              56,
+              44
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -1.4369461297416084,
+            "gain_upper": 2.803139819154496,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 1000,
+            "elapsed_seconds": 0.027077499999990096,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 1000,
+            "group_counts": [
+              518,
+              482
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": 0.012680391037043992,
+            "gain_upper": 1.3535132983758436,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 10000,
+            "elapsed_seconds": 0.233006099999983,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 1,
+            "decision": "accept",
+            "validation_interactions": 10000,
+            "group_counts": [
+              4994,
+              5006
+            ],
+            "mean_log_score_gain": 0.6830968447064438,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": 0.47109254726163863,
+            "gain_upper": 0.895101142151249,
+            "complexity_cost": 0.01
+          }
+        ]
+      },
+      {
+        "seed": 4,
+        "phase": "transfer",
+        "noise": true,
+        "checkpoints": [
+          {
+            "interactions": 100,
+            "distinct_histories": 100,
+            "elapsed_seconds": 0.0041511000000014064,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.43,
+            "decision": "pending_evidence",
+            "validation_interactions": 100,
+            "group_counts": [
+              56,
+              44
+            ],
+            "mean_log_score_gain": -1.9361214698702722,
+            "uncertainty_bound": 2.1200429744480522,
+            "gain_lower": -4.056164444318324,
+            "gain_upper": 0.18392150457778,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 1000,
+            "distinct_histories": 1000,
+            "elapsed_seconds": 0.025894499999992604,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.503,
+            "decision": "reject",
+            "validation_interactions": 1000,
+            "group_counts": [
+              518,
+              482
+            ],
+            "mean_log_score_gain": -1.600677720810447,
+            "uncertainty_bound": 0.6704164536693998,
+            "gain_lower": -2.2710941744798467,
+            "gain_upper": -0.9302612671410472,
+            "complexity_cost": 0.01
+          },
+          {
+            "interactions": 10000,
+            "distinct_histories": 10000,
+            "elapsed_seconds": 0.23364619999998126,
+            "constant_predictor_brier": 0.25,
+            "constant_predictor_nll": 0.6931471805599453,
+            "oracle_accuracy": 0.5017,
+            "decision": "reject",
+            "validation_interactions": 10000,
+            "group_counts": [
+              4994,
+              5006
+            ],
+            "mean_log_score_gain": -1.606651376615622,
+            "uncertainty_bound": 0.21200429744480523,
+            "gain_lower": -1.8186556740604274,
+            "gain_upper": -1.3946470791708168,
+            "complexity_cost": 0.01
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -158,6 +158,12 @@ La [validation Windows/Linux](FIRST_PIECE_VALIDATION.md) conserve les résultats
 des 14 tests par système et de l'audit aux trois horizons. Ces résultats
 portent sur le laboratoire et un oracle figé, sans apprenant entraîné.
 
+La [revue de code](CODE_REVIEW_FIRST_PIECE.md) corrige la couverture des deux
+queues statistiques, les cas numériques extrêmes et la perte des horizons
+lors d'une interruption. Elle publie 20 tests par système et les preuves
+avant/après. L'historique est fourni en une fois : ce laboratoire ne teste
+pas encore une mémoire interne alimentée événement par événement.
+
 ## Question de recherche suivante
 
 Comment construire une distinction qui explique une erreur répétée,

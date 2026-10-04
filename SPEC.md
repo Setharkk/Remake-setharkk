@@ -63,6 +63,8 @@ La bibliothèque de prédicats, les frontières d’épisode et l’exploration
 uniforme sont fournies. La continuité du programme admis est un biais
 explicite, pas une preuve de découverte d’une logique entièrement nouvelle.
 
+La [revue actuelle](CODE_REVIEW_CURRENT.md) confirme des écarts de fonctionnement : les réglages par défaut n’atteignent pas le seuil de recherche avec un seul contexte, une validation peut attendre sans borne, et le score du modèle servi est incohérent en apprentissage avec `use_structure=False`. Certaines contradictions de reprise sont acceptées. Ces défauts sont reproduits et restent à corriger ; la réussite des benchmarks ne vaut pas validation de toutes les configurations.
+
 ## Exigence géométrique de la référence V1
 
 La V1 donne un sens vérifiable à cette exigence :

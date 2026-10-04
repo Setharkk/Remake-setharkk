@@ -1,0 +1,115 @@
+{
+  "numeric_values_compared": 67,
+  "max_absolute_numeric_difference": 1.4432899320127035e-15,
+  "categorical_mismatches": [],
+  "source_hashes_identical": true,
+  "tolerance": 1e-10,
+  "excluded_fields": [
+    "elapsed_seconds",
+    "platform",
+    "python"
+  ],
+  "run_id": 37217750954,
+  "reviewed_source": "0b19465aa6be9aacf291b077cdc69f1b4e44580f",
+  "diagnostic_commit": "9f010f673425645c22edacdcd6189761555d49a7",
+  "tests_passed_per_platform": 85,
+  "diagnostic_cases_reproduced_or_positive_controls_passed_per_platform": 10,
+  "note": "Success means defects/limits reproduced or positive controls passed; engine is not corrected. Hashes are normalized UTF-8 text with universal newlines. Both runs assert Git diff of first_piece and setharkk against reviewed source is empty.",
+  "scope": {
+    "python_files_reviewed": [
+      "first_piece/__init__.py",
+      "first_piece/adapter.py",
+      "first_piece/audit.py",
+      "first_piece/criterion.py",
+      "first_piece/integration_probe.py",
+      "first_piece/learner.py",
+      "first_piece/learning_run.py",
+      "first_piece/review_probe.py",
+      "first_piece/scale_run.py",
+      "first_piece/scale_world.py",
+      "first_piece/shared.py",
+      "first_piece/shared_adapter.py",
+      "first_piece/spherical.py",
+      "first_piece/streaming.py",
+      "first_piece/temporal.py",
+      "first_piece/temporal_adapter.py",
+      "first_piece/temporal_run.py",
+      "first_piece/temporal_world.py",
+      "first_piece/tests/test_adapter.py",
+      "first_piece/tests/test_contracts.py",
+      "first_piece/tests/test_learning.py",
+      "first_piece/tests/test_piece.py",
+      "first_piece/tests/test_review.py",
+      "first_piece/tests/test_shared.py",
+      "first_piece/tests/test_temporal.py",
+      "first_piece/world.py",
+      "setharkk/__init__.py",
+      "setharkk/contracts.py",
+      "validation/scale_final_probe.py",
+      "validation/temporal_final_probe.py"
+    ],
+    "workflows_reviewed": [
+      ".github/workflows/first-piece.yml",
+      ".github/workflows/scale.yml",
+      ".github/workflows/scale-final.yml",
+      ".github/workflows/temporal-final.yml"
+    ],
+    "reference_archives_not_newly_audited": [
+      "cortex_lab_v0",
+      "cortex_lab_v1"
+    ]
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P1",
+      "case": "single_context"
+    },
+    {
+      "id": "F2",
+      "priority": "P1",
+      "case": "disappearing_scope"
+    },
+    {
+      "id": "F3",
+      "priority": "P2",
+      "cases": [
+        "shared_ablation",
+        "temporal_ablation"
+      ]
+    },
+    {
+      "id": "F4",
+      "priority": "P2",
+      "case": "inconsistent_restore"
+    },
+    {
+      "id": "F5",
+      "priority": "P2",
+      "case": "accepted_antipode"
+    },
+    {
+      "id": "F6",
+      "priority": "P3",
+      "case": "oversized_seed"
+    }
+  ],
+  "measured_design_limits": [
+    {
+      "id": "L1",
+      "case": "exhausted_budget"
+    },
+    {
+      "id": "L2",
+      "case": "aging"
+    }
+  ],
+  "policy_evaluation_input_seed": "71000000 + fixture seed; distinct from training RNG",
+  "initial_diagnostic": {
+    "commit": "4acac03b452dc9a6de16e7a29978159bc8ee35c2",
+    "run_id": 37217068378,
+    "scope": "Initial pilot; evaluation reused fixture input seed and local hashes used raw bytes. Not pooled with final diagnostic.",
+    "windows": "initial_windows.json",
+    "linux": "initial_linux.json"
+  }
+}

@@ -2,6 +2,8 @@
 
 Cette version élargit la première pièce sans lui ajouter d’essaim, de dialogue ou d’exécuteur réel. Elle reste un laboratoire synthétique. Le [protocole](SCALING_PROTOCOL.md) fixe les budgets, les horizons et les conditions ; le [rapport](FIRST_PIECE_SCALE_RESULTS.md) publie les résultats et les limites.
 
+La [revue actuelle](CODE_REVIEW_CURRENT.md) reproduit les défauts de fonctionnement encore ouverts, notamment le seuil de collecte par défaut avec un seul contexte et la validation d’un contexte qui disparaît. Les résultats du benchmark restent limités à leurs configurations annoncées ; la disponibilité générale de la recherche et les invariants de reprise doivent être corrigés avant le coordinateur.
+
 ## Ce qui change
 
 La version temporelle conserve un modèle par contexte et sélectionne une seule relation parmi dix symboles fixes. La version partagée conserve **une seule banque neuronale pour tous les contextes**, reçoit des symboles opaques liés dynamiquement et sélectionne des combinaisons d’au plus trois relations.

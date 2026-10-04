@@ -25,3 +25,8 @@ La [révision du code](CODE_REVIEW.md) détaille les défauts corrigés, les
 La [deuxième revue](CODE_REVIEW_2.md) corrige les instantanés de poids,
 l'initialisation aléatoire et les métriques lors d'une interruption.
 Ses 21 tests et la comparaison complète passent sur Windows et Linux.
+
+Le [benchmark sur 20 graines](BENCHMARK_RESULTS_20_SEEDS.md) publie les
+courbes, les comparaisons et les échecs. L'apprentissage progresse dans ce
+laboratoire, mais la sélection active reste moins efficace en moyenne que
+le hasard et plusieurs conditions régressent après 100 expériences.

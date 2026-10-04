@@ -18,3 +18,6 @@ limites se trouvent dans le README du laboratoire.
 
 Le [premier essai mesuré](EXPERIMENT_RESULTS.md) conserve les résultats de
 la comparaison exécutée sous Windows et Linux, ainsi que ses limites.
+
+La [révision du code](CODE_REVIEW.md) détaille les défauts corrigés, les
+17 tests réussis sur Windows et Linux et les mesures du protocole version 2.

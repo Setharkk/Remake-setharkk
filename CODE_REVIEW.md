@@ -46,7 +46,35 @@ de mises à jour, les traces et l'exclusion des couples réservés de
 l'apprentissage. Il force la branche active pour la vérifier ; le run
 comparatif CI utilise ensuite le tirage aléatoire normal.
 
-Les contrôles Python sont exécutés par GitHub Actions sur Windows et Linux.
+Les **17 tests passent sur Windows et Linux**. La comparaison de
+200 expériences par condition, graine 0, passe aussi sur les deux systèmes.
+
+Code vérifié : f8a0b331b415e4764c9f1e1a88ca1ffb65e48302.
+[Exécution et journaux CI](https://github.com/Setharkk/Remake-setharkk/actions/runs/37164311617).
+
+| Géométrie | Exploration | Brier final |
+|---|---|---:|
+| Hyperbolique | Active | 0.183795 |
+| Hyperbolique | Aléatoire | 0.213789 |
+| Euclidienne | Active | 0.238497 |
+| Euclidienne | Aléatoire | 0.200433 |
+
+Windows et Linux concordent à la précision présentée. Le Brier uniforme
+est 0.25 ; celui de l'état inchangé avec succès à 0.5 est 0.21875 sur les
+huit cas réservés de cette graine. La condition euclidienne active fait
+moins bien que cette seconde référence. La sélection active fait mieux
+que le hasard en hyperbolique et moins bien en euclidien sur cet essai :
+aucun avantage général n'est établi.
+
+Les changements de démarrage modifient les données observées. Ces nombres
+ne permettent donc pas d'attribuer une variation de performance aux seules
+corrections numériques par comparaison avec la première version.
+
+Les archives incluent désormais splits.json :
+[Windows](https://github.com/Setharkk/Remake-setharkk/actions/runs/37164311617/artifacts/11289360512)
+et [Linux](https://github.com/Setharkk/Remake-setharkk/actions/runs/37164311617/artifacts/11288886558).
+Ces fichiers ont la durée de conservation configurée dans GitHub Actions.
+
 Les métriques de la première version restent dans EXPERIMENT_RESULTS.md :
 elles ne constituent pas les résultats de cette version corrigée.
 

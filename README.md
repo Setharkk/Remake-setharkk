@@ -22,5 +22,6 @@ la comparaison exécutée sous Windows et Linux, ainsi que ses limites.
 La [révision du code](CODE_REVIEW.md) détaille les défauts corrigés, les
 17 tests réussis sur Windows et Linux et les mesures du protocole version 2.
 
-La [deuxième revue](CODE_REVIEW_2.md) vérifie les instantanés de poids,
+La [deuxième revue](CODE_REVIEW_2.md) corrige les instantanés de poids,
 l'initialisation aléatoire et les métriques lors d'une interruption.
+Ses 21 tests et la comparaison complète passent sur Windows et Linux.

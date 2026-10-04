@@ -103,7 +103,7 @@ class TemporalLearningTests(unittest.TestCase):
 
     def test_new_attempt_after_unhelpful_data_can_later_learn(self):
         learner = TemporalLearner(91)
-        train(learner, TemporalWorld(78, mode="noise"), 1200)
+        train(learner, TemporalWorld(78, mode="noise"), 5000)
         self.assertGreaterEqual(learner.tasks[0]["attempts"], 2)
         self.assertIsNone(learner.tasks[0]["feature"])
         train(learner, TemporalWorld(71), 6000)

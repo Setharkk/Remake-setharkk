@@ -327,6 +327,11 @@ class TemporalLearner:
                             value = values.get(key)
                             if type(value) not in (int, float) or not math.isfinite(value):
                                 raise ValueError("Invalid comparison statistic")
+            accepted = [entry for entry in state["decisions"] if entry["decision"] == "accept"]
+            if len(accepted) != state["admissions"] or (accepted and accepted[-1]["feature"] != state["feature"]):
+                raise ValueError("Accepted relation and decision lineage differ")
+            if state["status"] == "tracking" and state["attempts"] == instance.config["max_attempts"]:
+                raise ValueError("Attempt budget exhausted without closing search")
             trial = state["trial"]
             validating = state["status"] == "validating"
             if validating != (trial is not None) or validating != (state["candidate"] is not None and state["control"] is not None):

@@ -1,0 +1,94 @@
+{
+  "reviewed_commit": "af6022eb8f60e8e6113329880b107e0f60267bf2",
+  "diagnostic_commit": "acdded30c84ff7cade928e3b8b03ad9729ecf1c7",
+  "github_actions_run_id": 37168726957,
+  "job_id": 111337088460,
+  "platform": "windows",
+  "existing_tests_passed": {
+    "shared": 25,
+    "intrinsic": 10
+  },
+  "note": "Successful probe execution reports reproduced defects; it does not mean they are fixed.",
+  "diagnostics": {
+    "reviewed_commit": "af6022eb8f60e8e6113329880b107e0f60267bf2",
+    "input_validation": {
+      "negative_state_bit": {
+        "accepted": true,
+        "identical_prediction_to_reference": true,
+        "maximum_prediction_difference": 0
+      },
+      "negative_action": {
+        "accepted": true,
+        "identical_prediction_to_reference": true,
+        "maximum_prediction_difference": 0
+      },
+      "fractional_state_bit": {
+        "accepted": true,
+        "identical_prediction_to_reference": true,
+        "maximum_prediction_difference": 0
+      },
+      "fractional_action": {
+        "accepted": true,
+        "identical_prediction_to_reference": true,
+        "maximum_prediction_difference": 0
+      },
+      "target_outside_binary_range": {
+        "accepted_and_trained": true,
+        "optimizer_updates": 1,
+        "stored_result": [
+          1,
+          0,
+          0,
+          2
+        ],
+        "loss": 1.348826914248905
+      }
+    },
+    "interruption": {
+      "injected_interruption_observed": true,
+      "completed_interactions": 4,
+      "weights_file_exists": false,
+      "replay_file_exists": false,
+      "metrics_rows_preserved": 1
+    },
+    "weight_only_continuation": {
+      "checkpoint_keys": [
+        "format_version",
+        "architecture",
+        "dimension",
+        "points_per_model",
+        "intrinsic_degrees_of_freedom_per_model",
+        "stored_scalars_per_model",
+        "models"
+      ],
+      "predictions_identical_before_continuation": true,
+      "same_constructor_seed": true,
+      "replay_manually_reconstructed": true,
+      "predictions_identical_after_one_update": false,
+      "maximum_prediction_difference_after_one_update": 0.07613520505617954,
+      "original_update_count": 41,
+      "restored_update_count": 1
+    },
+    "dependency_trigger_coverage": {
+      "intrinsic_push_filters": [
+        "cortex_lab_v1/**",
+        ".github/workflows/cortex-intrinsic.yml"
+      ],
+      "shared_dependencies": [
+        {
+          "path": "cortex_lab_v0/core.py",
+          "triggers_intrinsic_workflow": false
+        },
+        {
+          "path": "cortex_lab_v0/run.py",
+          "triggers_intrinsic_workflow": false
+        },
+        {
+          "path": "cortex_lab_v0/file_lab.py",
+          "triggers_intrinsic_workflow": false
+        }
+      ],
+      "legacy_workflow_test_command": "python -m unittest discover -s cortex_lab_v0/tests -v"
+    }
+  }
+}

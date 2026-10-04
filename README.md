@@ -8,6 +8,9 @@ paramètres neuronaux sont des points hyperboliques appris avec un optimiseur
 riemannien. La [spécification](SPEC.md) formalise cette exigence et indique
 les capacités restant à construire. La [validation de la V1](INTRINSIC_VALIDATION.md)
 publie les tests Windows/Linux et les limites de son apprentissage.
+La [revue de la V1](CODE_REVIEW_V1.md) expose les défauts reproduits et les
+corrections proposées. La [note sur les travaux antérieurs](LITERATURE_NON_EUCLIDEAN.md)
+situe cette architecture dans la littérature.
 
 La première expérience de référence est [Cortex Lab V0](cortex_lab_v0/README.md) : un laboratoire
 de fichiers avec 72 paramètres par modèle et trois modèles pour estimer

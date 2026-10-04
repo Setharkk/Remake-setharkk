@@ -3,9 +3,12 @@
 Projet de recherche pour un cortex neuronal courbe qui apprend des
 conséquences de ses actions et choisit des expériences.
 
-La nouvelle base est [Cortex Lab V1](cortex_lab_v1/README.md), dont tous les
-paramètres neuronaux sont des points hyperboliques appris avec un optimiseur
-riemannien. La [spécification](SPEC.md) formalise cette exigence et indique
+La conception repart d'une [nouvelle base de recherche](RESEARCH_RESET.md),
+avec les exigences de l'utilisateur et un mécanisme d'apprentissage à définir.
+
+[Cortex Lab V1](cortex_lab_v1/README.md) reste une référence expérimentale.
+Tous ses paramètres neuronaux sont des points hyperboliques appris avec un
+optimiseur riemannien. La [spécification](SPEC.md) formalise cette exigence et indique
 les capacités restant à construire. La [validation de la V1](INTRINSIC_VALIDATION.md)
 publie les tests Windows/Linux et les limites de son apprentissage.
 La [revue de la V1](CODE_REVIEW_V1.md) expose les défauts reproduits et les

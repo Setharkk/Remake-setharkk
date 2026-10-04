@@ -3,6 +3,10 @@
 Ces exigences reprennent les demandes de l'utilisateur. La correction
 essentielle est que le réseau lui-même doit être non euclidien.
 
+La [nouvelle conception](RESEARCH_RESET.md) reprend ces exigences. Les choix
+mathématiques et les états d'implémentation décrits ci-dessous concernent
+la référence V1 ; ils ne fixent pas l'architecture de la prochaine expérience.
+
 ## Exigence géométrique du réseau
 
 La V1 donne un sens vérifiable à cette exigence :

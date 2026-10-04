@@ -12,6 +12,7 @@ on:
       - 'first_piece/adapter.py'
       - 'first_piece/tests/test_shared.py'
       - 'first_piece/tests/test_current_fixes.py'
+      - 'first_piece/tests/test_renewable.py'
       - '.github/workflows/scale.yml'
   workflow_dispatch:
 permissions:

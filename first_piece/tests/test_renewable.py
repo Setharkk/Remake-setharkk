@@ -17,7 +17,7 @@ from first_piece.integration_probe import agent_proposal, observed_receipt
 def constant_step(core, i):
     core.receive({"kind": "token", "token": "constant", "task": 0})
     core.receive({"kind": "surface", "surface": "sealed", "task": 0})
-    core.learn(i % 2, i % 2)
+    core.learn(0, i % 2)
 
 
 def canonical(core):

@@ -217,7 +217,13 @@ class SharedLearner:
     def required_fit_records(self):
         """Fit target limited by the buffers of contexts with actual labels."""
         labelled = sum(task["steps"] > 0 for task in self.tasks.values())
-        return min(self.config["min_records"], max(1, labelled) * self.config["fit_per_context"])
+        target = min(self.config["min_records"], max(1, labelled) * self.config["fit_per_context"])
+        # An abandoned, thin context must not create an unreachable target.
+        # First allow the declared global warmup; then fit from a full buffer
+        # plus whatever other labelled data remain, without lowering support gates.
+        available = sum(len(task["records"]) for task in self.tasks.values())
+        full = any(len(task["records"]) == self.config["fit_per_context"] for task in self.tasks.values())
+        return min(target, available) if self.steps >= target and full else target
 
     def pending_probabilities(self):
         if self.episode["phase"] != "feedback":

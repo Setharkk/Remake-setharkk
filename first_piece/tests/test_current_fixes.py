@@ -43,6 +43,19 @@ class CurrentFixes(unittest.TestCase):
             wider.learn(0, 1)
         self.assertEqual(wider.required_fit_records(), 512)
 
+    def test_briefly_observed_context_cannot_make_fit_target_unreachable(self):
+        core, world = SharedLearner(91), ScaleWorld(31, n_contexts=2)
+        actions = random.Random(801)
+        episode(core, world, 1, rng=actions)
+        for _ in range(511):
+            episode(core, world, 0, rng=actions)
+        self.assertEqual(core.steps, 512)
+        self.assertEqual(len(core.tasks[1]["records"]), 1)
+        self.assertEqual(core.required_fit_records(), 257)
+        self.assertEqual(core.attempts, 1)
+        self.assertEqual(core.trial["fit_required_records"], 257)
+        self.assertEqual(SharedLearner.restore(core.checkpoint()).checkpoint(), core.checkpoint())
+
     def test_single_context_shared_adapter_default_learns_and_resumes(self):
         adapter = SharedAdapter(seed=91)
         world = ScaleWorld(31, n_contexts=1)

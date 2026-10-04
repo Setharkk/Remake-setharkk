@@ -24,8 +24,8 @@ def noise_control(seed, *, n=20000, eval_n=1024):
     check_bounds(model)
     snapshot = model.checkpoint()
     inputs = copy.deepcopy(world)
-    inputs.rng = random.Random(42000000 + seed)
-    outcomes = random.Random(43000000 + seed)
+    inputs.rng = random.Random(52000000 + seed)
+    outcomes = random.Random(53000000 + seed)
     scores = {k: {"correct": 0, "brier_sum": 0.0} for k in ("full", "matched_control")}
     for i in range(eval_n):
         events, ignored = inputs.episode(i % 4)
@@ -61,13 +61,13 @@ def main():
                 model = SharedLearner.restore(json.loads(states.joinpath(f"{scale}-{seed}-{phase}.json").read_text(encoding="utf-8")))
                 before = model.checkpoint()
                 for name, slots in (("context_zero", [0]), ("other_contexts", range(1, contexts)), ("new_context", [contexts])):
-                    value = evaluation(model, world, seed=40000000 + len(rows),
+                    value = evaluation(model, world, seed=50000000 + len(rows),
                                        changed=phase == "after", n=1024, slots=slots)
                     rows.append({"scale": scale, "seed": seed, "phase": phase, "group": name, "scores": value})
                 if before != model.checkpoint():
                     raise AssertionError("Fresh holdout changed the input model")
     holdout = {"training_interactions": 0, "neural_updates": 0, "episodes_per_group": 1024,
-               "total_evaluation_episodes": len(rows) * 1024, "seed_base": 40000000, "reports": rows}
+               "total_evaluation_episodes": len(rows) * 1024, "seed_base": 50000000, "reports": rows}
     noise = [noise_control(seed) for seed in (0, 1, 2)]
     result = {"fresh_holdout": holdout, "independent_noise_control": noise,
               "noise_training_interactions": sum(r["training_interactions"] for r in noise)}

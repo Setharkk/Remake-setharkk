@@ -26,7 +26,7 @@ jobs:
         with:
           name: first-piece-scale-${{ matrix.os }}
           path: ${{ runner.temp }}/scale-frozen
-          run-id: 37213364380
+          run-id: 37214331488
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Fresh holdout and random-outcome controls
         run: python -m validation.scale_final_probe --states "${{ runner.temp }}/scale-frozen" --out "${{ runner.temp }}/scale-fresh.json"

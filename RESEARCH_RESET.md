@@ -79,6 +79,10 @@ Un petit environnement séquentiel présenterait des observations identiques
 dans des contextes différents, dont certains peuvent être distingués par
 l'historique. Un contrôle présenterait des différences purement aléatoires.
 
+L'objectif initial retenu est de découvrir une règle inconnue puis de la
+réutiliser dans une autre situation. La durée d'exposition et l'unité de
+mesure font partie du protocole, conformément à la précision de l'utilisateur.
+
 Les critères seraient la prédiction sur de nouvelles séquences, le transfert,
 l'oubli des compétences antérieures, le coût des distinctions créées et
 l'équivalence entre une exécution continue et une exécution reprise.
@@ -86,6 +90,11 @@ l'équivalence entre une exécution continue et une exécution reprise.
 Les références de comparaison recevraient les mêmes informations et un
 budget comparable. Cette expérience teste un mécanisme ; elle ne démontre
 pas à elle seule une intelligence générale ou une originalité scientifique.
+
+Le [protocole de mesure et de durée](MEASUREMENT_PROTOCOL.md) distingue
+les expériences reçues, le coût de calcul et les compétences observées.
+Il demande des courbes sur plusieurs horizons et des conclusions limitées
+aux budgets effectivement testés.
 
 ## Méthode de recherche
 

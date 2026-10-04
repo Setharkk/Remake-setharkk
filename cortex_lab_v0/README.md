@@ -145,7 +145,8 @@ Les sorties se trouvent dans cortex_lab_v0/cortex_runs/<identifiant>/ :
 - config.json : version du protocole, paramètres et environnement logiciel ;
 - splits.json : situations d'entraînement et de contrôle ;
 - summary.json : résultats par graine et moyennes descriptives ;
-- seed_*/<condition>/metrics.csv : courbe de progression ;
+- seed_*/<condition>/metrics.csv : courbe de progression, écrite dès
+  l'évaluation initiale puis à chaque évaluation ;
 - experiences.jsonl : observation, prédiction avant action et résultat réel ;
 - weights.pt : poids sauvegardés ;
 - replay.json : mémoire d'expériences ;
@@ -169,9 +170,14 @@ Vérifier la baisse de l'erreur sur le contrôle et comparer les références
 calculées **sur les mêmes cas réservés** : probabilités uniformes et
 prédiction que les fichiers restent inchangés.
 
-La V0 sauvegarde les poids et les expériences. Elle commence une expérience
-comparative neuve à chaque lancement ; une reprise complète des optimiseurs
-et du fonctionnement continu reste à développer.
+La V0 sauvegarde les poids et les expériences. Les instantanés de poids
+sont des copies CPU indépendantes du modèle en cours d'apprentissage.
+Les poids et replay.json sont écrits en fin de condition réussie ; les
+métriques et expériences déjà écrites restent consultables après une
+exception. Ces traces partielles ne représentent pas une condition terminée.
+
+La V0 commence une expérience comparative neuve à chaque lancement ; une
+reprise complète des optimiseurs et du fonctionnement continu reste à développer.
 
 ## Portée des conclusions
 
@@ -215,3 +221,5 @@ restent à tester séparément.
 
 La CI conserve aussi les métriques, expériences et poids dans les artefacts
 cortex-results-ubuntu-latest et cortex-results-windows-latest du run Actions.
+Elle tente également d'archiver les fichiers disponibles si la comparaison
+a commencé puis échoué. L'échec du run reste indiqué dans Actions.

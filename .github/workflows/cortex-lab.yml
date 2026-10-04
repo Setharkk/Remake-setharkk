@@ -29,8 +29,10 @@ jobs:
       - name: Geometry, filesystem and learning tests
         run: python -m unittest discover -s cortex_lab_v0/tests -v
       - name: Comparative learning run
+        id: experiment
         run: python -m cortex_lab_v0.run --steps 200 --seeds 0 --device cpu --out "${{ runner.temp }}/cortex-smoke"
       - name: Upload experiment results
+        if: ${{ always() && (steps.experiment.outcome == 'success' || steps.experiment.outcome == 'failure') }}
         uses: actions/upload-artifact@v4
         with:
           name: cortex-results-${{ matrix.os }}

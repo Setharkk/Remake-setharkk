@@ -64,7 +64,16 @@ def run_condition(root, geometry, exploration, seed, train, test, args):
     warmup = make_warmup(train, seed)
     initial = learner.evaluate(test)
     rows = [{"step": 0, **initial}]
-    with (directory / "experiences.jsonl").open("w", encoding="utf-8") as stream:
+    with (
+        (directory / "metrics.csv").open(
+            "w", encoding="utf-8", newline=""
+        ) as metrics_stream,
+        (directory / "experiences.jsonl").open("w", encoding="utf-8") as stream,
+    ):
+        writer = csv.DictWriter(metrics_stream, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerow(rows[0])
+        metrics_stream.flush()
         for step in range(1, args.steps + 1):
             probabilities = learner.predict(train)
             gains = information_gain(probabilities).cpu().tolist()
@@ -98,6 +107,8 @@ def run_condition(root, geometry, exploration, seed, train, test, args):
             if step % args.evaluate_every == 0 or step == args.steps:
                 metrics = learner.evaluate(test)
                 rows.append({"step": step, **metrics})
+                writer.writerow(rows[-1])
+                metrics_stream.flush()
                 print(
                     f"{seed} {geometry:10s} {exploration:6s} "
                     f"step={step:4d} Brier={metrics['brier']:.4f} "
@@ -105,12 +116,6 @@ def run_condition(root, geometry, exploration, seed, train, test, args):
                     f"delta_weights={metrics['weights_changed_l2']:.3f}",
                     flush=True
                 )
-    with (directory / "metrics.csv").open(
-        "w", encoding="utf-8", newline=""
-    ) as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
-        writer.writeheader()
-        writer.writerows(rows)
     torch.save(learner.checkpoint(), directory / "weights.pt")
     write_json(directory / "replay.json", list(learner.memory))
     final = rows[-1]

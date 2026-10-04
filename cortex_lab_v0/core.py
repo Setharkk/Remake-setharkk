@@ -130,7 +130,8 @@ class Ensemble:
         for index in range(members):
             # Initialize the matching geometries identically on CPU.
             with torch.random.fork_rng(devices=[]):
-                torch.manual_seed(seed + index * 997)
+                # Seed only the CPU generator covered by this RNG fork.
+                torch.random.default_generator.manual_seed(seed + index * 997)
                 model = TransitionModel(geometry)
             self.models.append(model.to(self.device))
         self.optimizers = [
@@ -242,7 +243,11 @@ class Ensemble:
         return metrics
 
     def checkpoint(self):
+        """Capture independent CPU weights, without live model storage aliases."""
         return [
-            {name: tensor.detach().cpu() for name, tensor in model.state_dict().items()}
+            {
+                name: tensor.detach().cpu().clone()
+                for name, tensor in model.state_dict().items()
+            }
             for model in self.models
         ]

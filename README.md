@@ -3,6 +3,8 @@
 Projet de recherche pour un cortex neuronal courbe qui apprend des
 conséquences de ses actions et choisit des expériences.
 
+L’état actuel mesuré est décrit dans le [rapport de révision plastique](PLASTIC_REVISION_RESULTS.md) : 139 tests sur Windows et Linux, adaptations successives et essais à 64 symboles et 16 contextes. Les rapports ci-dessous documentent les étapes précédentes et leurs périmètres respectifs.
+
 La [première pièce](FIRST_PIECE.md) contient maintenant un apprenant :
 mémoire alimentée événement par événement, prototypes neuronaux sur S²
 et distinction proposée depuis les résultats de ses actions. Un contrôle
@@ -81,3 +83,10 @@ Le [benchmark sur 20 graines](BENCHMARK_RESULTS_20_SEEDS.md) publie les
 courbes, les comparaisons et les échecs. L'apprentissage progresse dans ce
 laboratoire, mais la sélection active reste moins efficace en moyenne que
 le hasard et plusieurs conditions régressent après 100 expériences.
+
+La [révision plastique sur S²](PLASTIC_REVISION.md), de format 7, conserve
+les contrats de la première pièce et les imports explicites. Le
+[rapport](PLASTIC_REVISION_RESULTS.md) publie 139 tests Windows/Linux,
+les délais, les ablations et la montée à 64 symboles/16 contextes.
+Le pire délai testé sur les trois graines initiales passe de 21 000 à
+10 000 retours ; l'avantage propre du transfert de poids reste non établi.

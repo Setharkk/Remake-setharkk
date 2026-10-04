@@ -1,0 +1,47 @@
+{
+  "engine_commit": "b5c86166fb22f69c1e441acce5d47ec5915a55c8",
+  "absolute_tolerance": 1e-10,
+  "relative_tolerance": 1e-10,
+  "excluded_fields": [
+    "runner",
+    "python",
+    "elapsed_seconds",
+    "max_sampled_checkpoint_bytes"
+  ],
+  "cases_per_os": 17,
+  "scale_cases_per_os": 3,
+  "mathematical_tolerance_failures": [],
+  "above_absolute_tolerance": [
+    {
+      "path": "/cases/9/final_metrics/plastic_revision/decisions/30/improvement/variance_proxy",
+      "a": 24260.952899116055,
+      "b": 24260.952899116182
+    },
+    {
+      "path": "/cases/9/final_metrics/plastic_revision/searches/8/validation/variance_checks/improvement/16384",
+      "a": 24260.952899116055,
+      "b": 24260.952899116182
+    },
+    {
+      "path": "/cases/9/journals/plastic_revision/decisions/30/improvement/variance_proxy",
+      "a": 24260.952899116055,
+      "b": 24260.952899116182
+    },
+    {
+      "path": "/cases/9/journals/plastic_revision/searches/8/validation/variance_checks/improvement/16384",
+      "a": 24260.952899116055,
+      "b": 24260.952899116182
+    },
+    {
+      "path": "/scale_cases/2/decisions/58/preservation/variance_proxy",
+      "a": 33808.99521022118,
+      "b": 33808.995210221314
+    },
+    {
+      "path": "/scale_cases/2/searches/42/validation/variance_checks/preservation/1920",
+      "a": 33808.99521022118,
+      "b": 33808.995210221314
+    }
+  ],
+  "maximum_above_absolute_difference": 1.3096723705530167e-10
+}

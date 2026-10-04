@@ -231,8 +231,9 @@ déjà dépensé et des validations en cours.
 Après une admission, une copie des prototypes S² sert les prédictions
 structurées. Elle ne reçoit plus de gradients et n'est remplacée qu'après
 une nouvelle admission. Les banques plastiques continuent leurs mises à jour.
-Les candidats sont actuellement ajustés depuis les buffers récents ;
-les poids de la banque plastique ne servent pas à les initialiser.
+Dans les modes consolidé et calibré de formats 4 et 5, les candidats sont
+ajustés depuis les buffers récents ; leurs poids plastiques n'initialisent
+pas les candidats. La révision de format 6 ci-dessous ajoute ce transfert.
 Il existe une seule compétence protégée commune, sans réseau privé par agent.
 
 Les nouvelles validations fixent cinq horizons et la référence servie avant
@@ -278,3 +279,37 @@ des mises à jour neuronales et ne créent pas de réseau privé par agent.
 Le [rapport](CALIBRATION_RESULTS.md) publie calibration, conservation, délais,
 ressources et limites de sélection d'actions. Le coordinateur futur devra
 tenir compte de ces limites et des métriques annoncées.
+
+## Poids plastiques et révisions prospectives
+
+`PlasticRevisionAdapter` conserve les contrats, l'autorité unique et les
+prévisions déjà annoncées lors d'un import. Son cœur de format 7 réutilise
+les prototypes plastiques par un regroupement des routes sur S², avec un
+test sur les labels de fit et un redémarrage de l'âge d'optimisation.
+Les [instructions](PLASTIC_REVISION.md) décrivent les imports explicites.
+Un raffinement prospectif du même programme permet aussi d'utiliser les
+poids plastiques devenus plus précis lorsque le déclencheur d'erreur
+structurelle reste inactif. Ses labels de préparation ne servent pas de
+preuve d'admission.
+
+Le candidat et la banque de contrôle gardent le budget de gradients par fit.
+La pertinence d'une nouvelle structure est comparée à un taux de base par
+contexte, fixé depuis les données de fit avant validation. Une différence
+de taux de bruit entre contextes suffit ainsi moins facilement à remplacer
+une compétence d'action. Cette fréquence est un contrôle statistique,
+pas une banque neuronale privée.
+La validation utilise les amplitudes de gains connues avant chaque label,
+une référence figée et sept horizons déclarés. Quatre réglages exponentiels
+partagent le risque ; la borne de conservation du complément utilise aussi ces amplitudes
+et reste uniforme dans le temps. Un ancien essai importé garde sa politique jusqu'à sa clôture.
+
+Un examen des données récentes peut clore un candidat
+dépassé à deux horizons déclarés. Cette clôture n'est pas une admission et
+ne rend aucun risque au système. Les prochains essais restent prospectifs.
+Le coordinateur devra lire ces métriques et leur coût de recherche,
+sans utiliser une clôture comme preuve de compétence.
+
+Le [protocole](PLASTIC_REVISION_PROTOCOL.md) et le
+[rapport](PLASTIC_REVISION_RESULTS.md) donnent les unités, les comparaisons
+et les limites. La révision fournit une première pièce d'apprentissage,
+pas les objectifs, le dialogue ou les agents exécutant des tâches du PC.

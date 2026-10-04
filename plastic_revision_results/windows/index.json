@@ -1,0 +1,276 @@
+{
+  "engine_commit": "b5c86166fb22f69c1e441acce5d47ec5915a55c8",
+  "protocol": "PLASTIC_REVISION_PROTOCOL.md",
+  "runner": "windows",
+  "python": "3.11.9",
+  "cases": [
+    {
+      "case": "noise_then_signal",
+      "seed": 0,
+      "file": "noise_then_signal_seed0.json",
+      "training_labels": 80000,
+      "criteria_failures": [],
+      "delays": {
+        "calibrated": {
+          "first_admission_global_labels": 20928,
+          "full_competence_global_labels": 21000,
+          "confirmation_global_labels": 22000
+        },
+        "plastic_revision": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 10000,
+          "confirmation_global_labels": 11000
+        }
+      }
+    },
+    {
+      "case": "noise_then_signal",
+      "seed": 1,
+      "file": "noise_then_signal_seed1.json",
+      "training_labels": 80000,
+      "criteria_failures": [],
+      "delays": {
+        "calibrated": {
+          "first_admission_global_labels": 4672,
+          "full_competence_global_labels": 5000,
+          "confirmation_global_labels": 6000
+        },
+        "plastic_revision": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 1000,
+          "confirmation_global_labels": 2000
+        }
+      }
+    },
+    {
+      "case": "noise_then_signal",
+      "seed": 2,
+      "file": "noise_then_signal_seed2.json",
+      "training_labels": 80000,
+      "criteria_failures": [],
+      "delays": {
+        "calibrated": {
+          "first_admission_global_labels": 8640,
+          "full_competence_global_labels": 9000,
+          "confirmation_global_labels": 10000
+        },
+        "plastic_revision": {
+          "first_admission_global_labels": 1472,
+          "full_competence_global_labels": 2000,
+          "confirmation_global_labels": 3000
+        }
+      }
+    },
+    {
+      "case": "cold_holdout",
+      "seed": 17,
+      "file": "cold_holdout_seed17.json",
+      "training_labels": 80000,
+      "criteria_failures": [],
+      "delays": {
+        "calibrated": {
+          "first_admission_global_labels": 20928,
+          "full_competence_global_labels": 21000,
+          "confirmation_global_labels": 22000
+        },
+        "plastic_revision": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 1000,
+          "confirmation_global_labels": 2000
+        }
+      }
+    },
+    {
+      "case": "cold_holdout",
+      "seed": 23,
+      "file": "cold_holdout_seed23.json",
+      "training_labels": 80000,
+      "criteria_failures": [],
+      "delays": {
+        "calibrated": {
+          "first_admission_global_labels": 5440,
+          "full_competence_global_labels": 6000,
+          "confirmation_global_labels": 7000
+        },
+        "plastic_revision": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 1000,
+          "confirmation_global_labels": 2000
+        }
+      }
+    },
+    {
+      "case": "retention",
+      "seed": 0,
+      "file": "retention_seed0.json",
+      "training_labels": 140000,
+      "criteria_failures": [],
+      "delays": {}
+    },
+    {
+      "case": "retention",
+      "seed": 1,
+      "file": "retention_seed1.json",
+      "training_labels": 140000,
+      "criteria_failures": [],
+      "delays": {}
+    },
+    {
+      "case": "retention",
+      "seed": 2,
+      "file": "retention_seed2.json",
+      "training_labels": 140000,
+      "criteria_failures": [],
+      "delays": {}
+    },
+    {
+      "case": "successive_changes",
+      "seed": 0,
+      "file": "successive_changes_seed0.json",
+      "training_labels": 280000,
+      "criteria_failures": [],
+      "delays": {}
+    },
+    {
+      "case": "successive_changes",
+      "seed": 1,
+      "file": "successive_changes_seed1.json",
+      "training_labels": 280000,
+      "criteria_failures": [],
+      "delays": {}
+    },
+    {
+      "case": "successive_changes",
+      "seed": 2,
+      "file": "successive_changes_seed2.json",
+      "training_labels": 280000,
+      "criteria_failures": [],
+      "delays": {}
+    },
+    {
+      "case": "variable_noise",
+      "seed": 0,
+      "file": "variable_noise_seed0.json",
+      "training_labels": 40000,
+      "criteria_failures": [],
+      "delays": {}
+    },
+    {
+      "case": "variable_noise",
+      "seed": 1,
+      "file": "variable_noise_seed1.json",
+      "training_labels": 40000,
+      "criteria_failures": [],
+      "delays": {}
+    },
+    {
+      "case": "variable_noise",
+      "seed": 2,
+      "file": "variable_noise_seed2.json",
+      "training_labels": 40000,
+      "criteria_failures": [],
+      "delays": {}
+    },
+    {
+      "case": "cold_ablations",
+      "seed": 0,
+      "file": "cold_ablations_seed0.json",
+      "training_labels": 80000,
+      "criteria_failures": [],
+      "delays": {
+        "range_only": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 10000,
+          "confirmation_global_labels": 11000
+        },
+        "warm_only": {
+          "first_admission_global_labels": 20928,
+          "full_competence_global_labels": 21000,
+          "confirmation_global_labels": 22000
+        }
+      }
+    },
+    {
+      "case": "cold_ablations",
+      "seed": 1,
+      "file": "cold_ablations_seed1.json",
+      "training_labels": 80000,
+      "criteria_failures": [],
+      "delays": {
+        "range_only": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 1000,
+          "confirmation_global_labels": 2000
+        },
+        "warm_only": {
+          "first_admission_global_labels": 4672,
+          "full_competence_global_labels": 5000,
+          "confirmation_global_labels": 6000
+        }
+      }
+    },
+    {
+      "case": "cold_ablations",
+      "seed": 2,
+      "file": "cold_ablations_seed2.json",
+      "training_labels": 80000,
+      "criteria_failures": [],
+      "delays": {
+        "range_only": {
+          "first_admission_global_labels": 1472,
+          "full_competence_global_labels": 2000,
+          "confirmation_global_labels": 3000
+        },
+        "warm_only": {
+          "first_admission_global_labels": 8640,
+          "full_competence_global_labels": 9000,
+          "confirmation_global_labels": 10000
+        }
+      }
+    }
+  ],
+  "scale_cases": [
+    {
+      "case": "scale_64_16",
+      "seed": 0,
+      "file": "scale_64_16_seed0.json",
+      "training_labels": 432000,
+      "bounds": {
+        "max_search_history": 16,
+        "max_decision_history": 24,
+        "max_fit_records": 4096,
+        "max_allocated_points": 160,
+        "max_sampled_checkpoint_bytes": 1721034,
+        "max_probability_cache": 4096
+      }
+    },
+    {
+      "case": "scale_64_16",
+      "seed": 1,
+      "file": "scale_64_16_seed1.json",
+      "training_labels": 432000,
+      "bounds": {
+        "max_search_history": 16,
+        "max_decision_history": 25,
+        "max_fit_records": 4096,
+        "max_allocated_points": 160,
+        "max_sampled_checkpoint_bytes": 1709364,
+        "max_probability_cache": 4096
+      }
+    },
+    {
+      "case": "scale_64_16",
+      "seed": 2,
+      "file": "scale_64_16_seed2.json",
+      "training_labels": 432000,
+      "bounds": {
+        "max_search_history": 16,
+        "max_decision_history": 26,
+        "max_fit_records": 4096,
+        "max_allocated_points": 160,
+        "max_sampled_checkpoint_bytes": 1725951,
+        "max_probability_cache": 4096
+      }
+    }
+  ]
+}

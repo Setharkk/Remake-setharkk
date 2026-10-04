@@ -107,9 +107,9 @@ par définition ; cela ne rend pas euclidiens les paramètres qu'ils déplacent.
 
 | Exigence | État |
 |---|---|
-| Réseau lui-même non euclidien | Versions partagée, renouvelable, consolidée et calibrée sur S², 124 tests Windows/Linux ; références historiques et V1 hyperbolique conservées |
+| Réseau lui-même non euclidien | Révision plastique de format 7 sur S², 139 tests Windows/Linux ; références partagées, renouvelables, consolidées, calibrées et V1 hyperbolique conservées |
 | Apprendre des résultats de ses actions pendant une interaction | Implémenté dans la première pièce séquentielle et dans la référence de fichiers |
-| Apprentissage continu avec reprise complète | Mode calibré restaurable, requête en attente comprise ; risque à vie borné ; rétention, six changements et baisse de surconfiance réussis dans le protocole testé ; inertie de calibration, sélection d'actions et délai d'admission restent limités |
+| Apprentissage continu avec reprise complète | Révision plastique restaurable et imports explicites, requête en attente comprise ; risque à vie borné ; rétention, six changements, raffinements de confiance et 64 symboles/16 contextes validés dans le protocole synthétique ; sélection d'actions et capacité de représentation restent limitées |
 | Objectifs proposés par l'utilisateur et objectifs choisis par le système | À développer |
 | Cortex avec un essaim d'agents comme extensions de lui-même | À développer |
 | Dialogue | À développer |
@@ -136,3 +136,14 @@ sont pas présentés comme des réglages optimaux.
 Cette architecture utilise des mécanismes géométriques connus. Aucune
 innovation scientifique ou supériorité de performance n'est revendiquée
 sans comparaison appropriée.
+
+## Révision plastique et raffinements mesurés
+
+Le [format 7](PLASTIC_REVISION.md) initialise les candidats sur S² depuis
+les banques plastiques avec sélection sur le passé. Les admissions restent
+prospectives ; les nouvelles bornes et le contrôle des taux de contexte
+conservent le risque déclaré. Un raffinement du programme déjà admis peut
+proposer de meilleurs poids sans attendre une erreur de classement.
+Le [rapport](PLASTIC_REVISION_RESULTS.md) distingue le gain de délai de
+l'effet du transfert, qui n'est pas établi par l'ablation sur trois graines.
+Il conserve les coûts et les limites des expériences synthétiques.

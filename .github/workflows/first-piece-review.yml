@@ -1,0 +1,35 @@
+name: Current first piece complete review
+on:
+  push:
+    paths:
+      - 'validation/first_piece_full_review.py'
+      - '.github/workflows/first-piece-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing 85 regression tests
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Reproduce defects and causes without changing engine
+        run: python -m validation.first_piece_full_review --out "${{ runner.temp }}/current-first-piece-review.json"
+      - name: Upload reproducible evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-first-piece-review-${{ matrix.os }}
+          path: ${{ runner.temp }}/current-first-piece-review.json
+          if-no-files-found: warn

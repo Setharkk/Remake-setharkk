@@ -197,5 +197,21 @@ class LearningTests(unittest.TestCase):
         self.assertEqual(before, self.full.checkpoint())
 
 
+    def test_malformed_resume_metadata_and_huge_coordinates_are_rejected(self):
+        learner = DistinctionLearner.restore(self.full.checkpoint())
+        learner.receive({"kind": "token", "token": 0, "task": 0})
+        before = learner.checkpoint()
+        bad_task = copy.deepcopy(before)
+        bad_task["episode"]["task"] = False
+        bad_models = copy.deepcopy(before)
+        bad_models["tasks"][0]["candidate"] = copy.deepcopy(bad_models["tasks"][0]["active"])
+        bad_coordinates = copy.deepcopy(before)
+        bad_coordinates["tasks"][0]["active"]["points"][0][0][0] = 10**400
+        for snapshot in (bad_task, bad_models, bad_coordinates):
+            with self.assertRaises(ValueError):
+                DistinctionLearner.restore(snapshot)
+        self.assertEqual(before, learner.checkpoint())
+
+
 if __name__ == "__main__":
     unittest.main()

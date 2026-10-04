@@ -229,12 +229,24 @@ class DistinctionLearner:
             if state["active"] is None:
                 raise ValueError("Missing active predictor")
             validating = state["status"] == "validating"
-            if validating != (state["candidate"] is not None and state["control"] is not None):
-                raise ValueError("Inconsistent frozen models")
+            if validating:
+                if state["candidate"] is None or state["control"] is None:
+                    raise ValueError("Missing frozen models")
+                if any(sum(map(sum, state[k].counts)) != instance.config["warmup"]
+                       for k in ("candidate", "control")):
+                    raise ValueError("Frozen fit budget differs")
+            elif state["candidate"] is not None or state["control"] is not None:
+                raise ValueError("Unexpected frozen models")
             if (state["token"] is not None) != (state["status"] == "accepted"):
                 raise ValueError("Inconsistent admission")
             if validating and state["proposed_token"] is None:
                 raise ValueError("Missing proposed token")
+            if state["status"] == "accepted" and (
+                not instance.config["allow_distinctions"] or state["token"] != state["proposed_token"]
+            ):
+                raise ValueError("Inconsistent accepted distinction")
+            if state["status"] == "ablated" and instance.config["allow_distinctions"]:
+                raise ValueError("Inconsistent ablation")
             if not isinstance(state["records"], list) or len(state["records"]) > instance.config["warmup"]:
                 raise ValueError("Invalid training records")
             for record in state["records"]:
@@ -251,6 +263,13 @@ class DistinctionLearner:
             n = len(validation["outcomes"])
             if n >= HORIZONS[-1] or any(len(v) != n for v in validation.values()) or (not validating and n):
                 raise ValueError("Invalid validation length")
+            if validating and state["steps"] != instance.config["warmup"] + n:
+                raise ValueError("Validation exposure differs")
+            if state["status"] == "collecting":
+                if state["steps"] != len(state["records"]) or state["steps"] >= instance.config["warmup"]:
+                    raise ValueError("Collection exposure differs")
+            elif state["records"] or state["steps"] < instance.config["warmup"]:
+                raise ValueError("Unexpected training records")
             for value in validation["parent"] + validation["proposal"]:
                 if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not 0 <= value <= 1:
                     raise ValueError("Invalid saved probability")
@@ -276,6 +295,7 @@ class DistinctionLearner:
             if episode != {"phase": "idle", "task": None, "mask": 0, "coin": None, "events": 0}:
                 raise ValueError("Invalid idle episode")
         elif episode["phase"] in ("tokens", "feedback"):
+            _integer(episode["task"], "episode task", high=instance.config["max_tasks"] - 1)
             if episode["task"] not in instance.tasks or episode["events"] < 1:
                 raise ValueError("Unknown episode task")
             _integer(episode["coin"], "episode route", high=1)

@@ -5,6 +5,7 @@ optimizer counters are discrete state, not Euclidean weight matrices.
 """
 import math
 from .world import _integer
+from .criterion import _finite_number
 
 
 def dot(a, b):
@@ -25,8 +26,7 @@ def unit(v):
 def point(v):
     if not isinstance(v, (list, tuple)) or len(v) != 3:
         raise ValueError("A sphere point needs three coordinates")
-    if any(isinstance(x, bool) or not isinstance(x, (int, float)) or not math.isfinite(x) for x in v):
-        raise ValueError("Invalid sphere coordinates")
+    v = [_finite_number(x, "sphere coordinate") for x in v]
     if abs(norm(v) - 1) > 1e-10:
         raise ValueError("Point is not on the unit sphere")
     return list(v)

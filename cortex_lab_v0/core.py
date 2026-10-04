@@ -4,6 +4,7 @@ An ensemble is a heuristic approximation of uncertainty, not a calibrated
 Bayesian posterior. All outputs describe observable filesystem results.
 """
 import itertools
+import math
 import random
 from collections import deque
 
@@ -25,14 +26,32 @@ def lorentz_dot(x, y):
     ).sum(-1)
 
 
+def _cosh_sinhc(norm_squared):
+    """Analytic limits in squared norm keep values and gradients exact at zero."""
+    small = norm_squared < 1e-6
+    # Keep the inactive branch differentiable too: sqrt(0) would introduce
+    # NaN gradients through torch.where even when the series is selected.
+    r = norm_squared.clamp_min(1e-6).sqrt()
+    s = norm_squared
+    cosh_series = 1 + s * (1 / 2 + s * (1 / 24 + s / 720))
+    sinhc_series = 1 + s * (1 / 6 + s * (1 / 120 + s / 5040))
+    return (
+        torch.where(small, cosh_series, r.cosh()),
+        torch.where(small, sinhc_series, r.sinh() / r),
+    )
+
+
 def exp_origin(q):
-    r = (q.square().sum(-1, keepdim=True) + EPS).sqrt()
-    return torch.cat((r.cosh(), (r.sinh() / r) * q), dim=-1)
+    cosh, sinhc = _cosh_sinhc(q.square().sum(-1, keepdim=True))
+    return torch.cat((cosh, sinhc * q), dim=-1)
 
 
 def log_origin(z):
-    r = (z[..., 1:].square().sum(-1, keepdim=True) + EPS).sqrt()
-    return (r.asinh() / r) * z[..., 1:]
+    spatial = z[..., 1:]
+    s = spatial.square().sum(-1, keepdim=True)
+    r = s.clamp_min(1e-6).sqrt()
+    series = 1 + s * (-1 / 6 + s * (3 / 40 - s * 5 / 112))
+    return torch.where(s < 1e-6, series, r.asinh() / r) * spatial
 
 
 def transport_from_origin(z, w):
@@ -46,8 +65,8 @@ def curved_step(z, w):
     v = transport_from_origin(z, w)
     # Parallel transport preserves the tangent norm. Using ||w|| avoids
     # cancellation in the Lorentz norm near the origin.
-    r = (w.square().sum(-1, keepdim=True) + EPS).sqrt()
-    return r.cosh() * z + (r.sinh() / r) * v
+    cosh, sinhc = _cosh_sinhc(w.square().sum(-1, keepdim=True))
+    return cosh * z + sinhc * v
 
 
 class TransitionModel(nn.Module):
@@ -92,6 +111,16 @@ def information_gain(probabilities):
         return -(values * values.clamp_min(EPS).log()).sum(-1)
 
     return (entropy(joint.mean(0)) - entropy(joint).mean(0)).clamp_min(0)
+
+
+def mixture_log_likelihood(logits, targets):
+    """Joint Bernoulli likelihood of the uniform ensemble, in log space."""
+    bit_log_likelihood = torch.where(
+        targets.bool(), F.logsigmoid(logits), F.logsigmoid(-logits)
+    )
+    return torch.logsumexp(bit_log_likelihood.sum(-1), dim=0) - math.log(
+        logits.shape[0]
+    )
 
 
 class Ensemble:
@@ -175,22 +204,24 @@ class Ensemble:
 
     @torch.no_grad()
     def evaluate(self, cases):
-        probabilities = self.predict(cases)
+        observations, actions = self.inputs(cases)
+        logits = torch.stack([
+            model(observations, actions) for model in self.models
+        ])
+        probabilities = logits.sigmoid()
         targets = torch.tensor(
             [entry["result"] for entry in cases],
             dtype=DTYPE, device=self.device
         )
         mean = probabilities.mean(0)
-        mixture_likelihood = torch.where(
-            targets.bool(), probabilities, 1 - probabilities
-        ).prod(-1).mean(0)
+        log_likelihood = mixture_log_likelihood(logits, targets)
         changes = [
             float((self._vector(model) - initial).norm().cpu())
             for model, initial in zip(self.models, self.initial)
         ]
         metrics = {
             "brier": float((mean - targets).square().mean().cpu()),
-            "nll": float(-mixture_likelihood.clamp_min(EPS).log().mean().cpu()),
+            "nll": float(-log_likelihood.mean().cpu()),
             "exact_accuracy": float(
                 (mean.ge(0.5) == targets.bool()).all(-1).to(DTYPE).mean().cpu()
             ),

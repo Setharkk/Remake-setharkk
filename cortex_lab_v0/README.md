@@ -69,11 +69,17 @@ un échec par action. Ils sont exclus de l'entraînement et de la sélection.
 Le sélecteur reçoit les observations et actions candidates, jamais leurs
 résultats. Le contrôle représente une interpolation sur un monde minuscule.
 
-Huit expériences de démarrage sont communes aux quatre conditions.
-Ensuite, la sélection active choisit un couple selon le gain d'information,
-avec 12 % d'exploration aléatoire. Le générateur du laboratoire prépare
-l'état demandé. Les buts de la V0 sont donc choisis dans un catalogue fini :
-apprendre les effets d'une des quatre opérations.
+Huit expériences de démarrage sont communes aux quatre conditions : deux
+couples distincts par action. Ensuite, la sélection active choisit un couple
+selon le gain d'information, avec 12 % d'exploration aléatoire. Le générateur
+du laboratoire prépare l'état demandé. Le champ learning_target indique
+l'opération étudiée ; il décrit l'action sélectionnée. La V0 ne possède pas
+encore de mécanisme distinct qui génère et arbitre ses propres objectifs.
+
+Le contrôle est stratifié selon la réussite, à partir des résultats observés
+par le banc d'évaluation. Il mesure donc ce contrôle équilibré et ne représente
+pas la fréquence naturelle des situations. Ses scores sont journalisés sans
+piloter les mises à jour ou la sélection des expériences.
 
 Après chaque expérience, trois petites mises à jour par modèle sont
 effectuées avec un échantillonnage de la mémoire. La mémoire conserve au
@@ -107,8 +113,9 @@ v_spatial = w + v0/(1+z0) * z_spatial
 exp_z(v) = cosh(||w||)*z + sinh(||w||)/||w|| * v
 ~~~
 
-Le transport conserve la norme de w. Des limites numériques régulières
-traitent les vecteurs nuls. L'encodage et la longueur du déplacement sont
+Le transport conserve la norme de w. Des développements en série en
+norme carrée traitent les vecteurs nuls sans modifier la norme par un epsilon.
+Le déplacement nul laisse exactement le point inchangé. L'encodage et la longueur du déplacement sont
 bornés pour limiter les problèmes numériques. Les coefficients 0.8 et 0.4
 sont des choix de stabilisation du prototype.
 
@@ -135,7 +142,7 @@ comme identique dans cette V0.
 
 Les sorties se trouvent dans cortex_lab_v0/cortex_runs/<identifiant>/ :
 
-- config.json : paramètres et environnement logiciel ;
+- config.json : version du protocole, paramètres et environnement logiciel ;
 - splits.json : situations d'entraînement et de contrôle ;
 - summary.json : résultats par graine et moyennes descriptives ;
 - seed_*/<condition>/metrics.csv : courbe de progression ;
@@ -148,7 +155,8 @@ Dans metrics.csv :
 
 - **brier** : erreur moyenne des probabilités sur le contrôle ; plus faible
   est meilleur ;
-- **nll** : perte logarithmique du mélange sur le résultat complet ;
+- **nll** : perte logarithmique du mélange sur le résultat complet, calculée
+  directement en espace logarithmique pour éviter la saturation numérique ;
 - **exact_accuracy** : les quatre bits sont simultanément corrects ;
 - **success_accuracy** : prédiction correcte de la réussite de l'opération ;
 - **brier_action_0..3** : erreurs par compétence, pour repérer les régressions ;
@@ -179,9 +187,15 @@ confirmée sur des environnements plus variés.
 
 ## Validation
 
-Les tests fournis couvrent la géométrie et ses dérivées, les opérations
-réelles de fichiers, la séparation des données, le gain d'information,
-l'amélioration de prédictions et la sauvegarde des poids.
+Les tests fournis couvrent la géométrie et ses dérivées, les limites exactes
+à l'origine, les prédictions extrêmes, les opérations réelles de fichiers,
+la propagation des erreurs système inattendues, la séparation des données,
+le gain d'information, l'amélioration de prédictions, la sauvegarde des poids
+et le déroulement des quatre conditions.
+
+Les absences de source et les destinations déjà présentes sont des résultats
+d'échec attendus. Une erreur inattendue du système de fichiers interrompt
+l'expérience et remonte à l'appelant ; elle n'entre pas dans l'apprentissage.
 
 Lors de la préparation, les formules géométriques ont été contrôlées
 séparément dans un environnement JavaScript sur 1000 états. L'erreur

@@ -40,5 +40,6 @@ jobs:
             ${{ runner.temp }}/cortex-smoke/**/metrics.csv
             ${{ runner.temp }}/cortex-smoke/**/experiences.jsonl
             ${{ runner.temp }}/cortex-smoke/**/config.json
+            ${{ runner.temp }}/cortex-smoke/**/splits.json
             ${{ runner.temp }}/cortex-smoke/**/weights.pt
             ${{ runner.temp }}/cortex-smoke/**/replay.json

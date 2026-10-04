@@ -2,6 +2,12 @@
 
 Code évalué : ce5f2c0f73004fa56d2c57abd0206dd9b65f0855.
 
+Ce document conserve les résultats de la première version. Le protocole
+version 2 corrige les limites géométriques à zéro, la perte logarithmique,
+le traitement des erreurs système et le démarrage, qui utilise maintenant
+huit couples distincts. Ses résultats doivent être mesurés séparément ;
+les nombres ci-dessous ne décrivent pas la version corrigée.
+
 [Exécution GitHub Actions](https://github.com/Setharkk/Remake-setharkk/actions/runs/37163260023).
 
 ## Protocole

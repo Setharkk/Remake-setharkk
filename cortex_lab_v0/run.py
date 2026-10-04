@@ -37,6 +37,18 @@ def split_cases(cases, seed):
     return train, test
 
 
+def make_warmup(train, seed):
+    """Two distinct pairs per action, shared by all four conditions."""
+    rng = random.Random(seed + 555)
+    by_action = [
+        rng.sample([
+            index for index, case in enumerate(train) if case["action"] == action
+        ], 2)
+        for action in range(len(ACTION_NAMES))
+    ]
+    return [indices[round_index] for round_index in range(2) for indices in by_action]
+
+
 def write_json(path, data):
     path.write_text(
         json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
@@ -49,13 +61,7 @@ def run_condition(root, geometry, exploration, seed, train, test, args):
     lab = FileLab(directory / "files")
     learner = Ensemble(geometry, seed + 12000, args.device)
     rng = random.Random(seed + 776)
-    warm_rng = random.Random(seed + 555)
-    warmup = [
-        warm_rng.choice([
-            index for index, case in enumerate(train) if case["action"] == action
-        ])
-        for _ in range(2) for action in range(4)
-    ]
+    warmup = make_warmup(train, seed)
     initial = learner.evaluate(test)
     rows = [{"step": 0, **initial}]
     with (directory / "experiences.jsonl").open("w", encoding="utf-8") as stream:
@@ -81,7 +87,7 @@ def run_condition(root, geometry, exploration, seed, train, test, args):
             record.update({
                 "step": step,
                 "selection": selection,
-                "goal": "learn_effects_of_" + ACTION_NAMES[chosen["action"]],
+                "learning_target": "learn_effects_of_" + ACTION_NAMES[chosen["action"]],
                 "expected_information_gain": gains[index],
                 "predicted_before": probabilities[:, index].mean(0).cpu().tolist(),
             })
@@ -153,7 +159,8 @@ def main():
     root = Path(args.out).resolve() / f"{stamp}_{uuid.uuid4().hex[:8]}"
     root.mkdir(parents=True, exist_ok=False)
     write_json(root / "config.json", {
-        **vars(args), "python": sys.version, "torch": str(torch.__version__),
+        **vars(args), "protocol_version": 2,
+        "python": sys.version, "torch": str(torch.__version__),
         "platform": platform.platform(),
         "hyperbolic_curvature": -1, "euclidean_curvature": 0,
         "latent_dimension": 4,
@@ -162,9 +169,15 @@ def main():
     cases = collect_cases(FileLab(root / "evaluation_fixtures"))
     results = []
     splits = {}
+    prepared_splits = {}
     for seed in args.seeds:
         train, test = split_cases(cases, seed)
+        prepared_splits[seed] = (train, test)
         splits[str(seed)] = {"training_candidates": train, "held_out_cases": test}
+    # Persist the protocol before training, including if a later run fails.
+    write_json(root / "splits.json", splits)
+    for seed in args.seeds:
+        train, test = prepared_splits[seed]
         for geometry in ("hyperbolic", "euclidean"):
             for exploration in ("active", "random"):
                 results.append(run_condition(
@@ -189,9 +202,8 @@ def main():
         )) / 4
         for case in cases
     ]
-    write_json(root / "splits.json", splits)
     write_json(root / "summary.json", {
-        "runs": results, "aggregate": aggregate,
+        "protocol_version": 2, "runs": results, "aggregate": aggregate,
         "reference_all_32_cases": {
             "unchanged_state_brier": statistics.mean(unchanged),
             "uniform_predictions_brier": 0.25,

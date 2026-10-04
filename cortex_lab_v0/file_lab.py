@@ -45,7 +45,10 @@ class FileLab:
             else:
                 bytes_read = len(source.read_bytes())
             success = 1
-        except OSError as exc:
+        except (FileNotFoundError, FileExistsError) as exc:
+            # Missing inputs and existing destinations are expected task
+            # outcomes. Other OS failures must stop the run, rather than
+            # silently teaching a result not explained by the observed state.
             success = 0
             error = type(exc).__name__
         after = [int(path.is_file()) for path in paths]

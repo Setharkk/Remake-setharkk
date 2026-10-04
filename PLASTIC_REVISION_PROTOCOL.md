@@ -116,7 +116,7 @@ le bon candidat était disponible, mais la preuve d'amélioration échouait
 
 ## Reprise et capacité
 
-Format 6, identité first_piece.plastic-revision-s2.v1. L'import explicite
+Format 7, identité first_piece.plastic-revision-s2.v2. L'import explicite
 depuis le format 5 conserve une validation déjà commencée avec ses anciens
 horizons, bornes, banques, compteurs et requêtes. La frontière de politique
 s'applique seulement aux nouvelles tentatives. Les formats plus anciens
@@ -215,3 +215,37 @@ retournent zéro et la vraie ambiguïté antipodale reste rejetée.
 Cette correction conserve la définition géodésique. Toutes les mesures
 sont réexécutées, et les premiers résultats numériques restent archivés
 comme itérations non retenues.
+
+## Raffinement des poids sans changer le programme
+
+Le moteur a233af3 gardait les bonnes actions à grande échelle, mais ses
+probabilités restaient insuffisamment nettes : Brier 0,026 à 0,032 après
+512 labels/contexte de récupération, au-dessus du seuil fixé à 0,025.
+Les banques plastiques progressaient sans proposition lorsque l'erreur
+passait sous le déclencheur structurel.
+
+Tous les 4 096 retours globaux, sans essai en cours et hors cooldown,
+le modèle peut examiner les poids actifs. Leur meilleure action doit
+coïncider avec celle de la compétence protégée sur chaque route du programme.
+Le gain logarithmique moyen sur le buffer doit atteindre 0,02 et le
+programme doit avoir son support de fit. Ces conditions utilisent le passé
+pour proposer, pas pour admettre.
+
+Le nouvel essai est global et conserve exactement le programme admis.
+La recherche habituelle est exécutée et son travail est compté, mais son
+programme alternatif est ignoré dans ce mode de confiance. Le fit conserve
+les quatre passes et les banques habituelles. Les gains sur de nouveaux
+labels doivent encore franchir les mêmes bornes, seuils et supports.
+Une proposition ne modifie aucune compétence protégée.
+
+Le journal distingue « structure » et « confidence » et conserve le gain
+de préparation. Son sous-total de raffinements concerne le bloc courant.
+Le travail de lecture ajoute au plus deux prévisions par ligne retenue
+à chaque examen éligible ; ce coût reste distinct des gradients.
+
+L'identité de reprise passe au format 7. Un import explicite du dernier
+prototype de format 6 (sept regards et trois sommes V) ajoute les champs
+de politique à « structure » sans modifier les prévisions, poids, risque
+ou essais existants. Les premiers formats 6 expérimentaux ayant des
+politiques différentes restent associés à leur code historique.
+Les imports depuis le mode calibré de format 5 sont conservés.

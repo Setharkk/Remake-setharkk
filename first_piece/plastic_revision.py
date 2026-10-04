@@ -13,6 +13,8 @@ MEAN_ITERATIONS = 8
 TILTS = (1, 2, 4, 8)
 REFRESH_HORIZONS = (512, 1024)
 REFRESH_GAIN = .02
+REFINEMENT_EVERY = 4096
+REFINEMENT_GAIN = .02
 
 
 def spherical_mean(points, weights):
@@ -33,8 +35,8 @@ def spherical_mean(points, weights):
 
 
 class PlasticRevisionLearner(CalibratedLearner):
-    CHECKPOINT_FORMAT = 6
-    IMPLEMENTATION = "first_piece.plastic-revision-s2.v1"
+    CHECKPOINT_FORMAT = 7
+    IMPLEMENTATION = "first_piece.plastic-revision-s2.v2"
 
     def __init__(self, *args, reuse_plastic_weights=True,
                  bounded_validation_ranges=True, **kwargs):
@@ -185,7 +187,7 @@ class PlasticRevisionLearner(CalibratedLearner):
                 for r, s in principal for a in range(self.config["n_actions"]))
         return widths
 
-    def _start_trial(self, scope):
+    def _start_trial(self, scope, *, refinement_gain=None):
         counter(self.attempts + 1, "lifetime attempts")
         if len(self.searches) == self.config["max_attempts"]:
             self._compact()
@@ -194,7 +196,11 @@ class PlasticRevisionLearner(CalibratedLearner):
         self.attempts += 1
         self._revision_variance = {name: 0.0 for name in COMPARISONS}
         rows = [(slot, *r) for slot in sorted(self.tasks) for r in self.tasks[slot]["records"]]
+        retained_program = list(self.program)
         program = self._search(rows, scope=scope)
+        if refinement_gain is not None:
+            program = retained_program
+            self.searches[-1]["program"] = list(program)
         initialization = None
         if program is None:
             self.decisions.append({"attempt": self.attempts, "at": self.steps, "scope": scope,
@@ -224,6 +230,8 @@ class PlasticRevisionLearner(CalibratedLearner):
             "horizons": list(self._horizons()), "serve_mode": mode,
             "served_at": self._protected["at"] if mode == "consolidated" else None,
             "reference": self._reference_kind(),
+            "purpose": "confidence" if refinement_gain is not None else "structure",
+            "refinement_gain": refinement_gain,
             "conditional_null": self._conditional_null(rows) if program is not None and
                 self.config["bounded_validation_ranges"] else None,
             "variance_checks": {name: {} for name in COMPARISONS},
@@ -381,7 +389,34 @@ class PlasticRevisionLearner(CalibratedLearner):
                     self._revision_variance["improvement"] += (proposed-served) ** 2
                 else:
                     self._revision_variance["preservation"] += (proposed-served) ** 2
-        return super().learn(action, outcome)
+        served = super().learn(action, outcome)
+        if (self.config["bounded_validation_ranges"] and self.config["use_structure"]
+                and self.trial is None and self._protected is not None and
+                self.steps % REFINEMENT_EVERY == 0 and self.steps >= self.next_trial
+                and self._search_available()):
+            self._consider_refinement()
+        return served
+
+    def _consider_refinement(self):
+        """Propose stronger weights for the SAME program using past evidence."""
+        protected = self._protected["bank"]
+        def policy(bank, route):
+            probabilities = [bank.probability(a, route) for a in range(self.config["n_actions"])]
+            return max(range(self.config["n_actions"]), key=probabilities.__getitem__)
+        if any(policy(self.active, r) != policy(protected, r)
+               for r in range(2 ** len(self.program))):
+            return
+        rows = [(slot, *r) for slot in sorted(self.tasks) for r in self.tasks[slot]["records"]]
+        if len(rows) < self.required_fit_records() or self._fit_score(self.program, rows) is None:
+            return
+        gains = []
+        for slot, mask, before, coin, action, outcome in rows:
+            route = self._route(self.program, slot, mask, before)
+            gains.append(log_probability(self.active.probability(action, route), outcome) -
+                         log_probability(protected.probability(action, route), outcome))
+        gain = math.fsum(gains)/len(rows)
+        if gain >= REFINEMENT_GAIN:
+            self._start_trial(None, refinement_gain=gain)
 
     def _search_keys(self, attempt):
         keys = super()._search_keys(attempt)
@@ -448,6 +483,22 @@ class PlasticRevisionLearner(CalibratedLearner):
             self._frozen_reference = {"at": counter(frozen["at"], "frozen exposure"), "bank": bank}
 
     @classmethod
+    def from_plastic_revision_checkpoint(cls, snapshot):
+        """Import the last format-6 prototype without changing pending forecasts."""
+        if (type(snapshot) is not dict or snapshot.get("format") != 6 or
+                snapshot.get("implementation") != "first_piece.plastic-revision-s2.v1"):
+            raise ValueError("Expected a format-6 plastic revision prototype")
+        data = copy.deepcopy(snapshot)
+        data["format"], data["implementation"] = cls.CHECKPOINT_FORMAT, cls.IMPLEMENTATION
+        for search in data.get("searches", []):
+            if search["attempt"] >= data["revision_start_attempt"]:
+                meta = search["validation"]
+                if "purpose" in meta or "refinement_gain" in meta:
+                    raise ValueError("Format-6 prototype already claims refinement policy")
+                meta.update(purpose="structure", refinement_gain=None)
+        return cls.restore(data).checkpoint()
+
+    @classmethod
     def from_calibrated_checkpoint(cls, snapshot):
         old = CalibratedLearner.restore(snapshot)
         model = cls(**old.config)
@@ -473,6 +524,9 @@ class PlasticRevisionLearner(CalibratedLearner):
         result = super().metrics()
         extra = self.active.n_routes * self.config["n_actions"] if self._frozen_reference else 0
         result.update(search_mode="plastic_revision",
+                      refinement_check_interval=REFINEMENT_EVERY,
+                      refinement_gain_threshold=REFINEMENT_GAIN,
+                      confidence_refinement_searches=sum(s.get("validation", {}).get("purpose") == "confidence" for s in self.searches),
                       supersessions=self.archived_supersessions + sum(d["decision"] == "superseded" for d in self.decisions),
                       reuse_plastic_weights=self.config["reuse_plastic_weights"],
                       bounded_validation_ranges=self.config["bounded_validation_ranges"],

@@ -8,6 +8,16 @@ class PlasticRevisionAdapter(CalibratedAdapter):
     IMPLEMENTATION = PlasticRevisionLearner.IMPLEMENTATION
 
     @classmethod
+    def from_plastic_revision_checkpoint(cls, snapshot):
+        if type(snapshot) is not dict or snapshot.get("implementation") != "first_piece.plastic-revision-s2.v1":
+            raise ValueError("Expected a format-6 plastic adapter prototype")
+        import copy
+        data = copy.deepcopy(snapshot)
+        data["implementation"] = cls.IMPLEMENTATION
+        data["learner"] = PlasticRevisionLearner.from_plastic_revision_checkpoint(data["learner"])
+        return cls.restore(data).checkpoint()
+
+    @classmethod
     def from_calibrated_checkpoint(cls, snapshot):
         old = CalibratedAdapter.restore(snapshot)
         data = old.checkpoint()

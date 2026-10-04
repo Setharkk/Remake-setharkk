@@ -14,7 +14,7 @@ INITIAL_KEYS = {"source", "at", "mapped_records", "mapped_routes",
 def validate_search(model, search):
     meta = search["validation"]
     if type(meta) is not dict or set(meta) != {
-            "horizons", "serve_mode", "served_at", "reference", "widths", "variance_checks", "refresh_checks", "conditional_null"}:
+            "horizons", "serve_mode", "served_at", "reference", "widths", "variance_checks", "refresh_checks", "conditional_null", "purpose", "refinement_gain"}:
         raise ValueError("Invalid revision validation policy")
     if (type(meta["horizons"]) is not list or any(type(n) is not int for n in meta["horizons"])
             or meta["horizons"] != list(model._horizons(search["attempt"]))):
@@ -26,6 +26,20 @@ def validate_search(model, search):
             raise ValueError("Invalid protected revision reference")
     elif meta["served_at"] is not None or meta["reference"] not in ("moving_plastic", "frozen_plastic"):
         raise ValueError("Invalid plastic revision reference")
+    from .plastic_revision import REFINEMENT_GAIN, REFINEMENT_EVERY
+    if meta["purpose"] not in ("structure", "confidence"):
+        raise ValueError("Unknown revision purpose")
+    if meta["purpose"] == "confidence":
+        if (search["scope"] is not None or meta["reference"] != "protected"
+                or search["at"] % REFINEMENT_EVERY or not model.config["bounded_validation_ranges"]
+                or not REFINEMENT_GAIN <= _finite_number(meta["refinement_gain"], "past refinement gain") <= UNIVERSAL_WIDTH/2 + 1e-8):
+            raise ValueError("Undeclared confidence refinement")
+        earlier = [d for d in model.decisions if d["decision"] == "accept" and d["at"] < search["at"]]
+        previous = earlier[-1] if earlier else model.renewal["last_admission"]
+        if previous is not None and search["program"] != previous["program"]:
+            raise ValueError("Confidence refinement changed the admitted program")
+    elif meta["refinement_gain"] is not None:
+        raise ValueError("Refinement gain outside a confidence proposal")
     supported = search["program"] is not None
     if meta["reference"] == "frozen_plastic" and (not supported or
             not model.config["bounded_validation_ranges"] or not model.config["use_structure"]):

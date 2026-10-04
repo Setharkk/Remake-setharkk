@@ -212,6 +212,8 @@ class PlasticRevisionTests(unittest.TestCase):
             s["validation"].pop("variance_checks")
             s["validation"].pop("refresh_checks")
             s["validation"].pop("conditional_null")
+            s["validation"].pop("purpose")
+            s["validation"].pop("refinement_gain")
         new["format"], new["implementation"] = old["format"], old["implementation"]
         self.assertEqual(new, old)
 
@@ -243,6 +245,48 @@ class PlasticRevisionTests(unittest.TestCase):
                     p = restored.receive(event)
                 self.assertEqual(max(range(4), key=p.__getitem__), target)
                 restored.finish_evaluation()
+
+    def test_plastic_confidence_refinement_improves_a_large_shared_rule(self):
+        core = PlasticRevisionLearner(100, max_tasks=17, max_symbols=64)
+        world = ShiftWorld(400, n_symbols=64, n_contexts=16)
+        actions, labels = random.Random(8200000), random.Random(8300000)
+        for i in range(80000):
+            events, target = world.episode(i % 16)
+            action = actions.randrange(4)
+            outcome = int(labels.random() < .25) if i < 16000 else int(action == target)
+            for event in events:
+                core.receive(event)
+            core.learn(action, outcome)
+        searches = [s for s in core.searches if s["validation"].get("purpose") == "confidence"]
+        self.assertTrue(searches)
+        self.assertTrue(any(d["decision"] == "accept" and d["attempt"] in
+                            {s["attempt"] for s in searches} for d in core.decisions))
+        clone = PlasticRevisionLearner.restore(core.checkpoint())
+        maximum = 0.0
+        for slot in range(16):
+            loss = 0.0
+            for _ in range(128):
+                events, target = world.episode(slot)
+                for event in events:
+                    p = clone.receive(event)
+                loss += sum((value-int(a == target))**2 for a,value in enumerate(p))/4
+                clone.finish_evaluation()
+            maximum = max(maximum, loss/128)
+        self.assertLessEqual(maximum, .025)
+
+    def test_format6_pending_prototype_import_preserves_forecast_and_banks(self):
+        core = PlasticRevisionLearner.restore(self.pending)
+        for event in ScaleWorld(400, n_symbols=16, n_contexts=4).episode(0)[0]:
+            prediction = core.receive(event)
+        old = core.checkpoint()
+        old["format"], old["implementation"] = 6, "first_piece.plastic-revision-s2.v1"
+        for search in old["searches"]:
+            search["validation"].pop("purpose")
+            search["validation"].pop("refinement_gain")
+        imported = PlasticRevisionLearner.restore(
+            PlasticRevisionLearner.from_plastic_revision_checkpoint(old))
+        self.assertEqual(imported.pending_probabilities(), prediction)
+        self.assertEqual(canonical(imported), canonical(core))
 
     def test_wire_import_and_duplicate_receipt_keep_one_learning_update(self):
         old = CalibratedAdapter(actions=("left", "right"))

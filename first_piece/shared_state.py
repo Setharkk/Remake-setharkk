@@ -125,7 +125,7 @@ def validate_history(model):
         if decision == "unsupported":
             if set(entry) != BASE_DECISION or search["program"] is not None or at != search["at"]:
                 raise ValueError("Invalid unsupported decision")
-        elif decision in ("expired", "migrated"):
+        elif decision in ("expired", "migrated", "superseded"):
             if set(entry) != CLOSED_KEYS or search["program"] is None:
                 raise ValueError("Invalid nonstatistical closure")
             n = counter(entry["validation_interactions"], "closed validation exposure")
@@ -136,6 +136,9 @@ def validate_history(model):
                 raise ValueError("Impossible stalled-context expiration")
             if decision == "migrated" and search["score_source"] != "legacy_active":
                 raise ValueError("Only legacy trials require migration closure")
+            if decision == "superseded" and (not hasattr(model, "_valid_supersession") or
+                    not model._valid_supersession(search, entry)):
+                raise ValueError("Undeclared candidate supersession")
         elif decision in ("pending", "accept", "futile", "inconclusive"):
             if set(entry) != GATE_KEYS or search["program"] is None:
                 raise ValueError("Invalid statistical decision fields")

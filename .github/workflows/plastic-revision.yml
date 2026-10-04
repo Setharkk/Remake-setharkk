@@ -1,0 +1,45 @@
+name: Plastic spherical reuse latency and scale
+on:
+  push:
+    paths:
+      - 'first_piece/**'
+      - 'setharkk/**'
+      - 'validation/plastic_revision_probe.py'
+      - 'PLASTIC_REVISION_PROTOCOL.md'
+      - '.github/workflows/plastic-revision.yml'
+  pull_request:
+    paths:
+      - 'first_piece/**'
+      - 'setharkk/**'
+      - 'validation/plastic_revision_probe.py'
+      - 'PLASTIC_REVISION_PROTOCOL.md'
+      - '.github/workflows/plastic-revision.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  revision:
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Full regression and plastic revision invariants
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Fixed latency ablations retention and 64 symbol 16 context protocol
+        run: python -m validation.plastic_revision_probe --out "${{ runner.temp }}/plastic-revision.json"
+      - name: Upload complete measurements
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: plastic-revision-${{ matrix.os }}
+          path: ${{ runner.temp }}/plastic-revision.json
+          if-no-files-found: warn

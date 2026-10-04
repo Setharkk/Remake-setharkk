@@ -1,0 +1,45 @@
+name: Renewable search and long session retention
+on:
+  push:
+    paths:
+      - 'first_piece/**'
+      - 'setharkk/**'
+      - 'validation/renewable_probe.py'
+      - 'RENEWABLE_SEARCH_PROTOCOL.md'
+      - '.github/workflows/renewable.yml'
+  pull_request:
+    paths:
+      - 'first_piece/**'
+      - 'setharkk/**'
+      - 'validation/renewable_probe.py'
+      - 'RENEWABLE_SEARCH_PROTOCOL.md'
+      - '.github/workflows/renewable.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  renewal:
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing and renewable regression tests
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Predeclared noise recovery and retention experiments
+        run: python -m validation.renewable_probe --out "${{ runner.temp }}/renewable.json"
+      - name: Upload complete curves journals and resume evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: renewable-${{ matrix.os }}
+          path: ${{ runner.temp }}/renewable.json
+          if-no-files-found: warn

@@ -89,6 +89,25 @@ def log_probability(p, y):
 
 
 class SharedLearner:
+    CHECKPOINT_FORMAT = 2
+    IMPLEMENTATION = "first_piece.shared-compositions-s2.v1"
+
+    def _history_origin(self):
+        return {"archived_attempts": 0, "archived_fit_records": 0,
+                "archived_admissions": 0, "archived_at": -1, "last_admission": None}
+
+    def _restore_history_origin(self, snapshot):
+        pass
+
+    def _attempt_limit(self):
+        return self.config["max_attempts"]
+
+    def _search_available(self):
+        return self.attempts < self._attempt_limit()
+
+    def _interval_alpha(self, attempt=None):
+        return ALPHA
+
     def __init__(self, seed=0, *, max_tasks=32, max_symbols=64, n_actions=4,
                  max_features=3, fit_per_context=256, min_records=512,
                  replay_passes=4, max_attempts=16, cooldown=256,
@@ -361,13 +380,13 @@ class SharedLearner:
                       "other_n": 0, "preservation": 0.0,
                       "support": [0] * self.active.n_routes}
 
-    def _interval(self, gain, n, *, anytime=False):
+    def _interval(self, gain, n, *, anytime=False, attempt=None):
         if not n:
             return {"n": 0, "mean": 0.0, "bound": None, "lower": None}
         mean = gain / n
         # Bounded predictable log gains; conditional Hoeffding-Azuma.
         family = 3 * len(HORIZONS) * self.config["max_attempts"]
-        log_family = math.log(2 * family / ALPHA)
+        log_family = math.log(2 * family / self._interval_alpha(attempt))
         if anytime:
             # Stitch maximal Hoeffding bounds over [2^k, 2^(k+1)).
             # Weight epoch k by 6/(pi^2*(k+1)^2). Thus the complement may
@@ -469,7 +488,7 @@ class SharedLearner:
                 self._judge()
             elif self.steps - self.trial["last_progress_at"] >= self.config["trial_stall_limit"]:
                 self._close_unfinished_trial("expired")
-        elif self.steps >= self.next_trial and self.attempts < self.config["max_attempts"]:
+        elif self.steps >= self.next_trial and self._search_available():
             enough = sum(len(t["records"]) for t in self.tasks.values()) >= self.required_fit_records()
             if enough and len(task["losses"]) == LOSS_WINDOW and math.fsum(task["losses"]) / LOSS_WINDOW > .4 * (1 / self.config["n_actions"]) * (1 - 1 / self.config["n_actions"]):
                 self._start_trial(e["task"] if self.program else None)
@@ -498,7 +517,7 @@ class SharedLearner:
             tasks[str(slot)] = {**task, "records": [[hex_mask(m), hex_mask(b), c, a, y]
                                                    for m, b, c, a, y in task["records"]]}
         episode = {**self.episode, "mask": hex_mask(self.episode["mask"]), "before": hex_mask(self.episode["before"])}
-        result = {"format": 2, "implementation": "first_piece.shared-compositions-s2.v1",
+        result = {"format": self.CHECKPOINT_FORMAT, "implementation": self.IMPLEMENTATION,
                   "config": self.config, "rng": listify(self.rng.getstate()), "symbols": self.symbols,
                   "tasks": tasks, "episode": episode, "program": self.program,
                   "active": self.active.checkpoint(), "baseline": self.baseline.checkpoint(),
@@ -528,11 +547,12 @@ class SharedLearner:
         json_data = copy.deepcopy(d)
         json_data["rng"] = listify(json_data["rng"])
         json_value(json_data)
-        if type(d["format"]) is not int or d["format"] != 2 or d["implementation"] != "first_piece.shared-compositions-s2.v1":
+        if type(d["format"]) is not int or d["format"] != cls.CHECKPOINT_FORMAT or d["implementation"] != cls.IMPLEMENTATION:
             raise ValueError("Unsupported shared checkpoint")
         if type(d["config"]) is not dict or set(d["config"]) != set(cls().config):
             raise ValueError("Invalid shared configuration")
         model = cls(**d["config"])
+        model._restore_history_origin(d)
         symbols = d["symbols"]
         if type(symbols) is not list or len(symbols) > model.config["max_symbols"] or any(type(s) is not str for s in symbols) or len(set(symbols)) != len(symbols):
             raise ValueError("Invalid vocabulary")
@@ -587,7 +607,7 @@ class SharedLearner:
             model.tasks[slot] = {**task, "records": records}
         for name in ("steps", "attempts", "admissions", "neural_updates", "next_trial"):
             setattr(model, name, counter(d[name], name))
-        if model.steps != sum(t["steps"] for t in model.tasks.values()) or not model.admissions <= model.attempts <= model.config["max_attempts"]:
+        if model.steps != sum(t["steps"] for t in model.tasks.values()) or not model.admissions <= model.attempts <= model._attempt_limit():
             raise ValueError("Inconsistent exposure or search budgets")
         e = d["episode"]
         if type(e) is not dict or set(e) != set(idle_episode()) or e["phase"] not in ("idle", "tokens", "feedback"):
@@ -655,14 +675,16 @@ class SharedLearner:
             if type(d[name]) is not list or len(d[name]) > model.config["max_attempts"] * len(HORIZONS):
                 raise ValueError("Unbounded search history")
             setattr(model, name, d[name])
-        if len(model.searches) != model.attempts:
+        origin = model._history_origin()
+        if len(model.searches) != model.attempts - origin["archived_attempts"]:
             raise ValueError("Search history and budget differ")
         if any(type(x) is not dict for x in model.decisions):
             raise ValueError("Invalid decision entry")
-        if len([x for x in model.decisions if x.get("decision") == "accept"]) != model.admissions or bool(model.program) != bool(model.admissions):
+        if len([x for x in model.decisions if x.get("decision") == "accept"]) != model.admissions - origin["archived_admissions"] or bool(model.program) != bool(model.admissions):
             raise ValueError("Admission history differs from live program")
         accepted = [x for x in model.decisions if x.get("decision") == "accept"]
-        if accepted and accepted[-1].get("program") != model.program:
+        last = accepted[-1] if accepted else origin["last_admission"]
+        if last is not None and last.get("program") != model.program:
             raise ValueError("Program differs from last admission")
         live_updates = sum(sum(map(sum, bank.counts)) for bank in (model.active, model.baseline))
         if model.neural_updates < 2 * model.steps or model.neural_updates < live_updates:

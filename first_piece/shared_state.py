@@ -41,14 +41,14 @@ def _program(model, value, *, nullable=False):
                 raise ValueError("History order is unbound")
 
 
-def _interval(model, raw, *, anytime=False):
+def _interval(model, raw, *, anytime=False, attempt=None):
     if type(raw) is not dict:
         raise ValueError("Invalid history interval")
     n = counter(raw.get("n"), "history horizon")
     mean = _finite_number(raw.get("mean"), "history gain")
     if abs(mean) > -math.log(.01) + 1e-8:
         raise ValueError("Impossible history gain")
-    expected = model._interval(mean * n, n, anytime=anytime)
+    expected = model._interval(mean * n, n, anytime=anytime, attempt=attempt)
     if set(raw) != set(expected):
         raise ValueError("Invalid interval fields")
     for key, value in expected.items():
@@ -66,8 +66,12 @@ def _interval(model, raw, *, anytime=False):
 
 def validate_history(model):
     from .shared import HORIZONS, PENALTY, RETENTION_TOLERANCE
-    previous_at = -1
-    for index, search in enumerate(model.searches, 1):
+    origin = model._history_origin()
+    offset = origin["archived_attempts"]
+    if origin["last_admission"] is not None:
+        _program(model, origin["last_admission"]["program"])
+    previous_at = origin["archived_at"]
+    for index, search in enumerate(model.searches, offset + 1):
         if type(search) is not dict or set(search) != SEARCH_KEYS:
             raise ValueError("Invalid search entry fields")
         if counter(search["attempt"], "search attempt", minimum=1) != index:
@@ -95,7 +99,7 @@ def validate_history(model):
             if search["program"] is not None and not examined:
                 raise ValueError("No hypothesis examined")
 
-    histories = {attempt: [] for attempt in range(1, model.attempts + 1)}
+    histories = {attempt: [] for attempt in range(offset + 1, model.attempts + 1)}
     previous_at = -1
     for entry in model.decisions:
         if type(entry) is not dict:
@@ -103,12 +107,12 @@ def validate_history(model):
         attempt = counter(entry.get("attempt"), "decision attempt", minimum=1)
         if attempt not in histories:
             raise ValueError("Decision refers to nonexistent attempt")
-        search = model.searches[attempt - 1]
+        search = model.searches[attempt - offset - 1]
         at = counter(entry.get("at"), "decision exposure")
         if not max(previous_at, search["at"]) <= at <= model.steps:
             raise ValueError("Invalid decision chronology")
         previous_at = at
-        if attempt < model.attempts and at >= model.searches[attempt]["at"]:
+        if attempt < model.attempts and at >= model.searches[attempt - offset]["at"]:
             raise ValueError("Decision overlaps a later search")
         if entry.get("program") != search["program"] or entry.get("scope") != search["scope"]:
             raise ValueError("Decision and search lineage differ")
@@ -130,10 +134,10 @@ def validate_history(model):
         elif decision in ("pending", "accept", "futile", "inconclusive"):
             if set(entry) != GATE_KEYS or search["program"] is None:
                 raise ValueError("Invalid statistical decision fields")
-            n = _interval(model, entry["relevance"])
-            if n not in HORIZONS or _interval(model, entry["improvement"]) != n:
+            n = _interval(model, entry["relevance"], attempt=attempt)
+            if n not in HORIZONS or _interval(model, entry["improvement"], attempt=attempt) != n:
                 raise ValueError("Invalid predeclared horizon")
-            other = _interval(model, entry["preservation"], anytime=True)
+            other = _interval(model, entry["preservation"], anytime=True, attempt=attempt)
             if n + other != at - search["at"] or (entry["scope"] is None and other):
                 raise ValueError("Decision exposure differs")
             support = entry["route_support"]
@@ -200,14 +204,18 @@ def validate_history(model):
         if observed_horizons != [n for n in HORIZONS if n <= t["n"]]:
             raise ValueError("Trial horizon history differs")
 
-    fitted = sum(s["fit_records"] for s in model.searches if s["program"] is not None)
+    fitted = origin["archived_fit_records"] + sum(s["fit_records"] for s in model.searches if s["program"] is not None)
     if model.neural_updates != 2 * model.steps + 2 * model.config["replay_passes"] * fitted:
         raise ValueError("Total neural updates differ from feedback and fits")
     accepted = [entry for entry in model.decisions if entry["decision"] == "accept"]
     expected_live = model.steps
     if accepted:
         last = accepted[-1]
-        expected_live = model.steps - last["at"] + model.searches[last["attempt"] - 1]["fit_records"] * model.config["replay_passes"]
+        expected_live = model.steps - last["at"] + model.searches[last["attempt"] - offset - 1]["fit_records"] * model.config["replay_passes"]
+    elif origin["last_admission"] is not None:
+        last = origin["last_admission"]
+        _program(model, last["program"])
+        expected_live = model.steps - last["at"] + last["fit_records"] * model.config["replay_passes"]
     if any(sum(map(sum, bank.counts)) != expected_live for bank in (model.active, model.baseline)):
         raise ValueError("Live bank counters differ from their lineage")
     if model.program and any(any(row) for row in model.active.counts[2 ** len(model.program):]):

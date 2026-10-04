@@ -1,0 +1,31 @@
+name: Intrinsic V1 review probes
+on:
+  push:
+    branches: ['codex/review-intrinsic-v1']
+    paths:
+      - 'review_materials/v1/**'
+      - '.github/workflows/intrinsic-review.yml'
+permissions:
+  contents: read
+jobs:
+  review:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: cortex_lab_v1/requirements.txt
+      - name: Install CPU PyTorch
+        run: python -m pip install -r cortex_lab_v1/requirements.txt --index-url https://download.pytorch.org/whl/cpu
+      - name: Shared laboratory baseline tests
+        run: python -m unittest discover -s cortex_lab_v0/tests -v
+      - name: Intrinsic baseline tests
+        run: python -m unittest discover -s cortex_lab_v1/tests -v
+      - name: Reproduce review findings
+        run: python -m review_materials.v1.probes

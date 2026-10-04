@@ -47,6 +47,8 @@ def train(model, world, n, *, seed=801, changed=False, noise=False):
 
 def policy(model, world, *, slot=0, changed=False, n=512):
     clone = SharedLearner.restore(model.checkpoint())
+    # Keep symbol identities/rule, reserve a new input RNG for evaluation.
+    world.rng = random.Random(71000000 + world.seed)
     correct = 0
     for _ in range(n):
         events, target = world.episode(slot, changed=changed)
@@ -231,7 +233,7 @@ def oversized_seed():
     except ValueError as exc:
         error = str(exc)
     assert error is not None
-    return {"constructor_accepted_seed": 2**53 + 1, "json_restore_error": error,
+    return {"constructor_accepted_seed": str(2**53 + 1), "json_restore_error": error,
             "ordinary_seed_roundtrip": SharedLearner.restore(SharedLearner(91).checkpoint()).config["seed"] == 91}
 
 
@@ -313,7 +315,7 @@ def main():
     args = parser.parse_args()
     paths = sorted([*Path("first_piece").glob("*.py"), *Path("first_piece/tests").glob("*.py"),
                     *Path("setharkk").glob("*.py")])
-    source_hashes = {p.as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
+    source_hashes = {p.as_posix(): hashlib.sha256(p.read_text(encoding="utf-8").encode("utf-8")).hexdigest() for p in paths}
     changed = subprocess.run(["git", "diff", "--name-only", REVIEWED_SOURCE, "--",
                               "first_piece", "setharkk"], check=True, capture_output=True,
                              text=True).stdout.strip()
@@ -322,6 +324,8 @@ def main():
               "diagnostic_commit": os.environ.get("GITHUB_SHA"),
               "python": platform.python_version(), "platform": platform.system(),
               "engine_files_unchanged_from_reviewed_source": True, "source_sha256": source_hashes,
+              "source_hash_policy": "UTF-8 text with universal newline normalization",
+              "policy_evaluation_input_seed": "71000000 + fixture seed; not training RNG",
               "meaning": "Reproductions of known defects and limits, not a correction or novelty benchmark",
               "cases": {}}
     scenarios = (single_context, disappearing_scope, shared_ablation, temporal_ablation,

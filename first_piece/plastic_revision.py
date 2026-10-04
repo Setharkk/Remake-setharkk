@@ -8,7 +8,7 @@ from .consolidated import COMPARISONS, UNIVERSAL_WIDTH
 from .shared import SharedSpherePredictor, log_probability, _integer
 from .spherical import log_map, exp_map
 
-FAST_HORIZONS = (128, 512, 1024, 4096, 8192, 16384)
+FAST_HORIZONS = (128, 512, 1024, 2048, 4096, 8192, 16384)
 MEAN_ITERATIONS = 8
 TILTS = (1, 2, 4, 8)
 REFRESH_HORIZONS = (512, 1024)

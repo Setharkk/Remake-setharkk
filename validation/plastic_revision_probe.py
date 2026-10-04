@@ -164,7 +164,7 @@ def run_case(kind, seed, modes=None):
         assert "targeted" in resume_kinds
     for name, b in bounds.items():
         assert b["max_search_history"] <= 16 and b["max_fit_records"] <= 1024
-        assert b["max_decision_history"] <= (96 if isinstance(cores[name], PlasticRevisionLearner) else 80)
+        assert b["max_decision_history"] <= (112 if isinstance(cores[name], PlasticRevisionLearner) else 80)
         assert b["max_allocated_points"] <= 160
     assert cores[revised].metrics()["calibration_probability_cache"] <= 1024
     delays = {}
@@ -179,7 +179,7 @@ def run_case(kind, seed, modes=None):
                           if d["phase"] == "signal" and d["decision"] == "accept"]
             delays[name] = {"first_admission_global_labels": admissions[0]["phase_global_labels"] if admissions else None,
                             "full_competence_global_labels": first, "confirmation_global_labels": confirmation}
-        if "plastic_revision" in cores:
+        if "plastic_revision" in cores and seed in (0, 1, 2):
             first = delays["plastic_revision"]["full_competence_global_labels"]
             check(first is not None and first <= 12000, "Cold full competence exceeds 12000: " + str(first))
     return {"case": kind, "seed": seed, "criteria_failures": failures, "delays": delays, "training_labels": cores[revised].steps,
@@ -319,7 +319,7 @@ def run_scale(seed):
     index += 1
     fresh = evaluate_scale(core, seed, 1, index, fresh=True)
     assert fresh["contexts"][0]["policy_success"] >= .95
-    assert bounds["max_search_history"] <= 16 and bounds["max_decision_history"] <= 96
+    assert bounds["max_search_history"] <= 16 and bounds["max_decision_history"] <= 112
     assert bounds["max_fit_records"] <= 4096 and bounds["max_allocated_points"] <= 160
     assert bounds["max_probability_cache"] <= 4096
     return {"case": "scale_64_16", "seed": seed, "training_labels": core.steps,
@@ -338,8 +338,10 @@ def main():
     cases, scales = [], []
     kinds = ("noise_then_signal",) if args.quick else ("retention", "successive_changes", "variable_noise") if args.skip_cold else ("noise_then_signal", "retention", "successive_changes", "variable_noise")
     for kind in kinds:
-        for seed in (0, 1, 2):
+        for seed in ((0, 1, 2, 17, 23) if args.quick else (0, 1, 2)):
             case = run_case(kind, seed)
+            if seed in (17, 23):
+                case["case"] = "cold_holdout"
             cases.append(case)
             print("PLASTIC_REVISION_CASE " + json.dumps(summarize(case), sort_keys=True), flush=True)
     if not args.quick:

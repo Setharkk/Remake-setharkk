@@ -87,9 +87,9 @@ Le premier moteur corrigé 973d034 échouait au délai (18 000 pour la graine 0)
 malgré la conservation réussie. Les critères demeurent ceux déclarés.
 
 Les seuils de pertinence, amélioration, conservation et support ne
-sont pas abaissés. Les nouveaux regards sont 128, 512, 1 024, 4 096, 8 192,
+sont pas abaissés. Les nouveaux regards sont 128, 512, 1 024, 2 048, 4 096, 8 192,
 16 384 retours principaux. Risque à vie, blocs et archives restent sommables.
-Le journal garde 16 recherches et au plus 96 décisions par défaut.
+Le journal garde 16 recherches et au plus 112 décisions par défaut.
 
 ## Remplacement d'un candidat dépassé
 
@@ -107,6 +107,12 @@ admission. Les regards statistiques et les seuils restent obligatoires.
 Son travail de recherche est journalisé séparément. L'archive héritée
 regroupe cette clôture avec les essais inconclusifs ; un compteur séparé
 en conserve le sous-total exact.
+
+Le moteur 4467089 conservait encore un délai de 18 000 sur la graine 0 :
+le bon candidat était disponible, mais la preuve d'amélioration échouait
+à 1 024 et le regard suivant était 4 096 retours principaux. Le regard
+2 048 est ajouté avec sa propre part de risque. Le plafond détaillé devient
+112 décisions, sans agrandir les banques neuronales.
 
 ## Reprise et capacité
 
@@ -177,7 +183,7 @@ contexte ; conservation >=95 % pendant le bruit ; aucun remplacement sous
 bruit ; Brier bruit moyen <=0,205 et perte tronquée <=0,62 ; récupération
 structurée Brier <=0,025 à 512 labels/contexte ; contexte neuf >=95 %.
 Au plus 160 points S², 4 096 lignes retenues, 4 096 probabilités en cache,
-16 recherches détaillées et 96 décisions.
+16 recherches détaillées et 112 décisions.
 
 Reprise en validation ciblée reproduisant 1 024 retours futurs.
 Comparer Windows/Linux, trois graines identiques, bibliothèque standard
@@ -186,3 +192,14 @@ Python exclus de la comparaison numérique à tolérance 1e-10.
 
 Ces expériences restent synthétiques. Elles ne prouvent pas un dialogue,
 une autonomie générale, une nouveauté scientifique ou un avantage euclidien.
+
+## Graines supplémentaires après les révisions
+
+Le test rapide ajoute les graines 17 et 23, choisies avant leur exécution
+pour observer la sensibilité au-delà des graines de développement 0/1/2.
+Les flux, budgets et sondes restent identiques. Le seuil de délai annoncé
+s'applique aux trois graines initiales ; les deux délais supplémentaires
+sont publiés tels qu'observés, avec les mêmes exigences de compétence finale,
+de conservation, de ressources et de reprise. Cette petite extension ne
+constitue pas une validation générale. Le total est 5 336 000 retours
+d'apprentissage principaux par système, plus les copies de reprise.

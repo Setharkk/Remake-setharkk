@@ -1,0 +1,39 @@
+name: Frozen scale states fresh validation
+on:
+  push:
+    paths:
+      - 'validation/scale_final_probe.py'
+      - '.github/workflows/scale-final.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  fresh:
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download frozen states from tested scaling source
+        uses: actions/download-artifact@v4
+        with:
+          name: first-piece-scale-${{ matrix.os }}
+          path: ${{ runner.temp }}/scale-frozen
+          run-id: 37213364380
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Fresh holdout and random-outcome controls
+        run: python -m validation.scale_final_probe --states "${{ runner.temp }}/scale-frozen" --out "${{ runner.temp }}/scale-fresh.json"
+      - name: Upload independent evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: scale-fresh-${{ matrix.os }}
+          path: ${{ runner.temp }}/scale-fresh.json
+          if-no-files-found: warn

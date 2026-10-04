@@ -18,8 +18,8 @@ on:
 permissions:
   contents: read
 jobs:
-  revision:
-    timeout-minutes: 60
+  quick:
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
@@ -34,8 +34,32 @@ jobs:
           python-version: '3.11'
       - name: Full regression and plastic revision invariants
         run: python -m unittest discover -s first_piece/tests -v
-      - name: Fixed latency ablations retention and 64 symbol 16 context protocol
-        run: python -m validation.plastic_revision_probe --out "${{ runner.temp }}/plastic-revision.json"
+      - name: Three seed complete competence latency check
+        run: python -m validation.plastic_revision_probe --quick --out "${{ runner.temp }}/plastic-revision-cold.json"
+      - name: Upload cold start evidence including failed criteria
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: plastic-revision-cold-${{ matrix.os }}
+          path: ${{ runner.temp }}/plastic-revision-cold.json
+          if-no-files-found: warn
+  revision:
+    needs: quick
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fixed ablations retention and 64 symbol 16 context protocol
+        run: python -m validation.plastic_revision_probe --skip-cold --out "${{ runner.temp }}/plastic-revision.json"
       - name: Upload complete measurements
         if: ${{ always() }}
         uses: actions/upload-artifact@v4

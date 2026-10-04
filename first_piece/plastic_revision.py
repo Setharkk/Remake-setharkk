@@ -48,7 +48,7 @@ class PlasticRevisionLearner(CalibratedLearner):
         self.revision_start_attempt = 1
         self.revision_import_at = None
         self._frozen_reference = None
-        self._revision_variance = {"relevance": 0.0, "improvement": 0.0}
+        self._revision_variance = {name: 0.0 for name in COMPARISONS}
 
     def _horizons(self, attempt=None):
         attempt = max(1, self.attempts) if attempt is None else attempt
@@ -192,7 +192,7 @@ class PlasticRevisionLearner(CalibratedLearner):
         if sum(task["steps"] > 0 for task in self.tasks.values()) == 1:
             scope = None
         self.attempts += 1
-        self._revision_variance = {"relevance": 0.0, "improvement": 0.0}
+        self._revision_variance = {name: 0.0 for name in COMPARISONS}
         rows = [(slot, *r) for slot in sorted(self.tasks) for r in self.tasks[slot]["records"]]
         program = self._search(rows, scope=scope)
         initialization = None
@@ -226,7 +226,7 @@ class PlasticRevisionLearner(CalibratedLearner):
             "reference": self._reference_kind(),
             "conditional_null": self._conditional_null(rows) if program is not None and
                 self.config["bounded_validation_ranges"] else None,
-            "variance_checks": {"relevance": {}, "improvement": {}},
+            "variance_checks": {name: {} for name in COMPARISONS},
             "refresh_checks": []})
         self.searches[-1]["validation"]["widths"] = self._ranges()
 
@@ -234,7 +234,7 @@ class PlasticRevisionLearner(CalibratedLearner):
         attempt = max(1, self.attempts) if attempt is None else attempt
         result = super()._interval(gain, n, anytime=anytime,
                                   attempt=attempt, comparison=comparison)
-        if (not n or comparison not in ("relevance", "improvement") or
+        if (not n or comparison not in COMPARISONS or
                 attempt < self.revision_start_attempt or
                 not self.config["bounded_validation_ranges"]):
             return result
@@ -244,12 +244,18 @@ class PlasticRevisionLearner(CalibratedLearner):
         if str(n) not in checks:
             raise ValueError("No declared variance record for this validation look")
         variance = checks[str(n)]
-        family = 3 * len(self._horizons(attempt)) * self.config["max_attempts"]
+        if comparison == "preservation":
+            epoch = n.bit_length() - 1
+            scale_n = 1 << epoch
+            family = 3 * self.config["max_attempts"] * (epoch+1)*(epoch+2)
+        else:
+            scale_n = n
+            family = 3 * len(self._horizons(attempt)) * self.config["max_attempts"]
         risk = math.log(2 * family * len(TILTS) / self._interval_alpha(attempt))
         if width == 0:
             bound, multiplier = 0.0, TILTS[0]
         else:
-            base = math.sqrt(8 * risk / (n * width * width))
+            base = math.sqrt(8 * risk / (scale_n * width * width))
             bound, multiplier = min(
                 ((risk / (base * scale) + base * scale * variance / 8) / n, scale)
                 for scale in TILTS)
@@ -263,16 +269,18 @@ class PlasticRevisionLearner(CalibratedLearner):
                 self.trial["n"] in self._horizons()):
             meta = self._validation(self.attempts)
             for name, value in self._revision_variance.items():
-                meta["variance_checks"][name][str(self.trial["n"])] = value
+                n = self.trial["other_n"] if name == "preservation" else self.trial["n"]
+                if n:
+                    meta["variance_checks"][name][str(n)] = value
         super()._judge()
         if (self.trial is not None and self.attempts >= self.revision_start_attempt
                 and self.config["bounded_validation_ranges"] and
-                self.trial["scope"] is None and self._reference_kind() == "frozen_plastic"
+                self._reference_kind() in ("frozen_plastic", "protected")
                 and self.trial["n"] in REFRESH_HORIZONS):
             self._refresh_candidate()
         if self.trial is None:
             self._frozen_reference = None
-            self._revision_variance = {"relevance": 0.0, "improvement": 0.0}
+            self._revision_variance = {name: 0.0 for name in COMPARISONS}
 
 
     def _fit_score(self, program, rows):
@@ -297,12 +305,12 @@ class PlasticRevisionLearner(CalibratedLearner):
         """Use past labels to end a stale trial; the next trial spends new risk."""
         t = self.trial
         rows = [(slot, *r) for slot in sorted(self.tasks) for r in self.tasks[slot]["records"]]
-        self._search(rows, scope=None)
+        self._search(rows, scope=t["scope"])
         preview = self.searches.pop()
         proposed = preview["program"]
         current_score = self._fit_score(t["program"], rows)
         proposed_score = self._fit_score(proposed, rows)
-        check = {"at": self.steps, "n": t["n"], "program": proposed,
+        check = {"at": self.steps, "n": t["n"], "other_n": t["other_n"], "program": proposed,
                  "current_score": current_score, "proposed_score": proposed_score,
                  **{key: preview[key] for key in ("fit_records", "eligible_features",
                                                  "pooled_features", "hypotheses_examined")}}
@@ -314,12 +322,13 @@ class PlasticRevisionLearner(CalibratedLearner):
 
     def _valid_supersession(self, search, entry):
         meta = search.get("validation", {})
-        if (search["attempt"] < self.revision_start_attempt or search["scope"] is not None
-                or meta.get("reference") != "frozen_plastic" or
+        if (search["attempt"] < self.revision_start_attempt
+                or meta.get("reference") not in ("frozen_plastic", "protected") or
                 entry["validation_interactions"] not in REFRESH_HORIZONS):
             return False
         checks = [r for r in meta.get("refresh_checks", [])
-                  if r["at"] == entry["at"] and r["n"] == entry["validation_interactions"]]
+                  if r["at"] == entry["at"] and r["n"] == entry["validation_interactions"]
+                  and r["other_n"] == entry["preservation_interactions"]]
         pending = any(d.get("attempt") == search["attempt"] and d["at"] == entry["at"]
                       and d["decision"] == "pending" for d in self.decisions)
         return bool(pending and len(checks) == 1 and checks[0]["program"] is not None
@@ -345,7 +354,7 @@ class PlasticRevisionLearner(CalibratedLearner):
     def _close_unfinished_trial(self, decision):
         super()._close_unfinished_trial(decision)
         self._frozen_reference = None
-        self._revision_variance = {"relevance": 0.0, "improvement": 0.0}
+        self._revision_variance = {name: 0.0 for name in COMPARISONS}
 
     def learn(self, action, outcome):
         if self.episode["phase"] != "feedback":
@@ -358,17 +367,20 @@ class PlasticRevisionLearner(CalibratedLearner):
             if self._validation(self.attempts)["reference"] != self._reference_kind():
                 raise ValueError("Validation reference changed during revision")
             e, t = self.episode, self.trial
-            if self.config["bounded_validation_ranges"] and (t["scope"] is None or e["task"] == t["scope"]):
+            if self.config["bounded_validation_ranges"]:
                 new_route = self._route(t["program"], e["task"], e["mask"], e["before"])
                 old_route = self._route(self.program, e["task"], e["mask"], e["before"]) if self.program else e["coin"]
                 bank, old_route = self._served_readout(e, old_route)
                 def logit(p):
                     return log_probability(p, 1) - log_probability(p, 0)
                 proposed = logit(self.candidate.probability(action, new_route))
-                control = logit(self._control_probability(e, action))
                 served = logit(bank.probability(action, old_route))
-                self._revision_variance["relevance"] += (proposed-control) ** 2
-                self._revision_variance["improvement"] += (proposed-served) ** 2
+                if t["scope"] is None or e["task"] == t["scope"]:
+                    control = logit(self._control_probability(e, action))
+                    self._revision_variance["relevance"] += (proposed-control) ** 2
+                    self._revision_variance["improvement"] += (proposed-served) ** 2
+                else:
+                    self._revision_variance["preservation"] += (proposed-served) ** 2
         return super().learn(action, outcome)
 
     def _search_keys(self, attempt):
@@ -407,7 +419,7 @@ class PlasticRevisionLearner(CalibratedLearner):
         if self.archived_supersessions > self.renewal["terminal_counts"]["inconclusive"]:
             raise ValueError("Supersessions exceed archived non-admissions")
         variance = snapshot["revision_variance"]
-        if type(variance) is not dict or set(variance) != {"relevance", "improvement"}:
+        if type(variance) is not dict or set(variance) != set(COMPARISONS):
             raise ValueError("Invalid revision variance fields")
         from .criterion import _finite_number
         self._revision_variance = {name: _finite_number(value, "variance proxy")

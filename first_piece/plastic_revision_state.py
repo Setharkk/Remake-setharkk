@@ -69,7 +69,7 @@ def validate_search(model, search):
             raise ValueError("Unsupported narrowed revision range")
 
     checks = meta["variance_checks"]
-    if type(checks) is not dict or set(checks) != {"relevance", "improvement"}:
+    if type(checks) is not dict or set(checks) != set(COMPARISONS):
         raise ValueError("Invalid variance look fields")
     horizons = model._horizons(search["attempt"])
     for name, table in checks.items():
@@ -77,7 +77,7 @@ def validate_search(model, search):
             raise ValueError("Unbounded variance look history")
         previous_n, previous_v = 0, 0.0
         for key in sorted(table, key=lambda k: int(k) if type(k) is str and k.isdecimal() else -1):
-            if type(key) is not str or not key.isdecimal() or str(int(key)) != key or int(key) not in horizons:
+            if type(key) is not str or not key.isdecimal() or str(int(key)) != key or (name != "preservation" and int(key) not in horizons):
                 raise ValueError("Variance at an undeclared look")
             n, value = int(key), _finite_number(table[key], "predictable variance")
             maximum = widths[name] * widths[name]
@@ -85,7 +85,7 @@ def validate_search(model, search):
                 raise ValueError("Variance proxy exceeds declared increments")
             previous_n, previous_v = n, value
         decisions = [d for d in model.decisions if d.get("attempt") == search["attempt"] and "relevance" in d]
-        expected = {str(d["relevance"]["n"]) for d in decisions} if model.config["bounded_validation_ranges"] else set()
+        expected = {str(d[name]["n"]) for d in decisions if d[name]["n"]} if model.config["bounded_validation_ranges"] else set()
         if set(table) != expected:
             raise ValueError("Variance records and completed looks differ")
 
@@ -97,16 +97,17 @@ def validate_search(model, search):
         raise ValueError("Unbounded candidate refresh history")
     previous_n = 0
     for record in refresh:
-        keys = {"at", "n", "program", "current_score", "proposed_score", "fit_records",
+        keys = {"at", "n", "other_n", "program", "current_score", "proposed_score", "fit_records",
                 "eligible_features", "pooled_features", "hypotheses_examined"}
         if type(record) is not dict or set(record) != keys:
             raise ValueError("Invalid refresh accounting")
         n = counter(record["n"], "refresh horizon")
-        if (not previous_n < n or n not in REFRESH_HORIZONS or search["scope"] is not None
-                or meta["reference"] != "frozen_plastic" or not model.config["bounded_validation_ranges"]):
+        if (not previous_n < n or n not in REFRESH_HORIZONS 
+                or meta["reference"] not in ("frozen_plastic", "protected") or not model.config["bounded_validation_ranges"]):
             raise ValueError("Undeclared refresh policy")
         previous_n = n
-        if record["at"] != search["at"] + n:
+        other = counter(record["other_n"], "refresh preservation exposure")
+        if record["at"] != search["at"] + n + other or (search["scope"] is None and other):
             raise ValueError("Refresh exposure differs")
         if not any(d.get("attempt") == search["attempt"] and d["at"] == record["at"]
                    and d["decision"] == "pending" for d in model.decisions):
@@ -188,12 +189,13 @@ def validate_revision(model):
     else:
         meta = model._validation(model.attempts)
         for name, value in model._revision_variance.items():
-            maximum = model.trial["n"] * meta["widths"][name] ** 2
+            n = model.trial["other_n"] if name == "preservation" else model.trial["n"]
+            maximum = n * meta["widths"][name] ** 2
             if value > maximum + 1e-7:
                 raise ValueError("Live variance exceeds prospective range")
             checks = meta["variance_checks"][name]
             if checks:
                 last = max(map(int, checks))
                 previous = checks[str(last)]
-                if not previous - 1e-8 <= value <= previous + (model.trial["n"]-last) * meta["widths"][name] ** 2 + 1e-7:
+                if not previous - 1e-8 <= value <= previous + (n-last) * meta["widths"][name] ** 2 + 1e-7:
                     raise ValueError("Live variance differs from last declared look")

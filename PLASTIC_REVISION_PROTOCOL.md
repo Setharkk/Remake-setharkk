@@ -76,16 +76,26 @@ le risque par union. La sélection du rayon après observation de V_n n'est
 donc pas une optimisation sans pénalité. Cela borne la moyenne des gains
 conditionnels sur les entrées observées, pas une distribution future arbitraire.
 
-La conservation du complément garde la borne uniforme dans le temps du mode
-consolidé. Les seuils de pertinence, amélioration, conservation et support ne
+Pour le complément d'un essai ciblé, la somme prévisible V est également
+retenue. À l'époque j=floor(log2(n_autres)), lambda_0 utilise 2^j à la place
+de n, et L=log(2*3*tentatives_par_bloc*4*(j+1)*(j+2)/alpha_bloc).
+Les quatre lambda de chaque époque sont fixés avant les labels. L'inégalité
+de Ville donne la validité uniforme dans le temps pour chaque lambda ;
+l'union des époques utilise somme_j 1/((j+1)*(j+2))=1. Cela conserve une
+borne uniforme dans le temps, avec les largeurs effectives des entrées.
+Le premier moteur corrigé 973d034 échouait au délai (18 000 pour la graine 0)
+malgré la conservation réussie. Les critères demeurent ceux déclarés.
+
+Les seuils de pertinence, amélioration, conservation et support ne
 sont pas abaissés. Les nouveaux regards sont 128, 512, 1 024, 4 096, 8 192,
 16 384 retours principaux. Risque à vie, blocs et archives restent sommables.
 Le journal garde 16 recherches et au plus 96 décisions par défaut.
 
 ## Remplacement d'un candidat dépassé
 
-Avant la première admission seulement, un candidat global encore en attente
-aux horizons 512 ou 1 024 reçoit un examen de la fenêtre récente. La recherche
+Un candidat encore en attente aux horizons 512 ou 1 024 reçoit un examen
+de la fenêtre récente, avant ou après la première admission. Les essais
+ciblés gardent leur portée et leur validation du complément. La recherche
 emploie la même famille de programmes et le même score pénalisé de fit.
 Si un autre programme a un score supérieur d'au moins 0,02, ou si l'ancien
 n'a plus le support minimal de fit, l'essai est clos comme « superseded ».

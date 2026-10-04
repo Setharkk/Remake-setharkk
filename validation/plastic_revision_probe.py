@@ -21,6 +21,10 @@ ABLATIONS = {"range_only": lambda *a, **k: PlasticRevisionLearner(*a, reuse_plas
 def run_case(kind, seed, modes=None):
     modes = MODES if modes is None else modes
     revised = next(name for name in modes if name != "calibrated")
+    failures = []
+    def check(condition, message):
+        if not condition:
+            failures.append(message)
     start = time.perf_counter()
     cores = {name: cls(100 + seed, **OPTIONS) for name, cls in modes.items()}
     world = ShiftWorld(400 + seed, n_symbols=16, n_contexts=4)
@@ -126,9 +130,9 @@ def run_case(kind, seed, modes=None):
                         bounds[name]["max_sampled_checkpoint_bytes"],
                         len(json.dumps(core.checkpoint(), ensure_ascii=False, separators=(",", ":")).encode("utf-8")))
                 if phase_name == "recovery" and local == 2000:
-                    assert max(x["brier"] for x in curves[revised][-1]["contexts"]) <= .025, "Confidence failed to recover"
+                    check(max(x["brier"] for x in curves[revised][-1]["contexts"]) <= .025, "Confidence failed to recover")
                 if phase_name in ("prolonged_noise", "mixed_noise"):
-                    assert min(x["policy_success"] for x in curves[revised][-1]["contexts"]) >= .95, {"phase": phase_name, "at": core.steps, "contexts": curves[revised][-1]["contexts"], "decisions": core.decisions[-6:]}
+                    check(min(x["policy_success"] for x in curves[revised][-1]["contexts"]) >= .95, "Noise policy below 95% at " + str(core.steps))
         modes = {}
         for name, m in cores.items():
             modes[name] = {"attempts_before": before[name][0], "attempts_after": m.attempts,
@@ -140,19 +144,19 @@ def run_case(kind, seed, modes=None):
                               "noise": noise, "context_0_shift": shift, "modes": modes})
         if noise:
             for name, m in cores.items():
-                assert m.checkpoint()["protected"] == frozen[name], "Calibration erased or replaced a competence"
+                check(m.checkpoint()["protected"] == frozen[name], name + ": competence changed during " + phase_name)
             if phase_name == "prolonged_noise":
                 c = modes[revised]["actual_training_scores"]
-                assert c["brier"] <= .205 and c["log_loss"] <= .62
+                check(c["brier"] <= .205 and c["log_loss"] <= .62, "Retention noise scores exceed limits")
             if phase_name == "mixed_noise":
                 c = modes[revised]["tail_training_scores"]
-                assert c["brier"] <= .26 and c["log_loss"] <= .58
+                check(c["brier"] <= .26 and c["log_loss"] <= .58, "Variable noise scores exceed limits")
                 for slot in range(4):
                     params = cores[revised].calibration_parameters(slot)
-                    assert abs(params["background_rate"] - (.1 if slot < 2 else .6)) <= .10
-            assert modes[revised]["admissions_before"] == modes[revised]["admissions_after"], "Admission under independent noise"
+                    check(abs(params["background_rate"] - (.1 if slot < 2 else .6)) <= .10, "Incorrect background rate")
+            check(modes[revised]["admissions_before"] == modes[revised]["admissions_after"], "Admission under independent noise")
         if not noise:
-            assert min(x["policy_success"] for x in modes[revised]["final_contexts"]) >= .95, "Competence or minority-context adaptation failed"
+            check(min(x["policy_success"] for x in modes[revised]["final_contexts"]) >= .95, "Final competence below 95% in " + phase_name)
     if shadow is not None:
         assert canonical(shadow) == canonical(cores[revised])
         resumes[-1]["verified_future_labels"] = 1024 - remaining
@@ -176,16 +180,16 @@ def run_case(kind, seed, modes=None):
             delays[name] = {"first_admission_global_labels": admissions[0]["phase_global_labels"] if admissions else None,
                             "full_competence_global_labels": first, "confirmation_global_labels": confirmation}
         if "plastic_revision" in cores:
-            assert delays["plastic_revision"]["full_competence_global_labels"] is not None
-            assert delays["plastic_revision"]["full_competence_global_labels"] <= 12000, delays
-    return {"case": kind, "seed": seed, "delays": delays, "training_labels": cores[revised].steps,
+            first = delays["plastic_revision"]["full_competence_global_labels"]
+            check(first is not None and first <= 12000, "Cold full competence exceeds 12000: " + str(first))
+    return {"case": kind, "seed": seed, "criteria_failures": failures, "delays": delays, "training_labels": cores[revised].steps,
             "evaluation_episodes_per_point": 2048, "elapsed_seconds": time.perf_counter() - start,
             "phases": phases_result, "curves": curves, "journals": journals, "bounds": bounds,
             "resumes": resumes, "final_metrics": {name: m.metrics() for name, m in cores.items()}}
 
 
 def summarize(c):
-    return {"case": c["case"], "seed": c["seed"],
+    return {"case": c["case"], "seed": c["seed"], "criteria_failures": c["criteria_failures"],
             "phases": [{"phase": p["phase"], "noise": p["noise"], "modes": {
                 name: {"attempts": m["attempts_after"], "admissions": m["admissions_after"],
                        "policy_by_context": [x["policy_success"] for x in m["final_contexts"]],
@@ -328,23 +332,27 @@ def run_scale(seed):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", required=True)
+    parser.add_argument("--quick", action="store_true")
+    parser.add_argument("--skip-cold", action="store_true")
     args = parser.parse_args()
     cases, scales = [], []
-    for kind in ("noise_then_signal", "retention", "successive_changes", "variable_noise"):
+    kinds = ("noise_then_signal",) if args.quick else ("retention", "successive_changes", "variable_noise") if args.skip_cold else ("noise_then_signal", "retention", "successive_changes", "variable_noise")
+    for kind in kinds:
         for seed in (0, 1, 2):
             case = run_case(kind, seed)
             cases.append(case)
             print("PLASTIC_REVISION_CASE " + json.dumps(summarize(case), sort_keys=True), flush=True)
-    for seed in (0, 1, 2):
-        case = run_case("noise_then_signal", seed, ABLATIONS)
-        case["case"] = "cold_ablations"
-        cases.append(case)
-        print("PLASTIC_REVISION_CASE " + json.dumps(summarize(case), sort_keys=True), flush=True)
-    for seed in (0, 1, 2):
-        case = run_scale(seed)
-        scales.append(case)
-        print("PLASTIC_REVISION_SCALE " + json.dumps({k: v for k,v in case.items()
-                      if k not in ("curves", "searches", "decisions")}, sort_keys=True), flush=True)
+    if not args.quick:
+        for seed in (0, 1, 2):
+            case = run_case("noise_then_signal", seed, ABLATIONS)
+            case["case"] = "cold_ablations"
+            cases.append(case)
+            print("PLASTIC_REVISION_CASE " + json.dumps(summarize(case), sort_keys=True), flush=True)
+        for seed in (0, 1, 2):
+            case = run_scale(seed)
+            scales.append(case)
+            print("PLASTIC_REVISION_SCALE " + json.dumps({k: v for k,v in case.items()
+                          if k not in ("curves", "searches", "decisions")}, sort_keys=True), flush=True)
     report = {"protocol": "PLASTIC_REVISION_PROTOCOL.md", "protocol_version": 1,
               "engine_commit": subprocess.run(["git", "rev-parse", "HEAD"], check=True,
                                                capture_output=True, text=True).stdout.strip(),
@@ -355,6 +363,8 @@ def main():
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print("PLASTIC_REVISION_FULL_JSON " + json.dumps(report, separators=(",", ":")), flush=True)
+    failures = [(c["case"], c["seed"], c["criteria_failures"]) for c in cases if c["criteria_failures"]]
+    assert not failures, failures
 
 
 if __name__ == "__main__":

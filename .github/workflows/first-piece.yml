@@ -38,6 +38,16 @@ jobs:
       - name: Audit available information and noise control
         id: audit
         run: python -m first_piece.audit --seeds 0 1 2 3 4 --horizons 100 1000 10000 --out "${{ runner.temp }}/first-piece"
+      - name: Learning, ablation, transfer and retention
+        id: learning
+        run: python -m first_piece.learning_run --seeds 0 1 2 3 4 --out "${{ runner.temp }}/first-piece-learning"
+      - name: Upload complete learning state
+        if: ${{ always() && (steps.learning.outcome == 'success' || steps.learning.outcome == 'failure') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-piece-learning-${{ matrix.os }}
+          if-no-files-found: error
+          path: ${{ runner.temp }}/first-piece-learning/
       - name: Upload laboratory audit
         if: ${{ always() && (steps.audit.outcome == 'success' || steps.audit.outcome == 'failure') }}
         uses: actions/upload-artifact@v4

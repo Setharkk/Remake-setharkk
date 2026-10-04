@@ -48,6 +48,14 @@ def log_map(q, target):
     return [angle * t / length for t in tangent]
 
 
+def learnable_point(value, anchors):
+    """A sphere point in the numerical domain of every required logarithm."""
+    q = point(value)
+    for anchor in anchors:
+        log_map(q, anchor)  # Reject the cut locus, never invent a direction.
+    return q
+
+
 def exp_map(q, tangent):
     radius = norm(tangent)
     if radius < 1e-14:
@@ -129,6 +137,6 @@ class SpherePredictor:
             value = state[name]
             if not isinstance(value, list) or len(value) != 2 or any(not isinstance(row, list) or len(row) != 2 for row in value):
                 raise ValueError("Invalid predictor shape")
-        model.points = [[point(p) for p in row] for row in state["points"]]
+        model.points = [[learnable_point(p, model.anchors) for p in row] for row in state["points"]]
         model.counts = [[_integer(n, "update count") for n in row] for row in state["counts"]]
         return model

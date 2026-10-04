@@ -302,6 +302,16 @@ class FirstPieceAdapter:
             expected_kind = "surface" if learner.episode["phase"] == "feedback" else "token"
             if instance._translate_observation(last)["kind"] != expected_kind:
                 raise ValueError("Observation and model phase differ")
+        if learner.episode["phase"] == "tokens":
+            token = instance._translate_observation(last)["token"]
+            if hasattr(learner, "_symbol_ids"):
+                token_id = learner._symbol_ids.get(token)
+                if token_id is None:
+                    raise ValueError("Last observation symbol absent from vocabulary")
+            else:
+                token_id = token
+            if not learner.episode["mask"] & (1 << token_id):
+                raise ValueError("Last observation absent from active memory")
         if prediction is not None:
             probabilities = learner.pending_probabilities()
             for i, forecast in enumerate(prediction["forecasts"]):

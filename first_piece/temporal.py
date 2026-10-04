@@ -211,7 +211,7 @@ class TemporalLearner:
         counter(state["steps"] + 1, "learning exposure")
         active_route = episode["coin"] if state["feature"] is None else feature_route(
             episode["mask"], episode["before"], state["feature"])
-        probability = state["active"].probability(action, active_route)
+        probability = self.pending_probabilities()[action]
         state["steps"] += 1
         state["records"].append([episode["mask"], episode["before"], episode["coin"], action, outcome])
         state["records"] = state["records"][-self.config["warmup"]:]

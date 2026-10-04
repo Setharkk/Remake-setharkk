@@ -12,7 +12,7 @@ import time
 
 from setharkk.contracts import counter, identifier, json_value
 from .criterion import _finite_number
-from .spherical import SpherePredictor, point, unit
+from .spherical import SpherePredictor, learnable_point, unit
 from .world import _integer, _tuples
 
 HORIZONS = (128, 1024, 4096)
@@ -51,7 +51,7 @@ class SharedSpherePredictor(SpherePredictor):
             rows = data[name]
             if type(rows) is not list or len(rows) != model.n_routes or any(type(r) is not list or len(r) != model.n_actions for r in rows):
                 raise ValueError("Invalid shared bank shape")
-        model.points = [[point(p) for p in r] for r in data["points"]]
+        model.points = [[learnable_point(p, model.anchors) for p in r] for r in data["points"]]
         model.counts = [[counter(n, "neural update count") for n in r] for r in data["counts"]]
         return model
 
@@ -92,18 +92,20 @@ class SharedLearner:
     def __init__(self, seed=0, *, max_tasks=32, max_symbols=64, n_actions=4,
                  max_features=3, fit_per_context=256, min_records=512,
                  replay_passes=4, max_attempts=16, cooldown=256,
-                 pool_size=96, pair_beam=12, rate=.03, use_structure=True):
-        _integer(seed, "seed")
+                 pool_size=96, pair_beam=12, rate=.03, use_structure=True,
+                 trial_stall_limit=4096):
+        counter(seed, "seed")
         limits = {"max_tasks": (max_tasks, 1, 32), "max_symbols": (max_symbols, 4, 128),
                   "n_actions": (n_actions, 2, 16), "max_features": (max_features, 1, 3),
                   "fit_per_context": (fit_per_context, 64, 1024), "min_records": (min_records, 64, 32768),
                   "replay_passes": (replay_passes, 1, 8), "max_attempts": (max_attempts, 1, 32),
                   "cooldown": (cooldown, 128, 4096), "pool_size": (pool_size, 16, 128),
-                  "pair_beam": (pair_beam, 1, 32)}
+                  "pair_beam": (pair_beam, 1, 32),
+                  "trial_stall_limit": (trial_stall_limit, 128, 32768)}
         for name, (value, low, high) in limits.items():
             _integer(value, name, low=low, high=high)
-        if min_records > max_tasks * fit_per_context or type(use_structure) is not bool:
-            raise ValueError("Unreachable fit budget or invalid readout setting")
+        if type(use_structure) is not bool:
+            raise ValueError("Invalid readout setting")
         self.config = {"seed": seed, **{k: v[0] for k, v in limits.items()},
                        "rate": rate, "use_structure": use_structure}
         self.rng = random.Random(seed)
@@ -117,7 +119,7 @@ class SharedLearner:
         self.candidate = self.control = None
         self.trial = None
         self.steps = self.attempts = self.admissions = self.neural_updates = 0
-        self.next_trial = min_records
+        self.next_trial = min(min_records, fit_per_context)
         self.decisions = []
         self.searches = []
         self.max_sphere_residual = 0.0
@@ -211,6 +213,11 @@ class SharedLearner:
             return None
         e["phase"] = "feedback"
         return self.pending_probabilities()
+
+    def required_fit_records(self):
+        """Fit target limited by the buffers of contexts with actual labels."""
+        labelled = sum(task["steps"] > 0 for task in self.tasks.values())
+        return min(self.config["min_records"], max(1, labelled) * self.config["fit_per_context"])
 
     def pending_probabilities(self):
         if self.episode["phase"] != "feedback":
@@ -311,7 +318,8 @@ class SharedLearner:
                         continue
                     seen.add(triple)
                     consider(triple)
-        report = {"at": self.steps, "fit_records": total, "eligible_features": len(eligible),
+        report = {"attempt": self.attempts, "scope": scope, "score_source": "served",
+                  "at": self.steps, "fit_records": total, "eligible_features": len(eligible),
                   "pooled_features": len(pool), "hypotheses_examined": examined,
                   "elapsed_seconds": time.perf_counter() - start,
                   "program": None if best is None else list(best[2])}
@@ -321,7 +329,7 @@ class SharedLearner:
     def _start_trial(self, scope):
         # A sole observed context has no complement to preserve. Use a global
         # trial rather than waiting for observations that cannot exist.
-        if len(self.tasks) == 1:
+        if sum(task["steps"] > 0 for task in self.tasks.values()) == 1:
             scope = None
         self.attempts += 1
         rows = [(slot, *r) for slot in sorted(self.tasks) for r in self.tasks[slot]["records"]]
@@ -340,6 +348,8 @@ class SharedLearner:
         self.neural_updates = counter(self.neural_updates + 2 * len(rows) * self.config["replay_passes"], "neural updates")
         self.candidate, self.control = candidate, control
         self.trial = {"program": program, "scope": scope, "fit_records": len(rows),
+                      "started_at": self.steps, "last_progress_at": self.steps,
+                      "fit_required_records": self.required_fit_records(),
                       "fit_updates_per_bank": len(rows) * self.config["replay_passes"],
                       "n": 0, "relevance": 0.0, "improvement": 0.0,
                       "other_n": 0, "preservation": 0.0,
@@ -400,6 +410,16 @@ class SharedLearner:
         self.trial = self.candidate = self.control = None
         self.next_trial = self.steps + self.config["cooldown"]
 
+    def _close_unfinished_trial(self, reason):
+        """Discard a candidate without a new statistical look or budget refund."""
+        t = self.trial
+        self.decisions.append({"attempt": self.attempts, "at": self.steps,
+                               "scope": t["scope"], "program": list(t["program"]),
+                               "decision": reason, "validation_interactions": t["n"],
+                               "preservation_interactions": t["other_n"]})
+        self.trial = self.candidate = self.control = None
+        self.next_trial = counter(self.steps + self.config["cooldown"], "next trial")
+
     def learn(self, action, outcome):
         if self.episode["phase"] != "feedback":
             raise RuntimeError("No pending feedback")
@@ -410,7 +430,8 @@ class SharedLearner:
         e = self.episode
         task = self.tasks[e["task"]]
         route = self._route(self.program, e["task"], e["mask"], e["before"]) if self.program else e["coin"]
-        p = self.active.probability(action, route)
+        served_model, served_route = (self.active, route) if self.config["use_structure"] else (self.baseline, e["coin"])
+        p = served_model.probability(action, served_route)
         if self.trial is not None:
             t = self.trial
             tr = self._route(t["program"], e["task"], e["mask"], e["before"])
@@ -418,6 +439,7 @@ class SharedLearner:
             gain = log_probability(proposed, outcome) - log_probability(p, outcome)
             if t["scope"] is None or e["task"] == t["scope"]:
                 t["n"] = counter(t["n"] + 1, "validation interactions")
+                t["last_progress_at"] = next_step
                 t["support"][tr] += 1
                 t["improvement"] += gain
                 t["relevance"] += log_probability(proposed, outcome) - log_probability(self.control.probability(action, e["coin"]), outcome)
@@ -439,8 +461,10 @@ class SharedLearner:
             # A complement event must not repeat a predeclared scoped look.
             if self.trial["scope"] is None or e["task"] == self.trial["scope"]:
                 self._judge()
+            elif self.steps - self.trial["last_progress_at"] >= self.config["trial_stall_limit"]:
+                self._close_unfinished_trial("expired")
         elif self.steps >= self.next_trial and self.attempts < self.config["max_attempts"]:
-            enough = sum(len(t["records"]) for t in self.tasks.values()) >= self.config["min_records"]
+            enough = sum(len(t["records"]) for t in self.tasks.values()) >= self.required_fit_records()
             if enough and len(task["losses"]) == LOSS_WINDOW and math.fsum(task["losses"]) / LOSS_WINDOW > .4 * (1 / self.config["n_actions"]) * (1 - 1 / self.config["n_actions"]):
                 self._start_trial(e["task"] if self.program else None)
         return p
@@ -451,6 +475,9 @@ class SharedLearner:
                 "program": list(self.program), "attempts": self.attempts, "admissions": self.admissions,
                 "trial_scope": None if self.trial is None else self.trial["scope"],
                 "trial_interactions": 0 if self.trial is None else self.trial["n"],
+                "trial_idle_interactions": 0 if self.trial is None else self.steps - self.trial["last_progress_at"],
+                "required_fit_records": self.required_fit_records(),
+                "fit_wait_reason": None if sum(len(t["records"]) for t in self.tasks.values()) >= self.required_fit_records() else "collecting_labels",
                 "status": "validating" if self.trial else ("exhausted" if self.attempts == self.config["max_attempts"] else "tracking"),
                 "live_points_including_control": points,
                 "allocated_points_including_trial": points * (2 if self.trial else 1),
@@ -465,7 +492,7 @@ class SharedLearner:
             tasks[str(slot)] = {**task, "records": [[hex_mask(m), hex_mask(b), c, a, y]
                                                    for m, b, c, a, y in task["records"]]}
         episode = {**self.episode, "mask": hex_mask(self.episode["mask"]), "before": hex_mask(self.episode["before"])}
-        result = {"format": 1, "implementation": "first_piece.shared-compositions-s2.v1",
+        result = {"format": 2, "implementation": "first_piece.shared-compositions-s2.v1",
                   "config": self.config, "rng": listify(self.rng.getstate()), "symbols": self.symbols,
                   "tasks": tasks, "episode": episode, "program": self.program,
                   "active": self.active.checkpoint(), "baseline": self.baseline.checkpoint(),
@@ -478,7 +505,15 @@ class SharedLearner:
         return copy.deepcopy(result)
 
     @classmethod
+    def migrate_checkpoint_v1(cls, snapshot):
+        """Explicit conversion; unfinished old trials close without admission."""
+        from .shared_state import migrate_v1
+        return migrate_v1(cls, snapshot)
+
+    @classmethod
     def restore(cls, snapshot):
+        if type(snapshot) is dict and snapshot.get("format") == 1:
+            raise ValueError("Use migrate_checkpoint_v1 explicitly before restoring a shared format-1 checkpoint")
         if type(snapshot) is not dict or set(snapshot) != set(cls().checkpoint()):
             raise ValueError("Invalid shared checkpoint fields")
         d = copy.deepcopy(snapshot)
@@ -487,7 +522,7 @@ class SharedLearner:
         json_data = copy.deepcopy(d)
         json_data["rng"] = listify(json_data["rng"])
         json_value(json_data)
-        if type(d["format"]) is not int or d["format"] != 1 or d["implementation"] != "first_piece.shared-compositions-s2.v1":
+        if type(d["format"]) is not int or d["format"] != 2 or d["implementation"] != "first_piece.shared-compositions-s2.v1":
             raise ValueError("Unsupported shared checkpoint")
         if type(d["config"]) is not dict or set(d["config"]) != set(cls().config):
             raise ValueError("Invalid shared configuration")
@@ -590,14 +625,14 @@ class SharedLearner:
         if (t is not None) != (model.candidate is not None) or (t is not None) != (model.control is not None):
             raise ValueError("Incomplete trial")
         if t is not None:
-            if type(t) is not dict or set(t) != {"program", "scope", "fit_records", "fit_updates_per_bank", "n", "relevance", "improvement", "other_n", "preservation", "support"}:
+            if type(t) is not dict or set(t) != {"program", "scope", "fit_records", "fit_updates_per_bank", "n", "relevance", "improvement", "other_n", "preservation", "support", "started_at", "last_progress_at", "fit_required_records"}:
                 raise ValueError("Invalid trial summary")
             program(t["program"])
             if not t["program"] or (t["scope"] is not None and (type(t["scope"]) is not int or t["scope"] not in model.tasks)):
                 raise ValueError("Invalid trial scope")
             for name in ("fit_records", "fit_updates_per_bank", "n", "other_n"):
                 counter(t[name], name)
-            if not model.config["min_records"] <= t["fit_records"] <= model.config["fit_per_context"] * model.config["max_tasks"] or t["fit_updates_per_bank"] != t["fit_records"] * model.config["replay_passes"] or t["n"] >= HORIZONS[-1] or t["n"] + t["other_n"] > model.steps:
+            if not counter(t["fit_required_records"], "required fit records", minimum=64) <= t["fit_records"] <= model.config["fit_per_context"] * model.config["max_tasks"] or t["fit_updates_per_bank"] != t["fit_records"] * model.config["replay_passes"] or t["n"] >= HORIZONS[-1] or t["n"] + t["other_n"] > model.steps:
                 raise ValueError("Invalid trial budget")
             if type(t["support"]) is not list or len(t["support"]) != model.active.n_routes or any(type(n) is not int or n < 0 for n in t["support"]) or sum(t["support"]) != t["n"]:
                 raise ValueError("Invalid trial support")
@@ -616,6 +651,8 @@ class SharedLearner:
             setattr(model, name, d[name])
         if len(model.searches) != model.attempts:
             raise ValueError("Search history and budget differ")
+        if any(type(x) is not dict for x in model.decisions):
+            raise ValueError("Invalid decision entry")
         if len([x for x in model.decisions if x.get("decision") == "accept"]) != model.admissions or bool(model.program) != bool(model.admissions):
             raise ValueError("Admission history differs from live program")
         accepted = [x for x in model.decisions if x.get("decision") == "accept"]
@@ -627,6 +664,8 @@ class SharedLearner:
         model.max_sphere_residual = _finite_number(d["max_sphere_residual"], "sphere residual")
         if not 0 <= model.max_sphere_residual <= 1e-10:
             raise ValueError("Invalid geometry residual")
+        from .shared_state import validate_history
+        validate_history(model)
         return model
 
 

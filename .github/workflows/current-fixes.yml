@@ -1,0 +1,43 @@
+name: Current first piece corrections
+on:
+  push:
+    paths:
+      - 'first_piece/**'
+      - 'setharkk/**'
+      - 'validation/current_fix_probe.py'
+      - '.github/workflows/current-fixes.yml'
+  pull_request:
+    paths:
+      - 'first_piece/**'
+      - 'setharkk/**'
+      - 'validation/current_fix_probe.py'
+      - '.github/workflows/current-fixes.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  corrections:
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: All existing and current regression tests
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Six defects before and after correction plus migration
+        run: python -m validation.current_fix_probe --out "${{ runner.temp }}/current-fixes.json"
+      - name: Upload current correction evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-fixes-${{ matrix.os }}
+          path: ${{ runner.temp }}/current-fixes.json
+          if-no-files-found: warn

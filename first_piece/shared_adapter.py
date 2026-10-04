@@ -21,6 +21,15 @@ class SharedAdapter(FirstPieceAdapter):
         options["n_actions"] = len(actions)
         super().__init__(actions=actions, learner_options=options, **kwargs)
 
+    @classmethod
+    def migrate_checkpoint_v1(cls, snapshot):
+        """Convert the core explicitly, then validate the whole wire frontier."""
+        if type(snapshot) is not dict:
+            raise ValueError("Invalid adapter checkpoint")
+        upgraded = copy.deepcopy(snapshot)
+        upgraded["learner"] = SharedLearner.migrate_checkpoint_v1(upgraded.get("learner"))
+        return cls.restore(upgraded).checkpoint()
+
     def _fork_learner(self):
         return self._learner._transaction_copy()
 

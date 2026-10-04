@@ -52,6 +52,16 @@ jobs:
       - name: Learning, ablation, transfer and retention
         id: learning
         run: python -m first_piece.learning_run --seeds 0 1 2 3 4 --out "${{ runner.temp }}/first-piece-learning"
+      - name: Temporal order, hidden changes and bounded revisions
+        id: temporal
+        run: python -m first_piece.temporal_run --seeds 0 1 2 3 4 --out "${{ runner.temp }}/first-piece-temporal"
+      - name: Upload complete temporal state
+        if: ${{ always() && (steps.temporal.outcome == 'success' || steps.temporal.outcome == 'failure') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-piece-temporal-${{ matrix.os }}
+          if-no-files-found: error
+          path: ${{ runner.temp }}/first-piece-temporal/
       - name: Upload complete learning state
         if: ${{ always() && (steps.learning.outcome == 'success' || steps.learning.outcome == 'failure') }}
         uses: actions/upload-artifact@v4

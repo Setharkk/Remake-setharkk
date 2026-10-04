@@ -9,7 +9,7 @@ import json
 import threading
 
 from setharkk import contracts as wire
-from .learner import DistinctionLearner, _route
+from .learner import DistinctionLearner
 
 
 IMPLEMENTATION = "first_piece.presence-s2.v1"
@@ -37,6 +37,9 @@ def _local_event(event):
 
 
 class FirstPieceAdapter:
+    LEARNER_CLASS = DistinctionLearner
+    IMPLEMENTATION = IMPLEMENTATION
+
     def __init__(self, *, model_id="setharkk.first-piece", seed=0,
                  actions=("lab.action.0", "lab.action.1"), receipt_window=64,
                  learner_options=None):
@@ -52,7 +55,7 @@ class FirstPieceAdapter:
         options = {} if learner_options is None else copy.deepcopy(learner_options)
         if type(options) is not dict or "seed" in options:
             raise ValueError("Invalid learner options")
-        self._learner = DistinctionLearner(seed, **options)
+        self._learner = self.LEARNER_CLASS(seed, **options)
         self._model_id = model_id
         self._actions = tuple(actions)
         self._receipt_window = receipt_window
@@ -82,7 +85,7 @@ class FirstPieceAdapter:
     def capabilities(self):
         with self._lock:
             return {
-                "contract_version": wire.VERSION, "implementation": IMPLEMENTATION,
+                "contract_version": wire.VERSION, "implementation": self.IMPLEMENTATION,
                 "model_id": self.model_id, "max_inflight_actions": 1, "streams": 1,
                 "max_contexts": self._learner.config["max_tasks"],
                 "observation_kinds": ["lab.token", "lab.surface"],
@@ -219,7 +222,7 @@ class FirstPieceAdapter:
     def checkpoint(self):
         with self._lock:
             return copy.deepcopy({
-                "format": 1, "contract_version": wire.VERSION, "implementation": IMPLEMENTATION,
+                "format": 1, "contract_version": wire.VERSION, "implementation": self.IMPLEMENTATION,
                 "model_id": self.model_id, "actions": list(self.actions),
                 "receipt_window": self.receipt_window, "model_revision": self._revision,
                 "stream_id": self._stream_id, "last_sequence": self._last_sequence,
@@ -237,9 +240,9 @@ class FirstPieceAdapter:
                   "pending_request", "receipts", "learner"}
         if type(snapshot) is not dict or set(snapshot) != fields:
             raise ValueError("Invalid adapter checkpoint")
-        if type(snapshot["format"]) is not int or snapshot["format"] != 1 or type(snapshot["contract_version"]) is not int or snapshot["contract_version"] != wire.VERSION or snapshot["implementation"] != IMPLEMENTATION:
+        if type(snapshot["format"]) is not int or snapshot["format"] != 1 or type(snapshot["contract_version"]) is not int or snapshot["contract_version"] != wire.VERSION or snapshot["implementation"] != cls.IMPLEMENTATION:
             raise ValueError("Unsupported adapter implementation or format")
-        learner = DistinctionLearner.restore(snapshot["learner"])
+        learner = cls.LEARNER_CLASS.restore(snapshot["learner"])
         options = {k: v for k, v in learner.config.items() if k != "seed"}
         instance = cls(model_id=snapshot["model_id"], seed=learner.config["seed"],
                        actions=snapshot["actions"], receipt_window=snapshot["receipt_window"],
@@ -293,11 +296,10 @@ class FirstPieceAdapter:
             if last["kind"] != expected_kind:
                 raise ValueError("Observation and model phase differ")
         if prediction is not None:
-            state = learner.tasks[learner.episode["task"]]
-            route = learner.episode["coin"] if state["token"] is None else _route(learner.episode["mask"], state["token"])
+            probabilities = learner.pending_probabilities()
             for i, forecast in enumerate(prediction["forecasts"]):
                 p = forecast["distribution"]["parameters"]["p"]
-                if abs(p - state["active"].probability(i, route)) > 1e-10:
+                if abs(p - probabilities[i]) > 1e-10:
                     raise ValueError("Live forecast and neural state differ")
         if pending is not None:
             if prediction is None or pending["model_id"] != instance.model_id or any(pending[k] != prediction[k] for k in ("prediction_id", "model_revision", "stream_id", "sequence", "context_id")):

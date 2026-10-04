@@ -103,6 +103,14 @@ class DistinctionLearner:
         route = self.episode["coin"] if state["token"] is None else _route(self.episode["mask"], state["token"])
         return [state["active"].probability(action, route) for action in (0, 1)]
 
+    def pending_probabilities(self):
+        """Read the current neural output without consuming another event."""
+        if self.episode["phase"] != "feedback":
+            raise RuntimeError("No pending prediction")
+        state = self.tasks[self.episode["task"]]
+        route = self.episode["coin"] if state["token"] is None else _route(self.episode["mask"], state["token"])
+        return [state["active"].probability(action, route) for action in (0, 1)]
+
     def _propose(self, state):
         token = _select_token(state["records"])
         state["proposed_token"] = token

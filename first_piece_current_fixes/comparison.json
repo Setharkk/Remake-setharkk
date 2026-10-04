@@ -1,0 +1,57 @@
+{
+  "before_source": "0b19465aa6be9aacf291b077cdc69f1b4e44580f",
+  "corrected_source": "99cf3b33d78f77ea7a17fa1c74eaf0ee629e2204",
+  "correction_workflow": 37220417809,
+  "tests_passed_per_os": 97,
+  "new_regression_cases": 12,
+  "numeric_values_compared": 65,
+  "max_absolute_difference": 3.3306690738754696e-16,
+  "categorical_mismatches": [],
+  "tolerance": 1e-10,
+  "excluded": [
+    "elapsed_seconds",
+    "platform",
+    "python"
+  ],
+  "scope": "Six reproduced defect families; seven before/after scenarios plus explicit migration; not a novelty or general intelligence test",
+  "scaling": {
+    "workflow_run": 37220417831,
+    "training_interactions_per_os": 1560000,
+    "neural_updates_per_os": 3602968,
+    "final_groups_per_os": 54,
+    "final_evaluation_episodes_per_os": 55296,
+    "minimum_full_policy_success": 1,
+    "numeric_values_compared": 10434,
+    "max_absolute_difference": 2.6645352591003757e-15,
+    "categorical_mismatches": [],
+    "excluded_fields": [
+      "elapsed_seconds",
+      "training_seconds",
+      "checkpoint_bytes",
+      "snapshot_bytes",
+      "milliseconds_per_episode"
+    ]
+  },
+  "legacy_frozen_holdout": {
+    "workflow_run": 37220417903,
+    "explicit_format1_migrations_per_os": 18,
+    "groups_per_os": 54,
+    "evaluation_episodes_per_os": 55296,
+    "minimum_full_policy_success": 1,
+    "noise_admissions_per_seed": [
+      0,
+      0,
+      0
+    ],
+    "noise_attempts_per_seed": [
+      16,
+      16,
+      16
+    ],
+    "scope": "Old trained states explicitly migrated and evaluated without training; noise controls train separately"
+  },
+  "legacy_laboratory": {
+    "workflow_run": 37220417795,
+    "both_os_passed": true
+  }
+}

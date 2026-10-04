@@ -32,7 +32,7 @@ et mêmes poids sphériques entre les contextes. Le
 essais jusqu’à 64 symboles et 16 contextes, les coûts et les limites.
 Elle reste synthétique ; son budget de mémoire et de recherche est explicite.
 
-La [revue complète du code actuel](CODE_REVIEW_CURRENT.md) reproduit six familles de défauts sous Windows et Linux, dont un seuil de recherche inaccessible avec un seul contexte par défaut et une validation qui peut bloquer les recherches si son contexte disparaît. Les 85 tests passent, mais ces défauts restent ouverts ; les causes et critères de correction sont publiés avant la deuxième pièce.
+La [revue du code précédent](CODE_REVIEW_CURRENT.md) conserve les six familles de défauts reproduites. Les [corrections vérifiées](CURRENT_FIXES.md) sont maintenant livrées avec **97 tests Windows/Linux**, une comparaison avant/après, un cycle de vie borné de validation et une migration explicite des checkpoints partagés vers le format 2. Le budget de recherche reste non renouvelable ; les limites de longue durée sont annoncées.
 
 La [nouvelle base de recherche](RESEARCH_RESET.md) conserve les exigences
 du projet. Le [protocole de mesure](MEASUREMENT_PROTOCOL.md) fixe les unités

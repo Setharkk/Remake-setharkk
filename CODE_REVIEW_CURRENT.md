@@ -1,5 +1,7 @@
 # Revue complète de la première pièce actuelle — 4 octobre 2026
 
+> Revue historique figée sur la source 0b19465. Les [six familles de défauts ont été corrigées et vérifiées](CURRENT_FIXES.md) à la source 99cf3b3 ; les limites de conception L1–L6 restent distinctes et ne sont pas toutes résolues par cette livraison.
+
 La première pièce fonctionne dans le benchmark publié, mais ses réglages par défaut peuvent empêcher toute recherche de structure avec un seul contexte. Une validation peut aussi bloquer toutes les recherches suivantes si son contexte disparaît. Ces défauts doivent être corrigés avant de confier l’ordonnancement à un coordinateur.
 
 Cette livraison est une **revue avec reproductions**, sans correction du moteur. Les six familles de défauts ci-dessous sont ouvertes. Le budget de recherche non renouvelable et le ralentissement de l’optimiseur sont des limites de conception mesurées séparément.

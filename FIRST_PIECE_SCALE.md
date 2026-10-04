@@ -2,7 +2,7 @@
 
 Cette version élargit la première pièce sans lui ajouter d’essaim, de dialogue ou d’exécuteur réel. Elle reste un laboratoire synthétique. Le [protocole](SCALING_PROTOCOL.md) fixe les budgets, les horizons et les conditions ; le [rapport](FIRST_PIECE_SCALE_RESULTS.md) publie les résultats et les limites.
 
-La [revue actuelle](CODE_REVIEW_CURRENT.md) reproduit les défauts de fonctionnement encore ouverts, notamment le seuil de collecte par défaut avec un seul contexte et la validation d’un contexte qui disparaît. Les résultats du benchmark restent limités à leurs configurations annoncées ; la disponibilité générale de la recherche et les invariants de reprise doivent être corrigés avant le coordinateur.
+Les [corrections de la revue](CURRENT_FIXES.md) sont livrées : collecte atteignable, validation bornée sans progrès, scores servis cohérents et état partagé au format 2 avec migration explicite. Les résultats restent limités aux distributions et budgets annoncés ; les limites de recherche et de rétention longue persistent.
 
 ## Ce qui change
 
@@ -49,7 +49,9 @@ Elle examine au plus 96 prédicats par défaut, tous leurs couples, puis les ext
 
 Les banques proposées sont ajustées sur les anciens épisodes puis figées. La décision emploie seulement de nouveaux retours. Les banques servies continuent de recevoir un gradient pendant cette validation. Les gains contre le contrôle et contre la prédiction effectivement servie doivent dépasser leur incertitude et le coût du programme.
 
-Après une première admission, un contexte présentant une erreur élevée déclenche une validation sur ce périmètre. Une garde de score mesure aussi les autres contextes. Sa borne est uniforme dans le temps pour permettre des rythmes de retour différents. Avec un seul contexte observé, la validation est globale. Le [protocole](SCALING_PROTOCOL.md) détaille les hypothèses et les formules : l’admission ne garantit pas une performance future ou une absence d’oubli transitoire.
+`min_records` est une cible d’ajustement adaptée aux buffers effectivement alimentés. Une mémoire pleine peut autoriser un ajustement avec les données disponibles après le warmup ; les seuils de support ne changent pas. Les métriques annoncent le besoin de collecte.
+
+Après une première admission, un contexte présentant une erreur élevée déclenche une validation sur ce périmètre. Une garde de score mesure aussi les autres contextes. Sa borne est uniforme dans le temps pour permettre des rythmes de retour différents. Avec un seul contexte réellement alimenté, la validation est globale. Une validation ciblée expire après `trial_stall_limit=4096` retours appris consécutifs sans progrès de son contexte ; elle libère ses candidats sans admission ni remboursement d’essai. Sa frontière d’attente est conservée à la reprise. Le [protocole](SCALING_PROTOCOL.md) détaille les hypothèses et les formules : l’admission ne garantit pas une performance future ou une absence d’oubli transitoire.
 
 ## Interfaces et reprise
 
@@ -57,7 +59,7 @@ Après une première admission, un contexte présentant une erreur élevée déc
 
 Les noms d’action restent opaques, leurs arguments sont actuellement vides, et la mesure reste `lab.success/binary`. Une proposition sélectionne un candidat effectivement évalué. Une requête en vol est liée à son exécuteur ; un reçu identique ne réentraîne pas le modèle.
 
-L’implémentation possède l’identité `first_piece.shared-compositions-s2.v1`. Elle refuse la conversion implicite des anciens snapshots. Le checkpoint contient le vocabulaire, les correspondances de contextes, les bitsets hexadécimaux, la mémoire bornée, les quatre banques éventuelles, les résumés de validation, les budgets, le RNG, l’ordre du flux et une requête éventuellement en attente.
+L’implémentation possède l’identité `first_piece.shared-compositions-s2.v1`. Elle refuse la conversion implicite des anciens snapshots. Le checkpoint du cœur est au format 2. Une restauration d’un ancien format 1 demande `SharedLearner.migrate_checkpoint_v1` ou `SharedAdapter.migrate_checkpoint_v1` avant `restore` ; les validations inachevées sont clôturées sans admission ni remise à zéro des essais. Le checkpoint contient le vocabulaire, les correspondances de contextes, les bitsets hexadécimaux, la mémoire bornée, les quatre banques éventuelles, les résumés de validation, les budgets, le RNG, l’ordre du flux et une requête éventuellement en attente.
 
 La copie transactionnelle spécialisée détache les objets que les opérations peuvent modifier. Elle partage en lecture les anciens enregistrements, qui ne sont jamais réécrits. Les snapshots et métriques exposés restent des copies entièrement détachées. L’interface reste synchrone, avec un flux et une action en vol : ce n’est pas encore une ingestion parallèle d’essaim.
 

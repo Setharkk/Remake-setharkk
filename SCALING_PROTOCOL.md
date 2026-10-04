@@ -68,3 +68,11 @@ Dans le benchmark alterné, le nombre de retours du complément est déterminé 
 Pour n retours complémentaires, k=floor(log2 n), N=2^(k+1), M=3×3×16, la demi-largeur vaut :
 log(1/ε) × sqrt(2 N [log(2M/α)+log(π²/6)+2log(k+1)]) / n.
 Les deux tests principaux gardent leurs horizons préannoncés. Avec un seul contexte effectivement observé, l’essai porte sur tout le flux et n’attend pas de complément inexistant.
+
+## Révision après le holdout indépendant à 40 millions
+
+Les contextes déjà observés atteignent la réussite parfaite, mais deux graines de la petite condition échouent sur le contexte neuf après changement. Avec seulement deux contextes, « contexte 0 modifié » et « contexte 1 conserve la règle » définissent des partitions complémentaires équivalentes sur les données ; un écart d’arrondi de score pouvait choisir le mauvais défaut pour un troisième contexte.
+
+La recherche départage maintenant les scores indiscernables à 10^−12 en privilégiant une exception dans le périmètre d’erreur fixé avant validation. C’est un biais de continuité explicite : il conserve le défaut de la règle commune quand deux solutions expliquent les mêmes données. Cela ne révèle pas la règle d’un contexte vraiment inconnu et ne garantit pas son comportement. Les deux permutations de numérotation sont testées.
+
+Les seuils, capacités et budgets de validation ne sont pas changés. Le holdout de 40 millions est conservé comme diagnostic ; la version corrigée sera vérifiée avec un nouveau holdout de 50 millions.

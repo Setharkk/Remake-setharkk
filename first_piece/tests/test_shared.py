@@ -252,6 +252,12 @@ class SharedLearningTests(unittest.TestCase):
         self.assertIn(fa, selected)
         self.assertIn(fb, selected)
         self.assertTrue(any(f >= learner.context_offset for f in selected))
+        # Equal training partitions ctx==0 and ctx==1 must keep the declared
+        # changed context as the exception, independent of slot numbering.
+        for scope in (0, 1):
+            localized = learner._search(rows, scope=scope)
+            self.assertIn(learner.context_offset + scope, localized)
+            self.assertNotIn(learner.context_offset + 1 - scope, localized)
 
     def test_xor_is_found_without_a_handwritten_xor_predicate(self):
         learner = train(SharedLearner(91, max_tasks=2, n_actions=2), ScaleWorld(31, n_contexts=2, n_actions=2), 10000)

@@ -228,7 +228,7 @@ class SharedLearner:
             raise RuntimeError("No pending outcome")
         self.episode = idle_episode()
 
-    def _search(self, rows):
+    def _search(self, rows, *, scope=None):
         start = time.perf_counter()
         masks = {}
         classes = [[0, 0] for _ in range(self.config["n_actions"])]
@@ -281,8 +281,14 @@ class SharedLearner:
         pairs = []
         def consider(program):
             nonlocal best
-            candidate = (score(program), tuple(-f for f in program), tuple(program))
-            if math.isfinite(candidate[0]) and (best is None or candidate[:2] > best[:2]):
+            # Mathematically equal partitions can differ by summation roundoff.
+            # Prefer a localized exception in the already declared error scope,
+            # preserving the common rule's default for an unobserved context.
+            local = scope is not None and self.context_offset + scope in program
+            candidate = (score(program), (int(local), tuple(-f for f in program)), tuple(program))
+            if math.isfinite(candidate[0]) and (best is None or
+                    candidate[0] > best[0] + 1e-12 or
+                    (abs(candidate[0] - best[0]) <= 1e-12 and candidate[1] > best[1])):
                 best = candidate
             return candidate
 
@@ -319,7 +325,7 @@ class SharedLearner:
             scope = None
         self.attempts += 1
         rows = [(slot, *r) for slot in sorted(self.tasks) for r in self.tasks[slot]["records"]]
-        program = self._search(rows)
+        program = self._search(rows, scope=scope)
         if program is None:
             self.decisions.append({"attempt": self.attempts, "at": self.steps, "scope": scope,
                                    "program": None, "decision": "unsupported"})

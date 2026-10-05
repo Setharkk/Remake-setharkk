@@ -143,6 +143,31 @@ class ReadinessTests(unittest.TestCase):
         self.assertEqual(result["state"],"completed")
         self.assertEqual(canonical(reference),canonical(service._adapter._learner))
 
+    def test_internal_work_error_restarts_private_computation_without_reexecution(self):
+        service = CooperativeService()
+        p = feed(service,trace(0))
+        request = service.register_action(agent_proposal(p,0),executor_id="test:executor")
+        receipt = observed_receipt(request,1)
+        reference = copy.deepcopy(service._adapter._learner)
+        reference.learn(0,1)
+        committed = service._adapter.checkpoint()
+        service.begin_receipt(receipt)
+        real = PlasticRevisionLearner.learn
+        def fail_after_feedback(core,action,outcome):
+            real(core,action,outcome)
+            raise RuntimeError("injected error inside mutable feedback")
+        with patch("first_piece.plastic_revision.PlasticRevisionLearner.learn",side_effect=fail_after_feedback,autospec=True):
+            with self.assertRaises(RuntimeError):
+                service.advance(1)
+        self.assertEqual(committed,service._adapter.checkpoint())
+        self.assertEqual(service.work_status()["phase"],"feedback")
+        service = CooperativeService.restore(json.loads(json.dumps(service.checkpoint())))
+        ack = service.submit_receipt(receipt)
+        self.assertEqual(ack["model_revision"],1)
+        self.assertEqual(canonical(reference),canonical(service._adapter._learner))
+        self.assertEqual(service.submit_receipt(receipt),ack)
+        self.assertEqual(service._adapter._learner.steps,1)
+
     def test_partial_replay_rejects_resealed_cursor_and_permutation_corruption(self):
         core = train(PlasticRevisionLearner(5,max_tasks=4,max_symbols=16),
                      ScaleWorld(400,n_symbols=16,n_contexts=4),511)

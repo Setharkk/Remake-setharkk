@@ -575,7 +575,18 @@ class CooperativeService:
                 return {**self.work_status(),"consumed_units":0}
             work, consumed = self._work, 0
             while consumed < max_units and work.phase != "done":
-                work.advance()
+                try:
+                    work.advance()
+                except Exception:
+                    # Discard unpublished changes; keep the same execution receipt.
+                    # Retrying recomputes private work, never the external action.
+                    adapter = self._adapter
+                    learned = work.receipt["status"] == "observed"
+                    pending = adapter._pending
+                    core = adapter._fork_learner(observation=not learned,
+                        context=adapter._slots[pending["context_id"]])
+                    self._work = ReceiptWork(core,work.action,work.receipt)
+                    raise
                 consumed += 1
             if work.phase != "done":
                 return {**self.work_status(),"consumed_units":consumed}

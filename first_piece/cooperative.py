@@ -497,11 +497,16 @@ class ReceiptWork:
 
 class CooperativeService:
     """Versioned sidecar for the same active adapter, never a second learner."""
+    ADAPTER_CLASS = PlasticRevisionAdapter
+    WORK_CLASS = ReceiptWork
+    WORK_PROTOCOL = PROTOCOL
+    WORK_PRIMITIVES = ["eight-row index","one hypothesis","one gradient","shuffle","bounded control"]
+
     def __init__(self, *, minimum_observations=32, **adapter_options):
         wire.counter(minimum_observations,"minimum observations",minimum=1)
         if minimum_observations > 1024:
             raise ValueError("Coverage threshold exceeds buffer budget")
-        self._adapter = PlasticRevisionAdapter(**adapter_options)
+        self._adapter = self.ADAPTER_CLASS(**adapter_options)
         self._work = None
         self._lock = threading.RLock()
         self.minimum_observations = minimum_observations
@@ -510,7 +515,7 @@ class CooperativeService:
     def from_adapter_checkpoint(cls,snapshot,*,minimum_observations=32):
         """Adopt an active format-8 adapter, including its pending action."""
         new = cls(minimum_observations=minimum_observations)
-        new._adapter = PlasticRevisionAdapter.restore(snapshot)
+        new._adapter = cls.ADAPTER_CLASS.restore(snapshot)
         return new
 
     def submit_observation(self,message):
@@ -527,8 +532,8 @@ class CooperativeService:
 
     def capabilities(self):
         with self._lock:
-            return {**self._adapter.capabilities(),"work_protocol":PROTOCOL,
-                    "work_primitives":["eight-row index","one hypothesis","one gradient","shuffle","bounded control"],
+            return {**self._adapter.capabilities(),"work_protocol":self.WORK_PROTOCOL,
+                    "work_primitives":list(self.WORK_PRIMITIVES),
                     "coverage":"recent observed labels, not epistemic confidence"}
 
     def begin_receipt(self,message):
@@ -555,14 +560,14 @@ class CooperativeService:
                 if outcome["measure"] != "lab.success" or outcome["unit"] != "binary" or type(outcome["value"]) is not int or outcome["value"] not in (0,1):
                     raise ValueError("Outcome outside binary capabilities")
             candidate = adapter._fork_learner(observation=not learned,context=adapter._slots[pending["context_id"]])
-            self._work = ReceiptWork(candidate,adapter.actions.index(pending["action_name"]),receipt)
+            self._work = self.WORK_CLASS(candidate,adapter.actions.index(pending["action_name"]),receipt)
             return self.work_status()
 
     def work_status(self):
         with self._lock:
             if self._work is None:
-                return {"protocol":PROTOCOL,"state":"idle","model_revision":self._adapter._revision}
-            return {"protocol":PROTOCOL,"state":"working","phase":self._work.phase,
+                return {"protocol":self.WORK_PROTOCOL,"state":"idle","model_revision":self._adapter._revision}
+            return {"protocol":self.WORK_PROTOCOL,"state":"working","phase":self._work.phase,
                     "request_id":self._work.receipt["request_id"],"units":self._work.units,
                     "model_revision":self._adapter._revision}
 
@@ -585,7 +590,7 @@ class CooperativeService:
                     pending = adapter._pending
                     core = adapter._fork_learner(observation=not learned,
                         context=adapter._slots[pending["context_id"]])
-                    self._work = ReceiptWork(core,work.action,work.receipt)
+                    self._work = self.WORK_CLASS(core,work.action,work.receipt)
                     raise
                 consumed += 1
             if work.phase != "done":
@@ -602,7 +607,7 @@ class CooperativeService:
             while len(adapter._receipts) > adapter.receipt_window:
                 del adapter._receipts[next(iter(adapter._receipts))]
             self._work = None
-            return {"protocol":PROTOCOL,"state":"completed","ack":copy.deepcopy(ack),
+            return {"protocol":self.WORK_PROTOCOL,"state":"completed","ack":copy.deepcopy(ack),
                     "consumed_units":consumed,"total_units":work.units}
 
     def submit_receipt(self,message):
@@ -639,7 +644,7 @@ class CooperativeService:
 
     def checkpoint(self):
         with self._lock:
-            return {"format":1,"protocol":PROTOCOL,"minimum_observations":self.minimum_observations,
+            return {"format":1,"protocol":self.WORK_PROTOCOL,"minimum_observations":self.minimum_observations,
                     "adapter":self._adapter.checkpoint(),
                     "work":None if self._work is None else self._work.checkpoint()}
 
@@ -647,12 +652,12 @@ class CooperativeService:
     def restore(cls,snapshot):
         if type(snapshot) is not dict or set(snapshot) != {"format","protocol","minimum_observations","adapter","work"}:
             raise ValueError("Invalid cooperative checkpoint")
-        if type(snapshot["format"]) is not int or snapshot["format"] != 1 or snapshot["protocol"] != PROTOCOL:
+        if type(snapshot["format"]) is not int or snapshot["format"] != 1 or snapshot["protocol"] != cls.WORK_PROTOCOL:
             raise ValueError("Unsupported cooperative checkpoint")
         new = cls(minimum_observations=snapshot["minimum_observations"])
-        new._adapter = PlasticRevisionAdapter.restore(snapshot["adapter"])
+        new._adapter = cls.ADAPTER_CLASS.restore(snapshot["adapter"])
         if snapshot["work"] is not None:
-            new._work = ReceiptWork.restore(snapshot["work"])
+            new._work = cls.WORK_CLASS.restore(snapshot["work"])
             pending = new._adapter._pending
             if pending is None or new._work.receipt["request_id"] != pending["request_id"] or new._work.receipt["source_id"] != pending["executor_id"]:
                 raise ValueError("Work and pending request differ")

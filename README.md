@@ -102,3 +102,10 @@ les contrats de la première pièce et les imports explicites. Le
 les délais, les ablations et la montée à 64 symboles/16 contextes.
 Le pire délai testé sur les trois graines initiales passe de 21 000 à
 10 000 retours ; l'avantage propre du transfert de poids reste non établi.
+
+
+Le [moteur de trace S² v2](FIRST_PIECE_TRACE_V2.md) ajoute une lecture calibrée,
+une révision prospective des poids protégés et un service coopératif optionnel.
+Le [protocole](FIRST_PIECE_TRACE_V2_PROTOCOL.md) fixe les budgets de mesure ;
+le [rapport](FIRST_PIECE_TRACE_V2_RESULTS.md) publie les résultats et les limites.
+Le moteur format 8 reste le défaut ; les capacités des deux backends sont explicites.

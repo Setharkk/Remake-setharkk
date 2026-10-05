@@ -1,0 +1,17 @@
+{
+  "preflight_commit": "ce365f306b7a1db93b4d8c7f8be0d99ca202365f",
+  "preflight_run_id": 37305787777,
+  "preflight_jobs": {
+    "linux": 111749024346,
+    "windows": 111749024781
+  },
+  "staged_algorithm_blobs": {
+    "first_piece/adaptive_trace_v2.py": "5617a1878028d4c9929c59d97c4dfeee8c953db9",
+    "first_piece/cooperative.py": "8aab244200c7eb2ec66829d26f6fe162f9d12201",
+    "first_piece/trace_service.py": "845fc1a8a12a41d7489269c41d783724ac76f418",
+    "first_piece/trace_work.py": "11a183ae7ffb5079765d033e8e6de8357feaa1af"
+  },
+  "published_algorithm_blobs": null,
+  "published_commit": null,
+  "status": "pending committed-source verification"
+}

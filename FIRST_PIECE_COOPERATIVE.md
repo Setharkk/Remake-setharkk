@@ -90,3 +90,12 @@ Le protocole et les résultats sont disponibles dans
 L'expérience `AdaptiveTraceLearner` est un module distinct :
 elle ne remplace pas le moteur servi tant que son contrat d'intégration et
 ses capacités n'ont pas été validés pour ce rôle.
+
+
+## Autre backend explicite
+
+Le [moteur de trace v2](FIRST_PIECE_TRACE_V2.md) réutilise le contrat extérieur
+avec AdaptiveTraceService et le protocole first_piece.trace-cooperative.v2.
+CooperativeService continue à sélectionner le moteur format 8 par défaut.
+Les checkpoints de service et les capacités distinguent les deux backends ;
+ils ne réalisent pas un transfert implicite de mémoire entre représentations.

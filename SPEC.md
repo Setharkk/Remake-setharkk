@@ -185,3 +185,20 @@ sont fournis ; seuls les centres, sorties et admissions dépendent des
 données. Ce module est expérimental et n'est pas intégré à l'adaptateur
 courant. Ses [résultats](FIRST_PIECE_READINESS_RESULTS.md) ne constituent
 ni une preuve d'originalité ni une validation du cortex ou des actions PC.
+
+
+## Backend de trace calibrée v2
+
+Le [v2](FIRST_PIECE_TRACE_V2.md) ajoute un backend optionnel au contrat JSON
+commun : encodeur et prototypes intrinsèques sur S², calibration causale séparée
+des poids, révision de poids sur validation prospective, partition/replay reprenables.
+Le service versionné first_piece.trace-cooperative.v2 ne remplace pas implicitement
+le moteur format 8 et ne convertit pas sa mémoire en ordre de symboles inventé.
+
+Les probabilités calibrées servent aussi de référence au test de révision, pour
+qu'un bruit indépendant ne justifie pas l'effacement d'une compétence protégée.
+Les délais de vérification sont propres aux feuilles. L'unicité d'apprentissage
+porte sur les reçus du service ; le journal des effets physiques reste à la charge
+de l'exécuteur. Les critères et limites sont dans le
+[protocole](FIRST_PIECE_TRACE_V2_PROTOCOL.md) et le
+[rapport](FIRST_PIECE_TRACE_V2_RESULTS.md).

@@ -368,3 +368,23 @@ checkpoint et ses propres capacités (deux actions, huit contextes).
 Il n'est pas un remplacement compatible du service courant.
 Un futur branchement exigera la validation de son adaptateur, de sa
 continuation de calcul et des tâches déjà couvertes par le moteur actif.
+
+
+## Branchement optionnel du moteur de trace v2
+
+AdaptiveTraceService expose les mêmes opérations publiques que CooperativeService :
+observation, prévision, réservation d'action, reçu, quota, couverture et checkpoint.
+La classe de base sélectionne l'adaptateur, la continuation et leur protocole par
+des points d'extension ; ses valeurs par défaut conservent le service format 8.
+
+Le [backend de trace v2](FIRST_PIECE_TRACE_V2.md) annonce deux actions binaires,
+huit contextes, 64 symboles et son propre format neuronal 2. Son identifiant permet
+au coordinateur de reconnaître une représentation différente plutôt que de charger
+un checkpoint d'un autre moteur. Les poids sont figés pendant les essais futurs ;
+la calibration et l'historique causal sont persistés avec le reste du modèle.
+
+La partition géodésique et le replay sont reprenables. Le modèle servi reste
+cohérent jusqu'à publication du reçu complet. Le cortex peut donc allouer un quota
+et persister un service en cours, en gardant le journal d'exécution externe.
+Ce branchement ne démontre pas la couverture des tâches propres au format 8,
+et n'ajoute pas de dialogue, d'objectifs autonomes ou d'exécution PC.

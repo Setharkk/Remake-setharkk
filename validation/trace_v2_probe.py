@@ -209,7 +209,7 @@ def main():
             report["errors"][name] = traceback.format_exc()
             print("TRACE_V2_ERROR="+json.dumps({name: report["errors"][name]}), flush=True)
     report["engineering_pass"] = not report["errors"]
-    report["research_pass"] = not args.quick and all(report["cases"].get(
+    report["research_pass"] = None if args.quick else all(report["cases"].get(
         f"representation_seed_{s}", {}).get("research_pass", False) for s in range(3))
     Path(args.out).write_text(json.dumps(report, sort_keys=True, indent=2)+"\n", encoding="utf-8")
     print("TRACE_V2_FULL_JSON="+json.dumps(report, sort_keys=True), flush=True)

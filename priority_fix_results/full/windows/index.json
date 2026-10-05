@@ -1,0 +1,5121 @@
+{
+  "engine_commit": "4539fdabb9f8007ca5e95b99bf978282d417cca8",
+  "runner": "Windows",
+  "workflow_run": 37274619561,
+  "independent_jobs": 15,
+  "case_files": [
+    {
+      "case": "ablations-0",
+      "file": "ablations-0.json"
+    },
+    {
+      "case": "ablations-1",
+      "file": "ablations-1.json"
+    },
+    {
+      "case": "ablations-2",
+      "file": "ablations-2.json"
+    },
+    {
+      "case": "retention-0",
+      "file": "retention-0.json"
+    },
+    {
+      "case": "retention-1",
+      "file": "retention-1.json"
+    },
+    {
+      "case": "retention-2",
+      "file": "retention-2.json"
+    },
+    {
+      "case": "scale-0",
+      "file": "scale-0.json"
+    },
+    {
+      "case": "scale-1",
+      "file": "scale-1.json"
+    },
+    {
+      "case": "scale-2",
+      "file": "scale-2.json"
+    },
+    {
+      "case": "successive_changes-0",
+      "file": "successive_changes-0.json"
+    },
+    {
+      "case": "successive_changes-1",
+      "file": "successive_changes-1.json"
+    },
+    {
+      "case": "successive_changes-2",
+      "file": "successive_changes-2.json"
+    },
+    {
+      "case": "variable_noise-0",
+      "file": "variable_noise-0.json"
+    },
+    {
+      "case": "variable_noise-1",
+      "file": "variable_noise-1.json"
+    },
+    {
+      "case": "variable_noise-2",
+      "file": "variable_noise-2.json"
+    },
+    {
+      "case": "cold",
+      "file": "cold.json"
+    }
+  ],
+  "summary": [
+    {
+      "case": "successive_changes",
+      "seed": 1,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "rule_0",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02429155946541742,
+                "log_loss": 0.08086498015515349,
+                "observed_success": 0.2499
+              },
+              "tail_training_scores": {
+                "brier": 0.00007756850891068043,
+                "log_loss": 0.010343450844871774,
+                "observed_success": 0.25375
+              }
+            },
+            "plastic_revision": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.005303175383649375,
+                "log_loss": 0.025582591270805446,
+                "observed_success": 0.2499
+              },
+              "tail_training_scores": {
+                "brier": 0.00007434904344137424,
+                "log_loss": 0.010322231285228927,
+                "observed_success": 0.25375
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_1",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.024983820527854344,
+                "log_loss": 0.0892701700807308,
+                "observed_success": 0.248825
+              },
+              "tail_training_scores": {
+                "brier": 0.0076510452414998206,
+                "log_loss": 0.04182238187892578,
+                "observed_success": 0.252875
+              }
+            },
+            "plastic_revision": {
+              "attempts": 5,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010781725527155069,
+                "log_loss": 0.04999733698116299,
+                "observed_success": 0.248825
+              },
+              "tail_training_scores": {
+                "brier": 0.007604045143526227,
+                "log_loss": 0.04126502807928391,
+                "observed_success": 0.252875
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_2",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 5,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02599234074337765,
+                "log_loss": 0.09148534348554514,
+                "observed_success": 0.251725
+              },
+              "tail_training_scores": {
+                "brier": 0.009659438372495084,
+                "log_loss": 0.04597576817261696,
+                "observed_success": 0.25475
+              }
+            },
+            "plastic_revision": {
+              "attempts": 6,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.00557915192271947,
+                "log_loss": 0.02757792755039192,
+                "observed_success": 0.251725
+              },
+              "tail_training_scores": {
+                "brier": 0.000029093574187068288,
+                "log_loss": 0.010625193942297854,
+                "observed_success": 0.25475
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_3",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 7,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02531972753477313,
+                "log_loss": 0.09020106136126112,
+                "observed_success": 0.25235
+              },
+              "tail_training_scores": {
+                "brier": 0.007224905408115886,
+                "log_loss": 0.0409448041685312,
+                "observed_success": 0.250625
+              }
+            },
+            "plastic_revision": {
+              "attempts": 10,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.013633514685900142,
+                "log_loss": 0.05664156328023912,
+                "observed_success": 0.25235
+              },
+              "tail_training_scores": {
+                "brier": 0.010155559765626916,
+                "log_loss": 0.046651989178001015,
+                "observed_success": 0.250625
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_4",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 10,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.027302645990410095,
+                "log_loss": 0.09385607997405826,
+                "observed_success": 0.24865
+              },
+              "tail_training_scores": {
+                "brier": 0.01178182589321736,
+                "log_loss": 0.0503004099829089,
+                "observed_success": 0.251
+              }
+            },
+            "plastic_revision": {
+              "attempts": 11,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.007597103653123366,
+                "log_loss": 0.03273812514665525,
+                "observed_success": 0.24865
+              },
+              "tail_training_scores": {
+                "brier": 5.544870212733702e-7,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.251
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_5",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 11,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.03440212560137977,
+                "log_loss": 0.11249464702980506,
+                "observed_success": 0.24725
+              },
+              "tail_training_scores": {
+                "brier": 0.00009563296758560652,
+                "log_loss": 0.01159355081322453,
+                "observed_success": 0.2535
+              }
+            },
+            "plastic_revision": {
+              "attempts": 15,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.013641201425135785,
+                "log_loss": 0.05614842865076935,
+                "observed_success": 0.24725
+              },
+              "tail_training_scores": {
+                "brier": 0.011752190565081177,
+                "log_loss": 0.05046418224750671,
+                "observed_success": 0.2535
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_6",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 13,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.023524672965939006,
+                "log_loss": 0.08434929075817836,
+                "observed_success": 0.251325
+              },
+              "tail_training_scores": {
+                "brier": 0.0040611202101809105,
+                "log_loss": 0.031622348403353186,
+                "observed_success": 0.252125
+              }
+            },
+            "plastic_revision": {
+              "attempts": 16,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.005688925396843203,
+                "log_loss": 0.0269169480310517,
+                "observed_success": 0.251325
+              },
+              "tail_training_scores": {
+                "brier": 0.000026906467624411442,
+                "log_loss": 0.010568027638941277,
+                "observed_success": 0.252125
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 13,
+          "max_decision_history": 30,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 112624
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 59,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 151171
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 40157,
+          "attempt": 2,
+          "scope": 0,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {}
+    },
+    {
+      "case": "successive_changes",
+      "seed": 2,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "rule_0",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.023354572030939623,
+                "log_loss": 0.07872155710333269,
+                "observed_success": 0.251075
+              },
+              "tail_training_scores": {
+                "brier": 0.0000745327155789951,
+                "log_loss": 0.010232356046063585,
+                "observed_success": 0.254875
+              }
+            },
+            "plastic_revision": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.005381950437368934,
+                "log_loss": 0.025894177136707743,
+                "observed_success": 0.251075
+              },
+              "tail_training_scores": {
+                "brier": 0.00007103686917014,
+                "log_loss": 0.010232356046063585,
+                "observed_success": 0.254875
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_1",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02219504988689543,
+                "log_loss": 0.08224821683947567,
+                "observed_success": 0.24645
+              },
+              "tail_training_scores": {
+                "brier": 0.0032982584961110833,
+                "log_loss": 0.03034095455317644,
+                "observed_success": 0.251375
+              }
+            },
+            "plastic_revision": {
+              "attempts": 5,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.006705712514893329,
+                "log_loss": 0.03968121884593744,
+                "observed_success": 0.24645
+              },
+              "tail_training_scores": {
+                "brier": 0.00324641145706814,
+                "log_loss": 0.02958792649656337,
+                "observed_success": 0.251375
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_2",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 5,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.023222423607960157,
+                "log_loss": 0.08355196234881854,
+                "observed_success": 0.2543
+              },
+              "tail_training_scores": {
+                "brier": 0.003474668862190679,
+                "log_loss": 0.02951486832140767,
+                "observed_success": 0.256
+              }
+            },
+            "plastic_revision": {
+              "attempts": 6,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010653740098060433,
+                "log_loss": 0.04168651002697729,
+                "observed_success": 0.2543
+              },
+              "tail_training_scores": {
+                "brier": 0.000012717801015644707,
+                "log_loss": 0.010091369204475774,
+                "observed_success": 0.256
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_3",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 8,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.026331332028222597,
+                "log_loss": 0.09072865709250905,
+                "observed_success": 0.249175
+              },
+              "tail_training_scores": {
+                "brier": 0.010817091260063348,
+                "log_loss": 0.04575975031067745,
+                "observed_success": 0.255
+              }
+            },
+            "plastic_revision": {
+              "attempts": 10,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010550578317601813,
+                "log_loss": 0.0476925096002628,
+                "observed_success": 0.249175
+              },
+              "tail_training_scores": {
+                "brier": 0.007013216372723662,
+                "log_loss": 0.03726682947370165,
+                "observed_success": 0.255
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_4",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 9,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.028567849656908204,
+                "log_loss": 0.09492900038725914,
+                "observed_success": 0.2479
+              },
+              "tail_training_scores": {
+                "brier": 0.000023065011939859363,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.260375
+              }
+            },
+            "plastic_revision": {
+              "attempts": 11,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.007594551299120647,
+                "log_loss": 0.032967156895497146,
+                "observed_success": 0.2479
+              },
+              "tail_training_scores": {
+                "brier": 5.847620745718487e-7,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.260375
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_5",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 11,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.025305737067639077,
+                "log_loss": 0.08921632114234919,
+                "observed_success": 0.245975
+              },
+              "tail_training_scores": {
+                "brier": 0.00835326627069772,
+                "log_loss": 0.04192394249986981,
+                "observed_success": 0.241
+              }
+            },
+            "plastic_revision": {
+              "attempts": 15,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.013083662605352209,
+                "log_loss": 0.05525475970719887,
+                "observed_success": 0.245975
+              },
+              "tail_training_scores": {
+                "brier": 0.009423805578416143,
+                "log_loss": 0.04473060749845485,
+                "observed_success": 0.241
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_6",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 13,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.025020953474323277,
+                "log_loss": 0.08927439399983479,
+                "observed_success": 0.249625
+              },
+              "tail_training_scores": {
+                "brier": 0.00686061083049696,
+                "log_loss": 0.04024002699067613,
+                "observed_success": 0.2405
+              }
+            },
+            "plastic_revision": {
+              "attempts": 16,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.005335045100918563,
+                "log_loss": 0.026039632582154956,
+                "observed_success": 0.249625
+              },
+              "tail_training_scores": {
+                "brier": 0.00002527019548712867,
+                "log_loss": 0.010543124053982968,
+                "observed_success": 0.2405
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 13,
+          "max_decision_history": 29,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 112135
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 59,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 151533
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 40165,
+          "attempt": 2,
+          "scope": 0,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {}
+    },
+    {
+      "case": "retention",
+      "seed": 1,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.048505562535093284,
+                "log_loss": 0.15138759732992244,
+                "observed_success": 0.24805
+              },
+              "tail_training_scores": {
+                "brier": 0.00007784227918458362,
+                "log_loss": 0.010340308077121507,
+                "observed_success": 0.2435
+              }
+            },
+            "plastic_revision": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010532022904761578,
+                "log_loss": 0.04084333750640019,
+                "observed_success": 0.24805
+              },
+              "tail_training_scores": {
+                "brier": 0.00007453890713127347,
+                "log_loss": 0.0103184895782952,
+                "observed_success": 0.2435
+              }
+            }
+          }
+        },
+        {
+          "phase": "prolonged_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 46,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.18929542197606755,
+                "log_loss": 0.5677174069422017,
+                "observed_success": 0.249925
+              },
+              "tail_training_scores": {
+                "brier": 0.1916920864518742,
+                "log_loss": 0.5720113594800847,
+                "observed_success": 0.255875
+              }
+            },
+            "plastic_revision": {
+              "attempts": 102,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.18929538821907818,
+                "log_loss": 0.5677183993972188,
+                "observed_success": 0.249925
+              },
+              "tail_training_scores": {
+                "brier": 0.19169189784875218,
+                "log_loss": 0.5720110027145181,
+                "observed_success": 0.255875
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 46,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0017957200762059437,
+                "log_loss": 0.016466957331227067,
+                "observed_success": 0.253325
+              },
+              "tail_training_scores": {
+                "brier": 0.00007735124731441042,
+                "log_loss": 0.010331369130311432,
+                "observed_success": 0.2545
+              }
+            },
+            "plastic_revision": {
+              "attempts": 102,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0017925895891282753,
+                "log_loss": 0.01644533369924658,
+                "observed_success": 0.253325
+              },
+              "tail_training_scores": {
+                "brier": 0.00007409971820629875,
+                "log_loss": 0.010310277914779344,
+                "observed_success": 0.2545
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 20,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 108682
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 18,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 114075
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20162,
+          "attempt": 2,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "renewal",
+          "at": 31682,
+          "attempt": 17,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {}
+    },
+    {
+      "case": "retention",
+      "seed": 2,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.046634947957027856,
+                "log_loss": 0.14721545545586662,
+                "observed_success": 0.24765
+              },
+              "tail_training_scores": {
+                "brier": 0.00007416402664025008,
+                "log_loss": 0.01023492487942635,
+                "observed_success": 0.246375
+              }
+            },
+            "plastic_revision": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010693199127921216,
+                "log_loss": 0.04156069552262396,
+                "observed_success": 0.24765
+              },
+              "tail_training_scores": {
+                "brier": 0.00007062347131806916,
+                "log_loss": 0.01023492487942635,
+                "observed_success": 0.246375
+              }
+            }
+          }
+        },
+        {
+          "phase": "prolonged_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 57,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.1873204558507603,
+                "log_loss": 0.563626000527506,
+                "observed_success": 0.2460625
+              },
+              "tail_training_scores": {
+                "brier": 0.18756333708624973,
+                "log_loss": 0.5629483499167783,
+                "observed_success": 0.248125
+              }
+            },
+            "plastic_revision": {
+              "attempts": 102,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.18732047881299826,
+                "log_loss": 0.5636281306134405,
+                "observed_success": 0.2460625
+              },
+              "tail_training_scores": {
+                "brier": 0.18756335437485291,
+                "log_loss": 0.5629485094207676,
+                "observed_success": 0.248125
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 57,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0016015488931119797,
+                "log_loss": 0.01588202853653551,
+                "observed_success": 0.251075
+              },
+              "tail_training_scores": {
+                "brier": 0.00007432233106035834,
+                "log_loss": 0.010233089998452925,
+                "observed_success": 0.2535
+              }
+            },
+            "plastic_revision": {
+              "attempts": 102,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0015981546723735386,
+                "log_loss": 0.015880752047702694,
+                "observed_success": 0.251075
+              },
+              "tail_training_scores": {
+                "brier": 0.00007083932333860557,
+                "log_loss": 0.010233089998452925,
+                "observed_success": 0.2535
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 20,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 106296
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 17,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 116416
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20163,
+          "attempt": 2,
+          "scope": 2,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "renewal",
+          "at": 31683,
+          "attempt": 17,
+          "scope": 2,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {}
+    },
+    {
+      "case": "variable_noise",
+      "seed": 2,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.046634947957027856,
+                "log_loss": 0.14721545545586662,
+                "observed_success": 0.24765
+              },
+              "tail_training_scores": {
+                "brier": 0.00007416402664025008,
+                "log_loss": 0.01023492487942635,
+                "observed_success": 0.246375
+              }
+            },
+            "plastic_revision": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010693199127921216,
+                "log_loss": 0.04156069552262396,
+                "observed_success": 0.24765
+              },
+              "tail_training_scores": {
+                "brier": 0.00007062347131806916,
+                "log_loss": 0.01023492487942635,
+                "observed_success": 0.246375
+              }
+            }
+          }
+        },
+        {
+          "phase": "mixed_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.1738854606059922,
+                "log_loss": 0.5279774854366903,
+                "observed_success": 0.34608333333333335
+              },
+              "tail_training_scores": {
+                "brier": 0.16441157847193832,
+                "log_loss": 0.4972020367308494,
+                "observed_success": 0.3435
+              }
+            },
+            "plastic_revision": {
+              "attempts": 15,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.1738864840098822,
+                "log_loss": 0.5280012403749106,
+                "observed_success": 0.34608333333333335
+              },
+              "tail_training_scores": {
+                "brier": 0.1644115122610402,
+                "log_loss": 0.49720199047594793,
+                "observed_success": 0.3435
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.00982917522767586,
+                "log_loss": 0.04328831785354279,
+                "observed_success": 0.254875
+              },
+              "tail_training_scores": {
+                "brier": 0.00982917522767586,
+                "log_loss": 0.04328831785354279,
+                "observed_success": 0.254875
+              }
+            },
+            "plastic_revision": {
+              "attempts": 16,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.009826178988679763,
+                "log_loss": 0.04328363999704951,
+                "observed_success": 0.254875
+              },
+              "tail_training_scores": {
+                "brier": 0.009826178988679763,
+                "log_loss": 0.04328363999704951,
+                "observed_success": 0.254875
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 3,
+          "max_decision_history": 7,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 96454
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 18,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 119365
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20159,
+          "attempt": 2,
+          "scope": 2,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {}
+    },
+    {
+      "case": "successive_changes",
+      "seed": 0,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "rule_0",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.023904288666293995,
+                "log_loss": 0.07972386729528257,
+                "observed_success": 0.2484
+              },
+              "tail_training_scores": {
+                "brier": 0.00007327733934676298,
+                "log_loss": 0.010122966034251469,
+                "observed_success": 0.24825
+              }
+            },
+            "plastic_revision": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.005547528895557901,
+                "log_loss": 0.025878801759357445,
+                "observed_success": 0.2484
+              },
+              "tail_training_scores": {
+                "brier": 0.00006989253684746184,
+                "log_loss": 0.01008559067625148,
+                "observed_success": 0.24825
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_1",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02427972876254286,
+                "log_loss": 0.0848171299748631,
+                "observed_success": 0.25025
+              },
+              "tail_training_scores": {
+                "brier": 0.006833286600905307,
+                "log_loss": 0.035728926316599,
+                "observed_success": 0.253625
+              }
+            },
+            "plastic_revision": {
+              "attempts": 5,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.009826608481396203,
+                "log_loss": 0.04348854703201157,
+                "observed_success": 0.25025
+              },
+              "tail_training_scores": {
+                "brier": 0.006779895646003896,
+                "log_loss": 0.034943658202924485,
+                "observed_success": 0.253625
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_2",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 5,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02355899664916862,
+                "log_loss": 0.08592674729549364,
+                "observed_success": 0.24515
+              },
+              "tail_training_scores": {
+                "brier": 0.005449169343908038,
+                "log_loss": 0.036336534383689355,
+                "observed_success": 0.24825
+              }
+            },
+            "plastic_revision": {
+              "attempts": 6,
+              "admissions": 3,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010063504180411935,
+                "log_loss": 0.04074892421817423,
+                "observed_success": 0.24515
+              },
+              "tail_training_scores": {
+                "brier": 0.000014486750962640935,
+                "log_loss": 0.010149724217265742,
+                "observed_success": 0.24825
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_3",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 7,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02674140778284845,
+                "log_loss": 0.09384014745135899,
+                "observed_success": 0.249425
+              },
+              "tail_training_scores": {
+                "brier": 0.010029019808857722,
+                "log_loss": 0.048393333772933284,
+                "observed_success": 0.24575
+              }
+            },
+            "plastic_revision": {
+              "attempts": 10,
+              "admissions": 4,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.013181727931433372,
+                "log_loss": 0.05625161142581955,
+                "observed_success": 0.249425
+              },
+              "tail_training_scores": {
+                "brier": 0.010186791200637346,
+                "log_loss": 0.04765224041090242,
+                "observed_success": 0.24575
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_4",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 9,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02574390852842434,
+                "log_loss": 0.09119971279438305,
+                "observed_success": 0.25275
+              },
+              "tail_training_scores": {
+                "brier": 0.0090340489411347,
+                "log_loss": 0.04553703525146768,
+                "observed_success": 0.256125
+              }
+            },
+            "plastic_revision": {
+              "attempts": 11,
+              "admissions": 5,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.00795373424927839,
+                "log_loss": 0.033514166118411896,
+                "observed_success": 0.25275
+              },
+              "tail_training_scores": {
+                "brier": 5.789862801080287e-7,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.256125
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_5",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 11,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02548367989138454,
+                "log_loss": 0.08910752002191367,
+                "observed_success": 0.249825
+              },
+              "tail_training_scores": {
+                "brier": 0.008673304163927415,
+                "log_loss": 0.04198441289381229,
+                "observed_success": 0.247
+              }
+            },
+            "plastic_revision": {
+              "attempts": 15,
+              "admissions": 6,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.012835838478824505,
+                "log_loss": 0.05250482018575202,
+                "observed_success": 0.249825
+              },
+              "tail_training_scores": {
+                "brier": 0.00974567688095848,
+                "log_loss": 0.043864194872288154,
+                "observed_success": 0.247
+              }
+            }
+          }
+        },
+        {
+          "phase": "rule_6",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 14,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.02705396744310413,
+                "log_loss": 0.09241075416448771,
+                "observed_success": 0.247475
+              },
+              "tail_training_scores": {
+                "brier": 0.010134713109833578,
+                "log_loss": 0.04474596799330062,
+                "observed_success": 0.2405
+              }
+            },
+            "plastic_revision": {
+              "attempts": 16,
+              "admissions": 7,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.005203664070525285,
+                "log_loss": 0.026087055924936788,
+                "observed_success": 0.247475
+              },
+              "tail_training_scores": {
+                "brier": 0.000025594381064828454,
+                "log_loss": 0.01054172004362986,
+                "observed_success": 0.2405
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 14,
+          "max_decision_history": 30,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 113720
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 59,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 150852
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 40173,
+          "attempt": 2,
+          "scope": 0,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {}
+    },
+    {
+      "case": "retention",
+      "seed": 0,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.04773519706349597,
+                "log_loss": 0.14932483824556037,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.00007276574415520345,
+                "log_loss": 0.010117403750505871,
+                "observed_success": 0.244625
+              }
+            },
+            "plastic_revision": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.011025064986624663,
+                "log_loss": 0.041672419628864,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.00006943878866080955,
+                "log_loss": 0.010082200789448627,
+                "observed_success": 0.244625
+              }
+            }
+          }
+        },
+        {
+          "phase": "prolonged_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 19,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.1891438532724078,
+                "log_loss": 0.5677060957646788,
+                "observed_success": 0.24925
+              },
+              "tail_training_scores": {
+                "brier": 0.18880115035171333,
+                "log_loss": 0.565737686298894,
+                "observed_success": 0.25
+              }
+            },
+            "plastic_revision": {
+              "attempts": 104,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.18914387275792993,
+                "log_loss": 0.5677089760005111,
+                "observed_success": 0.24925
+              },
+              "tail_training_scores": {
+                "brier": 0.18880128838046933,
+                "log_loss": 0.5657382367827398,
+                "observed_success": 0.25
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 19,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.001997467829263899,
+                "log_loss": 0.016816719260315093,
+                "observed_success": 0.25095
+              },
+              "tail_training_scores": {
+                "brier": 0.00007329866161490094,
+                "log_loss": 0.010118703614752127,
+                "observed_success": 0.24575
+              }
+            },
+            "plastic_revision": {
+              "attempts": 104,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.001994162166110084,
+                "log_loss": 0.01677929779940275,
+                "observed_success": 0.25095
+              },
+              "tail_training_scores": {
+                "brier": 0.00006992546850332482,
+                "log_loss": 0.010082268587184697,
+                "observed_success": 0.24575
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 22,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 107220
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 17,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 119457
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20150,
+          "attempt": 2,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "renewal",
+          "at": 31670,
+          "attempt": 17,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {}
+    },
+    {
+      "case": "cold_ablations",
+      "seed": 1,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "range_only": {
+              "attempts": 103,
+              "admissions": 0,
+              "policy_by_context": [
+                0.255859375,
+                0.21484375,
+                0.23046875,
+                0.244140625
+              ],
+              "actual_training_scores": {
+                "brier": 0.1967025784350795,
+                "log_loss": 0.5881682959810423,
+                "observed_success": 0.24865
+              },
+              "tail_training_scores": {
+                "brier": 0.19148541375397649,
+                "log_loss": 0.5747570075337861,
+                "observed_success": 0.245
+              }
+            },
+            "warm_only": {
+              "attempts": 87,
+              "admissions": 0,
+              "policy_by_context": [
+                0.2578125,
+                0.25390625,
+                0.283203125,
+                0.248046875
+              ],
+              "actual_training_scores": {
+                "brier": 0.19653286680200444,
+                "log_loss": 0.5873846152937929,
+                "observed_success": 0.24865
+              },
+              "tail_training_scores": {
+                "brier": 0.1916011187208729,
+                "log_loss": 0.5747322482746988,
+                "observed_success": 0.245
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "range_only": {
+              "attempts": 106,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.014382706088026385,
+                "log_loss": 0.055120112869736705,
+                "observed_success": 0.249425
+              },
+              "tail_training_scores": {
+                "brier": 0.000023015494852379786,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.255125
+              }
+            },
+            "warm_only": {
+              "attempts": 89,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.056478790990230995,
+                "log_loss": 0.21913676589824507,
+                "observed_success": 0.249425
+              },
+              "tail_training_scores": {
+                "brier": 0.03907713646612149,
+                "log_loss": 0.17309948593522914,
+                "observed_success": 0.255125
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "range_only": {
+          "max_search_history": 16,
+          "max_decision_history": 16,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 109167
+        },
+        "warm_only": {
+          "max_search_history": 16,
+          "max_decision_history": 19,
+          "max_fit_records": 1024,
+          "max_allocated_points": 128,
+          "max_sampled_checkpoint_bytes": 100360
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 6688,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "targeted",
+          "at": 41344,
+          "attempt": 106,
+          "scope": 3,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {
+        "range_only": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 1000,
+          "confirmation_global_labels": 2000
+        },
+        "warm_only": {
+          "first_admission_global_labels": 4672,
+          "full_competence_global_labels": 5000,
+          "confirmation_global_labels": 6000
+        }
+      }
+    },
+    {
+      "case": "variable_noise",
+      "seed": 0,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.04773519706349597,
+                "log_loss": 0.14932483824556037,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.00007276574415520345,
+                "log_loss": 0.010117403750505871,
+                "observed_success": 0.244625
+              }
+            },
+            "plastic_revision": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.011025064986624663,
+                "log_loss": 0.041672419628864,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.00006943878866080955,
+                "log_loss": 0.010082200789448627,
+                "observed_success": 0.244625
+              }
+            }
+          }
+        },
+        {
+          "phase": "mixed_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.1725574987084585,
+                "log_loss": 0.5243953858954397,
+                "observed_success": 0.34291666666666665
+              },
+              "tail_training_scores": {
+                "brier": 0.16474594670594153,
+                "log_loss": 0.49820718061845465,
+                "observed_success": 0.343
+              }
+            },
+            "plastic_revision": {
+              "attempts": 17,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.17255795073640437,
+                "log_loss": 0.5244112940806875,
+                "observed_success": 0.34291666666666665
+              },
+              "tail_training_scores": {
+                "brier": 0.16474601255910945,
+                "log_loss": 0.4982076191973433,
+                "observed_success": 0.343
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0102324634202407,
+                "log_loss": 0.044282514523879477,
+                "observed_success": 0.24825
+              },
+              "tail_training_scores": {
+                "brier": 0.0102324634202407,
+                "log_loss": 0.044282514523879477,
+                "observed_success": 0.24825
+              }
+            },
+            "plastic_revision": {
+              "attempts": 18,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010229567573366348,
+                "log_loss": 0.04424518516807407,
+                "observed_success": 0.24825
+              },
+              "tail_training_scores": {
+                "brier": 0.010229567573366348,
+                "log_loss": 0.04424518516807407,
+                "observed_success": 0.24825
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 3,
+          "max_decision_history": 7,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 96316
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 17,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 112424
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20150,
+          "attempt": 2,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "renewal",
+          "at": 31670,
+          "attempt": 17,
+          "scope": 1,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {}
+    },
+    {
+      "case": "cold_ablations",
+      "seed": 2,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "range_only": {
+              "attempts": 102,
+              "admissions": 0,
+              "policy_by_context": [
+                0.25390625,
+                0.234375,
+                0.26953125,
+                0.2578125
+              ],
+              "actual_training_scores": {
+                "brier": 0.19538639578268124,
+                "log_loss": 0.5850681776891765,
+                "observed_success": 0.2464
+              },
+              "tail_training_scores": {
+                "brier": 0.19520666618403504,
+                "log_loss": 0.582955324861348,
+                "observed_success": 0.25125
+              }
+            },
+            "warm_only": {
+              "attempts": 82,
+              "admissions": 0,
+              "policy_by_context": [
+                0.251953125,
+                0.2734375,
+                0.2421875,
+                0.26171875
+              ],
+              "actual_training_scores": {
+                "brier": 0.19521224995367636,
+                "log_loss": 0.5847095228449591,
+                "observed_success": 0.2464
+              },
+              "tail_training_scores": {
+                "brier": 0.1945649938431676,
+                "log_loss": 0.5813461955139442,
+                "observed_success": 0.25125
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "range_only": {
+              "attempts": 105,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.01426819606644373,
+                "log_loss": 0.06290369914748171,
+                "observed_success": 0.2491
+              },
+              "tail_training_scores": {
+                "brier": 0.00029590182845272715,
+                "log_loss": 0.012856030930328619,
+                "observed_success": 0.253
+              }
+            },
+            "warm_only": {
+              "attempts": 85,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.09714805028768013,
+                "log_loss": 0.32942900078030923,
+                "observed_success": 0.2491
+              },
+              "tail_training_scores": {
+                "brier": 0.07237620784544146,
+                "log_loss": 0.2649013815686158,
+                "observed_success": 0.253
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "range_only": {
+          "max_search_history": 16,
+          "max_decision_history": 17,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 109012
+        },
+        "warm_only": {
+          "max_search_history": 16,
+          "max_decision_history": 20,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 101517
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 6688,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {
+        "range_only": {
+          "first_admission_global_labels": 1472,
+          "full_competence_global_labels": 2000,
+          "confirmation_global_labels": 3000
+        },
+        "warm_only": {
+          "first_admission_global_labels": 8640,
+          "full_competence_global_labels": 9000,
+          "confirmation_global_labels": 10000
+        }
+      }
+    },
+    {
+      "case": "cold_ablations",
+      "seed": 0,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "range_only": {
+              "attempts": 100,
+              "admissions": 0,
+              "policy_by_context": [
+                0.2890625,
+                0.248046875,
+                0.244140625,
+                0.279296875
+              ],
+              "actual_training_scores": {
+                "brier": 0.1967028179928165,
+                "log_loss": 0.5875689420077264,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.1921720195865249,
+                "log_loss": 0.5755676641117192,
+                "observed_success": 0.247375
+              }
+            },
+            "warm_only": {
+              "attempts": 87,
+              "admissions": 0,
+              "policy_by_context": [
+                0.27734375,
+                0.236328125,
+                0.248046875,
+                0.232421875
+              ],
+              "actual_training_scores": {
+                "brier": 0.19655276303358513,
+                "log_loss": 0.5869461342156662,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.19232641831987674,
+                "log_loss": 0.5761554784990391,
+                "observed_success": 0.247375
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "range_only": {
+              "attempts": 103,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.015617022426273863,
+                "log_loss": 0.06814022164498564,
+                "observed_success": 0.25355
+              },
+              "tail_training_scores": {
+                "brier": 0.000023154228370432163,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.254125
+              }
+            },
+            "warm_only": {
+              "attempts": 89,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.10174907398025833,
+                "log_loss": 0.30843825137100817,
+                "observed_success": 0.25355
+              },
+              "tail_training_scores": {
+                "brier": 0.00002266710708004049,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.254125
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "range_only": {
+          "max_search_history": 16,
+          "max_decision_history": 17,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 105493
+        },
+        "warm_only": {
+          "max_search_history": 16,
+          "max_decision_history": 19,
+          "max_fit_records": 1024,
+          "max_allocated_points": 128,
+          "max_sampled_checkpoint_bytes": 103249
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 7072,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "targeted",
+          "at": 41521,
+          "attempt": 103,
+          "scope": 0,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {
+        "range_only": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 10000,
+          "confirmation_global_labels": 11000
+        },
+        "warm_only": {
+          "first_admission_global_labels": 20928,
+          "full_competence_global_labels": 21000,
+          "confirmation_global_labels": 22000
+        }
+      }
+    },
+    {
+      "case": "variable_noise",
+      "seed": 1,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.048505562535093284,
+                "log_loss": 0.15138759732992244,
+                "observed_success": 0.24805
+              },
+              "tail_training_scores": {
+                "brier": 0.00007784227918458362,
+                "log_loss": 0.010340308077121507,
+                "observed_success": 0.2435
+              }
+            },
+            "plastic_revision": {
+              "attempts": 1,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010532022904761578,
+                "log_loss": 0.04084333750640019,
+                "observed_success": 0.24805
+              },
+              "tail_training_scores": {
+                "brier": 0.00007453890713127347,
+                "log_loss": 0.0103184895782952,
+                "observed_success": 0.2435
+              }
+            }
+          }
+        },
+        {
+          "phase": "mixed_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.17327480994656408,
+                "log_loss": 0.5265864132947544,
+                "observed_success": 0.34775
+              },
+              "tail_training_scores": {
+                "brier": 0.16741015831222292,
+                "log_loss": 0.5057180991984048,
+                "observed_success": 0.349
+              }
+            },
+            "plastic_revision": {
+              "attempts": 15,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.17327548436625959,
+                "log_loss": 0.5266013231337385,
+                "observed_success": 0.34775
+              },
+              "tail_training_scores": {
+                "brier": 0.1674101602449478,
+                "log_loss": 0.5057182415825244,
+                "observed_success": 0.349
+              }
+            }
+          }
+        },
+        {
+          "phase": "recovery",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 3,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010666292506962573,
+                "log_loss": 0.04616326154578831,
+                "observed_success": 0.25375
+              },
+              "tail_training_scores": {
+                "brier": 0.010666292506962573,
+                "log_loss": 0.04616326154578831,
+                "observed_success": 0.25375
+              }
+            },
+            "plastic_revision": {
+              "attempts": 16,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.010663465930727725,
+                "log_loss": 0.04613968906374167,
+                "observed_success": 0.25375
+              },
+              "tail_training_scores": {
+                "brier": 0.010663465930727725,
+                "log_loss": 0.04613968906374167,
+                "observed_success": 0.25375
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 3,
+          "max_decision_history": 7,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 96353
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 18,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 119171
+        }
+      },
+      "resumes": [
+        {
+          "kind": "targeted",
+          "at": 20152,
+          "attempt": 2,
+          "scope": 3,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {}
+    },
+    {
+      "case": "noise_then_signal",
+      "seed": 0,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 87,
+              "admissions": 0,
+              "policy_by_context": [
+                0.27734375,
+                0.236328125,
+                0.248046875,
+                0.232421875
+              ],
+              "actual_training_scores": {
+                "brier": 0.19655276303358513,
+                "log_loss": 0.5869461342156662,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.19232641831987674,
+                "log_loss": 0.5761554784990391,
+                "observed_success": 0.247375
+              }
+            },
+            "plastic_revision": {
+              "attempts": 100,
+              "admissions": 0,
+              "policy_by_context": [
+                0.2890625,
+                0.248046875,
+                0.244140625,
+                0.279296875
+              ],
+              "actual_training_scores": {
+                "brier": 0.1967028179928165,
+                "log_loss": 0.5875689420077264,
+                "observed_success": 0.2504
+              },
+              "tail_training_scores": {
+                "brier": 0.1921720195865249,
+                "log_loss": 0.5755676641117192,
+                "observed_success": 0.247375
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 89,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.10174925232551253,
+                "log_loss": 0.30843825137100817,
+                "observed_success": 0.25355
+              },
+              "tail_training_scores": {
+                "brier": 0.000023041370722981666,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.254125
+              }
+            },
+            "plastic_revision": {
+              "attempts": 103,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.015613322376074188,
+                "log_loss": 0.06813645591865607,
+                "observed_success": 0.25355
+              },
+              "tail_training_scores": {
+                "brier": 0.000019521770735607997,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.254125
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 19,
+          "max_fit_records": 1024,
+          "max_allocated_points": 128,
+          "max_sampled_checkpoint_bytes": 98391
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 17,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 105725
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 7072,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "targeted",
+          "at": 41521,
+          "attempt": 103,
+          "scope": 0,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {
+        "calibrated": {
+          "first_admission_global_labels": 20928,
+          "full_competence_global_labels": 21000,
+          "confirmation_global_labels": 22000
+        },
+        "plastic_revision": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 10000,
+          "confirmation_global_labels": 11000
+        }
+      }
+    },
+    {
+      "case": "noise_then_signal",
+      "seed": 1,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 87,
+              "admissions": 0,
+              "policy_by_context": [
+                0.2578125,
+                0.25390625,
+                0.283203125,
+                0.248046875
+              ],
+              "actual_training_scores": {
+                "brier": 0.19653286680200444,
+                "log_loss": 0.5873846152937929,
+                "observed_success": 0.24865
+              },
+              "tail_training_scores": {
+                "brier": 0.1916011187208729,
+                "log_loss": 0.5747322482746988,
+                "observed_success": 0.245
+              }
+            },
+            "plastic_revision": {
+              "attempts": 103,
+              "admissions": 0,
+              "policy_by_context": [
+                0.255859375,
+                0.21484375,
+                0.23046875,
+                0.244140625
+              ],
+              "actual_training_scores": {
+                "brier": 0.1967025784350795,
+                "log_loss": 0.5881682959810423,
+                "observed_success": 0.24865
+              },
+              "tail_training_scores": {
+                "brier": 0.19148541375397649,
+                "log_loss": 0.5747570075337861,
+                "observed_success": 0.245
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 89,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.0564827106867946,
+                "log_loss": 0.21919012605425423,
+                "observed_success": 0.249425
+              },
+              "tail_training_scores": {
+                "brier": 0.03908139866937827,
+                "log_loss": 0.17315973693159423,
+                "observed_success": 0.255125
+              }
+            },
+            "plastic_revision": {
+              "attempts": 106,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.014378977983559556,
+                "log_loss": 0.05511472468695627,
+                "observed_success": 0.249425
+              },
+              "tail_training_scores": {
+                "brier": 0.00002023597918069505,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.255125
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 19,
+          "max_fit_records": 1024,
+          "max_allocated_points": 128,
+          "max_sampled_checkpoint_bytes": 95615
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 16,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 109541
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 6688,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "targeted",
+          "at": 41344,
+          "attempt": 106,
+          "scope": 3,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {
+        "calibrated": {
+          "first_admission_global_labels": 4672,
+          "full_competence_global_labels": 5000,
+          "confirmation_global_labels": 6000
+        },
+        "plastic_revision": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 1000,
+          "confirmation_global_labels": 2000
+        }
+      }
+    },
+    {
+      "case": "noise_then_signal",
+      "seed": 2,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 82,
+              "admissions": 0,
+              "policy_by_context": [
+                0.251953125,
+                0.2734375,
+                0.2421875,
+                0.26171875
+              ],
+              "actual_training_scores": {
+                "brier": 0.19521224995367636,
+                "log_loss": 0.5847095228449591,
+                "observed_success": 0.2464
+              },
+              "tail_training_scores": {
+                "brier": 0.1945649938431676,
+                "log_loss": 0.5813461955139442,
+                "observed_success": 0.25125
+              }
+            },
+            "plastic_revision": {
+              "attempts": 102,
+              "admissions": 0,
+              "policy_by_context": [
+                0.25390625,
+                0.234375,
+                0.26953125,
+                0.2578125
+              ],
+              "actual_training_scores": {
+                "brier": 0.19538639578268124,
+                "log_loss": 0.5850681776891765,
+                "observed_success": 0.2464
+              },
+              "tail_training_scores": {
+                "brier": 0.19520666618403504,
+                "log_loss": 0.582955324861348,
+                "observed_success": 0.25125
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 85,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.09715285897920402,
+                "log_loss": 0.329459926550685,
+                "observed_success": 0.2491
+              },
+              "tail_training_scores": {
+                "brier": 0.07238255030682356,
+                "log_loss": 0.26494222425268543,
+                "observed_success": 0.253
+              }
+            },
+            "plastic_revision": {
+              "attempts": 105,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.01422711045881459,
+                "log_loss": 0.06216388783945079,
+                "observed_success": 0.2491
+              },
+              "tail_training_scores": {
+                "brier": 0.0002486331135745596,
+                "log_loss": 0.01200138247419715,
+                "observed_success": 0.253
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 20,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 98833
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 17,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 109171
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 6688,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {
+        "calibrated": {
+          "first_admission_global_labels": 8640,
+          "full_competence_global_labels": 9000,
+          "confirmation_global_labels": 10000
+        },
+        "plastic_revision": {
+          "first_admission_global_labels": 1472,
+          "full_competence_global_labels": 2000,
+          "confirmation_global_labels": 3000
+        }
+      }
+    },
+    {
+      "case": "cold_holdout",
+      "seed": 17,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 94,
+              "admissions": 0,
+              "policy_by_context": [
+                0.248046875,
+                0.259765625,
+                0.255859375,
+                0.283203125
+              ],
+              "actual_training_scores": {
+                "brier": 0.19777048792731963,
+                "log_loss": 0.5898950797714225,
+                "observed_success": 0.2516
+              },
+              "tail_training_scores": {
+                "brier": 0.19506611194479356,
+                "log_loss": 0.5817764153573538,
+                "observed_success": 0.252625
+              }
+            },
+            "plastic_revision": {
+              "attempts": 101,
+              "admissions": 0,
+              "policy_by_context": [
+                0.265625,
+                0.26171875,
+                0.2421875,
+                0.240234375
+              ],
+              "actual_training_scores": {
+                "brier": 0.1982546636482549,
+                "log_loss": 0.5912177102613212,
+                "observed_success": 0.2516
+              },
+              "tail_training_scores": {
+                "brier": 0.19564352587562028,
+                "log_loss": 0.583434336935385,
+                "observed_success": 0.252625
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 96,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.10143251237653951,
+                "log_loss": 0.3077952834503465,
+                "observed_success": 0.250425
+              },
+              "tail_training_scores": {
+                "brier": 0.000023584539923040908,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.254
+              }
+            },
+            "plastic_revision": {
+              "attempts": 104,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.014300053232381283,
+                "log_loss": 0.06522704879325245,
+                "observed_success": 0.250425
+              },
+              "tail_training_scores": {
+                "brier": 0.00008197963051411368,
+                "log_loss": 0.010919500004708397,
+                "observed_success": 0.254
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 22,
+          "max_fit_records": 1024,
+          "max_allocated_points": 128,
+          "max_sampled_checkpoint_bytes": 105126
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 17,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 107217
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 7072,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {
+        "calibrated": {
+          "first_admission_global_labels": 20928,
+          "full_competence_global_labels": 21000,
+          "confirmation_global_labels": 22000
+        },
+        "plastic_revision": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 1000,
+          "confirmation_global_labels": 2000
+        }
+      }
+    },
+    {
+      "case": "cold_holdout",
+      "seed": 23,
+      "criteria_failures": [],
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "noise": true,
+          "modes": {
+            "calibrated": {
+              "attempts": 96,
+              "admissions": 0,
+              "policy_by_context": [
+                0.248046875,
+                0.28125,
+                0.21875,
+                0.291015625
+              ],
+              "actual_training_scores": {
+                "brier": 0.19830622175883791,
+                "log_loss": 0.5911957231691054,
+                "observed_success": 0.2519
+              },
+              "tail_training_scores": {
+                "brier": 0.19632625095286027,
+                "log_loss": 0.5852049448762239,
+                "observed_success": 0.25375
+              }
+            },
+            "plastic_revision": {
+              "attempts": 102,
+              "admissions": 0,
+              "policy_by_context": [
+                0.23046875,
+                0.275390625,
+                0.255859375,
+                0.25390625
+              ],
+              "actual_training_scores": {
+                "brier": 0.1983573140551711,
+                "log_loss": 0.5914100134507922,
+                "observed_success": 0.2519
+              },
+              "tail_training_scores": {
+                "brier": 0.19540595564119276,
+                "log_loss": 0.5826723065597262,
+                "observed_success": 0.25375
+              }
+            }
+          }
+        },
+        {
+          "phase": "signal",
+          "noise": false,
+          "modes": {
+            "calibrated": {
+              "attempts": 98,
+              "admissions": 1,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.025730579498444636,
+                "log_loss": 0.08603836384417624,
+                "observed_success": 0.252875
+              },
+              "tail_training_scores": {
+                "brier": 0.000023724232982422246,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.2515
+              }
+            },
+            "plastic_revision": {
+              "attempts": 105,
+              "admissions": 2,
+              "policy_by_context": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "actual_training_scores": {
+                "brier": 0.01098778614410279,
+                "log_loss": 0.04717313857135421,
+                "observed_success": 0.252875
+              },
+              "tail_training_scores": {
+                "brier": 0.000020652112831256736,
+                "log_loss": 0.010050335853501876,
+                "observed_success": 0.2515
+              }
+            }
+          }
+        }
+      ],
+      "bounds": {
+        "calibrated": {
+          "max_search_history": 16,
+          "max_decision_history": 18,
+          "max_fit_records": 1024,
+          "max_allocated_points": 128,
+          "max_sampled_checkpoint_bytes": 89671
+        },
+        "plastic_revision": {
+          "max_search_history": 16,
+          "max_decision_history": 17,
+          "max_fit_records": 1024,
+          "max_allocated_points": 160,
+          "max_sampled_checkpoint_bytes": 107154
+        }
+      },
+      "resumes": [
+        {
+          "kind": "renewal",
+          "at": 6688,
+          "attempt": 17,
+          "scope": null,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        },
+        {
+          "kind": "targeted",
+          "at": 41344,
+          "attempt": 105,
+          "scope": 3,
+          "principal_labels": 32,
+          "verified_future_labels": 1024
+        }
+      ],
+      "delays": {
+        "calibrated": {
+          "first_admission_global_labels": 5440,
+          "full_competence_global_labels": 6000,
+          "confirmation_global_labels": 7000
+        },
+        "plastic_revision": {
+          "first_admission_global_labels": 960,
+          "full_competence_global_labels": 1000,
+          "confirmation_global_labels": 2000
+        }
+      }
+    }
+  ],
+  "scale_summary": [
+    {
+      "seed": 2,
+      "training_labels": 432000,
+      "elapsed_seconds": 121.23555450000003,
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "global_labels": 16000,
+          "labels_per_context": 1000,
+          "noise": true,
+          "admissions_before": 0,
+          "admissions_after": 0,
+          "actual_training_scores": {
+            "brier": 0.2028006463846964,
+            "log_loss": 0.6032781235368321,
+            "observed_success": 0.25375
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 0.2265625,
+              "brier": 0.19587425449833107
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 0.2734375,
+              "brier": 0.19089388340027766
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 0.2421875,
+              "brier": 0.1941355047476934
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 0.2578125,
+              "brier": 0.19494576447876097
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 0.2109375,
+              "brier": 0.1932658682378624
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 0.2421875,
+              "brier": 0.19695434319648616
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 0.2109375,
+              "brier": 0.19505877977745892
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 0.265625,
+              "brier": 0.1928066845870068
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 0.21875,
+              "brier": 0.19616644177904302
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 0.1796875,
+              "brier": 0.19755611280541793
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 0.234375,
+              "brier": 0.1970983678375253
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 0.21875,
+              "brier": 0.19821205168167536
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 0.296875,
+              "brier": 0.19093147768910393
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 0.21875,
+              "brier": 0.19545671500360765
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 0.3203125,
+              "brier": 0.18735318041201368
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 0.3046875,
+              "brier": 0.189408126558295
+            }
+          ]
+        },
+        {
+          "phase": "initial_signal",
+          "global_labels": 160000,
+          "labels_per_context": 10000,
+          "noise": false,
+          "admissions_before": 0,
+          "admissions_after": 3,
+          "actual_training_scores": {
+            "brier": 0.006623370900413011,
+            "log_loss": 0.03271280393999391,
+            "observed_success": 0.25131875
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002400925713011302
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000024265633760432003
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023685226984307114
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023957311873276043
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002418187939162929
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000024050151001533456
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002396128310881988
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002405871563662055
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.00000240269569224733
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023797745606758308
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002396923865577923
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002409699581033124
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002395806032298239
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023938761591577617
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.00000237846765358881
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023789409297009955
+            }
+          ]
+        },
+        {
+          "phase": "prolonged_noise",
+          "global_labels": 64000,
+          "labels_per_context": 4000,
+          "noise": true,
+          "admissions_before": 3,
+          "admissions_after": 3,
+          "actual_training_scores": {
+            "brier": 0.1933418540498996,
+            "log_loss": 0.5817378348555623,
+            "observed_success": 0.251375
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18847618666459107
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18763695500761937
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.14793253879104576
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1860565918660286
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18969688746553032
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.183526419759725
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.17174041336711435
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1876369550083574
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.14913398313447546
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18763695500833227
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.16153389115645345
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18774376632507375
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.17628976196135562
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.16398127566990375
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.17599259471020529
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1875442881195291
+            }
+          ]
+        },
+        {
+          "phase": "recovery",
+          "global_labels": 32000,
+          "labels_per_context": 2000,
+          "noise": false,
+          "admissions_before": 3,
+          "admissions_after": 3,
+          "actual_training_scores": {
+            "brier": 0.008409447285964626,
+            "log_loss": 0.040036760995392655,
+            "observed_success": 0.2515625
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.00000241167257023435
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000024006617942333286
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023790462621616854
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002390447814348075
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002377545241485478
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023818757148716204
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002397036786827458
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023795563069656054
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023823781708866957
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023918498499326083
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002383399568081701
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000023739722465163695
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002368290508562626
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002394126141777874
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000024056304774179555
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000024075451068134055
+            }
+          ]
+        },
+        {
+          "phase": "change",
+          "global_labels": 160000,
+          "labels_per_context": 10000,
+          "noise": false,
+          "admissions_before": 3,
+          "admissions_after": 5,
+          "actual_training_scores": {
+            "brier": 0.0022466062458237237,
+            "log_loss": 0.0167401955755608,
+            "observed_success": 0.25119375
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.00011795386348021829
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.639283474546756e-7
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.60871585842286e-7
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.666614293315889e-7
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.643945675289101e-7
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.60084797002458e-7
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.611922002622504e-7
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.618232570381781e-7
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.650543614531605e-7
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.644067374822146e-7
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.613550390746401e-7
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.589435477351569e-7
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.615212533569064e-7
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.605452422544056e-7
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.610232764732085e-7
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.640851012904127e-7
+            }
+          ]
+        }
+      ],
+      "bounds": {
+        "max_search_history": 16,
+        "max_decision_history": 26,
+        "max_fit_records": 4096,
+        "max_allocated_points": 160,
+        "max_sampled_checkpoint_bytes": 1725940,
+        "max_probability_cache": 4096
+      },
+      "resumes": [
+        {
+          "at": 19042,
+          "scope": 1,
+          "attempt": 35,
+          "verified_future_labels": 1024
+        }
+      ],
+      "fresh_context": {
+        "global_labels": 432000,
+        "contexts": [
+          {
+            "context": 16,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 6.654102551490773e-7
+          }
+        ],
+        "attempts": 52,
+        "admissions": 5
+      }
+    },
+    {
+      "seed": 1,
+      "training_labels": 432000,
+      "elapsed_seconds": 108.00943050000001,
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "global_labels": 16000,
+          "labels_per_context": 1000,
+          "noise": true,
+          "admissions_before": 0,
+          "admissions_after": 0,
+          "actual_training_scores": {
+            "brier": 0.1988610485296617,
+            "log_loss": 0.5941100944408916,
+            "observed_success": 0.2486875
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 0.2265625,
+              "brier": 0.20011448980116353
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 0.265625,
+              "brier": 0.1955463857994165
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 0.2109375,
+              "brier": 0.20242765020099984
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 0.28125,
+              "brier": 0.19348654310041094
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 0.296875,
+              "brier": 0.19740346113293716
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 0.2734375,
+              "brier": 0.20024377739669452
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 0.2890625,
+              "brier": 0.19412729720725025
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 0.2890625,
+              "brier": 0.19614084932912096
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 0.25,
+              "brier": 0.1988435983040112
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 0.2265625,
+              "brier": 0.1992672734873256
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 0.2421875,
+              "brier": 0.1939848723476526
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 0.2734375,
+              "brier": 0.1997315913132177
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 0.28125,
+              "brier": 0.19403678268268762
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 0.3203125,
+              "brier": 0.18948357771011945
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 0.2734375,
+              "brier": 0.19876748691749302
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 0.234375,
+              "brier": 0.20177188874613736
+            }
+          ]
+        },
+        {
+          "phase": "initial_signal",
+          "global_labels": 160000,
+          "labels_per_context": 10000,
+          "noise": false,
+          "admissions_before": 0,
+          "admissions_after": 3,
+          "actual_training_scores": {
+            "brier": 0.008394916243413538,
+            "log_loss": 0.0399694643816191,
+            "observed_success": 0.25055625
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026946998825897916
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026986366756570227
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026928787604789464
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002705417303433882
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027079115774780488
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027047733455496046
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027073047187499683
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026976763037099014
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027022163669027055
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027000677313192354
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027050639721903773
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026983129024136296
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002702540140146098
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027004577977678683
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002701914640852151
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002697624880492485
+            }
+          ]
+        },
+        {
+          "phase": "prolonged_noise",
+          "global_labels": 64000,
+          "labels_per_context": 4000,
+          "noise": true,
+          "admissions_before": 3,
+          "admissions_after": 3,
+          "actual_training_scores": {
+            "brier": 0.19275845706026426,
+            "log_loss": 0.5805531876176143,
+            "observed_success": 0.2499375
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.16408530337082455
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.15899833449243628
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18902550203026355
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18763695505082265
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18847618683421716
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.15460505894103663
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18774376634885304
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18804894150758836
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.16501109058602606
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1890255020299126
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18751488499667615
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18847618683539005
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18647772224471754
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1713184127232272
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1796057974023473
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1876369550850629
+            }
+          ]
+        },
+        {
+          "phase": "recovery",
+          "global_labels": 32000,
+          "labels_per_context": 2000,
+          "noise": false,
+          "admissions_before": 3,
+          "admissions_after": 3,
+          "actual_training_scores": {
+            "brier": 0.008403637033316227,
+            "log_loss": 0.04016238166889475,
+            "observed_success": 0.24809375
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002699291550975547
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027035152001055074
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002700369457369789
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027041589760142506
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027005387789853976
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026990227895520773
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002703824103361076
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027093060799106686
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027034635949125555
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026893504924506796
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026989713663346606
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002701885264827574
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.00000269983962730566
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002706999222121372
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027019293288644407
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026983091318355885
+            }
+          ]
+        },
+        {
+          "phase": "change",
+          "global_labels": 160000,
+          "labels_per_context": 10000,
+          "noise": false,
+          "admissions_before": 3,
+          "admissions_after": 5,
+          "actual_training_scores": {
+            "brier": 0.0021911467816515665,
+            "log_loss": 0.016721663132641656,
+            "observed_success": 0.25108125
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.00019228611606180593
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.555622184927829e-7
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.533704747140339e-7
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.583386268041684e-7
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.574577240977587e-7
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.559166140107628e-7
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.565152401742365e-7
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.548734559509568e-7
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.558068481304412e-7
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.555873163697993e-7
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.573207661174607e-7
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.563775176209241e-7
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.556490970829955e-7
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.548721263010105e-7
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.553634797992889e-7
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.573625183365233e-7
+            }
+          ]
+        }
+      ],
+      "bounds": {
+        "max_search_history": 16,
+        "max_decision_history": 25,
+        "max_fit_records": 4096,
+        "max_allocated_points": 160,
+        "max_sampled_checkpoint_bytes": 1709353,
+        "max_probability_cache": 4096
+      },
+      "resumes": [
+        {
+          "at": 18914,
+          "scope": 1,
+          "attempt": 39,
+          "verified_future_labels": 1024
+        }
+      ],
+      "fresh_context": {
+        "global_labels": 432000,
+        "contexts": [
+          {
+            "context": 16,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 6.561531699248789e-7
+          }
+        ],
+        "attempts": 62,
+        "admissions": 5
+      }
+    },
+    {
+      "seed": 0,
+      "training_labels": 432000,
+      "elapsed_seconds": 136.59693420000002,
+      "phases": [
+        {
+          "phase": "initial_noise",
+          "global_labels": 16000,
+          "labels_per_context": 1000,
+          "noise": true,
+          "admissions_before": 0,
+          "admissions_after": 0,
+          "actual_training_scores": {
+            "brier": 0.19996011084436366,
+            "log_loss": 0.5968636535781288,
+            "observed_success": 0.248
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 0.1953125,
+              "brier": 0.20117972550303917
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 0.2109375,
+              "brier": 0.19685025720083207
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 0.234375,
+              "brier": 0.19258548969624079
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 0.2734375,
+              "brier": 0.1962186012097533
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 0.2890625,
+              "brier": 0.19253608223411783
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 0.25,
+              "brier": 0.1890755723678735
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 0.28125,
+              "brier": 0.18986826960556377
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 0.3046875,
+              "brier": 0.19010770826768464
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 0.2578125,
+              "brier": 0.19239218296446253
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 0.2265625,
+              "brier": 0.19551399435164923
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 0.234375,
+              "brier": 0.19520740606646964
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 0.234375,
+              "brier": 0.19327036274373527
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 0.2734375,
+              "brier": 0.19304519023933153
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 0.265625,
+              "brier": 0.19491131947378826
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 0.2265625,
+              "brier": 0.19838429756035056
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 0.296875,
+              "brier": 0.19320203181169643
+            }
+          ]
+        },
+        {
+          "phase": "initial_signal",
+          "global_labels": 160000,
+          "labels_per_context": 10000,
+          "noise": false,
+          "admissions_before": 0,
+          "admissions_after": 3,
+          "actual_training_scores": {
+            "brier": 0.009351350572507933,
+            "log_loss": 0.042427696814654525,
+            "observed_success": 0.24786875
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002697459164380602
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026907219341222324
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002694638364955134
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026945435035207784
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026959977394404127
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026947041966060938
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026986508233496155
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027008064504241424
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026906265729190667
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002693907944016845
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026918174822348648
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026869071372702323
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026932792403542603
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026874040110412955
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000027010400808861694
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002691489073633282
+            }
+          ]
+        },
+        {
+          "phase": "prolonged_noise",
+          "global_labels": 64000,
+          "labels_per_context": 4000,
+          "noise": true,
+          "admissions_before": 3,
+          "admissions_after": 3,
+          "actual_training_scores": {
+            "brier": 0.19220974038379304,
+            "log_loss": 0.5792044548937352,
+            "observed_success": 0.2494375
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.15638868775078546
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18749962623988892
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.17704067915464014
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.171811370504736
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18749962623980135
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1608019653490393
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1875148850074365
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18804894158722885
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18902550203382823
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18756066128774374
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.16057010957992804
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1880489415090816
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18934593595750773
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.1690992842711031
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18774376640280088
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.18788109523596752
+            }
+          ]
+        },
+        {
+          "phase": "recovery",
+          "global_labels": 32000,
+          "labels_per_context": 2000,
+          "noise": false,
+          "admissions_before": 3,
+          "admissions_after": 3,
+          "actual_training_scores": {
+            "brier": 0.008152112079925477,
+            "log_loss": 0.039592334386864596,
+            "observed_success": 0.25275
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026929796949464714
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026857158114804268
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002702165408435414
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026921176107062647
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002689961650452531
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026940392741395566
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026982486444233053
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002695201403556363
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002687308899722535
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002694572949778183
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026950332715660883
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002690224810466765
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.000002698087701453585
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026973204786477332
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.0000026896984904382964
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.00000268946494327107
+            }
+          ]
+        },
+        {
+          "phase": "change",
+          "global_labels": 160000,
+          "labels_per_context": 10000,
+          "noise": false,
+          "admissions_before": 3,
+          "admissions_after": 5,
+          "actual_training_scores": {
+            "brier": 0.0022551421578427253,
+            "log_loss": 0.01673634672816017,
+            "observed_success": 0.25091875
+          },
+          "final_contexts": [
+            {
+              "context": 0,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 0.00010752426888596294
+            },
+            {
+              "context": 1,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.562118028754277e-7
+            },
+            {
+              "context": 2,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.567483981342147e-7
+            },
+            {
+              "context": 3,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.584558047319861e-7
+            },
+            {
+              "context": 4,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.565278228529239e-7
+            },
+            {
+              "context": 5,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.576556599072435e-7
+            },
+            {
+              "context": 6,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.577687256155335e-7
+            },
+            {
+              "context": 7,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.577327881534752e-7
+            },
+            {
+              "context": 8,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.576331683807026e-7
+            },
+            {
+              "context": 9,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.573665318007822e-7
+            },
+            {
+              "context": 10,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.578989519830011e-7
+            },
+            {
+              "context": 11,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.577239776474327e-7
+            },
+            {
+              "context": 12,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.561825096112617e-7
+            },
+            {
+              "context": 13,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.559837304186234e-7
+            },
+            {
+              "context": 14,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.587912194050028e-7
+            },
+            {
+              "context": 15,
+              "episodes": 128,
+              "policy_success": 1,
+              "brier": 6.588544413628101e-7
+            }
+          ]
+        }
+      ],
+      "bounds": {
+        "max_search_history": 16,
+        "max_decision_history": 24,
+        "max_fit_records": 4096,
+        "max_allocated_points": 160,
+        "max_sampled_checkpoint_bytes": 1721034,
+        "max_probability_cache": 4096
+      },
+      "resumes": [
+        {
+          "at": 18786,
+          "scope": 1,
+          "attempt": 37,
+          "verified_future_labels": 1024
+        }
+      ],
+      "fresh_context": {
+        "global_labels": 432000,
+        "contexts": [
+          {
+            "context": 16,
+            "episodes": 512,
+            "policy_success": 1,
+            "brier": 6.576953828877296e-7
+          }
+        ],
+        "attempts": 62,
+        "admissions": 5
+      }
+    }
+  ],
+  "cold_workflow_run": 37274619607,
+  "comparison_cases": 17,
+  "scale_cases": 3,
+  "principal_training_labels": 5336000
+}

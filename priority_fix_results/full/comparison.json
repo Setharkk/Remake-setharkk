@@ -1,0 +1,58 @@
+{
+  "engine_commit": "4539fdabb9f8007ca5e95b99bf978282d417cca8",
+  "workflow_run": 37274619561,
+  "independent_cases_per_os": 15,
+  "cases_per_os": 17,
+  "scale_cases_per_os": 3,
+  "absolute_tolerance": 1e-10,
+  "relative_tolerance": 1e-10,
+  "excluded_fields": [
+    "runner",
+    "python",
+    "elapsed_seconds",
+    "max_sampled_checkpoint_bytes"
+  ],
+  "numeric_values_compared": 259892,
+  "mathematical_tolerance_failures": [],
+  "above_absolute_tolerance": [
+    {
+      "path": "/scale-2/scale_cases/0/decisions/58/preservation/variance_proxy",
+      "a": 33808.99521022118,
+      "b": 33808.995210221314,
+      "difference": 1.3096723705530167e-10
+    },
+    {
+      "path": "/scale-2/scale_cases/0/searches/42/validation/variance_checks/preservation/1920",
+      "a": 33808.99521022118,
+      "b": 33808.995210221314,
+      "difference": 1.3096723705530167e-10
+    },
+    {
+      "path": "/successive_changes-1/cases/0/final_metrics/plastic_revision/decisions/30/improvement/variance_proxy",
+      "a": 24260.952899116055,
+      "b": 24260.952899116182,
+      "difference": 1.2732925824820995e-10
+    },
+    {
+      "path": "/successive_changes-1/cases/0/final_metrics/plastic_revision/searches/8/validation/variance_checks/improvement/16384",
+      "a": 24260.952899116055,
+      "b": 24260.952899116182,
+      "difference": 1.2732925824820995e-10
+    },
+    {
+      "path": "/successive_changes-1/cases/0/journals/plastic_revision/decisions/30/improvement/variance_proxy",
+      "a": 24260.952899116055,
+      "b": 24260.952899116182,
+      "difference": 1.2732925824820995e-10
+    },
+    {
+      "path": "/successive_changes-1/cases/0/journals/plastic_revision/searches/8/validation/variance_checks/improvement/16384",
+      "a": 24260.952899116055,
+      "b": 24260.952899116182,
+      "difference": 1.2732925824820995e-10
+    }
+  ],
+  "maximum_above_absolute_difference": 1.3096723705530167e-10,
+  "cold_workflow_run": 37274619607,
+  "confirmed_deadline_passed_on_both_os": true
+}

@@ -1,0 +1,166 @@
+{
+  "baseline_commit": "3bc75f676b3b93244e099f10db948d1a6be71f85",
+  "bridge_benchmark": {
+    "all_predictive_states_equal": true,
+    "episodes": 96,
+    "fit_gradients_per_attempt": 32768,
+    "full_fit_rows": 4096,
+    "full_fit_seconds": {
+      "after": [
+        0.9321404999999459,
+        0.9432462000000896,
+        0.9307645000000093
+      ],
+      "before": [
+        0.9137642000000596,
+        0.9052619999999933,
+        0.8922244999999975
+      ]
+    },
+    "median_ms_per_episode": {
+      "after": 0.9882145833325732,
+      "before": 16.263354166666726
+    },
+    "median_seconds": {
+      "after": 0.09486859999992703,
+      "before": 1.5612820000000056
+    },
+    "samples": [
+      {
+        "after": 0.09149309999997968,
+        "before": 1.5468647000000146
+      },
+      {
+        "after": 0.09486859999992703,
+        "before": 1.5612820000000056
+      },
+      {
+        "after": 0.09645520000003671,
+        "before": 1.5642798000000084
+      }
+    ],
+    "wire_speedup": 16.457310427277378
+  },
+  "corrected_reproductions": {
+    "confirmed_deadline": {
+      "actual_delays": {
+        "plastic_revision": {
+          "confirmation_global_labels": 13000,
+          "first_admission_global_labels": null,
+          "full_competence_global_labels": 12000
+        }
+      },
+      "criteria_failures": [
+        "Cold confirmed competence exceeds 12000: 13000"
+      ],
+      "protocol_confirmed_limit": 12000,
+      "synthetic_curve_first_success": 12000
+    },
+    "historical_restore": {
+      "DistinctionLearner": {
+        "error": "Presence neural updates differ from feedback and fit",
+        "forged_neural_update_total_accepted": false
+      },
+      "TemporalLearner": {
+        "error": "Temporal neural updates differ from feedback and fits",
+        "forged_neural_update_total_accepted": false
+      }
+    },
+    "mean_optimizer_domain": {
+      "candidate_restorable": true,
+      "initialization": {
+        "active_source_updates": 0,
+        "ambiguous_means": 1,
+        "at": 0,
+        "control_source_updates": 0,
+        "geodesic_mean_steps": 0,
+        "mapped_records": 16,
+        "mapped_routes": 1,
+        "optimizer_restarted": true,
+        "source": "plastic-geodesic-gated",
+        "source_prototype_reads": 8,
+        "transferred_candidate_points": 0,
+        "transferred_control_points": 0
+      },
+      "probability": 0.5,
+      "replay_update_succeeds": true,
+      "sources_in_optimizer_domain": true,
+      "transferred_point": [
+        0.70316255393463,
+        0.70316255393463,
+        0.1054743830901945
+      ]
+    },
+    "transaction_isolation": {
+      "adapter_checkpoint_changed_after_failed_receipt": false,
+      "adapter_revision_unchanged": true,
+      "adapter_still_restorable": true,
+      "injected_error": "injected failure after candidate.learn",
+      "original_checkpoint_changed_after_unpublished_child_learn": false,
+      "original_steps_after": 639,
+      "original_steps_before": 639,
+      "original_still_restorable": true,
+      "shared_validation_object": false,
+      "variance_keys_after": {
+        "improvement": [],
+        "preservation": [],
+        "relevance": []
+      },
+      "variance_keys_before": {
+        "improvement": [],
+        "preservation": [],
+        "relevance": []
+      }
+    }
+  },
+  "dense_benchmark": {
+    "distinct_symbols_per_episode": 64,
+    "median_seconds": {
+      "after": 0.12503819999994903,
+      "before": 0.36716119999994135
+    },
+    "rows": 512,
+    "samples": [
+      {
+        "after": 0.124598600000013,
+        "before": 0.36716119999994135
+      },
+      {
+        "after": 0.12503819999994903,
+        "before": 0.377598799999987
+      },
+      {
+        "after": 0.13123029999997016,
+        "before": 0.3614164000000528
+      },
+      {
+        "after": 0.1311879999999519,
+        "before": 0.3842444000000569
+      },
+      {
+        "after": 0.12480070000003707,
+        "before": 0.36343060000001515
+      }
+    ],
+    "selected_programs": {
+      "after": [
+        2080
+      ],
+      "before": [
+        2080
+      ]
+    },
+    "speedup": 2.9363922385326324
+  },
+  "execution_commit": "4539fdabb9f8007ca5e95b99bf978282d417cca8",
+  "failures": [],
+  "paired_continuation": {
+    "confidence_refinements_with_zero_alternative_search": 1,
+    "identical_predictive_state_except_declared_journal_work": true,
+    "labels": 32000,
+    "max_forecast_difference": 0,
+    "pending_format7_import_exact": true
+  },
+  "python": "3.11.9",
+  "runner": "Windows"
+}

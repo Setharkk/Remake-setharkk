@@ -1,9 +1,6 @@
 {
-  "baseline_commit": "3bc75f676b3b93244e099f10db948d1a6be71f85",
-  "preflight_commit": "6901504f78289c100e56940a49506b5c43be0a0f",
-  "preflight_run": 37274175341,
-  "unit_tests_per_os": 153,
-  "source_blob_sha1": {
+  "all_candidate_blobs_match": true,
+  "blobs": {
     "first_piece/adapter.py": "2bffcf5fc2721963a155c0e71c97f829be4994df",
     "first_piece/calibrated.py": "8885129b6989b9c6639bf33951121377606159dd",
     "first_piece/consolidated.py": "13bfc3ba0394e54b57f9c8b4ac3203c8a054431e",
@@ -19,12 +16,15 @@
     "first_piece/tests/test_revision_fixes.py": "4e5026c3e7eb9b7e037cf870065e41d5a4c92d59",
     "validation/plastic_revision_probe.py": "7844d054a5a7cbc2cd16adc5b5bd35d1c3261039"
   },
-  "corrected_reproductions_identical": true,
-  "continuation_identical": true,
-  "dense_programs_identical": true,
+  "tree": "257ca8568eb2a0fbd1f9a5c6a81891f67d43d3d3",
   "engine_commit": "4539fdabb9f8007ca5e95b99bf978282d417cca8",
-  "candidate_sources_published_without_change": true,
-  "all_nine_engine_workflows_succeeded": true,
+  "preflight_commit": "6901504f78289c100e56940a49506b5c43be0a0f",
+  "preflight_workflow_run": 37274175341,
   "published_parity_workflow_run": 37274619492,
-  "additional_pending_import_workflow_run": 37276047245
+  "unit_tests_per_os": 153,
+  "additional_pending_import_workflow_run": 37276047245,
+  "pending_import_purposes": [
+    "confidence",
+    "structure"
+  ]
 }

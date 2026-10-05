@@ -49,6 +49,14 @@ leurs banques, horizons, risques, prévisions et requêtes. Les anciens
 journaux de confiance gardent leur travail historique ; les nouveaux
 comptent zéro recherche alternative.
 
+Le [contrôle supplémentaire de migration](https://github.com/Setharkk/Remake-setharkk/actions/runs/37276047245)
+importe les checkpoints réellement produits par l'ancien moteur de format 7,
+dans les deux modes en attente : structure et confiance. Tous les champs
+sont identiques après import, sauf le format et l'identité annoncés.
+Le journal de confiance historique conserve ses compteurs de recherche
+positifs. Les [preuves Linux](priority_fix_results/compatibility-linux.json)
+et [Windows](priority_fix_results/compatibility-windows.json) sont archivées.
+
 Le coordinateur futur lit les métriques et prévisions versionnées.
 Il possède toujours un seul flux et une action en attente. Pendant un fit,
 les lecteurs consultent la révision précédant la publication ; les reçus
@@ -90,9 +98,42 @@ Les contrôles de transfert et le cache n'en suppriment pas les 32768
 gradients. Libérer le verrou corrige l'accès des lecteurs, sans accélérer
 tous les calculs ni rendre les retours instantanés.
 
-La publication du moteur déclenche également les cinq cas de délai et les
-30 cas indépendants Windows/Linux du protocole complet. Leurs résultats
-seront consignés après la fin des exécutions.
+Le moteur publié et testé est
+[`4539fdabb9f8007ca5e95b99bf978282d417cca8`](https://github.com/Setharkk/Remake-setharkk/commit/4539fdabb9f8007ca5e95b99bf978282d417cca8).
+Ses sources correspondent aux [14 blobs prévalidés](priority_fix_results/source_proof.json).
+
+- [153 tests et parité sur le code publié](https://github.com/Setharkk/Remake-setharkk/actions/runs/37274619492).
+- [Cinq cas de délai sur chaque système, tous réussis](https://github.com/Setharkk/Remake-setharkk/actions/runs/37274619607).
+- [30 cas indépendants, tous réussis](https://github.com/Setharkk/Remake-setharkk/actions/runs/37274619561).
+- Données complètes : [index Linux](priority_fix_results/full/linux/index.json),
+  [index Windows](priority_fix_results/full/windows/index.json)
+  et [comparaison numérique](priority_fix_results/full/comparison.json).
+
+Par système, 17 cas de comparaison/ablation et trois montées à l'échelle
+représentent **5 336 000 retours d'apprentissage principaux**,
+sans compter les copies de reprise. Les trois essais à 64 symboles et
+16 contextes conservent la compétence sous bruit, passent les changements,
+la récupération et le transfert sans label au contexte neuf. Chacun
+exécute 432000 retours et reproduit 1024 retours futurs après reprise.
+
+| Graine | Première compétence complète, retours de signal | Confirmation |
+|---|---:|---:|
+| 0 | 10000 | 11000 |
+| 1 | 1000 | 2000 |
+| 2 | 2000 | 3000 |
+| 17 | 1000 | 2000 |
+| 23 | 1000 | 2000 |
+
+Le pire délai **confirmé** des graines 0/1/2 est 11000, sous le plafond
+fixé à 12000. Les graines 17/23 restent une petite extension après
+développement, pas une preuve générale.
+
+La comparaison contrôle **259 892 valeurs numériques**,
+avec tolérances absolue et relative de 1e-10. Aucun champ ne dépasse la
+tolérance combinée. Six occurrences de sommes de variance présentent
+environ 1,3e-10 d'écart absolu sur des valeurs de 24261 et 33809, soit
+moins de 6e-15 relatif ; ces écarts restent publiés. Seuls système,
+version Python, durées et tailles JSON échantillonnées sont exclus.
 
 Les benchmarks comparent la référence Git
 `3bc75f676b3b93244e099f10db948d1a6be71f85` et le code corrigé, sans profileur,
@@ -130,3 +171,19 @@ une supériorité de S² sur un réseau euclidien ni une innovation scientifique
 Objectifs autonomes, choix appris des expériences, dialogue, essaim
 coordonné, continuations parallèles et exécution sur les applications
 du PC restent à construire.
+
+## Reproduction
+
+Python 3.11, bibliothèque standard, depuis un clone possédant l'historique Git :
+
+```text
+python -m unittest discover -s first_piece/tests -v
+python -m validation.revision_fix_probe --out revision-fixes.json
+python -m validation.plastic_revision_probe --quick --out cold.json
+python -m validation.plastic_revision_group --group scale --seed 0 --out scale.json
+```
+
+Le workflow automatique exécute les cinq groupes indépendants sur les
+trois graines et les deux systèmes. L'exécution agrégée historique reste
+disponible par `workflow_dispatch` ; elle ne duplique plus ces mêmes
+cas lors d'un push. Les fonctions de mesure et les critères sont conservés.

@@ -1,0 +1,80 @@
+{
+  "source_commit": "8d00725df14a121a3ca39a622e3b87462c13e6ed",
+  "workflows": [
+    {
+      "id": 37294956160,
+      "name": "First piece cooperative and representation readiness",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294956160",
+      "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
+    },
+    {
+      "id": 37294956092,
+      "name": "Current first piece corrections",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294956092",
+      "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
+    },
+    {
+      "id": 37294955957,
+      "name": "Protected competence and extended validation",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955957",
+      "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
+    },
+    {
+      "id": 37294955887,
+      "name": "Probability calibration without competence erasure",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955887",
+      "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
+    },
+    {
+      "id": 37294955829,
+      "name": "First piece laboratory",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955829",
+      "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
+    },
+    {
+      "id": 37294955816,
+      "name": "Independent plastic revision evidence",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955816",
+      "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
+    },
+    {
+      "id": 37294955803,
+      "name": "Renewable search and long session retention",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955803",
+      "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
+    },
+    {
+      "id": 37294955759,
+      "name": "Review priority corrections and predictive parity",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955759",
+      "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
+    },
+    {
+      "id": 37294955753,
+      "name": "Plastic spherical reuse latency and scale",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955753",
+      "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
+    }
+  ],
+  "readiness_engineering_pass": true,
+  "readiness_research_criteria_pass": true,
+  "tests_per_os": 163
+}

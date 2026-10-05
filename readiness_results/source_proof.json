@@ -1,0 +1,60 @@
+{
+  "base_commit": "9dbc2876d8347667dd46deddd9f340be96640c4d",
+  "published_source_commit": "8d00725df14a121a3ca39a622e3b87462c13e6ed",
+  "initial_source_proof": {
+    "base_commit": "9dbc2876d8347667dd46deddd9f340be96640c4d",
+    "candidate_commit": "954360941d0ecc96d100bfb9dfa72966d8ec0fb6",
+    "published_source_commit": "feef8fb8216cdae67fd6e902af53ba4c00345363",
+    "candidate_workflow_run": 37292819123,
+    "linux_tested_blobs": {
+      "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+      "first_piece/cooperative.py": "9c2682e302cfd356796da71ae9e5ebf825fa5fcf",
+      "first_piece/tests/test_readiness.py": "d428b6a38945ba253c3c49e8412f8bf7d47c476b"
+    },
+    "windows_tested_blobs": {
+      "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+      "first_piece/cooperative.py": "9c2682e302cfd356796da71ae9e5ebf825fa5fcf",
+      "first_piece/tests/test_readiness.py": "d428b6a38945ba253c3c49e8412f8bf7d47c476b"
+    },
+    "published_blobs": {
+      "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+      "first_piece/cooperative.py": "9c2682e302cfd356796da71ae9e5ebf825fa5fcf",
+      "first_piece/tests/test_readiness.py": "d428b6a38945ba253c3c49e8412f8bf7d47c476b"
+    },
+    "source_files_identical": true
+  },
+  "recovery_candidate_commit": "0d3d7fe046b3d2c89ebfb48f0a1e15ddca900172",
+  "recovery_workflow_run": 37294699123,
+  "published_blobs": {
+    "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+    "first_piece/cooperative.py": "dd40ea1e285378f7a1f3c254967510e72c0a00de",
+    "first_piece/tests/test_readiness.py": "e61d2361cb9fcf039c05d69238fb167944d75aec"
+  },
+  "linux_tested_blobs": {
+    "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+    "first_piece/cooperative.py": "dd40ea1e285378f7a1f3c254967510e72c0a00de",
+    "first_piece/tests/test_readiness.py": "e61d2361cb9fcf039c05d69238fb167944d75aec"
+  },
+  "windows_tested_blobs": {
+    "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+    "first_piece/cooperative.py": "dd40ea1e285378f7a1f3c254967510e72c0a00de",
+    "first_piece/tests/test_readiness.py": "e61d2361cb9fcf039c05d69238fb167944d75aec"
+  },
+  "source_files_identical": true,
+  "initial_measurement": {
+    "commit": "b58df616390880cfb4775c47e3ed3709446e02da",
+    "run": 37287542400,
+    "tested_blobs_linux": {
+      "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+      "first_piece/cooperative.py": "ae8697cfcdcc4fa600260b1e662cf96f5127fbea",
+      "first_piece/tests/test_readiness.py": "876323b55c4407d52b0be4d16e24b4daf07990cb"
+    },
+    "tested_blobs_windows": {
+      "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+      "first_piece/cooperative.py": "ae8697cfcdcc4fa600260b1e662cf96f5127fbea",
+      "first_piece/tests/test_readiness.py": "876323b55c4407d52b0be4d16e24b4daf07990cb"
+    }
+  },
+  "final_readiness_run": 37294956160,
+  "final_tests_per_os": 163
+}

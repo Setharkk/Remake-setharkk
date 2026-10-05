@@ -1,0 +1,18 @@
+{
+  "absolute_tolerance": 1e-10,
+  "relative_tolerance": 1e-10,
+  "ignored_fields": [
+    "os",
+    "python",
+    "seconds",
+    "max_tick_seconds",
+    "max_adaptive_learn_seconds",
+    "synchronous_fit_seconds",
+    "max_checkpoint_bytes"
+  ],
+  "numbers": 2330,
+  "scalars": 295,
+  "max_abs": 1.2212453270876722e-15,
+  "failures": [],
+  "pass": true
+}

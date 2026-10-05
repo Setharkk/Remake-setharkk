@@ -1,0 +1,41 @@
+{
+  "reference_source_commit": "feef8fb8216cdae67fd6e902af53ba4c00345363",
+  "candidate_commit": "0d3d7fe046b3d2c89ebfb48f0a1e15ddca900172",
+  "run": 37294699123,
+  "systems": {
+    "windows": {
+      "job": 111713059511,
+      "conclusion": "success",
+      "before": {
+        "phase": "feedback",
+        "committed_steps": 0,
+        "staged_steps": 1,
+        "checkpoint_restore_error": "Feedback work already advanced",
+        "pending_action_retained": true
+      },
+      "candidate_blobs": {
+        "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+        "first_piece/cooperative.py": "dd40ea1e285378f7a1f3c254967510e72c0a00de",
+        "first_piece/tests/test_readiness.py": "e61d2361cb9fcf039c05d69238fb167944d75aec"
+      },
+      "tests": "Ran 10 tests in 36.838s"
+    },
+    "linux": {
+      "job": 111713059803,
+      "conclusion": "success",
+      "before": {
+        "phase": "feedback",
+        "committed_steps": 0,
+        "staged_steps": 1,
+        "checkpoint_restore_error": "Feedback work already advanced",
+        "pending_action_retained": true
+      },
+      "candidate_blobs": {
+        "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+        "first_piece/cooperative.py": "dd40ea1e285378f7a1f3c254967510e72c0a00de",
+        "first_piece/tests/test_readiness.py": "e61d2361cb9fcf039c05d69238fb167944d75aec"
+      },
+      "tests": "Ran 10 tests in 22.863s"
+    }
+  }
+}

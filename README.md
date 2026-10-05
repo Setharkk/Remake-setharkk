@@ -3,7 +3,13 @@
 Projet de recherche pour un cortex neuronal courbe qui apprend des
 conséquences de ses actions et choisit des expériences.
 
-L'état actuel utilise le format 8. Les [corrections prioritaires](PRIORITY_FIXES.md)
+Le cœur courant utilise le format 8. Le [service coopératif](FIRST_PIECE_COOPERATIVE.md)
+permet de suspendre et reprendre le calcul par quotas et expose la couverture
+par action. Le [protocole gelé](FIRST_PIECE_READINESS_PROTOCOL.md) et les
+[résultats](FIRST_PIECE_READINESS_RESULTS.md) séparent sa validation d'ingénierie
+de l'expérience de représentation adaptative des répétitions.
+
+Les [corrections prioritaires](PRIORITY_FIXES.md)
 publient les défauts corrigés, les tests Windows/Linux, la compatibilité
 et les mesures CPU avant/après. Le [rapport du format 7](PLASTIC_REVISION_RESULTS.md)
 conserve les expériences à 64 symboles et 16 contextes. Les rapports suivants

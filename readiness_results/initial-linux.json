@@ -1,0 +1,3584 @@
+{
+  "base": "9dbc2876d8347667dd46deddd9f340be96640c4d",
+  "candidate_commit": "b58df616390880cfb4775c47e3ed3709446e02da",
+  "cases": {
+    "full_fit": [
+      {
+        "exact_checkpoint": true,
+        "fit_records": 4096,
+        "gradients": 32768,
+        "max_tick_seconds": 0.022542307999970035,
+        "mode": "structure",
+        "restored_phases": [
+          "('replay', 0)",
+          "('replay', 1)",
+          "('search', 'masks')",
+          "('search', 'pairs')",
+          "('search', 'pool')",
+          "('search', 'triples')"
+        ],
+        "synchronous_fit_seconds": 0.8851636640000038,
+        "ticks": 306,
+        "work_units": 39099
+      },
+      {
+        "exact_checkpoint": true,
+        "fit_records": 4096,
+        "gradients": 32768,
+        "max_tick_seconds": 0.019892934999973022,
+        "mode": "confidence",
+        "restored_phases": [
+          "('initialize', None)",
+          "('replay', 0)",
+          "('replay', 1)"
+        ],
+        "synchronous_fit_seconds": 0.6633513419999986,
+        "ticks": 257,
+        "work_units": 32774
+      }
+    ],
+    "long_parity": {
+      "admissions": 2,
+      "attempts": 38,
+      "contexts": 16,
+      "episodes": 32000,
+      "exact_forecasts_and_checkpoints": true,
+      "final_steps": 32000,
+      "max_tick_seconds": 0.02219924199999923,
+      "neural_updates": 1197512,
+      "quota": 128,
+      "restored_phase_keys": [
+        "('feedback', 'feedback', None)",
+        "('refinement', 'refinement_rows', None)",
+        "('refresh', 'search', 'masks')",
+        "('refresh', 'search', 'pairs')",
+        "('refresh', 'search', 'triples')",
+        "('start', 'replay', 0)",
+        "('start', 'replay', 1)",
+        "('start', 'search', 'masks')",
+        "('start', 'search', 'pairs')",
+        "('start', 'search', 'pool')",
+        "('start', 'search', 'singles')",
+        "('start', 'search', 'triples')"
+      ],
+      "seconds": 104.390090053,
+      "symbols": 64,
+      "ticks": 42757,
+      "work_phases": {
+        "feedback:feedback": 32000,
+        "refinement:refinement_rows": 4,
+        "refresh:search": 98,
+        "start:replay": 8856,
+        "start:search": 1799
+      },
+      "work_units": 1411193
+    },
+    "representation_seed_0": {
+      "adaptive_final": {
+        "admissions": 1,
+        "allocated_s2_points": 22,
+        "attempts": 12,
+        "contexts": 4,
+        "decisions": [
+          {
+            "alpha": 0.025,
+            "at": 256,
+            "attempt": 1,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.4549493401606954,
+            "mean": -0.027756541673124722,
+            "n": 128,
+            "radius": 1.4271927984875707
+          },
+          {
+            "alpha": 0.008333333333333333,
+            "at": 640,
+            "attempt": 2,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.6068904949310925,
+            "mean": -0.05791093385665866,
+            "n": 128,
+            "radius": 1.548979561074434
+          },
+          {
+            "alpha": 0.004166666666666667,
+            "at": 1024,
+            "attempt": 3,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.626655452256648,
+            "mean": -0.005537483861026373,
+            "n": 128,
+            "radius": 1.6211179683956216
+          },
+          {
+            "alpha": 0.0025,
+            "at": 1408,
+            "attempt": 4,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.7059243236220087,
+            "mean": -0.03363337279353485,
+            "n": 128,
+            "radius": 1.6722909508284738
+          },
+          {
+            "alpha": 0.0016666666666666668,
+            "at": 1792,
+            "attempt": 5,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.71761016570338,
+            "mean": -0.005789604439565336,
+            "n": 128,
+            "radius": 1.7118205612638147
+          },
+          {
+            "alpha": 0.0011904761904761906,
+            "at": 2176,
+            "attempt": 6,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.9857667820828933,
+            "mean": -0.24182301868775527,
+            "n": 128,
+            "radius": 1.743943763395138
+          },
+          {
+            "alpha": 0.0008928571428571429,
+            "at": 2560,
+            "attempt": 7,
+            "decision": "pending",
+            "leaf": 0,
+            "lower": -1.0768642912554514,
+            "mean": 0.6940826382065347,
+            "n": 128,
+            "radius": 1.7709469294619862
+          },
+          {
+            "alpha": 0.0008928571428571429,
+            "at": 2944,
+            "attempt": 7,
+            "decision": "pending",
+            "leaf": 0,
+            "lower": -0.16598165149936772,
+            "mean": 0.7194918132316254,
+            "n": 512,
+            "radius": 0.8854734647309931
+          },
+          {
+            "alpha": 0.0008928571428571429,
+            "at": 4480,
+            "attempt": 7,
+            "decision": "accept",
+            "leaf": 0,
+            "lower": 0.2747259049066408,
+            "mean": 0.7174626372721373,
+            "n": 2048,
+            "radius": 0.44273673236549654
+          },
+          {
+            "alpha": 0.0006944444444444445,
+            "at": 18815,
+            "attempt": 8,
+            "decision": "pending",
+            "leaf": 2,
+            "lower": -1.7739914360641325,
+            "mean": 0.02021246841704716,
+            "n": 128,
+            "radius": 1.7942039044811797
+          },
+          {
+            "alpha": 0.0006944444444444445,
+            "at": 19584,
+            "attempt": 8,
+            "decision": "futile",
+            "leaf": 2,
+            "lower": -0.9011185077487371,
+            "mean": -0.00401655550814732,
+            "n": 512,
+            "radius": 0.8971019522405899
+          },
+          {
+            "alpha": 0.0005555555555555556,
+            "at": 20095,
+            "attempt": 9,
+            "decision": "pending",
+            "leaf": 1,
+            "lower": -1.7805824370939418,
+            "mean": 0.03402166037115626,
+            "n": 128,
+            "radius": 1.814604097465098
+          },
+          {
+            "alpha": 0.0005555555555555556,
+            "at": 20864,
+            "attempt": 9,
+            "decision": "futile",
+            "leaf": 1,
+            "lower": -0.9093735686531341,
+            "mean": -0.002071519920585033,
+            "n": 512,
+            "radius": 0.907302048732549
+          },
+          {
+            "alpha": 0.00045454545454545455,
+            "at": 21375,
+            "attempt": 10,
+            "decision": "pending",
+            "leaf": 1,
+            "lower": -1.7906657391847691,
+            "mean": 0.04209013083243073,
+            "n": 128,
+            "radius": 1.8327558700171998
+          },
+          {
+            "alpha": 0.00045454545454545455,
+            "at": 22144,
+            "attempt": 10,
+            "decision": "pending",
+            "leaf": 1,
+            "lower": -0.8765434392804811,
+            "mean": 0.03983449572811879,
+            "n": 512,
+            "radius": 0.9163779350085999
+          },
+          {
+            "alpha": 0.00045454545454545455,
+            "at": 25215,
+            "attempt": 10,
+            "decision": "inconclusive",
+            "leaf": 1,
+            "lower": -0.4195245844421047,
+            "mean": 0.03866438306219522,
+            "n": 2048,
+            "radius": 0.45818896750429994
+          },
+          {
+            "alpha": 0.0003787878787878788,
+            "at": 25728,
+            "attempt": 11,
+            "decision": "pending",
+            "leaf": 2,
+            "lower": -1.8315906664642132,
+            "mean": 0.01750270844784094,
+            "n": 128,
+            "radius": 1.8490933749120542
+          },
+          {
+            "alpha": 0.0003787878787878788,
+            "at": 26495,
+            "attempt": 11,
+            "decision": "futile",
+            "leaf": 2,
+            "lower": -0.9406926353045738,
+            "mean": -0.016145947848546737,
+            "n": 512,
+            "radius": 0.9245466874560271
+          },
+          {
+            "alpha": 0.0003205128205128205,
+            "at": 27007,
+            "attempt": 12,
+            "decision": "futile",
+            "leaf": 2,
+            "lower": -2.081262821276084,
+            "mean": -0.2173257418630507,
+            "n": 128,
+            "radius": 1.8639370794130337
+          }
+        ],
+        "leaves": 2,
+        "lifetime_alpha_upper_bound": 0.05,
+        "neural_updates": 54272,
+        "nodes": 3,
+        "retained_records": 512,
+        "steps": 30720,
+        "symbols": 18,
+        "trial_n": null
+      },
+      "all_research_criteria_pass": true,
+      "criteria": {
+        "interruption_noise_long_prefix_at_least_95": true,
+        "interruption_noise_new_context_at_least_95": true,
+        "interruption_noise_ordinary_at_least_95": true,
+        "json_resume_exact": true,
+        "no_admission_initial_noise": true,
+        "no_admission_interruption_noise": true,
+        "recovery_long_prefix_at_least_95": true,
+        "recovery_new_context_at_least_95": true,
+        "recovery_ordinary_at_least_95": true,
+        "signal_long_prefix_at_least_95": true,
+        "signal_new_context_at_least_95": true,
+        "signal_ordinary_at_least_95": true
+      },
+      "episodes": 30720,
+      "format8_final": {
+        "admissions": 0,
+        "attempts": 77,
+        "neural_updates": 687104,
+        "steps": 30720
+      },
+      "json_resume_exact": true,
+      "max_adaptive_learn_seconds": 0.06740028300004042,
+      "max_allocated_s2_points": 36,
+      "max_checkpoint_bytes": 56146,
+      "max_retained_records": 512,
+      "phases": [
+        {
+          "adaptive_metrics": {
+            "admissions": 0,
+            "allocated_s2_points": 18,
+            "attempts": 6,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.4549493401606954,
+                "mean": -0.027756541673124722,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.6068904949310925,
+                "mean": -0.05791093385665866,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.626655452256648,
+                "mean": -0.005537483861026373,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1408,
+                "attempt": 4,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.7059243236220087,
+                "mean": -0.03363337279353485,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 1792,
+                "attempt": 5,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.71761016570338,
+                "mean": -0.005789604439565336,
+                "n": 128,
+                "radius": 1.7118205612638147
+              }
+            ],
+            "leaves": 1,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 13312,
+            "nodes": 1,
+            "retained_records": 256,
+            "steps": 2048,
+            "symbols": 18,
+            "trial_n": 0
+          },
+          "admissions_added": 0,
+          "curves": [],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.2632953214607463,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.2632953214607463,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.2632953214607463,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.2632953214607463,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.2632953214607463,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.2632953214607463,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.27744732623282625,
+                "episodes": 512,
+                "policy_accuracy": 0.5234375
+              },
+              "new_context": {
+                "brier": 0.29834354662371304,
+                "episodes": 512,
+                "policy_accuracy": 0.46484375
+              },
+              "ordinary": {
+                "brier": 0.278284961738814,
+                "episodes": 512,
+                "policy_accuracy": 0.5234375
+              }
+            }
+          },
+          "exposure": 2048,
+          "phase": "initial_noise"
+        },
+        {
+          "adaptive_metrics": {
+            "admissions": 1,
+            "allocated_s2_points": 22,
+            "attempts": 7,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.4549493401606954,
+                "mean": -0.027756541673124722,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.6068904949310925,
+                "mean": -0.05791093385665866,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.626655452256648,
+                "mean": -0.005537483861026373,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1408,
+                "attempt": 4,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.7059243236220087,
+                "mean": -0.03363337279353485,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 1792,
+                "attempt": 5,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.71761016570338,
+                "mean": -0.005789604439565336,
+                "n": 128,
+                "radius": 1.7118205612638147
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 2176,
+                "attempt": 6,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.9857667820828933,
+                "mean": -0.24182301868775527,
+                "n": 128,
+                "radius": 1.743943763395138
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 2560,
+                "attempt": 7,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.0768642912554514,
+                "mean": 0.6940826382065347,
+                "n": 128,
+                "radius": 1.7709469294619862
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 2944,
+                "attempt": 7,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.16598165149936772,
+                "mean": 0.7194918132316254,
+                "n": 512,
+                "radius": 0.8854734647309931
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 4480,
+                "attempt": 7,
+                "decision": "accept",
+                "leaf": 0,
+                "lower": 0.2747259049066408,
+                "mean": 0.7174626372721373,
+                "n": 2048,
+                "radius": 0.44273673236549654
+              }
+            ],
+            "leaves": 2,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 31744,
+            "nodes": 3,
+            "retained_records": 512,
+            "steps": 18432,
+            "symbols": 18,
+            "trial_n": null
+          },
+          "admissions_added": 1,
+          "curves": [
+            {
+              "signal_exposure": 512,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.26754347581940785,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "fixed_trace": {
+                  "brier": 0.2505621066831315,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.26321290507943207,
+                  "episodes": 512,
+                  "policy_accuracy": 0.478515625
+                }
+              }
+            },
+            {
+              "signal_exposure": 2048,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.26754347581940785,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "fixed_trace": {
+                  "brier": 0.2505898324155191,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.27059109968001,
+                  "episodes": 512,
+                  "policy_accuracy": 0.51171875
+                }
+              }
+            },
+            {
+              "signal_exposure": 8192,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.00002316949777892544,
+                  "episodes": 512,
+                  "policy_accuracy": 1
+                },
+                "fixed_trace": {
+                  "brier": 0.2506063902244977,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.26163730597760093,
+                  "episodes": 512,
+                  "policy_accuracy": 0.470703125
+                }
+              }
+            },
+            {
+              "signal_exposure": 16384,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.00002316949777892544,
+                  "episodes": 512,
+                  "policy_accuracy": 1
+                },
+                "fixed_trace": {
+                  "brier": 0.25459923692363884,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.2563614679358596,
+                  "episodes": 512,
+                  "policy_accuracy": 0.501953125
+                }
+              }
+            }
+          ],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.00002316949777892544,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "new_context": {
+                "brier": 0.00002316949777892544,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "ordinary": {
+                "brier": 0.00002316949777892544,
+                "episodes": 512,
+                "policy_accuracy": 1
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.25459923692363884,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.25459923692363884,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.25459923692363884,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.2574451860874719,
+                "episodes": 512,
+                "policy_accuracy": 0.509765625
+              },
+              "new_context": {
+                "brier": 0.2564436678790948,
+                "episodes": 512,
+                "policy_accuracy": 0.525390625
+              },
+              "ordinary": {
+                "brier": 0.25732095657103177,
+                "episodes": 512,
+                "policy_accuracy": 0.494140625
+              }
+            }
+          },
+          "exposure": 16384,
+          "phase": "signal"
+        },
+        {
+          "adaptive_metrics": {
+            "admissions": 1,
+            "allocated_s2_points": 22,
+            "attempts": 11,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.4549493401606954,
+                "mean": -0.027756541673124722,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.6068904949310925,
+                "mean": -0.05791093385665866,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.626655452256648,
+                "mean": -0.005537483861026373,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1408,
+                "attempt": 4,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.7059243236220087,
+                "mean": -0.03363337279353485,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 1792,
+                "attempt": 5,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.71761016570338,
+                "mean": -0.005789604439565336,
+                "n": 128,
+                "radius": 1.7118205612638147
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 2176,
+                "attempt": 6,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.9857667820828933,
+                "mean": -0.24182301868775527,
+                "n": 128,
+                "radius": 1.743943763395138
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 2560,
+                "attempt": 7,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.0768642912554514,
+                "mean": 0.6940826382065347,
+                "n": 128,
+                "radius": 1.7709469294619862
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 2944,
+                "attempt": 7,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.16598165149936772,
+                "mean": 0.7194918132316254,
+                "n": 512,
+                "radius": 0.8854734647309931
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 4480,
+                "attempt": 7,
+                "decision": "accept",
+                "leaf": 0,
+                "lower": 0.2747259049066408,
+                "mean": 0.7174626372721373,
+                "n": 2048,
+                "radius": 0.44273673236549654
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 18815,
+                "attempt": 8,
+                "decision": "pending",
+                "leaf": 2,
+                "lower": -1.7739914360641325,
+                "mean": 0.02021246841704716,
+                "n": 128,
+                "radius": 1.7942039044811797
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 19584,
+                "attempt": 8,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -0.9011185077487371,
+                "mean": -0.00401655550814732,
+                "n": 512,
+                "radius": 0.8971019522405899
+              },
+              {
+                "alpha": 0.0005555555555555556,
+                "at": 20095,
+                "attempt": 9,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -1.7805824370939418,
+                "mean": 0.03402166037115626,
+                "n": 128,
+                "radius": 1.814604097465098
+              },
+              {
+                "alpha": 0.0005555555555555556,
+                "at": 20864,
+                "attempt": 9,
+                "decision": "futile",
+                "leaf": 1,
+                "lower": -0.9093735686531341,
+                "mean": -0.002071519920585033,
+                "n": 512,
+                "radius": 0.907302048732549
+              },
+              {
+                "alpha": 0.00045454545454545455,
+                "at": 21375,
+                "attempt": 10,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -1.7906657391847691,
+                "mean": 0.04209013083243073,
+                "n": 128,
+                "radius": 1.8327558700171998
+              },
+              {
+                "alpha": 0.00045454545454545455,
+                "at": 22144,
+                "attempt": 10,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -0.8765434392804811,
+                "mean": 0.03983449572811879,
+                "n": 512,
+                "radius": 0.9163779350085999
+              },
+              {
+                "alpha": 0.00045454545454545455,
+                "at": 25215,
+                "attempt": 10,
+                "decision": "inconclusive",
+                "leaf": 1,
+                "lower": -0.4195245844421047,
+                "mean": 0.03866438306219522,
+                "n": 2048,
+                "radius": 0.45818896750429994
+              },
+              {
+                "alpha": 0.0003787878787878788,
+                "at": 25728,
+                "attempt": 11,
+                "decision": "pending",
+                "leaf": 2,
+                "lower": -1.8315906664642132,
+                "mean": 0.01750270844784094,
+                "n": 128,
+                "radius": 1.8490933749120542
+              },
+              {
+                "alpha": 0.0003787878787878788,
+                "at": 26495,
+                "attempt": 11,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -0.9406926353045738,
+                "mean": -0.016145947848546737,
+                "n": 512,
+                "radius": 0.9245466874560271
+              }
+            ],
+            "leaves": 2,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 48128,
+            "nodes": 3,
+            "retained_records": 512,
+            "steps": 26624,
+            "symbols": 18,
+            "trial_n": null
+          },
+          "admissions_added": 0,
+          "curves": [],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.00002316949777892544,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "new_context": {
+                "brier": 0.00002316949777892544,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "ordinary": {
+                "brier": 0.00002316949777892544,
+                "episodes": 512,
+                "policy_accuracy": 1
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.25758567604448374,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.25758567604448374,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.25758567604448374,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.2631470527280662,
+                "episodes": 512,
+                "policy_accuracy": 0.490234375
+              },
+              "new_context": {
+                "brier": 0.26925228691969283,
+                "episodes": 512,
+                "policy_accuracy": 0.462890625
+              },
+              "ordinary": {
+                "brier": 0.2609439184180895,
+                "episodes": 512,
+                "policy_accuracy": 0.521484375
+              }
+            }
+          },
+          "exposure": 8192,
+          "phase": "interruption_noise"
+        },
+        {
+          "adaptive_metrics": {
+            "admissions": 1,
+            "allocated_s2_points": 22,
+            "attempts": 12,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.4549493401606954,
+                "mean": -0.027756541673124722,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.6068904949310925,
+                "mean": -0.05791093385665866,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.626655452256648,
+                "mean": -0.005537483861026373,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1408,
+                "attempt": 4,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.7059243236220087,
+                "mean": -0.03363337279353485,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 1792,
+                "attempt": 5,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.71761016570338,
+                "mean": -0.005789604439565336,
+                "n": 128,
+                "radius": 1.7118205612638147
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 2176,
+                "attempt": 6,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.9857667820828933,
+                "mean": -0.24182301868775527,
+                "n": 128,
+                "radius": 1.743943763395138
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 2560,
+                "attempt": 7,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.0768642912554514,
+                "mean": 0.6940826382065347,
+                "n": 128,
+                "radius": 1.7709469294619862
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 2944,
+                "attempt": 7,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.16598165149936772,
+                "mean": 0.7194918132316254,
+                "n": 512,
+                "radius": 0.8854734647309931
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 4480,
+                "attempt": 7,
+                "decision": "accept",
+                "leaf": 0,
+                "lower": 0.2747259049066408,
+                "mean": 0.7174626372721373,
+                "n": 2048,
+                "radius": 0.44273673236549654
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 18815,
+                "attempt": 8,
+                "decision": "pending",
+                "leaf": 2,
+                "lower": -1.7739914360641325,
+                "mean": 0.02021246841704716,
+                "n": 128,
+                "radius": 1.7942039044811797
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 19584,
+                "attempt": 8,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -0.9011185077487371,
+                "mean": -0.00401655550814732,
+                "n": 512,
+                "radius": 0.8971019522405899
+              },
+              {
+                "alpha": 0.0005555555555555556,
+                "at": 20095,
+                "attempt": 9,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -1.7805824370939418,
+                "mean": 0.03402166037115626,
+                "n": 128,
+                "radius": 1.814604097465098
+              },
+              {
+                "alpha": 0.0005555555555555556,
+                "at": 20864,
+                "attempt": 9,
+                "decision": "futile",
+                "leaf": 1,
+                "lower": -0.9093735686531341,
+                "mean": -0.002071519920585033,
+                "n": 512,
+                "radius": 0.907302048732549
+              },
+              {
+                "alpha": 0.00045454545454545455,
+                "at": 21375,
+                "attempt": 10,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -1.7906657391847691,
+                "mean": 0.04209013083243073,
+                "n": 128,
+                "radius": 1.8327558700171998
+              },
+              {
+                "alpha": 0.00045454545454545455,
+                "at": 22144,
+                "attempt": 10,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -0.8765434392804811,
+                "mean": 0.03983449572811879,
+                "n": 512,
+                "radius": 0.9163779350085999
+              },
+              {
+                "alpha": 0.00045454545454545455,
+                "at": 25215,
+                "attempt": 10,
+                "decision": "inconclusive",
+                "leaf": 1,
+                "lower": -0.4195245844421047,
+                "mean": 0.03866438306219522,
+                "n": 2048,
+                "radius": 0.45818896750429994
+              },
+              {
+                "alpha": 0.0003787878787878788,
+                "at": 25728,
+                "attempt": 11,
+                "decision": "pending",
+                "leaf": 2,
+                "lower": -1.8315906664642132,
+                "mean": 0.01750270844784094,
+                "n": 128,
+                "radius": 1.8490933749120542
+              },
+              {
+                "alpha": 0.0003787878787878788,
+                "at": 26495,
+                "attempt": 11,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -0.9406926353045738,
+                "mean": -0.016145947848546737,
+                "n": 512,
+                "radius": 0.9245466874560271
+              },
+              {
+                "alpha": 0.0003205128205128205,
+                "at": 27007,
+                "attempt": 12,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -2.081262821276084,
+                "mean": -0.2173257418630507,
+                "n": 128,
+                "radius": 1.8639370794130337
+              }
+            ],
+            "leaves": 2,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 54272,
+            "nodes": 3,
+            "retained_records": 512,
+            "steps": 30720,
+            "symbols": 18,
+            "trial_n": null
+          },
+          "admissions_added": 0,
+          "curves": [],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.00002316949777892544,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "new_context": {
+                "brier": 0.00002316949777892544,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "ordinary": {
+                "brier": 0.00002316949777892544,
+                "episodes": 512,
+                "policy_accuracy": 1
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.2509590352915845,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.2509590352915845,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.2509590352915845,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.2527017956803749,
+                "episodes": 512,
+                "policy_accuracy": 0.537109375
+              },
+              "new_context": {
+                "brier": 0.2553252319104757,
+                "episodes": 512,
+                "policy_accuracy": 0.482421875
+              },
+              "ordinary": {
+                "brier": 0.2574084046618324,
+                "episodes": 512,
+                "policy_accuracy": 0.470703125
+              }
+            }
+          },
+          "exposure": 4096,
+          "phase": "recovery"
+        }
+      ],
+      "seconds": 36.31494944000002,
+      "seed": 0
+    },
+    "representation_seed_1": {
+      "adaptive_final": {
+        "admissions": 1,
+        "allocated_s2_points": 22,
+        "attempts": 13,
+        "contexts": 4,
+        "decisions": [
+          {
+            "alpha": 0.025,
+            "at": 256,
+            "attempt": 1,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.5690884645168002,
+            "mean": -0.14189566602922937,
+            "n": 128,
+            "radius": 1.4271927984875707
+          },
+          {
+            "alpha": 0.008333333333333333,
+            "at": 640,
+            "attempt": 2,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.5870781017919378,
+            "mean": -0.03809854071750392,
+            "n": 128,
+            "radius": 1.548979561074434
+          },
+          {
+            "alpha": 0.004166666666666667,
+            "at": 1024,
+            "attempt": 3,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.650936001939964,
+            "mean": -0.029818033544342256,
+            "n": 128,
+            "radius": 1.6211179683956216
+          },
+          {
+            "alpha": 0.0025,
+            "at": 1408,
+            "attempt": 4,
+            "decision": "pending",
+            "leaf": 0,
+            "lower": -1.6489624638141223,
+            "mean": 0.02332848701435142,
+            "n": 128,
+            "radius": 1.6722909508284738
+          },
+          {
+            "alpha": 0.0025,
+            "at": 1792,
+            "attempt": 4,
+            "decision": "pending",
+            "leaf": 0,
+            "lower": -0.8102142219609006,
+            "mean": 0.02593125345333627,
+            "n": 512,
+            "radius": 0.8361454754142369
+          },
+          {
+            "alpha": 0.0025,
+            "at": 3328,
+            "attempt": 4,
+            "decision": "inconclusive",
+            "leaf": 0,
+            "lower": -0.30000075808627485,
+            "mean": 0.1180719796208436,
+            "n": 2048,
+            "radius": 0.41807273770711845
+          },
+          {
+            "alpha": 0.0016666666666666668,
+            "at": 3712,
+            "attempt": 5,
+            "decision": "pending",
+            "leaf": 0,
+            "lower": -1.0200334210061004,
+            "mean": 0.6917871402577142,
+            "n": 128,
+            "radius": 1.7118205612638147
+          },
+          {
+            "alpha": 0.0016666666666666668,
+            "at": 4096,
+            "attempt": 5,
+            "decision": "pending",
+            "leaf": 0,
+            "lower": -0.17010641047742403,
+            "mean": 0.6858038701544833,
+            "n": 512,
+            "radius": 0.8559102806319073
+          },
+          {
+            "alpha": 0.0016666666666666668,
+            "at": 5632,
+            "attempt": 5,
+            "decision": "accept",
+            "leaf": 0,
+            "lower": 0.2659111774918013,
+            "mean": 0.693866317807755,
+            "n": 2048,
+            "radius": 0.42795514031595366
+          },
+          {
+            "alpha": 0.0011904761904761906,
+            "at": 18943,
+            "attempt": 6,
+            "decision": "futile",
+            "leaf": 1,
+            "lower": -1.768134502586531,
+            "mean": -0.02419073919139291,
+            "n": 128,
+            "radius": 1.743943763395138
+          },
+          {
+            "alpha": 0.0008928571428571429,
+            "at": 19456,
+            "attempt": 7,
+            "decision": "futile",
+            "leaf": 2,
+            "lower": -1.7853848594397912,
+            "mean": -0.014437929977804999,
+            "n": 128,
+            "radius": 1.7709469294619862
+          },
+          {
+            "alpha": 0.0006944444444444445,
+            "at": 19968,
+            "attempt": 8,
+            "decision": "pending",
+            "leaf": 2,
+            "lower": -1.7587315095144926,
+            "mean": 0.03547239496668699,
+            "n": 128,
+            "radius": 1.7942039044811797
+          },
+          {
+            "alpha": 0.0006944444444444445,
+            "at": 20736,
+            "attempt": 8,
+            "decision": "futile",
+            "leaf": 2,
+            "lower": -0.8982213250904696,
+            "mean": -0.00111937284987975,
+            "n": 512,
+            "radius": 0.8971019522405899
+          },
+          {
+            "alpha": 0.0005555555555555556,
+            "at": 21247,
+            "attempt": 9,
+            "decision": "futile",
+            "leaf": 1,
+            "lower": -1.8064394441300764,
+            "mean": 0.008164653335021681,
+            "n": 128,
+            "radius": 1.814604097465098
+          },
+          {
+            "alpha": 0.00045454545454545455,
+            "at": 21760,
+            "attempt": 10,
+            "decision": "futile",
+            "leaf": 2,
+            "lower": -1.9158089992823206,
+            "mean": -0.0830531292651209,
+            "n": 128,
+            "radius": 1.8327558700171998
+          },
+          {
+            "alpha": 0.0003787878787878788,
+            "at": 22272,
+            "attempt": 11,
+            "decision": "futile",
+            "leaf": 2,
+            "lower": -1.8457775058033827,
+            "mean": 0.0033158691086713757,
+            "n": 128,
+            "radius": 1.8490933749120542
+          },
+          {
+            "alpha": 0.0003205128205128205,
+            "at": 22783,
+            "attempt": 12,
+            "decision": "futile",
+            "leaf": 1,
+            "lower": -1.8767859637107076,
+            "mean": -0.012848884297673873,
+            "n": 128,
+            "radius": 1.8639370794130337
+          },
+          {
+            "alpha": 0.0002747252747252747,
+            "at": 23295,
+            "attempt": 13,
+            "decision": "pending",
+            "leaf": 1,
+            "lower": -1.8158316703752677,
+            "mean": 0.06169846836255768,
+            "n": 128,
+            "radius": 1.8775301387378254
+          },
+          {
+            "alpha": 0.0002747252747252747,
+            "at": 24064,
+            "attempt": 13,
+            "decision": "pending",
+            "leaf": 1,
+            "lower": -0.8865105546888292,
+            "mean": 0.05225451468008351,
+            "n": 512,
+            "radius": 0.9387650693689127
+          },
+          {
+            "alpha": 0.0002747252747252747,
+            "at": 27135,
+            "attempt": 13,
+            "decision": "inconclusive",
+            "leaf": 1,
+            "lower": -0.41281891004501514,
+            "mean": 0.056563624639441215,
+            "n": 2048,
+            "radius": 0.46938253468445634
+          }
+        ],
+        "leaves": 2,
+        "lifetime_alpha_upper_bound": 0.05,
+        "neural_updates": 56320,
+        "nodes": 3,
+        "retained_records": 512,
+        "steps": 30720,
+        "symbols": 18,
+        "trial_n": null
+      },
+      "all_research_criteria_pass": true,
+      "criteria": {
+        "interruption_noise_long_prefix_at_least_95": true,
+        "interruption_noise_new_context_at_least_95": true,
+        "interruption_noise_ordinary_at_least_95": true,
+        "json_resume_exact": true,
+        "no_admission_initial_noise": true,
+        "no_admission_interruption_noise": true,
+        "recovery_long_prefix_at_least_95": true,
+        "recovery_new_context_at_least_95": true,
+        "recovery_ordinary_at_least_95": true,
+        "signal_long_prefix_at_least_95": true,
+        "signal_new_context_at_least_95": true,
+        "signal_ordinary_at_least_95": true
+      },
+      "episodes": 30720,
+      "format8_final": {
+        "admissions": 0,
+        "attempts": 75,
+        "neural_updates": 670720,
+        "steps": 30720
+      },
+      "json_resume_exact": true,
+      "max_adaptive_learn_seconds": 0.06905330900002582,
+      "max_allocated_s2_points": 36,
+      "max_checkpoint_bytes": 56328,
+      "max_retained_records": 512,
+      "phases": [
+        {
+          "adaptive_metrics": {
+            "admissions": 0,
+            "allocated_s2_points": 18,
+            "attempts": 4,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.5690884645168002,
+                "mean": -0.14189566602922937,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.5870781017919378,
+                "mean": -0.03809854071750392,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.650936001939964,
+                "mean": -0.029818033544342256,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1408,
+                "attempt": 4,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.6489624638141223,
+                "mean": 0.02332848701435142,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1792,
+                "attempt": 4,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.8102142219609006,
+                "mean": 0.02593125345333627,
+                "n": 512,
+                "radius": 0.8361454754142369
+              }
+            ],
+            "leaves": 1,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 9216,
+            "nodes": 1,
+            "retained_records": 256,
+            "steps": 2048,
+            "symbols": 18,
+            "trial_n": 768
+          },
+          "admissions_added": 0,
+          "curves": [],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.30026859320907867,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.30026859320907867,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.30026859320907867,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.27532698169264336,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.27532698169264336,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.27532698169264336,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.2721375705702025,
+                "episodes": 512,
+                "policy_accuracy": 0.525390625
+              },
+              "new_context": {
+                "brier": 0.2798202940432819,
+                "episodes": 512,
+                "policy_accuracy": 0.494140625
+              },
+              "ordinary": {
+                "brier": 0.2864685206006272,
+                "episodes": 512,
+                "policy_accuracy": 0.470703125
+              }
+            }
+          },
+          "exposure": 2048,
+          "phase": "initial_noise"
+        },
+        {
+          "adaptive_metrics": {
+            "admissions": 1,
+            "allocated_s2_points": 22,
+            "attempts": 5,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.5690884645168002,
+                "mean": -0.14189566602922937,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.5870781017919378,
+                "mean": -0.03809854071750392,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.650936001939964,
+                "mean": -0.029818033544342256,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1408,
+                "attempt": 4,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.6489624638141223,
+                "mean": 0.02332848701435142,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1792,
+                "attempt": 4,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.8102142219609006,
+                "mean": 0.02593125345333627,
+                "n": 512,
+                "radius": 0.8361454754142369
+              },
+              {
+                "alpha": 0.0025,
+                "at": 3328,
+                "attempt": 4,
+                "decision": "inconclusive",
+                "leaf": 0,
+                "lower": -0.30000075808627485,
+                "mean": 0.1180719796208436,
+                "n": 2048,
+                "radius": 0.41807273770711845
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 3712,
+                "attempt": 5,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.0200334210061004,
+                "mean": 0.6917871402577142,
+                "n": 128,
+                "radius": 1.7118205612638147
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 4096,
+                "attempt": 5,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.17010641047742403,
+                "mean": 0.6858038701544833,
+                "n": 512,
+                "radius": 0.8559102806319073
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 5632,
+                "attempt": 5,
+                "decision": "accept",
+                "leaf": 0,
+                "lower": 0.2659111774918013,
+                "mean": 0.693866317807755,
+                "n": 2048,
+                "radius": 0.42795514031595366
+              }
+            ],
+            "leaves": 2,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 27648,
+            "nodes": 3,
+            "retained_records": 512,
+            "steps": 18432,
+            "symbols": 18,
+            "trial_n": null
+          },
+          "admissions_added": 1,
+          "curves": [
+            {
+              "signal_exposure": 512,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.30026859320907867,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "fixed_trace": {
+                  "brier": 0.2500309407537311,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.2708689457601651,
+                  "episodes": 512,
+                  "policy_accuracy": 0.505859375
+                }
+              }
+            },
+            {
+              "signal_exposure": 2048,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.2551186418298098,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "fixed_trace": {
+                  "brier": 0.25913919352128845,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.27051073616838356,
+                  "episodes": 512,
+                  "policy_accuracy": 0.50390625
+                }
+              }
+            },
+            {
+              "signal_exposure": 8192,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.000022955156980900592,
+                  "episodes": 512,
+                  "policy_accuracy": 1
+                },
+                "fixed_trace": {
+                  "brier": 0.2503674006822868,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.2518386323851684,
+                  "episodes": 512,
+                  "policy_accuracy": 0.564453125
+                }
+              }
+            },
+            {
+              "signal_exposure": 16384,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.000022955156980900592,
+                  "episodes": 512,
+                  "policy_accuracy": 1
+                },
+                "fixed_trace": {
+                  "brier": 0.2500015532619748,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.26357390387160595,
+                  "episodes": 512,
+                  "policy_accuracy": 0.48828125
+                }
+              }
+            }
+          ],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.000022955156980900592,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "new_context": {
+                "brier": 0.000022955156980900592,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "ordinary": {
+                "brier": 0.000022955156980900592,
+                "episodes": 512,
+                "policy_accuracy": 1
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.2500015532619748,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.2500015532619748,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.2500015532619748,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.25833384244176605,
+                "episodes": 512,
+                "policy_accuracy": 0.52734375
+              },
+              "new_context": {
+                "brier": 0.25910185424344695,
+                "episodes": 512,
+                "policy_accuracy": 0.52734375
+              },
+              "ordinary": {
+                "brier": 0.26362009948079446,
+                "episodes": 512,
+                "policy_accuracy": 0.50390625
+              }
+            }
+          },
+          "exposure": 16384,
+          "phase": "signal"
+        },
+        {
+          "adaptive_metrics": {
+            "admissions": 1,
+            "allocated_s2_points": 36,
+            "attempts": 13,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.5690884645168002,
+                "mean": -0.14189566602922937,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.5870781017919378,
+                "mean": -0.03809854071750392,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.650936001939964,
+                "mean": -0.029818033544342256,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1408,
+                "attempt": 4,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.6489624638141223,
+                "mean": 0.02332848701435142,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1792,
+                "attempt": 4,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.8102142219609006,
+                "mean": 0.02593125345333627,
+                "n": 512,
+                "radius": 0.8361454754142369
+              },
+              {
+                "alpha": 0.0025,
+                "at": 3328,
+                "attempt": 4,
+                "decision": "inconclusive",
+                "leaf": 0,
+                "lower": -0.30000075808627485,
+                "mean": 0.1180719796208436,
+                "n": 2048,
+                "radius": 0.41807273770711845
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 3712,
+                "attempt": 5,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.0200334210061004,
+                "mean": 0.6917871402577142,
+                "n": 128,
+                "radius": 1.7118205612638147
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 4096,
+                "attempt": 5,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.17010641047742403,
+                "mean": 0.6858038701544833,
+                "n": 512,
+                "radius": 0.8559102806319073
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 5632,
+                "attempt": 5,
+                "decision": "accept",
+                "leaf": 0,
+                "lower": 0.2659111774918013,
+                "mean": 0.693866317807755,
+                "n": 2048,
+                "radius": 0.42795514031595366
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 18943,
+                "attempt": 6,
+                "decision": "futile",
+                "leaf": 1,
+                "lower": -1.768134502586531,
+                "mean": -0.02419073919139291,
+                "n": 128,
+                "radius": 1.743943763395138
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 19456,
+                "attempt": 7,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -1.7853848594397912,
+                "mean": -0.014437929977804999,
+                "n": 128,
+                "radius": 1.7709469294619862
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 19968,
+                "attempt": 8,
+                "decision": "pending",
+                "leaf": 2,
+                "lower": -1.7587315095144926,
+                "mean": 0.03547239496668699,
+                "n": 128,
+                "radius": 1.7942039044811797
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 20736,
+                "attempt": 8,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -0.8982213250904696,
+                "mean": -0.00111937284987975,
+                "n": 512,
+                "radius": 0.8971019522405899
+              },
+              {
+                "alpha": 0.0005555555555555556,
+                "at": 21247,
+                "attempt": 9,
+                "decision": "futile",
+                "leaf": 1,
+                "lower": -1.8064394441300764,
+                "mean": 0.008164653335021681,
+                "n": 128,
+                "radius": 1.814604097465098
+              },
+              {
+                "alpha": 0.00045454545454545455,
+                "at": 21760,
+                "attempt": 10,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -1.9158089992823206,
+                "mean": -0.0830531292651209,
+                "n": 128,
+                "radius": 1.8327558700171998
+              },
+              {
+                "alpha": 0.0003787878787878788,
+                "at": 22272,
+                "attempt": 11,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -1.8457775058033827,
+                "mean": 0.0033158691086713757,
+                "n": 128,
+                "radius": 1.8490933749120542
+              },
+              {
+                "alpha": 0.0003205128205128205,
+                "at": 22783,
+                "attempt": 12,
+                "decision": "futile",
+                "leaf": 1,
+                "lower": -1.8767859637107076,
+                "mean": -0.012848884297673873,
+                "n": 128,
+                "radius": 1.8639370794130337
+              },
+              {
+                "alpha": 0.0002747252747252747,
+                "at": 23295,
+                "attempt": 13,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -1.8158316703752677,
+                "mean": 0.06169846836255768,
+                "n": 128,
+                "radius": 1.8775301387378254
+              },
+              {
+                "alpha": 0.0002747252747252747,
+                "at": 24064,
+                "attempt": 13,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -0.8865105546888292,
+                "mean": 0.05225451468008351,
+                "n": 512,
+                "radius": 0.9387650693689127
+              }
+            ],
+            "leaves": 2,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 52224,
+            "nodes": 3,
+            "retained_records": 512,
+            "steps": 26624,
+            "symbols": 18,
+            "trial_n": 1792
+          },
+          "admissions_added": 0,
+          "curves": [],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.000022955156980900592,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "new_context": {
+                "brier": 0.000022955156980900592,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "ordinary": {
+                "brier": 0.000022955156980900592,
+                "episodes": 512,
+                "policy_accuracy": 1
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.2503225531045129,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.2503225531045129,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.2503225531045129,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.26120360364782813,
+                "episodes": 512,
+                "policy_accuracy": 0.470703125
+              },
+              "new_context": {
+                "brier": 0.2576025053193554,
+                "episodes": 512,
+                "policy_accuracy": 0.509765625
+              },
+              "ordinary": {
+                "brier": 0.2599409342374161,
+                "episodes": 512,
+                "policy_accuracy": 0.482421875
+              }
+            }
+          },
+          "exposure": 8192,
+          "phase": "interruption_noise"
+        },
+        {
+          "adaptive_metrics": {
+            "admissions": 1,
+            "allocated_s2_points": 22,
+            "attempts": 13,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.5690884645168002,
+                "mean": -0.14189566602922937,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.5870781017919378,
+                "mean": -0.03809854071750392,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.650936001939964,
+                "mean": -0.029818033544342256,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1408,
+                "attempt": 4,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.6489624638141223,
+                "mean": 0.02332848701435142,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1792,
+                "attempt": 4,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.8102142219609006,
+                "mean": 0.02593125345333627,
+                "n": 512,
+                "radius": 0.8361454754142369
+              },
+              {
+                "alpha": 0.0025,
+                "at": 3328,
+                "attempt": 4,
+                "decision": "inconclusive",
+                "leaf": 0,
+                "lower": -0.30000075808627485,
+                "mean": 0.1180719796208436,
+                "n": 2048,
+                "radius": 0.41807273770711845
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 3712,
+                "attempt": 5,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.0200334210061004,
+                "mean": 0.6917871402577142,
+                "n": 128,
+                "radius": 1.7118205612638147
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 4096,
+                "attempt": 5,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.17010641047742403,
+                "mean": 0.6858038701544833,
+                "n": 512,
+                "radius": 0.8559102806319073
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 5632,
+                "attempt": 5,
+                "decision": "accept",
+                "leaf": 0,
+                "lower": 0.2659111774918013,
+                "mean": 0.693866317807755,
+                "n": 2048,
+                "radius": 0.42795514031595366
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 18943,
+                "attempt": 6,
+                "decision": "futile",
+                "leaf": 1,
+                "lower": -1.768134502586531,
+                "mean": -0.02419073919139291,
+                "n": 128,
+                "radius": 1.743943763395138
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 19456,
+                "attempt": 7,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -1.7853848594397912,
+                "mean": -0.014437929977804999,
+                "n": 128,
+                "radius": 1.7709469294619862
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 19968,
+                "attempt": 8,
+                "decision": "pending",
+                "leaf": 2,
+                "lower": -1.7587315095144926,
+                "mean": 0.03547239496668699,
+                "n": 128,
+                "radius": 1.7942039044811797
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 20736,
+                "attempt": 8,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -0.8982213250904696,
+                "mean": -0.00111937284987975,
+                "n": 512,
+                "radius": 0.8971019522405899
+              },
+              {
+                "alpha": 0.0005555555555555556,
+                "at": 21247,
+                "attempt": 9,
+                "decision": "futile",
+                "leaf": 1,
+                "lower": -1.8064394441300764,
+                "mean": 0.008164653335021681,
+                "n": 128,
+                "radius": 1.814604097465098
+              },
+              {
+                "alpha": 0.00045454545454545455,
+                "at": 21760,
+                "attempt": 10,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -1.9158089992823206,
+                "mean": -0.0830531292651209,
+                "n": 128,
+                "radius": 1.8327558700171998
+              },
+              {
+                "alpha": 0.0003787878787878788,
+                "at": 22272,
+                "attempt": 11,
+                "decision": "futile",
+                "leaf": 2,
+                "lower": -1.8457775058033827,
+                "mean": 0.0033158691086713757,
+                "n": 128,
+                "radius": 1.8490933749120542
+              },
+              {
+                "alpha": 0.0003205128205128205,
+                "at": 22783,
+                "attempt": 12,
+                "decision": "futile",
+                "leaf": 1,
+                "lower": -1.8767859637107076,
+                "mean": -0.012848884297673873,
+                "n": 128,
+                "radius": 1.8639370794130337
+              },
+              {
+                "alpha": 0.0002747252747252747,
+                "at": 23295,
+                "attempt": 13,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -1.8158316703752677,
+                "mean": 0.06169846836255768,
+                "n": 128,
+                "radius": 1.8775301387378254
+              },
+              {
+                "alpha": 0.0002747252747252747,
+                "at": 24064,
+                "attempt": 13,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -0.8865105546888292,
+                "mean": 0.05225451468008351,
+                "n": 512,
+                "radius": 0.9387650693689127
+              },
+              {
+                "alpha": 0.0002747252747252747,
+                "at": 27135,
+                "attempt": 13,
+                "decision": "inconclusive",
+                "leaf": 1,
+                "lower": -0.41281891004501514,
+                "mean": 0.056563624639441215,
+                "n": 2048,
+                "radius": 0.46938253468445634
+              }
+            ],
+            "leaves": 2,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 56320,
+            "nodes": 3,
+            "retained_records": 512,
+            "steps": 30720,
+            "symbols": 18,
+            "trial_n": null
+          },
+          "admissions_added": 0,
+          "curves": [],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.000022955156980900592,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "new_context": {
+                "brier": 0.000022955156980900592,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "ordinary": {
+                "brier": 0.000022955156980900592,
+                "episodes": 512,
+                "policy_accuracy": 1
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.25063569907329986,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.25063569907329986,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.25063569907329986,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.262389604655387,
+                "episodes": 512,
+                "policy_accuracy": 0.498046875
+              },
+              "new_context": {
+                "brier": 0.25297348688767224,
+                "episodes": 512,
+                "policy_accuracy": 0.533203125
+              },
+              "ordinary": {
+                "brier": 0.2673374547821569,
+                "episodes": 512,
+                "policy_accuracy": 0.458984375
+              }
+            }
+          },
+          "exposure": 4096,
+          "phase": "recovery"
+        }
+      ],
+      "seconds": 35.622617359,
+      "seed": 1
+    },
+    "representation_seed_2": {
+      "adaptive_final": {
+        "admissions": 1,
+        "allocated_s2_points": 22,
+        "attempts": 8,
+        "contexts": 4,
+        "decisions": [
+          {
+            "alpha": 0.025,
+            "at": 256,
+            "attempt": 1,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.4585754700454916,
+            "mean": -0.03138267155792096,
+            "n": 128,
+            "radius": 1.4271927984875707
+          },
+          {
+            "alpha": 0.008333333333333333,
+            "at": 640,
+            "attempt": 2,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.6110066697558991,
+            "mean": -0.06202710868146518,
+            "n": 128,
+            "radius": 1.548979561074434
+          },
+          {
+            "alpha": 0.004166666666666667,
+            "at": 1024,
+            "attempt": 3,
+            "decision": "pending",
+            "leaf": 0,
+            "lower": -1.5683422440748218,
+            "mean": 0.052775724320799765,
+            "n": 128,
+            "radius": 1.6211179683956216
+          },
+          {
+            "alpha": 0.004166666666666667,
+            "at": 1408,
+            "attempt": 3,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -0.8247386144447798,
+            "mean": -0.014179630246968982,
+            "n": 512,
+            "radius": 0.8105589841978108
+          },
+          {
+            "alpha": 0.0025,
+            "at": 1792,
+            "attempt": 4,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.69019558012089,
+            "mean": -0.017904629292416246,
+            "n": 128,
+            "radius": 1.6722909508284738
+          },
+          {
+            "alpha": 0.0016666666666666668,
+            "at": 2176,
+            "attempt": 5,
+            "decision": "futile",
+            "leaf": 0,
+            "lower": -1.8283790503705488,
+            "mean": -0.11655848910673416,
+            "n": 128,
+            "radius": 1.7118205612638147
+          },
+          {
+            "alpha": 0.0011904761904761906,
+            "at": 2560,
+            "attempt": 6,
+            "decision": "pending",
+            "leaf": 0,
+            "lower": -1.0323135999688975,
+            "mean": 0.7116301634262405,
+            "n": 128,
+            "radius": 1.743943763395138
+          },
+          {
+            "alpha": 0.0011904761904761906,
+            "at": 2944,
+            "attempt": 6,
+            "decision": "pending",
+            "leaf": 0,
+            "lower": -0.1741462544539114,
+            "mean": 0.6978256272436576,
+            "n": 512,
+            "radius": 0.871971881697569
+          },
+          {
+            "alpha": 0.0011904761904761906,
+            "at": 4480,
+            "attempt": 6,
+            "decision": "accept",
+            "leaf": 0,
+            "lower": 0.255043849708663,
+            "mean": 0.6910297905574475,
+            "n": 2048,
+            "radius": 0.4359859408487845
+          },
+          {
+            "alpha": 0.0008928571428571429,
+            "at": 18815,
+            "attempt": 7,
+            "decision": "pending",
+            "leaf": 1,
+            "lower": -1.6435512801816103,
+            "mean": 0.12739564928037592,
+            "n": 128,
+            "radius": 1.7709469294619862
+          },
+          {
+            "alpha": 0.0008928571428571429,
+            "at": 19583,
+            "attempt": 7,
+            "decision": "pending",
+            "leaf": 1,
+            "lower": -0.8227613736152225,
+            "mean": 0.06271209111577054,
+            "n": 512,
+            "radius": 0.8854734647309931
+          },
+          {
+            "alpha": 0.0008928571428571429,
+            "at": 22655,
+            "attempt": 7,
+            "decision": "inconclusive",
+            "leaf": 1,
+            "lower": -0.39763864728399845,
+            "mean": 0.04509808508149811,
+            "n": 2048,
+            "radius": 0.44273673236549654
+          },
+          {
+            "alpha": 0.0006944444444444445,
+            "at": 23168,
+            "attempt": 8,
+            "decision": "pending",
+            "leaf": 2,
+            "lower": -1.7697403677155599,
+            "mean": 0.02446353676561984,
+            "n": 128,
+            "radius": 1.7942039044811797
+          },
+          {
+            "alpha": 0.0006944444444444445,
+            "at": 23935,
+            "attempt": 8,
+            "decision": "pending",
+            "leaf": 2,
+            "lower": -0.8664942500765694,
+            "mean": 0.03060770216402039,
+            "n": 512,
+            "radius": 0.8971019522405899
+          },
+          {
+            "alpha": 0.0006944444444444445,
+            "at": 27007,
+            "attempt": 8,
+            "decision": "inconclusive",
+            "leaf": 2,
+            "lower": -0.419300700045661,
+            "mean": 0.029250276074633926,
+            "n": 2048,
+            "radius": 0.44855097612029493
+          }
+        ],
+        "leaves": 2,
+        "lifetime_alpha_upper_bound": 0.05,
+        "neural_updates": 46080,
+        "nodes": 3,
+        "retained_records": 512,
+        "steps": 30720,
+        "symbols": 18,
+        "trial_n": null
+      },
+      "all_research_criteria_pass": true,
+      "criteria": {
+        "interruption_noise_long_prefix_at_least_95": true,
+        "interruption_noise_new_context_at_least_95": true,
+        "interruption_noise_ordinary_at_least_95": true,
+        "json_resume_exact": true,
+        "no_admission_initial_noise": true,
+        "no_admission_interruption_noise": true,
+        "recovery_long_prefix_at_least_95": true,
+        "recovery_new_context_at_least_95": true,
+        "recovery_ordinary_at_least_95": true,
+        "signal_long_prefix_at_least_95": true,
+        "signal_new_context_at_least_95": true,
+        "signal_ordinary_at_least_95": true
+      },
+      "episodes": 30720,
+      "format8_final": {
+        "admissions": 0,
+        "attempts": 74,
+        "neural_updates": 662528,
+        "steps": 30720
+      },
+      "json_resume_exact": true,
+      "max_adaptive_learn_seconds": 0.06720004600003904,
+      "max_allocated_s2_points": 36,
+      "max_checkpoint_bytes": 55402,
+      "max_retained_records": 512,
+      "phases": [
+        {
+          "adaptive_metrics": {
+            "admissions": 0,
+            "allocated_s2_points": 18,
+            "attempts": 5,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.4585754700454916,
+                "mean": -0.03138267155792096,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.6110066697558991,
+                "mean": -0.06202710868146518,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.5683422440748218,
+                "mean": 0.052775724320799765,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1408,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -0.8247386144447798,
+                "mean": -0.014179630246968982,
+                "n": 512,
+                "radius": 0.8105589841978108
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1792,
+                "attempt": 4,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.69019558012089,
+                "mean": -0.017904629292416246,
+                "n": 128,
+                "radius": 1.6722909508284738
+              }
+            ],
+            "leaves": 1,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 11264,
+            "nodes": 1,
+            "retained_records": 256,
+            "steps": 2048,
+            "symbols": 18,
+            "trial_n": 0
+          },
+          "admissions_added": 0,
+          "curves": [],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.2816134504476651,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.2816134504476651,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.2816134504476651,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.2816134504476651,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.2816134504476651,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.2816134504476651,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.27348586297250427,
+                "episodes": 512,
+                "policy_accuracy": 0.51171875
+              },
+              "new_context": {
+                "brier": 0.26896547841981033,
+                "episodes": 512,
+                "policy_accuracy": 0.53125
+              },
+              "ordinary": {
+                "brier": 0.2750277373260462,
+                "episodes": 512,
+                "policy_accuracy": 0.50390625
+              }
+            }
+          },
+          "exposure": 2048,
+          "phase": "initial_noise"
+        },
+        {
+          "adaptive_metrics": {
+            "admissions": 1,
+            "allocated_s2_points": 22,
+            "attempts": 6,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.4585754700454916,
+                "mean": -0.03138267155792096,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.6110066697558991,
+                "mean": -0.06202710868146518,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.5683422440748218,
+                "mean": 0.052775724320799765,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1408,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -0.8247386144447798,
+                "mean": -0.014179630246968982,
+                "n": 512,
+                "radius": 0.8105589841978108
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1792,
+                "attempt": 4,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.69019558012089,
+                "mean": -0.017904629292416246,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 2176,
+                "attempt": 5,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.8283790503705488,
+                "mean": -0.11655848910673416,
+                "n": 128,
+                "radius": 1.7118205612638147
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 2560,
+                "attempt": 6,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.0323135999688975,
+                "mean": 0.7116301634262405,
+                "n": 128,
+                "radius": 1.743943763395138
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 2944,
+                "attempt": 6,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.1741462544539114,
+                "mean": 0.6978256272436576,
+                "n": 512,
+                "radius": 0.871971881697569
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 4480,
+                "attempt": 6,
+                "decision": "accept",
+                "leaf": 0,
+                "lower": 0.255043849708663,
+                "mean": 0.6910297905574475,
+                "n": 2048,
+                "radius": 0.4359859408487845
+              }
+            ],
+            "leaves": 2,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 29696,
+            "nodes": 3,
+            "retained_records": 512,
+            "steps": 18432,
+            "symbols": 18,
+            "trial_n": null
+          },
+          "admissions_added": 1,
+          "curves": [
+            {
+              "signal_exposure": 512,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.2541631025257098,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "fixed_trace": {
+                  "brier": 0.25136912526903554,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.2782293036695654,
+                  "episodes": 512,
+                  "policy_accuracy": 0.482421875
+                }
+              }
+            },
+            {
+              "signal_exposure": 2048,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.2541631025257098,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "fixed_trace": {
+                  "brier": 0.2674213382867314,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.27627045680615325,
+                  "episodes": 512,
+                  "policy_accuracy": 0.486328125
+                }
+              }
+            },
+            {
+              "signal_exposure": 8192,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.000024553974095143055,
+                  "episodes": 512,
+                  "policy_accuracy": 1
+                },
+                "fixed_trace": {
+                  "brier": 0.25193134274385265,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.255779726650147,
+                  "episodes": 512,
+                  "policy_accuracy": 0.51171875
+                }
+              }
+            },
+            {
+              "signal_exposure": 16384,
+              "variants": {
+                "adaptive_trace": {
+                  "brier": 0.000024553974095143055,
+                  "episodes": 512,
+                  "policy_accuracy": 1
+                },
+                "fixed_trace": {
+                  "brier": 0.25098716054925874,
+                  "episodes": 512,
+                  "policy_accuracy": 0.5
+                },
+                "format8": {
+                  "brier": 0.25937069941673957,
+                  "episodes": 512,
+                  "policy_accuracy": 0.509765625
+                }
+              }
+            }
+          ],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.000024553974095143055,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "new_context": {
+                "brier": 0.000024553974095143055,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "ordinary": {
+                "brier": 0.000024553974095143055,
+                "episodes": 512,
+                "policy_accuracy": 1
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.25098716054925874,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.25098716054925874,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.25098716054925874,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.2597098491565925,
+                "episodes": 512,
+                "policy_accuracy": 0.505859375
+              },
+              "new_context": {
+                "brier": 0.25793133966571985,
+                "episodes": 512,
+                "policy_accuracy": 0.501953125
+              },
+              "ordinary": {
+                "brier": 0.260259755601003,
+                "episodes": 512,
+                "policy_accuracy": 0.494140625
+              }
+            }
+          },
+          "exposure": 16384,
+          "phase": "signal"
+        },
+        {
+          "adaptive_metrics": {
+            "admissions": 1,
+            "allocated_s2_points": 36,
+            "attempts": 8,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.4585754700454916,
+                "mean": -0.03138267155792096,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.6110066697558991,
+                "mean": -0.06202710868146518,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.5683422440748218,
+                "mean": 0.052775724320799765,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1408,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -0.8247386144447798,
+                "mean": -0.014179630246968982,
+                "n": 512,
+                "radius": 0.8105589841978108
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1792,
+                "attempt": 4,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.69019558012089,
+                "mean": -0.017904629292416246,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 2176,
+                "attempt": 5,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.8283790503705488,
+                "mean": -0.11655848910673416,
+                "n": 128,
+                "radius": 1.7118205612638147
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 2560,
+                "attempt": 6,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.0323135999688975,
+                "mean": 0.7116301634262405,
+                "n": 128,
+                "radius": 1.743943763395138
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 2944,
+                "attempt": 6,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.1741462544539114,
+                "mean": 0.6978256272436576,
+                "n": 512,
+                "radius": 0.871971881697569
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 4480,
+                "attempt": 6,
+                "decision": "accept",
+                "leaf": 0,
+                "lower": 0.255043849708663,
+                "mean": 0.6910297905574475,
+                "n": 2048,
+                "radius": 0.4359859408487845
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 18815,
+                "attempt": 7,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -1.6435512801816103,
+                "mean": 0.12739564928037592,
+                "n": 128,
+                "radius": 1.7709469294619862
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 19583,
+                "attempt": 7,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -0.8227613736152225,
+                "mean": 0.06271209111577054,
+                "n": 512,
+                "radius": 0.8854734647309931
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 22655,
+                "attempt": 7,
+                "decision": "inconclusive",
+                "leaf": 1,
+                "lower": -0.39763864728399845,
+                "mean": 0.04509808508149811,
+                "n": 2048,
+                "radius": 0.44273673236549654
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 23168,
+                "attempt": 8,
+                "decision": "pending",
+                "leaf": 2,
+                "lower": -1.7697403677155599,
+                "mean": 0.02446353676561984,
+                "n": 128,
+                "radius": 1.7942039044811797
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 23935,
+                "attempt": 8,
+                "decision": "pending",
+                "leaf": 2,
+                "lower": -0.8664942500765694,
+                "mean": 0.03060770216402039,
+                "n": 512,
+                "radius": 0.8971019522405899
+              }
+            ],
+            "leaves": 2,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 41984,
+            "nodes": 3,
+            "retained_records": 512,
+            "steps": 26624,
+            "symbols": 18,
+            "trial_n": 1856
+          },
+          "admissions_added": 0,
+          "curves": [],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.000024553974095143055,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "new_context": {
+                "brier": 0.000024553974095143055,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "ordinary": {
+                "brier": 0.000024553974095143055,
+                "episodes": 512,
+                "policy_accuracy": 1
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.250618963550855,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.250618963550855,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.250618963550855,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.25704592083001787,
+                "episodes": 512,
+                "policy_accuracy": 0.548828125
+              },
+              "new_context": {
+                "brier": 0.26303682443856197,
+                "episodes": 512,
+                "policy_accuracy": 0.447265625
+              },
+              "ordinary": {
+                "brier": 0.26386140289014653,
+                "episodes": 512,
+                "policy_accuracy": 0.478515625
+              }
+            }
+          },
+          "exposure": 8192,
+          "phase": "interruption_noise"
+        },
+        {
+          "adaptive_metrics": {
+            "admissions": 1,
+            "allocated_s2_points": 22,
+            "attempts": 8,
+            "contexts": 4,
+            "decisions": [
+              {
+                "alpha": 0.025,
+                "at": 256,
+                "attempt": 1,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.4585754700454916,
+                "mean": -0.03138267155792096,
+                "n": 128,
+                "radius": 1.4271927984875707
+              },
+              {
+                "alpha": 0.008333333333333333,
+                "at": 640,
+                "attempt": 2,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.6110066697558991,
+                "mean": -0.06202710868146518,
+                "n": 128,
+                "radius": 1.548979561074434
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1024,
+                "attempt": 3,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.5683422440748218,
+                "mean": 0.052775724320799765,
+                "n": 128,
+                "radius": 1.6211179683956216
+              },
+              {
+                "alpha": 0.004166666666666667,
+                "at": 1408,
+                "attempt": 3,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -0.8247386144447798,
+                "mean": -0.014179630246968982,
+                "n": 512,
+                "radius": 0.8105589841978108
+              },
+              {
+                "alpha": 0.0025,
+                "at": 1792,
+                "attempt": 4,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.69019558012089,
+                "mean": -0.017904629292416246,
+                "n": 128,
+                "radius": 1.6722909508284738
+              },
+              {
+                "alpha": 0.0016666666666666668,
+                "at": 2176,
+                "attempt": 5,
+                "decision": "futile",
+                "leaf": 0,
+                "lower": -1.8283790503705488,
+                "mean": -0.11655848910673416,
+                "n": 128,
+                "radius": 1.7118205612638147
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 2560,
+                "attempt": 6,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -1.0323135999688975,
+                "mean": 0.7116301634262405,
+                "n": 128,
+                "radius": 1.743943763395138
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 2944,
+                "attempt": 6,
+                "decision": "pending",
+                "leaf": 0,
+                "lower": -0.1741462544539114,
+                "mean": 0.6978256272436576,
+                "n": 512,
+                "radius": 0.871971881697569
+              },
+              {
+                "alpha": 0.0011904761904761906,
+                "at": 4480,
+                "attempt": 6,
+                "decision": "accept",
+                "leaf": 0,
+                "lower": 0.255043849708663,
+                "mean": 0.6910297905574475,
+                "n": 2048,
+                "radius": 0.4359859408487845
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 18815,
+                "attempt": 7,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -1.6435512801816103,
+                "mean": 0.12739564928037592,
+                "n": 128,
+                "radius": 1.7709469294619862
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 19583,
+                "attempt": 7,
+                "decision": "pending",
+                "leaf": 1,
+                "lower": -0.8227613736152225,
+                "mean": 0.06271209111577054,
+                "n": 512,
+                "radius": 0.8854734647309931
+              },
+              {
+                "alpha": 0.0008928571428571429,
+                "at": 22655,
+                "attempt": 7,
+                "decision": "inconclusive",
+                "leaf": 1,
+                "lower": -0.39763864728399845,
+                "mean": 0.04509808508149811,
+                "n": 2048,
+                "radius": 0.44273673236549654
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 23168,
+                "attempt": 8,
+                "decision": "pending",
+                "leaf": 2,
+                "lower": -1.7697403677155599,
+                "mean": 0.02446353676561984,
+                "n": 128,
+                "radius": 1.7942039044811797
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 23935,
+                "attempt": 8,
+                "decision": "pending",
+                "leaf": 2,
+                "lower": -0.8664942500765694,
+                "mean": 0.03060770216402039,
+                "n": 512,
+                "radius": 0.8971019522405899
+              },
+              {
+                "alpha": 0.0006944444444444445,
+                "at": 27007,
+                "attempt": 8,
+                "decision": "inconclusive",
+                "leaf": 2,
+                "lower": -0.419300700045661,
+                "mean": 0.029250276074633926,
+                "n": 2048,
+                "radius": 0.44855097612029493
+              }
+            ],
+            "leaves": 2,
+            "lifetime_alpha_upper_bound": 0.05,
+            "neural_updates": 46080,
+            "nodes": 3,
+            "retained_records": 512,
+            "steps": 30720,
+            "symbols": 18,
+            "trial_n": null
+          },
+          "admissions_added": 0,
+          "curves": [],
+          "evaluation": {
+            "adaptive_trace": {
+              "long_prefix": {
+                "brier": 0.000024553974095143055,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "new_context": {
+                "brier": 0.000024553974095143055,
+                "episodes": 512,
+                "policy_accuracy": 1
+              },
+              "ordinary": {
+                "brier": 0.000024553974095143055,
+                "episodes": 512,
+                "policy_accuracy": 1
+              }
+            },
+            "fixed_trace": {
+              "long_prefix": {
+                "brier": 0.25473924776395673,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "new_context": {
+                "brier": 0.25473924776395673,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              },
+              "ordinary": {
+                "brier": 0.25473924776395673,
+                "episodes": 512,
+                "policy_accuracy": 0.5
+              }
+            },
+            "format8": {
+              "long_prefix": {
+                "brier": 0.2613016742672085,
+                "episodes": 512,
+                "policy_accuracy": 0.47265625
+              },
+              "new_context": {
+                "brier": 0.2640661578573679,
+                "episodes": 512,
+                "policy_accuracy": 0.4765625
+              },
+              "ordinary": {
+                "brier": 0.26152793277502207,
+                "episodes": 512,
+                "policy_accuracy": 0.48046875
+              }
+            }
+          },
+          "exposure": 4096,
+          "phase": "recovery"
+        }
+      ],
+      "seconds": 35.142570175,
+      "seed": 2
+    }
+  },
+  "engineering_pass": true,
+  "errors": {},
+  "os": "Linux",
+  "protocol": 1,
+  "python": "3.11.16",
+  "research_pass": true
+}

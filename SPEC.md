@@ -167,3 +167,21 @@ Les lecteurs peuvent consulter l'état cohérent précédent pendant un fit ;
 cela n'ajoute ni flux parallèle, ni action supplémentaire en vol, ni borne
 de latence pour un retour. Les limites restantes de représentation,
 d'exploration et de calcul sont publiées dans [PRIORITY_FIXES.md](PRIORITY_FIXES.md).
+
+
+## Continuation de calcul et expérience adaptative
+
+Le [contrat coopératif](FIRST_PIECE_COOPERATIVE.md) ajoute au moteur actif
+une continuation de recherche et de replay, un checkpoint du service séparé
+et la couverture par action fondée sur les observations réelles.
+L'autorité d'apprentissage, les contrats JSON version 1 et la géométrie S²
+du cœur restent ceux du format 8. Le quota compte des opérations bornées,
+sans garantie de temps réel dur.
+
+Le [protocole de représentation](FIRST_PIECE_READINESS_PROTOCOL.md) compare
+trois variantes sur des répétitions que la mémoire de présence/premier
+ordre confond. L'encodeur récurrent sphérique et l'opérateur de séparation
+sont fournis ; seuls les centres, sorties et admissions dépendent des
+données. Ce module est expérimental et n'est pas intégré à l'adaptateur
+courant. Ses [résultats](FIRST_PIECE_READINESS_RESULTS.md) ne constituent
+ni une preuve d'originalité ni une validation du cortex ou des actions PC.

@@ -337,3 +337,34 @@ L'import explicite depuis les formats plastiques 6/7 conserve les identités
 de la prédiction et de la requête déjà annoncées. Les métriques résumées
 `metrics(detailed=False)` permettent aux futurs agents de lire les compteurs
 sans recopier le journal détaillé.
+
+
+## Service de calcul coopératif
+
+Le [contrat de première pièce](FIRST_PIECE_COOPERATIVE.md) fournit une
+continuation versionnée `first_piece.cooperative.v1` :
+`begin_receipt`, `advance(max_units)`, `work_status`,
+`coverage`, `checkpoint` et `restore`.
+Le cortex est responsable de l'ordonnancement des quotas, de la persistance
+atomique du checkpoint complet et du journal des effets de l'exécuteur.
+Il n'envoie pas une nouvelle action tant que la précédente reste en attente.
+
+Une erreur dans le calcul reconstitue le travail privé depuis l'état servi,
+en conservant le reçu de l'exécution. La reprise ne demande pas une nouvelle
+action à l'exécuteur.
+
+Le service publie le modèle seulement après calcul complet. Une pause
+conserve la prévision et la révision précédentes. La couverture annonce
+des nombres d'observations récentes par action et route ; elle ne remplace
+pas une mesure d'incertitude. Le quota n'est pas un délai garanti.
+
+Le checkpoint du service contient celui de l'adaptateur actif format 8
+et une continuation scellée contre les altérations accidentelles.
+Il ne permet pas de fusionner des copies concurrentes du cœur, ni de
+reconstruire des effets PC absents du journal d'exécution.
+
+Le module expérimental `AdaptiveTraceLearner` possède son propre
+checkpoint et ses propres capacités (deux actions, huit contextes).
+Il n'est pas un remplacement compatible du service courant.
+Un futur branchement exigera la validation de son adaptateur, de sa
+continuation de calcul et des tâches déjà couvertes par le moteur actif.

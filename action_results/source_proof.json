@@ -1,0 +1,584 @@
+{
+  "base_commit": "32a5ba2976a3955c576e9a3a0508ab92e9d44ae8",
+  "baseline_source_commit": "61d0976f3742d3e24f685c7339f23fe5bc645876",
+  "candidate_commit": "17f609d421310ea8bd41d37dff490a0b690c44d0",
+  "published_source_commit": "111409963c293a2a45f586fafaf246ab1bf69813",
+  "published_source_tree": "f72797e8c0f51176c0ad4182386ce7673a718b16",
+  "blobs": {
+    "first_piece/action_bank.py": "7bfcd036e949f8ed6a7a4d811b4c92c42e68590f",
+    "first_piece/action_service.py": "d49aa5ebc1127d985047abab683f8cdcfe86d308",
+    "first_piece/action_trace.py": "3cacfbb3d0ecfd8b567c998759c5c7d0e2e8b1ab",
+    "first_piece/action_work.py": "95f59d5295f74bff0cb62eef92ab371b5a7e2362",
+    "first_piece/tests/test_action_catalogue.py": "2af2a045d134c2af53edcf44f5fc8b7a5e60aed0"
+  },
+  "research_workflow": 37325421414,
+  "research_pass": {
+    "Windows": true,
+    "Linux": true
+  },
+  "research_cases_per_os": 18,
+  "research_episodes_per_os": 2248704,
+  "candidate_jobs": [
+    {
+      "id": 111814806964,
+      "name": "research (ubuntu-latest, 32, 1, 1)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814806981,
+      "name": "research (ubuntu-latest, 32, 0, 1)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814806988,
+      "name": "research (ubuntu-latest, 4, 1, 1)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807019,
+      "name": "research (windows-latest, 4, 0, 1)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807021,
+      "name": "research (ubuntu-latest, 8, 1, 1)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807042,
+      "name": "research (ubuntu-latest, 8, 1, 0)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807053,
+      "name": "research (ubuntu-latest, 4, 1, 0)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807061,
+      "name": "research (windows-latest, 8, 0, 1)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807063,
+      "name": "research (ubuntu-latest, 4, 0, 1)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807070,
+      "name": "research (ubuntu-latest, 32, 0, 0)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807103,
+      "name": "research (ubuntu-latest, 4, 2, 0)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807111,
+      "name": "research (ubuntu-latest, 32, 2, 0)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807133,
+      "name": "research (ubuntu-latest, 4, 0, 0)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807144,
+      "name": "research (ubuntu-latest, 8, 0, 0)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807147,
+      "name": "research (windows-latest, 8, 1, 0)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807154,
+      "name": "research (windows-latest, 8, 2, 1)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807155,
+      "name": "research (windows-latest, 4, 2, 0)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807161,
+      "name": "research (windows-latest, 8, 2, 0)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807176,
+      "name": "research (windows-latest, 32, 1, 1)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807198,
+      "name": "research (windows-latest, 32, 0, 0)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807200,
+      "name": "research (windows-latest, 32, 1, 0)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807225,
+      "name": "research (ubuntu-latest, 8, 2, 0)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807247,
+      "name": "research (windows-latest, 8, 0, 0)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807274,
+      "name": "research (ubuntu-latest, 32, 1, 0)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807277,
+      "name": "research (ubuntu-latest, 32, 2, 1)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807282,
+      "name": "research (windows-latest, 4, 1, 0)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807299,
+      "name": "research (ubuntu-latest, 8, 2, 1)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807308,
+      "name": "research (windows-latest, 4, 0, 0)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807323,
+      "name": "research (windows-latest, 8, 1, 1)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807353,
+      "name": "research (windows-latest, 32, 0, 1)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807364,
+      "name": "research (windows-latest, 32, 2, 1)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807378,
+      "name": "research (windows-latest, 32, 2, 0)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807397,
+      "name": "research (ubuntu-latest, 8, 0, 1)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807557,
+      "name": "research (windows-latest, 4, 1, 1)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807565,
+      "name": "research (ubuntu-latest, 4, 2, 1)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814807797,
+      "name": "research (windows-latest, 4, 2, 1)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": null
+    },
+    {
+      "id": 111814805975,
+      "name": "engineering (ubuntu-latest)",
+      "os": "Linux",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": [
+        "Ran 18 tests in 98.589s"
+      ]
+    },
+    {
+      "id": 111814806200,
+      "name": "engineering (windows-latest)",
+      "os": "Windows",
+      "conclusion": "success",
+      "source_blobs_match": true,
+      "targeted_tests": [
+        "Ran 18 tests in 68.947s"
+      ]
+    }
+  ],
+  "existing_source_files_unchanged": true,
+  "existing_source_files": [
+    {
+      "path": "first_piece/.gitignore",
+      "sha": "f72252fdc25f6559db72a239f539b51bfc0d7250"
+    },
+    {
+      "path": "first_piece/README.md",
+      "sha": "af8daad93a70021a84189ab8f73aebb7bec63b2a"
+    },
+    {
+      "path": "first_piece/__init__.py",
+      "sha": "14c0b2208f4256c475898a95f8c0ee6f1e099fc8"
+    },
+    {
+      "path": "first_piece/adapter.py",
+      "sha": "2bffcf5fc2721963a155c0e71c97f829be4994df"
+    },
+    {
+      "path": "first_piece/adaptive_trace.py",
+      "sha": "2c6f04bd97a0c3339771ef191973a80da740dc5a"
+    },
+    {
+      "path": "first_piece/adaptive_trace_v2.py",
+      "sha": "5617a1878028d4c9929c59d97c4dfeee8c953db9"
+    },
+    {
+      "path": "first_piece/audit.py",
+      "sha": "93396e5d97dee788ddff1b2c2edca260670015a5"
+    },
+    {
+      "path": "first_piece/calibrated.py",
+      "sha": "8885129b6989b9c6639bf33951121377606159dd"
+    },
+    {
+      "path": "first_piece/calibrated_adapter.py",
+      "sha": "5bbf9098be486a86cfae6c7e715b5375361a5c16"
+    },
+    {
+      "path": "first_piece/consolidated.py",
+      "sha": "13bfc3ba0394e54b57f9c8b4ac3203c8a054431e"
+    },
+    {
+      "path": "first_piece/consolidated_adapter.py",
+      "sha": "8602b61dee69ae440dd023efc43886cb24e34c92"
+    },
+    {
+      "path": "first_piece/consolidated_state.py",
+      "sha": "8f177c3f40f97ce33da1033c25235658cd4409dd"
+    },
+    {
+      "path": "first_piece/cooperative.py",
+      "sha": "8aab244200c7eb2ec66829d26f6fe162f9d12201"
+    },
+    {
+      "path": "first_piece/criterion.py",
+      "sha": "f5f36143c390c9d49b20acffb0a5961570ec724a"
+    },
+    {
+      "path": "first_piece/integration_probe.py",
+      "sha": "ebc5765e2540c897087272a7ef3ad193333cbddf"
+    },
+    {
+      "path": "first_piece/learner.py",
+      "sha": "09a237ab31486f3804070132875caa994d262e09"
+    },
+    {
+      "path": "first_piece/learning_run.py",
+      "sha": "44433a69ed1a6afdaf660bc30636f3fa9fcee623"
+    },
+    {
+      "path": "first_piece/plastic_revision.py",
+      "sha": "9c37c05e4c9ee00fa09f09facf33466ed6c269dc"
+    },
+    {
+      "path": "first_piece/plastic_revision_adapter.py",
+      "sha": "2e752218c83d4c27e49dbd7a3f2bbff0d9de54e4"
+    },
+    {
+      "path": "first_piece/plastic_revision_state.py",
+      "sha": "f8c064ab333f0ce777c79ddbf75a165cf81846f5"
+    },
+    {
+      "path": "first_piece/renewable.py",
+      "sha": "0f46fece5a7d530468fd3c1c8f956978d5afe14a"
+    },
+    {
+      "path": "first_piece/renewable_adapter.py",
+      "sha": "1b7021d6160c6b9550a2ba9ab7ee962185f26185"
+    },
+    {
+      "path": "first_piece/review_probe.py",
+      "sha": "d312c34c41d08aef97e6fc444b8e10e6bcce5b3c"
+    },
+    {
+      "path": "first_piece/scale_run.py",
+      "sha": "7be091191bbe0e7fa82fdd468f9b2c2d5a11bbd2"
+    },
+    {
+      "path": "first_piece/scale_world.py",
+      "sha": "56dd0c5fc002090faab51575f32a6aee09be6df2"
+    },
+    {
+      "path": "first_piece/shared.py",
+      "sha": "613f4375efada1ec3912cfc4c9c67429d1662126"
+    },
+    {
+      "path": "first_piece/shared_adapter.py",
+      "sha": "16f4728489afe4018bb1b1f222a8c9d71b7e9ffe"
+    },
+    {
+      "path": "first_piece/shared_state.py",
+      "sha": "8224d84d7ef4c56840e425fd4e80b8d6181138cb"
+    },
+    {
+      "path": "first_piece/spherical.py",
+      "sha": "f64ab00b385d4a1abe435c9f4c58a411abf549c2"
+    },
+    {
+      "path": "first_piece/streaming.py",
+      "sha": "8c5e7c7529f60b66529aa07615f60c502ece518a"
+    },
+    {
+      "path": "first_piece/temporal.py",
+      "sha": "3a94f9a2cd01bf6504594d4f62144bd01a05ee15"
+    },
+    {
+      "path": "first_piece/temporal_adapter.py",
+      "sha": "245f2c111b5fda4dfeb8f541a948e375c1cbb025"
+    },
+    {
+      "path": "first_piece/temporal_run.py",
+      "sha": "c0721ffb79d757271cb95653471107ce301f2539"
+    },
+    {
+      "path": "first_piece/temporal_world.py",
+      "sha": "2ff2a1602248b1d71e135c18e31f138ff0a70e0c"
+    },
+    {
+      "path": "first_piece/tests/test_adapter.py",
+      "sha": "36764d92de33d8af5deeabeed67241148dc4db42"
+    },
+    {
+      "path": "first_piece/tests/test_calibrated.py",
+      "sha": "6976fa3f9b7d5c4c6e01d317a6963cb316221d30"
+    },
+    {
+      "path": "first_piece/tests/test_consolidated.py",
+      "sha": "953e7d844ab94306569cbc98b671af009b33489e"
+    },
+    {
+      "path": "first_piece/tests/test_contracts.py",
+      "sha": "28292824c61a7dab5cd68b35d566c805db01db33"
+    },
+    {
+      "path": "first_piece/tests/test_current_fixes.py",
+      "sha": "e139e07be24d2fd8ffddfb071956df3017023442"
+    },
+    {
+      "path": "first_piece/tests/test_learning.py",
+      "sha": "a609a547c9925be343c92421e6e5bbe558825954"
+    },
+    {
+      "path": "first_piece/tests/test_piece.py",
+      "sha": "d57f34a00be8659b1822f08a108125ab7a100e65"
+    },
+    {
+      "path": "first_piece/tests/test_plastic_revision.py",
+      "sha": "71899b5b23c938cd01b1343aa39198593bc50491"
+    },
+    {
+      "path": "first_piece/tests/test_readiness.py",
+      "sha": "e61d2361cb9fcf039c05d69238fb167944d75aec"
+    },
+    {
+      "path": "first_piece/tests/test_renewable.py",
+      "sha": "629f1af52cbc576a270b6031be770c8579f34de4"
+    },
+    {
+      "path": "first_piece/tests/test_review.py",
+      "sha": "896970d78fa2681af04311af5192bbdf3874fc88"
+    },
+    {
+      "path": "first_piece/tests/test_revision_fixes.py",
+      "sha": "4e5026c3e7eb9b7e037cf870065e41d5a4c92d59"
+    },
+    {
+      "path": "first_piece/tests/test_shared.py",
+      "sha": "f822df1119764e9b56d9a8a2ead3e9193806212e"
+    },
+    {
+      "path": "first_piece/tests/test_temporal.py",
+      "sha": "1bd8b18e404bf31ff1d3dd57527e605ea6a54db4"
+    },
+    {
+      "path": "first_piece/tests/test_trace_v2.py",
+      "sha": "935cc68743dc75e3a01e7fe290abdf758fae21b6"
+    },
+    {
+      "path": "first_piece/trace_service.py",
+      "sha": "845fc1a8a12a41d7489269c41d783724ac76f418"
+    },
+    {
+      "path": "first_piece/trace_work.py",
+      "sha": "11a183ae7ffb5079765d033e8e6de8357feaa1af"
+    },
+    {
+      "path": "first_piece/world.py",
+      "sha": "5c0b5bdcc70fd44139af69200700e33737821dbe"
+    },
+    {
+      "path": "setharkk/__init__.py",
+      "sha": "650f753e9e390e077cb2eb3980d31a84dd9e7f7e"
+    },
+    {
+      "path": "setharkk/contracts.py",
+      "sha": "c482c9168bc4be91f1a428c90f876d796e1e4f7a"
+    }
+  ],
+  "published_workflow": 37326313520,
+  "published_validation": "success",
+  "protocol_criteria_changed": false,
+  "negative_evidence_preserved": [
+    "action_results/baseline_windows.json",
+    "action_results/baseline_linux.json",
+    "action_results/intermediate.json"
+  ],
+  "published_tests": {
+    "Windows": [
+      "Ran 192 tests in 245.619s"
+    ],
+    "Linux": [
+      "Ran 192 tests in 300.833s"
+    ]
+  },
+  "published_jobs": [
+    {
+      "id": 111817854954,
+      "name": "validate (windows-latest)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 111817855109,
+      "name": "validate (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "published_engineering_reports": {
+    "Windows": "action_results/service_windows.json",
+    "Linux": "action_results/service_linux.json"
+  }
+}

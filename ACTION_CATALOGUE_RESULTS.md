@@ -5,7 +5,10 @@ Les 18 cas du protocole passent tous les critères sur Windows et Linux :
 Chaque cas reçoit 124 928 résultats ; cela représente 2 248 704 résultats
 de recherche par plateforme, avec les mêmes graines répliquées sur les deux OS.
 Les 18 tests ciblés et les comparaisons direct/service passent également.
-La suite générale du code publié est vérifiée séparément avant clôture.
+La suite générale du code publié passe avec **192 tests sur chaque plateforme** :
+245,619 secondes sous Windows et 300,833 secondes sous Linux.
+Le [workflow du code livré](https://github.com/Setharkk/Remake-setharkk/actions/runs/37326313520)
+est réussi sur les deux plateformes.
 
 ## Apprentissage et conservation
 
@@ -75,10 +78,12 @@ répété ne produit aucun gradient supplémentaire.
 
 | Actions | Plus long advance mesuré Windows / Linux, quota 128 | Maximum de points S² échantillonné en recherche | Plus grand checkpoint JSON échantillonné |
 |---|---:|---:|---:|
-| 4 | 4,40 / 5,88 ms | 68 | 265 479 octets |
-| 8 | 8,20 / 12,70 ms | 132 | 342 570 octets |
-| 32 | 25,77 / 34,04 ms | 516 | 846 052 octets |
+| 4 | 6,10 / 7,77 ms | 68 | 265 479 octets |
+| 8 | 12,09 / 15,36 ms | 132 | 342 570 octets |
+| 32 | 36,55 / 44,97 ms | 516 | 846 052 octets |
 
+Les latences du tableau proviennent de la vérification du code livré :
+[Windows](action_results/service_windows.json) / [Linux](action_results/service_linux.json).
 Ce sont des mesures CPU des runners GitHub, pas des garanties de latence
 ni un benchmark de la RTX de l'utilisateur. Les tailles JSON ne sont pas
 la RAM totale de Python. À 32 actions, les réserves par défaut valent

@@ -197,6 +197,7 @@ def representation(seed):
     for phase,n,signal in (("initial_noise",2048,False),("signal",16384,True),
                            ("interruption_noise",8192,False),("recovery",4096,True)):
         curves = []
+        observed_losses = {name:[] for name in learners}
         before = learners["adaptive_trace"].admissions
         for index,(events,target) in enumerate(episodes(7500000+seed+total,n),1):
             probabilities = {}
@@ -212,6 +213,8 @@ def representation(seed):
                 raise AssertionError("Control sees unmatched observation structure")
             action = action_rng.randrange(2)
             outcome = int(action == target) if signal else int(noise_rng.random() < .5)
+            for name,probability in probabilities.items():
+                observed_losses[name].append((probability[action]-outcome)**2)
             adaptive = learners["adaptive_trace"]
             # Checkpoint pending prediction and a live frozen trial; neither acts again.
             if adaptive.trial is not None and adaptive.trial["n"] >= 19 and not observed_resume:
@@ -255,6 +258,7 @@ def representation(seed):
                  for name,core in learners.items()}
         phase_reports.append({"phase":phase,"exposure":n,"admissions_added":learners["adaptive_trace"].admissions-before,
                               "curves":curves,"evaluation":tests,
+                              "prequential_brier":{name:math.fsum(values)/n for name,values in observed_losses.items()},
                               "adaptive_metrics":learners["adaptive_trace"].metrics()})
         print("READINESS_PHASE="+json.dumps({"seed":seed,"phase":phase,"evaluation":tests,
               "metrics":learners["adaptive_trace"].metrics()}),flush=True)

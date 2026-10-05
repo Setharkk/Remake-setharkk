@@ -1,0 +1,37 @@
+name: Action catalogue preflight
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'validation/action_candidate.json'
+      - 'validation/action_probe.py'
+      - '.github/workflows/action-catalogue-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Apply measured candidate
+        run: python -m validation.action_probe --apply validation/action_candidate.json
+      - name: Targeted action and migration tests
+        run: python -m unittest first_piece.tests.test_action_catalogue -v
+      - name: Existing and extended regression suite
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Predeclared action learning and noise protocol
+        run: python -m validation.action_probe --out actions.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: action-catalogue-${{ matrix.os }}
+          path: actions.json

@@ -26,6 +26,8 @@ jobs:
           python-version: '3.11'
       - name: Apply candidate in disposable workspace
         run: python -m validation.readiness_probe --apply validation/readiness_bundle.json
+      - name: Targeted continuation and migration invariants
+        run: python -m unittest first_piece.tests.test_readiness -v
       - name: Current regressions and readiness invariants
         run: python -m unittest discover -s first_piece/tests -v
       - name: Resume parity coverage and fixed representation experiment

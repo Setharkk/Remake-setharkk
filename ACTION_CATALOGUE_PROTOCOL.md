@@ -88,3 +88,11 @@ au déclencheur de nouvelle structure. Tous les 128 labels pertinents, un essai
 de partition est retiré si une révision des poids protégés devient nécessaire.
 Ce retrait n'admet rien et ne rend aucun risque ; le candidat suivant devra
 encore passer ses contrôles futurs. Les critères d'expérience restent inchangés.
+
+La troisième mesure a montré des candidats de révision contradits par leurs
+labels futurs, mais encore retenus à cause d'un gain moyen positif sur d'autres
+actions. Une borne opposée à une assertion clôt maintenant l'essai, sans
+admission ni remboursement du risque. Avant toute admission de révision,
+les labels récents doivent aussi garder la direction sélectionnée. Ce contrôle
+supplémentaire peut seulement refuser une admission ; il ne remplace pas la
+borne prospective. Un essai v2 importé garde ses règles jusqu'à clôture.

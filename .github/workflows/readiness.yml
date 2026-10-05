@@ -1,0 +1,39 @@
+name: First piece readiness candidate
+on:
+  push:
+    paths:
+      - 'validation/readiness_bundle.json'
+      - 'validation/readiness_probe.py'
+      - 'FIRST_PIECE_READINESS_PROTOCOL.md'
+      - '.github/workflows/readiness.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  readiness:
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Apply candidate in disposable workspace
+        run: python -m validation.readiness_probe --apply validation/readiness_bundle.json
+      - name: Current regressions and readiness invariants
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Resume parity coverage and fixed representation experiment
+        run: python -m validation.readiness_probe --out "${{ runner.temp }}/readiness.json"
+      - name: Upload evidence including failed hypotheses
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-piece-readiness-${{ matrix.os }}
+          path: ${{ runner.temp }}/readiness.json
+          if-no-files-found: warn

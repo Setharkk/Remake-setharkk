@@ -291,6 +291,7 @@ class DistinctionLearner:
                 for key in ("mean_log_score_gain", "uncertainty_bound", "gain_lower", "gain_upper", "complexity_cost"):
                     if not isinstance(decision.get(key), (int, float)) or not math.isfinite(decision[key]):
                         raise ValueError("Invalid decision statistic")
+            _validate_accounting(instance.config, state)
             instance.tasks[task] = state
         if sum(s["token"] is not None for s in instance.tasks.values()) + instance.config["max_tasks"] > instance.config["max_units"]:
             raise ValueError("Admission exceeds memory budget")
@@ -312,7 +313,7 @@ class DistinctionLearner:
         instance.episode = copy.deepcopy(episode)
         return instance
 
-    def metrics(self):
+    def metrics(self, *, detailed=True):
         active_points = 4 * len(self.tasks)
         stored_points = active_points + 8 * sum(s["status"] == "validating" for s in self.tasks.values())
         return {
@@ -320,6 +321,32 @@ class DistinctionLearner:
             "active_intrinsic_dof": 2 * active_points, "stored_neural_points": stored_points,
             "memory_mask_bits": 10, "neural_updates": sum(s["neural_updates"] for s in self.tasks.values()),
             "tasks": {str(task): {"steps": s["steps"], "status": s["status"], "token": s["token"],
-                                 "decisions": copy.deepcopy(s["decisions"])}
+                                 **({"decisions": copy.deepcopy(s["decisions"])} if detailed else {})}
                       for task, s in sorted(self.tasks.items())},
         }
+
+
+def _validate_accounting(config, state):
+    """Counts must describe this engine's fit and deciding-label policy."""
+    status, steps, warmup = state["status"], state["steps"], config["warmup"]
+    fitted = status not in ("collecting", "unsupported")
+    terminal = status not in ("collecting", "unsupported", "validating")
+    expected_total = steps + 2 * warmup * int(fitted) - int(terminal)
+    if state["neural_updates"] != expected_total:
+        raise ValueError("Presence neural updates differ from feedback and fit")
+    for name in ("active", "candidate", "control"):
+        bank = state[name]
+        if bank is not None and bank.rate != config["rate"]:
+            raise ValueError("Presence predictor rate differs from configuration")
+    expected_live = steps
+    if terminal:
+        if not state["decisions"]:
+            raise ValueError("Terminal presence model lacks deciding look")
+        last = state["decisions"][-1]
+        at = _integer(last.get("task_interactions"), "deciding exposure",
+                      low=warmup, high=steps)
+        if at != warmup + last["validation_interactions"]:
+            raise ValueError("Presence decision exposure differs from fit")
+        expected_live = warmup + steps - at if status in ("accepted", "ablated") else steps - 1
+    if sum(map(sum, state["active"].counts)) != expected_live:
+        raise ValueError("Presence live updates differ from admission lineage")

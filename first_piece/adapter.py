@@ -70,6 +70,8 @@ class FirstPieceAdapter:
         self._pending = None
         self._receipts = {}
         self._lock = threading.RLock()
+        self._receipt_condition = threading.Condition(self._lock)
+        self._receipt_busy = False
 
     @property
     def model_id(self):
@@ -97,7 +99,7 @@ class FirstPieceAdapter:
                 "neural_geometry": "product of S2", "receipt_window": self.receipt_window,
             }
 
-    def _fork_learner(self):
+    def _fork_learner(self, *, observation=False, context=None):
         return copy.deepcopy(self._learner)
 
     def _translate_observation(self, event):
@@ -121,7 +123,7 @@ class FirstPieceAdapter:
                 if len(self._slots) >= self._learner.config["max_tasks"]:
                     raise ValueError("Context budget exhausted")
                 slot = len(self._slots)
-            candidate = self._fork_learner()
+            candidate = self._fork_learner(observation=True, context=slot)
             local["task"] = slot
             probabilities = candidate.receive(local)
             result = None
@@ -185,7 +187,11 @@ class FirstPieceAdapter:
 
     def submit_receipt(self, message):
         receipt = wire.receipt(message)
-        with self._lock:
+        with self._receipt_condition:
+            # Serialize writers while allowing predictions, metrics and
+            # checkpoints to read the complete pre-commit model during a fit.
+            while self._receipt_busy:
+                self._receipt_condition.wait()
             completed = self._receipts.get(receipt["request_id"])
             if completed is not None:
                 if _semantic_receipt(completed["receipt"]) != _semantic_receipt(receipt):
@@ -198,33 +204,42 @@ class FirstPieceAdapter:
                 raise ValueError("Receipt has no matching action")
             if receipt["source_id"] != pending["executor_id"]:
                 raise ValueError("Receipt is not from the designated executor")
-            candidate = self._fork_learner()
             learned = receipt["status"] == "observed"
             if learned:
                 outcome = receipt["outcome"]
                 if outcome["measure"] != "lab.success" or outcome["unit"] != "binary" or type(outcome["value"]) is not int or outcome["value"] not in (0, 1):
                     raise ValueError("Outcome outside this model's capabilities")
+            candidate = self._fork_learner(observation=not learned, context=self._slots[pending["context_id"]])
+            self._receipt_busy = True
+        try:
+            if learned:
                 candidate.learn(self.actions.index(pending["action_name"]), outcome["value"])
             else:
                 candidate.finish_evaluation()
             revision = wire.counter(self._revision + int(learned), "model revision")
             ack = {"request_id": pending["request_id"], "learned": learned, "model_revision": revision}
-            self._learner = candidate
-            self._revision = revision
-            self._prediction = None
-            self._pending = None
-            self._receipts[receipt["request_id"]] = {
-                "request": copy.deepcopy(pending), "receipt": receipt, "ack": ack,
-            }
-            while len(self._receipts) > self.receipt_window:
-                del self._receipts[next(iter(self._receipts))]
-            return copy.deepcopy(ack)
+            completed_entry = {"request": copy.deepcopy(pending), "receipt": receipt, "ack": ack}
+            result = copy.deepcopy(ack)
+            with self._receipt_condition:
+                self._learner = candidate
+                self._revision = revision
+                self._prediction = None
+                self._pending = None
+                self._receipts[receipt["request_id"]] = completed_entry
+                while len(self._receipts) > self.receipt_window:
+                    del self._receipts[next(iter(self._receipts))]
+                return result
+        finally:
+            with self._receipt_condition:
+                self._receipt_busy = False
+                self._receipt_condition.notify_all()
 
-    def metrics(self):
+    def metrics(self, *, detailed=True):
         with self._lock:
             return {"model_revision": self._revision, "last_sequence": self._last_sequence,
                     "context_slots": dict(self._slots), "pending_request": self._pending is not None,
-                    "retained_receipts": len(self._receipts), "learner": self._learner.metrics()}
+                    "retained_receipts": len(self._receipts),
+                    "learner": self._learner.metrics(detailed=detailed)}
 
     def checkpoint(self):
         with self._lock:

@@ -17,6 +17,8 @@ Un prototype est conservé si au moins huit labels de son groupe sont
 disponibles et si sa log-vraisemblance tronquée sur le passé est strictement
 meilleure que celle du prototype neutre p=0,5. Sinon, ce prototype reste
 neutre. Une moyenne antipodale indéfinie reçoit aussi ce repli explicite.
+Le résultat doit également appartenir au domaine du logarithme vers les
+ancres de lecture : sinon, le prototype neutre est conservé avant tout replay.
 
 Le contrôle suit le même test depuis ses prototypes plastiques, avec son
 routage aléatoire. Les compteurs des deux optimiseurs sont remis à zéro
@@ -116,7 +118,7 @@ le bon candidat était disponible, mais la preuve d'amélioration échouait
 
 ## Reprise et capacité
 
-Format 7, identité first_piece.plastic-revision-s2.v2. L'import explicite
+Format 8, identité first_piece.plastic-revision-s2.v3. L'import explicite
 depuis le format 5 conserve une validation déjà commencée avec ses anciens
 horizons, bornes, banques, compteurs et requêtes. La frontière de politique
 s'applique seulement aux nouvelles tentatives. Les formats plus anciens
@@ -232,8 +234,10 @@ programme doit avoir son support de fit. Ces conditions utilisent le passé
 pour proposer, pas pour admettre.
 
 Le nouvel essai est global et conserve exactement le programme admis.
-La recherche habituelle est exécutée et son travail est compté, mais son
-programme alternatif est ignoré dans ce mode de confiance. Le fit conserve
+Dans le format 7, la recherche habituelle était exécutée avant d'ignorer
+son programme alternatif. Le format 8 omet cette recherche : le journal
+inscrit zéro prédicat éligible, zéro prédicat dans le pool et zéro hypothèse
+alternative examinée. La préparation du fit demeure comptée. Le fit conserve
 les quatre passes et les banques habituelles. Les gains sur de nouveaux
 labels doivent encore franchir les mêmes bornes, seuils et supports.
 Une proposition ne modifie aucune compétence protégée.
@@ -249,3 +253,27 @@ de politique à « structure » sans modifier les prévisions, poids, risque
 ou essais existants. Les premiers formats 6 expérimentaux ayant des
 politiques différentes restent associés à leur code historique.
 Les imports depuis le mode calibré de format 5 sont conservés.
+
+## Corrections de la revue et migration vers le format 8
+
+La [revue du format 7](CODE_REVIEW_PLASTIC.md) reste un état historique.
+Le [rapport de corrections](PRIORITY_FIXES.md) conserve les reproductions
+corrigées, les tests de transaction et les mesures CPU avant/après.
+
+Le critère de délai vérifie `confirmation_global_labels <= 12000` pour
+les graines 0/1/2. Un premier succès à 12000 confirmé à 13000 échoue.
+Les sondes et seuils sont inchangés.
+
+L'import explicite du format 7 conserve les poids, états aléatoires,
+prévisions, risques, journaux et essais en cours. Celui du dernier format 6
+documenté ajoute les deux champs de politique du format 7. Un ancien journal
+de confiance peut conserver son travail de recherche ; les nouveaux essais
+décrivent le calcul sans recherche alternative. Les premières variantes
+expérimentales du format 6 restent associées à leur moteur historique.
+
+Le budget de gradients et les conditions statistiques ne sont pas modifiés.
+Les comparaisons de continuation neutralisent uniquement les identifiants
+de format, les durées et les trois compteurs du travail alternatif omis
+dans les essais de confiance ; les états prédictifs et compteurs appris
+restent comparés. Les mesures CPU utilisent les mêmes flux sans profileur,
+plusieurs répétitions et l'ordre avant/après alterné.

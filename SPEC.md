@@ -107,7 +107,7 @@ par définition ; cela ne rend pas euclidiens les paramètres qu'ils déplacent.
 
 | Exigence | État |
 |---|---|
-| Réseau lui-même non euclidien | Révision plastique de format 7 sur S², 139 tests Windows/Linux ; références partagées, renouvelables, consolidées, calibrées et V1 hyperbolique conservées |
+| Réseau lui-même non euclidien | Révision plastique de format 8 sur S² ; corrections et tests Windows/Linux documentés dans [PRIORITY_FIXES.md](PRIORITY_FIXES.md) ; références partagées, renouvelables, consolidées, calibrées et V1 hyperbolique conservées |
 | Apprendre des résultats de ses actions pendant une interaction | Implémenté dans la première pièce séquentielle et dans la référence de fichiers |
 | Apprentissage continu avec reprise complète | Révision plastique restaurable et imports explicites, requête en attente comprise ; risque à vie borné ; rétention, six changements, raffinements de confiance et 64 symboles/16 contextes validés dans le protocole synthétique ; sélection d'actions et capacité de représentation restent limitées |
 | Objectifs proposés par l'utilisateur et objectifs choisis par le système | À développer |
@@ -139,7 +139,7 @@ sans comparaison appropriée.
 
 ## Révision plastique et raffinements mesurés
 
-Le [format 7](PLASTIC_REVISION.md) initialise les candidats sur S² depuis
+Le [format 8](PLASTIC_REVISION.md) initialise les candidats sur S² depuis
 les banques plastiques avec sélection sur le passé. Les admissions restent
 prospectives ; les nouvelles bornes et le contrôle des taux de contexte
 conservent le risque déclaré. Un raffinement du programme déjà admis peut
@@ -147,3 +147,23 @@ proposer de meilleurs poids sans attendre une erreur de classement.
 Le [rapport](PLASTIC_REVISION_RESULTS.md) distingue le gain de délai de
 l'effet du transfert, qui n'est pas établi par l'ablation sur trois graines.
 Il conserve les coûts et les limites des expériences synthétiques.
+
+## Invariants de la première pièce corrigée
+
+Un calcul sur une copie non publiée ne doit modifier ni les poids ni le
+journal de validation de son parent. Après une erreur avant publication,
+le checkpoint de l'adaptateur doit rester restaurable et le reçu rejouable.
+Un prototype transféré doit être utilisable par le logarithme vers les ancres,
+pas seulement avoir une norme unitaire.
+
+Les compteurs de gradients à la reprise doivent correspondre aux retours,
+fits et admissions du moteur concerné, y compris dans les références de
+présence et temporelle. Le délai maximal annoncé porte sur la confirmation
+de la compétence complète. Les reprises des formats 6 et 7 sont explicites
+et conservent les essais et résultats en attente.
+
+Les optimisations gardent les messages version 1 et la géométrie S².
+Les lecteurs peuvent consulter l'état cohérent précédent pendant un fit ;
+cela n'ajoute ni flux parallèle, ni action supplémentaire en vol, ni borne
+de latence pour un retour. Les limites restantes de représentation,
+d'exploration et de calcul sont publiées dans [PRIORITY_FIXES.md](PRIORITY_FIXES.md).

@@ -2,7 +2,7 @@
 
 `PlasticRevisionLearner` et `PlasticRevisionAdapter` gardent les contrats
 version 1 et la géométrie sphérique de la première pièce. L'identité est
-`first_piece.plastic-revision-s2.v2`, le checkpoint neuronal est au format 7.
+`first_piece.plastic-revision-s2.v3`, le checkpoint neuronal est au format 8.
 
 ## Utilisation et imports
 
@@ -23,8 +23,8 @@ cette autorité ; ils n'ont pas chacun un réseau et un compteur indépendants.
 L'import de l'ancien mode doit être explicite :
 
 ```python
-snapshot7 = PlasticRevisionAdapter.from_calibrated_checkpoint(snapshot5)
-core = PlasticRevisionAdapter.restore(snapshot7)
+snapshot8 = PlasticRevisionAdapter.from_calibrated_checkpoint(snapshot5)
+core = PlasticRevisionAdapter.restore(snapshot8)
 ```
 
 Les méthodes `from_consolidated_checkpoint`,
@@ -33,9 +33,14 @@ imports historiques. Une validation déjà commencée garde sa politique,
 ses banques et ses horizons ; la nouvelle politique commence au prochain
 essai. Une prévision en attente reste valable jusqu'au reçu ou à sa clôture.
 
-L'import du dernier prototype de format 6 est
-`PlasticRevisionAdapter.from_plastic_revision_checkpoint(snapshot6)`.
-Il préserve ses prévisions, banques et validations déjà commencées. Les
+L'import du format 7, ou du dernier prototype de format 6, est
+`PlasticRevisionAdapter.from_plastic_revision_checkpoint(snapshot7)`
+(avec `snapshot6` pour le format 6). Le cœur expose la même méthode.
+Il préserve ses prévisions, banques, risques, compteurs, requêtes et
+validations déjà commencées. Une restauration implicite d'un ancien format
+est refusée. Un essai de confiance importé garde son journal de recherche
+historique ; les nouveaux essais de confiance inscrivent zéro hypothèse
+alternative examinée. Les
 premières versions expérimentales ayant moins de regards ou de sommes V
 restent associées à leur code historique.
 
@@ -88,3 +93,33 @@ tous les contextes.
 Le dialogue, la sélection d'objectifs, l'exploration apprise et l'exécution
 dans les applications du PC restent à construire. Les expériences sont
 synthétiques ; aucune supériorité sur un réseau euclidien n'est établie.
+
+## Corrections et coûts d'intégration
+
+Les [corrections prioritaires](PRIORITY_FIXES.md) contrôlent aussi le domaine
+du logarithme du prototype transféré par rapport aux ancres de lecture.
+Une moyenne inutilisable pour un gradient reçoit le prototype neutre,
+même lorsque ses points sources étaient valides. La définition de S²,
+les gradients, les seuils d'admission et le budget de replay sont conservés.
+
+Un essai de confiance réajuste le programme protégé sans chercher de programme
+alternatif. La préparation, les deux banques et la validation prospective
+restent obligatoires. Le format 8 distingue ce travail réel dans son journal.
+
+L'adaptateur copie seulement l'état modifiable par l'opération en cours.
+Les observations partagent les banques en lecture ; les retours possèdent
+leurs banques, leur contexte mutable et le journal de validation actif.
+Un échec avant publication laisse le checkpoint précédent restaurable.
+
+Le calcul d'un retour s'effectue hors du verrou des lectures. Les écritures
+de reçus restent sérialisées ; un doublon attend la fin du premier calcul,
+puis reçoit son accusé sans nouvel apprentissage. Pendant le calcul,
+prévisions, métriques et checkpoints décrivent l'état précédent la publication.
+L'API reste synchrone, à un flux et une action en attente.
+Le calcul Python et le GIL ne donnent aucune garantie de latence.
+
+`metrics(detailed=False)` omet les listes `searches` et `decisions` ;
+les compteurs et budgets restent disponibles. Le comportement détaillé par
+défaut et le checkpoint complet sont conservés. Le cache borné des lectures
+géodésiques dépend des coordonnées, ancres et température ; il est dérivé,
+non appris et non sérialisé.

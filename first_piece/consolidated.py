@@ -125,9 +125,9 @@ class ConsolidatedLearner(RenewableLearner):
         from .consolidated_state import validate_memory
         validate_memory(self)
 
-    def _transaction_copy(self):
-        child = super()._transaction_copy()
-        child._protected = copy.deepcopy(self._protected)
+    def _transaction_copy(self, *, context=None):
+        child = super()._transaction_copy(context=context)
+        child._protected = copy.deepcopy(self._protected) if context is None else self._protected
         return child
 
     def checkpoint(self):
@@ -179,8 +179,8 @@ class ConsolidatedLearner(RenewableLearner):
     def migrate_checkpoint_v1(cls, snapshot):
         raise ValueError("Migrate with SharedLearner, then use from_finite_checkpoint")
 
-    def metrics(self):
-        result = super().metrics()
+    def metrics(self, *, detailed=True):
+        result = super().metrics(detailed=detailed)
         protected_points = 0 if self._protected is None else self.active.n_routes * self.config["n_actions"]
         points = result["live_points_including_control"] + protected_points
         result.update({

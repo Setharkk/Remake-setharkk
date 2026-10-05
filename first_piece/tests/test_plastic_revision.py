@@ -259,6 +259,9 @@ class PlasticRevisionTests(unittest.TestCase):
             core.learn(action, outcome)
         searches = [s for s in core.searches if s["validation"].get("purpose") == "confidence"]
         self.assertTrue(searches)
+        self.assertTrue(all(all(search[key] == 0 for key in
+                                 ("eligible_features", "pooled_features", "hypotheses_examined"))
+                            for search in searches))
         self.assertTrue(any(d["decision"] == "accept" and d["attempt"] in
                             {s["attempt"] for s in searches} for d in core.decisions))
         clone = PlasticRevisionLearner.restore(core.checkpoint())

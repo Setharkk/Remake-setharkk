@@ -1,5 +1,8 @@
 # Révision plastique : délais et montée à l'échelle
 
+Ce rapport conserve les mesures du format 7. Le format 8 et les nouvelles
+validations sont décrits dans [PRIORITY_FIXES.md](PRIORITY_FIXES.md).
+
 Le moteur de format 7 conserve le réseau sur S² et passe 139 tests sous
 Windows et Linux. Le pire délai de compétence complète après bruit initial
 passe de 21 000 à 10 000 retours globaux sur les trois graines initiales.

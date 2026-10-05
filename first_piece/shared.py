@@ -32,6 +32,25 @@ class SharedSpherePredictor(SpherePredictor):
         initial = unit([1.0, 1.0, .15])
         self.points = [[list(initial) for _ in range(n_actions)] for _ in range(n_routes)]
         self.counts = [[0 for _ in range(n_actions)] for _ in range(n_routes)]
+        self._probability_cache = [[None for _ in range(n_actions)] for _ in range(n_routes)]
+
+    def _transaction_copy(self):
+        child = copy.copy(self)
+        child.anchors = [list(p) for p in self.anchors]
+        child.points = [[list(p) for p in row] for row in self.points]
+        child.counts = [list(row) for row in self.counts]
+        child._probability_cache = [list(row) for row in self._probability_cache]
+        return child
+
+    def probability(self, action, route):
+        self._indices(action, route)
+        key = (tuple(self.points[route][action]), tuple(self.anchors[0]),
+               tuple(self.anchors[1]), self.temperature)
+        cached = self._probability_cache[route][action]
+        if cached is None or cached[0] != key:
+            cached = (key, super().probability(action, route))
+            self._probability_cache[route][action] = cached
+        return cached[1]
 
     def _indices(self, action, route):
         _integer(action, "action", high=self.n_actions - 1)
@@ -70,6 +89,55 @@ def set_bits(mask):
         yield bit.bit_length() - 1
         mask ^= bit
 
+
+
+def _feature_masks(rows, symbols, context_offset, context_capacity):
+    """Exact sparse assembly or eight-row bit transpose for dense episodes."""
+    width = context_offset + context_capacity
+    density = sum(mask.bit_count() + before.bit_count() + 1
+                  for _, mask, before, _, _, _ in rows)
+    if len(rows) < 8 or density <= len(rows) * width // 8:
+        masks = {}
+        for index, (slot, mask, before, _, _, _) in enumerate(rows):
+            bit = 1 << index
+            for feature in itertools.chain(set_bits(mask),
+                    (symbols + b for b in set_bits(before)), (context_offset + slot,)):
+                masks[feature] = masks.get(feature, 0) | bit
+        return masks
+    byte_width = (width + 7) // 8
+    columns = [0] * width
+    for start in range(0, len(rows), 8):
+        block = rows[start:start + 8]
+        packed = b"".join((mask | (before << symbols) | (1 << (context_offset + slot))).to_bytes(
+            byte_width, "little") for slot, mask, before, _, _, _ in block)
+        for offset in range(byte_width):
+            value = int.from_bytes(packed[offset::byte_width], "little")
+            swap = (value ^ (value >> 7)) & 0x00AA00AA00AA00AA
+            value ^= swap ^ (swap << 7)
+            swap = (value ^ (value >> 14)) & 0x0000CCCC0000CCCC
+            value ^= swap ^ (swap << 14)
+            swap = (value ^ (value >> 28)) & 0x00000000F0F0F0F0
+            value ^= swap ^ (swap << 28)
+            for bit, bits in enumerate(value.to_bytes(8, "little")):
+                feature = 8 * offset + bit
+                if bits and feature < width:
+                    columns[feature] |= bits << start
+    return {feature: bits for feature, bits in enumerate(columns) if bits}
+
+
+def pair_coordinates(index, capacity):
+    """Inverse of pair_index without constructing the full pair set."""
+    _integer(capacity, "pair capacity", low=2)
+    _integer(index, "pair index", high=capacity * (capacity - 1) // 2 - 1)
+    low, high = 0, capacity - 2
+    while low < high:
+        middle = (low + high + 1) // 2
+        if middle * (2 * capacity - middle - 1) // 2 <= index:
+            low = middle
+        else:
+            high = middle - 1
+    second = low + 1 + index - low * (2 * capacity - low - 1) // 2
+    return low, second
 
 def hex_mask(value):
     return format(value, "x")
@@ -168,28 +236,40 @@ class SharedLearner:
         self.searches = []
         self.max_sphere_residual = 0.0
 
-    def _transaction_copy(self):
-        """Private adapter fork; existing fit rows/historical entries are immutable.
-
-        Every object mutated by receive/learn is owned by the fork. This avoids
-        recursively copying thousands of immutable rows for every wire event.
-        Public checkpoint/metrics still return fully detached copies.
-        """
+    def _observation_copy(self):
+        """Own exactly the state receive() can change; banks remain read-only."""
         child = copy.copy(self)
         child.config = dict(self.config)
         child.rng = random.Random(0)
         child.rng.setstate(self.rng.getstate())
         child.symbols = list(self.symbols)
         child._symbol_ids = dict(self._symbol_ids)
-        child.tasks = {slot: {**task, "records": list(task["records"]),
-                            "losses": list(task["losses"])}
-                       for slot, task in self.tasks.items()}
+        child.tasks = dict(self.tasks)
         child.episode = dict(self.episode)
+        return child
+
+    def _transaction_copy(self, *, context=None):
+        """Own mutable feedback state and the live validation journal.
+
+        context=None keeps an unrestricted private fork isolated. The adapter
+        supplies its pending context: only that context's rows change. Other
+        task headers are still owned because admission resets all losses.
+        """
+        child = self._observation_copy()
         child.program = list(self.program)
-        for name in ("active", "baseline", "candidate", "control", "trial"):
-            setattr(child, name, copy.deepcopy(getattr(self, name)))
+        child.tasks = {
+            slot: {**task,
+                   "records": list(task["records"]) if context is None or slot == context else task["records"],
+                   "losses": list(task["losses"]) if context is None or slot == context else task["losses"]}
+            for slot, task in self.tasks.items()}
+        for name in ("active", "baseline", "candidate", "control"):
+            bank = getattr(self, name)
+            setattr(child, name, None if bank is None else bank._transaction_copy())
+        child.trial = copy.deepcopy(self.trial)
         child.decisions = list(self.decisions)
         child.searches = list(self.searches)
+        if self.trial is not None:
+            child.searches[-1] = copy.deepcopy(self.searches[-1])
         return child
 
     @property
@@ -284,15 +364,11 @@ class SharedLearner:
 
     def _search(self, rows, *, scope=None):
         start = time.perf_counter()
-        masks = {}
+        masks = _feature_masks(rows, self.config["max_symbols"],
+                               self.context_offset, self.config["max_tasks"])
         classes = [[0, 0] for _ in range(self.config["n_actions"])]
-        for index, (slot, mask, before, coin, action, y) in enumerate(rows):
-            bit = 1 << index
-            for feature in itertools.chain(set_bits(mask),
-                                           (self.config["max_symbols"] + b for b in set_bits(before)),
-                                           (self.context_offset + slot,)):
-                masks[feature] = masks.get(feature, 0) | bit
-            classes[action][y] |= bit
+        for index, (_, _, _, _, action, y) in enumerate(rows):
+            classes[action][y] |= 1 << index
         total = len(rows)
         all_rows = (1 << total) - 1
         eligible = [f for f, m in masks.items() if min(m.bit_count(), total - m.bit_count()) >= 16]
@@ -502,9 +578,11 @@ class SharedLearner:
         self.steps = next_step
         task["steps"] = counter(task["steps"] + 1, "context steps")
         task["losses"].append((p - outcome) ** 2)
-        task["losses"] = task["losses"][-LOSS_WINDOW:]
+        if len(task["losses"]) > LOSS_WINDOW:
+            del task["losses"][0]
         task["records"].append([e["mask"], e["before"], e["coin"], action, outcome])
-        task["records"] = task["records"][-self.config["fit_per_context"]:]
+        if len(task["records"]) > self.config["fit_per_context"]:
+            del task["records"][0]
         self.episode = idle_episode()
         if self.trial is not None:
             # A complement event must not repeat a predeclared scoped look.
@@ -518,7 +596,7 @@ class SharedLearner:
                 self._start_trial(e["task"] if self.program else None)
         return p
 
-    def metrics(self):
+    def metrics(self, *, detailed=True):
         points = 2 * self.active.n_routes * self.config["n_actions"]
         return {"steps": self.steps, "contexts": len(self.tasks), "symbols": len(self.symbols),
                 "program": list(self.program), "attempts": self.attempts, "admissions": self.admissions,
@@ -533,7 +611,8 @@ class SharedLearner:
                 "intrinsic_live_dof": points * 2, "intrinsic_peak_dof": points * 4,
                 "fit_records": sum(len(t["records"]) for t in self.tasks.values()),
                 "neural_updates": self.neural_updates, "max_sphere_residual": self.max_sphere_residual,
-                "decisions": copy.deepcopy(self.decisions), "searches": copy.deepcopy(self.searches)}
+                **({"decisions": copy.deepcopy(self.decisions), "searches": copy.deepcopy(self.searches)}
+                   if detailed else {})}
 
     def checkpoint(self):
         tasks = {}
@@ -655,9 +734,8 @@ class SharedLearner:
                 if f < model.config["max_symbols"] and f >= len(symbols):
                     raise ValueError("Unbound presence predicate")
                 if model.config["max_symbols"] <= f < model.context_offset:
-                    legal = {pair_index(a, b, model.config["max_symbols"])
-                             for a, b in itertools.combinations(range(len(symbols)), 2)}
-                    if f - model.config["max_symbols"] not in legal:
+                    _, second = pair_coordinates(f - model.config["max_symbols"], model.config["max_symbols"])
+                    if second >= len(symbols):
                         raise ValueError("Unbound order predicate")
                 if f >= model.context_offset and f - model.context_offset not in model.tasks:
                     raise ValueError("Unbound context predicate")

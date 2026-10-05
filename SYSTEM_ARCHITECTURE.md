@@ -14,7 +14,7 @@ sa mémoire et ses règles de routage restent des détails privés de l’appren
 | Pièce | Responsabilité | État |
 |---|---|---|
 | Contrats communs, `setharkk/contracts.py` | Messages JSON versionnés, identités, ordre logique, unités | Implémentés, version 1 |
-| Adaptateurs, `FirstPieceAdapter`, `TemporalAdapter`, `SharedAdapter`, `RenewableAdapter`, `ConsolidatedAdapter` et `CalibratedAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
+| Adaptateurs, `FirstPieceAdapter`, `TemporalAdapter`, `SharedAdapter`, `RenewableAdapter`, `ConsolidatedAdapter` et `CalibratedAdapter`, `PlasticRevisionAdapter` | Traduire les mêmes messages vers l'apprenant choisi ; conserver sa frontière de reprise | Implémentés, un flux et une action en attente |
 | Première pièce neuronale | Mémoire d'événements, prédictions et modification des prototypes S² | Présence, ordres et combinaisons bornées ; version partagée entre contextes |
 | Cortex coordinateur | Arbitrage des propositions, ressources communes, priorités, journal durable | À construire ; l'adaptateur possède déjà une seule autorité d'apprentissage |
 | Objectifs et planification | Distinguer la demande utilisateur, les objectifs exploratoires et leur valeur | À construire ; un `goal_id` peut déjà accompagner une proposition |
@@ -136,9 +136,12 @@ aveuglément une action en retrouvant une requête en attente.
 
 L'état n'est pas écrit automatiquement sur disque par l'adaptateur.
 L'appelant doit sauvegarder un checkpoint cohérent et le journal correspondant.
-Les transactions utilisent actuellement une copie temporaire du petit
-apprenant. Ce coût CPU et mémoire convient à la vérification du prototype ;
-il devra être mesuré et remplacé si le cortex grandit.
+Les transactions utilisent une copie temporaire adaptée à l'opération.
+Dans la famille partagée, une observation possède l'épisode, les nouvelles
+liaisons et le RNG ; elle lit les banques. Un retour possède les banques,
+les données du contexte concerné et le journal de validation actif.
+Les références de présence et temporelle conservent une copie complète.
+Les [mesures](PRIORITY_FIXES.md) publient le coût et les limites de ces copies.
 
 ## Limites locales et travaux à leur bonne place
 
@@ -283,7 +286,7 @@ tenir compte de ces limites et des métriques annoncées.
 ## Poids plastiques et révisions prospectives
 
 `PlasticRevisionAdapter` conserve les contrats, l'autorité unique et les
-prévisions déjà annoncées lors d'un import. Son cœur de format 7 réutilise
+prévisions déjà annoncées lors d'un import. Son cœur de format 8 réutilise
 les prototypes plastiques par un regroupement des routes sur S², avec un
 test sur les labels de fit et un redémarrage de l'âge d'optimisation.
 Les [instructions](PLASTIC_REVISION.md) décrivent les imports explicites.
@@ -313,3 +316,24 @@ Le [protocole](PLASTIC_REVISION_PROTOCOL.md) et le
 [rapport](PLASTIC_REVISION_RESULTS.md) donnent les unités, les comparaisons
 et les limites. La révision fournit une première pièce d'apprentissage,
 pas les objectifs, le dialogue ou les agents exécutant des tâches du PC.
+
+## Publication d'un retour pendant un calcul long
+
+Une condition sérialise les traitements de reçus. L'adaptateur prépare une
+copie isolée sous verrou, calcule son apprentissage hors du verrou, puis
+publie ensemble le modèle, la révision et l'accusé. Un échec préalable
+ne consomme pas la requête. Un doublon concurrent attend cette publication
+et retrouve le même accusé sans autre gradient.
+
+Pendant ce calcul, les lecteurs voient l'état cohérent précédent, y compris
+la requête en attente. Cette reprise peut recalculer un retour dont l'accusé
+n'était pas publié ; elle ne garantit toujours pas l'unicité d'une action
+physique. Le coordinateur devra ajouter un journal durable et des budgets
+de calcul. Un seul flux et une seule action restent en vol ; une écriture
+concurrente ne peut pas mélanger deux épisodes.
+
+Le format neuronal 8 n'est pas une nouvelle version des messages JSON.
+L'import explicite depuis les formats plastiques 6/7 conserve les identités
+de la prédiction et de la requête déjà annoncées. Les métriques résumées
+`metrics(detailed=False)` permettent aux futurs agents de lire les compteurs
+sans recopier le journal détaillé.

@@ -44,6 +44,9 @@ jobs:
           path: ${{ runner.temp }}/plastic-revision-cold.json
           if-no-files-found: warn
   revision:
+    # Pushes run the same full cases in plastic-revision-cases.yml.
+    # Keep this aggregate execution available for an explicit dispatch.
+    if: github.event_name == 'workflow_dispatch'
     needs: quick
     timeout-minutes: 60
     strategy:

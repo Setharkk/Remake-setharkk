@@ -9,8 +9,9 @@ class PlasticRevisionAdapter(CalibratedAdapter):
 
     @classmethod
     def from_plastic_revision_checkpoint(cls, snapshot):
-        if type(snapshot) is not dict or snapshot.get("implementation") != "first_piece.plastic-revision-s2.v1":
-            raise ValueError("Expected a format-6 plastic adapter prototype")
+        if (type(snapshot) is not dict or snapshot.get("implementation") not in (
+                "first_piece.plastic-revision-s2.v1", "first_piece.plastic-revision-s2.v2")):
+            raise ValueError("Expected a format-6/7 plastic adapter checkpoint")
         import copy
         data = copy.deepcopy(snapshot)
         data["implementation"] = cls.IMPLEMENTATION

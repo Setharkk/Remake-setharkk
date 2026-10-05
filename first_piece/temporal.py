@@ -363,6 +363,7 @@ class TemporalLearner:
                     _integer(value, "binary validation value", high=1)
                 if any(sum(map(sum, state[k].counts)) != instance.config["warmup"] for k in ("candidate", "control")):
                     raise ValueError("Temporary fit budget differs")
+            _validate_accounting(instance.config, state)
             instance.tasks[task] = state
         if instance.config["max_tasks"] + sum(s["feature"] is not None for s in instance.tasks.values()) > instance.config["max_units"]:
             raise ValueError("Structural budget exceeded")
@@ -386,7 +387,7 @@ class TemporalLearner:
         instance.episode = copy.deepcopy(episode)
         return instance
 
-    def metrics(self):
+    def metrics(self, *, detailed=True):
         tasks = len(self.tasks)
         validating = sum(s["status"] == "validating" for s in self.tasks.values())
         return {
@@ -400,7 +401,8 @@ class TemporalLearner:
             "tasks": {str(task): {
                 "steps": s["steps"], "status": s["status"], "attempts": s["attempts"],
                 "admissions": s["admissions"], "replacements": s["replacements"],
-                "feature": feature_description(s["feature"]), "decisions": copy.deepcopy(s["decisions"]),
+                "feature": feature_description(s["feature"]),
+                **({"decisions": copy.deepcopy(s["decisions"])} if detailed else {}),
             } for task, s in sorted(self.tasks.items())},
         }
 
@@ -424,3 +426,54 @@ def _validate_relations(mask, before):
         ranks[a] = rank
     if sorted(ranks.values()) != list(range(len(observed))):
         raise ValueError("Impossible first-occurrence order")
+
+
+def _validate_accounting(config, state):
+    """All supported attempts spend one two-bank warmup fit."""
+    attempts = state["attempts"]
+    histories = {attempt: [] for attempt in range(1, attempts + 1)}
+    previous_at = -1
+    for entry in state["decisions"]:
+        attempt = entry["attempt"]
+        if entry["at"] < previous_at:
+            raise ValueError("Temporal decisions are out of order")
+        previous_at = entry["at"]
+        history = histories[attempt]
+        if history and history[-1]["decision"] != "pending":
+            raise ValueError("Temporal decision follows a terminal look")
+        feature = entry.get("feature")
+        if entry["decision"] == "unsupported":
+            if feature is not None or history:
+                raise ValueError("Unsupported temporal attempt has a feature")
+        else:
+            _integer(feature, "history feature", high=FEATURES - 1)
+            if history and feature != history[0]["feature"]:
+                raise ValueError("Temporal attempt changed its feature")
+            n = entry["validation_interactions"]
+            if history and n <= history[-1]["validation_interactions"]:
+                raise ValueError("Temporal look is repeated or reversed")
+        history.append(entry)
+    supported = 0
+    for attempt, history in histories.items():
+        live = state["trial"] is not None and attempt == attempts
+        if live:
+            if history and history[-1]["decision"] != "pending":
+                raise ValueError("Temporal live attempt is already closed")
+            if history and history[0]["feature"] != state["trial"]["feature"]:
+                raise ValueError("Temporal live feature differs from history")
+            expected = [n for n in HORIZONS if n <= len(state["trial"]["outcomes"])]
+            if [d["validation_interactions"] for d in history] != expected:
+                raise ValueError("Temporal live look history differs")
+            supported += 1
+        else:
+            if not history or history[-1]["decision"] == "pending":
+                raise ValueError("Temporal attempt lacks a terminal decision")
+            supported += history[0]["decision"] != "unsupported"
+    expected_total = 2 * state["steps"] + 2 * config["warmup"] * supported
+    if state["neural_updates"] != expected_total:
+        raise ValueError("Temporal neural updates differ from feedback and fits")
+    accepted = [d for d in state["decisions"] if d["decision"] == "accept"]
+    expected_live = config["warmup"] + state["steps"] - accepted[-1]["at"] if accepted else state["steps"]
+    for name in ("active", "baseline"):
+        if sum(map(sum, state[name].counts)) != expected_live:
+            raise ValueError("Temporal live updates differ from admission lineage")

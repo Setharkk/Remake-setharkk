@@ -30,8 +30,8 @@ class SharedAdapter(FirstPieceAdapter):
         upgraded["learner"] = SharedLearner.migrate_checkpoint_v1(upgraded.get("learner"))
         return cls.restore(upgraded).checkpoint()
 
-    def _fork_learner(self):
-        return self._learner._transaction_copy()
+    def _fork_learner(self, *, observation=False, context=None):
+        return self._learner._observation_copy() if observation else self._learner._transaction_copy(context=context)
 
     def _translate_observation(self, event):
         if event["kind"] == "stream.symbol" and set(event["payload"]) == {"value"}:

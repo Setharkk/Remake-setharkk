@@ -3,9 +3,13 @@
 Projet de recherche pour un cortex neuronal courbe qui apprend des
 conséquences de ses actions et choisit des expériences.
 
-L’état actuel mesuré est décrit dans le [rapport de révision plastique](PLASTIC_REVISION_RESULTS.md) : 139 tests sur Windows et Linux, adaptations successives et essais à 64 symboles et 16 contextes. Les rapports ci-dessous documentent les étapes précédentes et leurs périmètres respectifs.
+L'état actuel utilise le format 8. Les [corrections prioritaires](PRIORITY_FIXES.md)
+publient les défauts corrigés, les tests Windows/Linux, la compatibilité
+et les mesures CPU avant/après. Le [rapport du format 7](PLASTIC_REVISION_RESULTS.md)
+conserve les expériences à 64 symboles et 16 contextes. Les rapports suivants
+documentent les étapes précédentes et leurs périmètres respectifs.
 
-La [revue du code de format 7](CODE_REVIEW_PLASTIC.md) publie les défauts reproduits, les profils CPU et les écarts à la spécification. Deux défauts prioritaires concernent l’isolation des copies et le domaine géométrique du transfert ; ils restent à corriger.
+La [revue du code de format 7](CODE_REVIEW_PLASTIC.md) publie les défauts reproduits, les profils CPU et les écarts à la spécification. Ses quatre défauts sont corrigés dans le format 8 ; les profils historiques restent disponibles.
 
 La [première pièce](FIRST_PIECE.md) contient maintenant un apprenant :
 mémoire alimentée événement par événement, prototypes neuronaux sur S²
@@ -86,7 +90,7 @@ courbes, les comparaisons et les échecs. L'apprentissage progresse dans ce
 laboratoire, mais la sélection active reste moins efficace en moyenne que
 le hasard et plusieurs conditions régressent après 100 expériences.
 
-La [révision plastique sur S²](PLASTIC_REVISION.md), de format 7, conserve
+La [révision plastique sur S²](PLASTIC_REVISION.md), de format 8, conserve
 les contrats de la première pièce et les imports explicites. Le
 [rapport](PLASTIC_REVISION_RESULTS.md) publie 139 tests Windows/Linux,
 les délais, les ablations et la montée à 64 symboles/16 contextes.

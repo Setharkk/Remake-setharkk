@@ -1,8 +1,9 @@
-name: Review priority corrections preflight
+name: Review priority corrections and predictive parity
 on:
   push:
     paths:
-      - 'validation/revision_fix_bundle.json'
+      - 'first_piece/**'
+      - 'setharkk/**'
       - 'validation/revision_fix_probe.py'
       - '.github/workflows/revision-fixes.yml'
   workflow_dispatch:
@@ -23,8 +24,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Apply exact source candidate inside disposable CI workspace
-        run: python -m validation.revision_fix_probe --apply validation/revision_fix_bundle.json
       - name: Existing regressions and priority correction invariants
         run: python -m unittest discover -s first_piece/tests -v
       - name: Verified corrections, parity and unprofiled before after measurements

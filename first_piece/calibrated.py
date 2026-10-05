@@ -126,9 +126,21 @@ class CalibratedLearner(ConsolidatedLearner):
         self.pending_import_at = None
         return served
 
-    def _transaction_copy(self):
-        child = super()._transaction_copy()
-        child._calibration = copy.deepcopy(self._calibration)
+    def _observation_copy(self):
+        child = super()._observation_copy()
+        child._calibration = dict(self._calibration)
+        return child
+
+    def _transaction_copy(self, *, context=None):
+        child = super()._transaction_copy(context=context)
+        if context is None:
+            child._calibration = copy.deepcopy(self._calibration)
+        else:
+            child._calibration = dict(self._calibration)
+            if context in child._calibration:
+                cache = self._calibration[context]
+                child._calibration[context] = {"probabilities": list(cache["probabilities"]),
+                                               "sums": list(cache["sums"])}
         return child
 
     def checkpoint(self):
@@ -218,8 +230,8 @@ class CalibratedLearner(ConsolidatedLearner):
         return cls.from_consolidated_checkpoint(
             ConsolidatedLearner.from_finite_checkpoint(snapshot))
 
-    def metrics(self):
-        result = super().metrics()
+    def metrics(self, *, detailed=True):
+        result = super().metrics(detailed=detailed)
         result.update(
             search_mode="calibrated",
             calibration_policy=POLICY,

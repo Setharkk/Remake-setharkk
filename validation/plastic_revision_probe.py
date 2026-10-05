@@ -180,8 +180,9 @@ def run_case(kind, seed, modes=None):
             delays[name] = {"first_admission_global_labels": admissions[0]["phase_global_labels"] if admissions else None,
                             "full_competence_global_labels": first, "confirmation_global_labels": confirmation}
         if "plastic_revision" in cores and seed in (0, 1, 2):
-            first = delays["plastic_revision"]["full_competence_global_labels"]
-            check(first is not None and first <= 12000, "Cold full competence exceeds 12000: " + str(first))
+            confirmed = delays["plastic_revision"]["confirmation_global_labels"]
+            check(confirmed is not None and confirmed <= 12000,
+                  "Cold confirmed competence exceeds 12000: " + str(confirmed))
     return {"case": kind, "seed": seed, "criteria_failures": failures, "delays": delays, "training_labels": cores[revised].steps,
             "evaluation_episodes_per_point": 2048, "elapsed_seconds": time.perf_counter() - start,
             "phases": phases_result, "curves": curves, "journals": journals, "bounds": bounds,

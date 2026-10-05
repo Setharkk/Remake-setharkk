@@ -70,3 +70,13 @@ La [révision temporelle](../FIRST_PIECE_TEMPORAL.md) met désormais en
 œuvre ce [protocole](../FIRST_PIECE_NEXT_PROTOCOL.md), dans une grammaire
 bornée de premiers ordres d'apparition. Un checkpoint de présence ne permet pas de reconstruire l'ordre
 qu'il n'avait pas enregistré : la migration devra être explicite.
+
+## Révision plastique courante
+
+Le [format 8](../PLASTIC_REVISION.md) conserve les banques S² et les messages
+communs. Les [corrections prioritaires](../PRIORITY_FIXES.md) documentent la
+reprise explicite des formats 6/7, les tests et les coûts mesurés.
+
+`PlasticRevisionAdapter.metrics(detailed=False)` expose les compteurs
+sans les journaux. Un reçu reste synchrone ; pendant son fit, les lectures
+renvoient l'état cohérent précédant sa publication.

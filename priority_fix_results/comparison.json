@@ -1,0 +1,25 @@
+{
+  "baseline_commit": "3bc75f676b3b93244e099f10db948d1a6be71f85",
+  "preflight_commit": "6901504f78289c100e56940a49506b5c43be0a0f",
+  "preflight_run": 37274175341,
+  "unit_tests_per_os": 153,
+  "source_blob_sha1": {
+    "first_piece/adapter.py": "2bffcf5fc2721963a155c0e71c97f829be4994df",
+    "first_piece/calibrated.py": "8885129b6989b9c6639bf33951121377606159dd",
+    "first_piece/consolidated.py": "13bfc3ba0394e54b57f9c8b4ac3203c8a054431e",
+    "first_piece/learner.py": "09a237ab31486f3804070132875caa994d262e09",
+    "first_piece/plastic_revision.py": "9c37c05e4c9ee00fa09f09facf33466ed6c269dc",
+    "first_piece/plastic_revision_adapter.py": "2e752218c83d4c27e49dbd7a3f2bbff0d9de54e4",
+    "first_piece/renewable.py": "0f46fece5a7d530468fd3c1c8f956978d5afe14a",
+    "first_piece/shared.py": "613f4375efada1ec3912cfc4c9c67429d1662126",
+    "first_piece/shared_adapter.py": "16f4728489afe4018bb1b1f222a8c9d71b7e9ffe",
+    "first_piece/shared_state.py": "8224d84d7ef4c56840e425fd4e80b8d6181138cb",
+    "first_piece/temporal.py": "3a94f9a2cd01bf6504594d4f62144bd01a05ee15",
+    "first_piece/tests/test_plastic_revision.py": "71899b5b23c938cd01b1343aa39198593bc50491",
+    "first_piece/tests/test_revision_fixes.py": "4e5026c3e7eb9b7e037cf870065e41d5a4c92d59",
+    "validation/plastic_revision_probe.py": "7844d054a5a7cbc2cd16adc5b5bd35d1c3261039"
+  },
+  "corrected_reproductions_identical": true,
+  "continuation_identical": true,
+  "dense_programs_identical": true
+}

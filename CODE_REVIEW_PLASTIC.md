@@ -1,5 +1,8 @@
 # Revue complète de la première pièce — 5 octobre 2026
 
+Cette revue conserve les défauts du moteur audité de format 7. Les corrections,
+optimisations et preuves du format 8 figurent dans [PRIORITY_FIXES.md](PRIORITY_FIXES.md).
+
 Le moteur conserve une géométrie neuronale sur S² et réussit ses 139 tests
 existants sous Windows et Linux. La revue révèle néanmoins **deux défauts P1
 dans le moteur plastique**, **un défaut P2 du critère de délai** et **un défaut

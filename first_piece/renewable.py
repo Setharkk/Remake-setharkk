@@ -70,8 +70,8 @@ class RenewableLearner(SharedLearner):
             self._compact()
         super()._start_trial(scope)
 
-    def _transaction_copy(self):
-        child = super()._transaction_copy()
+    def _transaction_copy(self, *, context=None):
+        child = super()._transaction_copy(context=context)
         child.renewal = copy.deepcopy(self.renewal)
         return child
 
@@ -139,8 +139,8 @@ class RenewableLearner(SharedLearner):
     def migrate_checkpoint_v1(cls, snapshot):
         raise ValueError("Migrate with SharedLearner.migrate_checkpoint_v1, then from_finite_checkpoint")
 
-    def metrics(self):
-        result = super().metrics()
+    def metrics(self, *, detailed=True):
+        result = super().metrics(detailed=detailed)
         block = (max(1, self.attempts) - 1) // self.config["max_attempts"] + 1
         legacy = self.renewal["legacy_first_block"]
         allocated = ALPHA * (2 - 1 / block) if legacy else ALPHA * block / (block + 1)

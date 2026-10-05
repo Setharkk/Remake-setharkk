@@ -6,7 +6,7 @@ from setharkk.contracts import counter
 from .calibrated import CalibratedLearner
 from .consolidated import COMPARISONS, UNIVERSAL_WIDTH
 from .shared import SharedSpherePredictor, log_probability, _integer
-from .spherical import log_map, exp_map
+from .spherical import log_map, exp_map, learnable_point
 
 FAST_HORIZONS = (128, 512, 1024, 2048, 4096, 8192, 16384)
 MEAN_ITERATIONS = 8
@@ -35,8 +35,8 @@ def spherical_mean(points, weights):
 
 
 class PlasticRevisionLearner(CalibratedLearner):
-    CHECKPOINT_FORMAT = 7
-    IMPLEMENTATION = "first_piece.plastic-revision-s2.v2"
+    CHECKPOINT_FORMAT = 8
+    IMPLEMENTATION = "first_piece.plastic-revision-s2.v3"
 
     def __init__(self, *args, reuse_plastic_weights=True,
                  bounded_validation_ranges=True, **kwargs):
@@ -128,10 +128,10 @@ class PlasticRevisionLearner(CalibratedLearner):
                 report["source_prototype_reads"] += len(source_routes)
                 try:
                     value, steps = spherical_mean(points, [weights[r] for r in source_routes])
+                    value = learnable_point(value, candidate.anchors)
                 except ValueError:
-                    # A valid bank can contain mutually antipodal prototypes.
-                    # Keep the declared neutral point rather than choosing an
-                    # undefined logarithm direction.
+                    # Sources or their mean can reach a logarithm cut locus.
+                    # Keep the declared neutral point; never invent a direction.
                     report["ambiguous_means"] += 1
                     continue
                 report["geodesic_mean_steps"] += steps
@@ -197,10 +197,15 @@ class PlasticRevisionLearner(CalibratedLearner):
         self._revision_variance = {name: 0.0 for name in COMPARISONS}
         rows = [(slot, *r) for slot in sorted(self.tasks) for r in self.tasks[slot]["records"]]
         retained_program = list(self.program)
-        program = self._search(rows, scope=scope)
-        if refinement_gain is not None:
+        if refinement_gain is None:
+            program = self._search(rows, scope=scope)
+        else:
             program = retained_program
-            self.searches[-1]["program"] = list(program)
+            self.searches.append({"attempt": self.attempts, "scope": scope,
+                "score_source": "served", "at": self.steps, "fit_records": len(rows),
+                "eligible_features": 0, "pooled_features": 0,
+                "hypotheses_examined": 0, "elapsed_seconds": 0.0,
+                "program": list(program)})
         initialization = None
         if program is None:
             self.decisions.append({"attempt": self.attempts, "at": self.steps, "scope": scope,
@@ -433,9 +438,9 @@ class PlasticRevisionLearner(CalibratedLearner):
         from .plastic_revision_state import validate_revision
         validate_revision(self)
 
-    def _transaction_copy(self):
-        child = super()._transaction_copy()
-        child._frozen_reference = copy.deepcopy(self._frozen_reference)
+    def _transaction_copy(self, *, context=None):
+        child = super()._transaction_copy(context=context)
+        child._frozen_reference = copy.deepcopy(self._frozen_reference) if context is None else self._frozen_reference
         child._revision_variance = dict(self._revision_variance)
         return child
 
@@ -484,18 +489,21 @@ class PlasticRevisionLearner(CalibratedLearner):
 
     @classmethod
     def from_plastic_revision_checkpoint(cls, snapshot):
-        """Import the last format-6 prototype without changing pending forecasts."""
-        if (type(snapshot) is not dict or snapshot.get("format") != 6 or
-                snapshot.get("implementation") != "first_piece.plastic-revision-s2.v1"):
-            raise ValueError("Expected a format-6 plastic revision prototype")
+        """Explicit import of formats 6/7, preserving pending forecasts and risk."""
+        identities = {6: "first_piece.plastic-revision-s2.v1",
+                      7: "first_piece.plastic-revision-s2.v2"}
+        if (type(snapshot) is not dict or type(snapshot.get("format")) is not int or
+                identities.get(snapshot["format"]) != snapshot.get("implementation")):
+            raise ValueError("Expected a format-6/7 plastic revision checkpoint")
         data = copy.deepcopy(snapshot)
         data["format"], data["implementation"] = cls.CHECKPOINT_FORMAT, cls.IMPLEMENTATION
-        for search in data.get("searches", []):
-            if search["attempt"] >= data["revision_start_attempt"]:
-                meta = search["validation"]
-                if "purpose" in meta or "refinement_gain" in meta:
-                    raise ValueError("Format-6 prototype already claims refinement policy")
-                meta.update(purpose="structure", refinement_gain=None)
+        if snapshot["format"] == 6:
+            for search in data.get("searches", []):
+                if search["attempt"] >= data["revision_start_attempt"]:
+                    meta = search["validation"]
+                    if "purpose" in meta or "refinement_gain" in meta:
+                        raise ValueError("Format-6 prototype already claims refinement policy")
+                    meta.update(purpose="structure", refinement_gain=None)
         return cls.restore(data).checkpoint()
 
     @classmethod
@@ -520,8 +528,8 @@ class PlasticRevisionLearner(CalibratedLearner):
     def from_finite_checkpoint(cls, snapshot):
         return cls.from_calibrated_checkpoint(CalibratedLearner.from_finite_checkpoint(snapshot))
 
-    def metrics(self):
-        result = super().metrics()
+    def metrics(self, *, detailed=True):
+        result = super().metrics(detailed=detailed)
         extra = self.active.n_routes * self.config["n_actions"] if self._frozen_reference else 0
         result.update(search_mode="plastic_revision",
                       refinement_check_interval=REFINEMENT_EVERY,

@@ -34,10 +34,9 @@ def _program(model, value, *, nullable=False):
         if feature >= model.context_offset and feature - model.context_offset not in model.tasks:
             raise ValueError("History context is unbound")
         if model.config["max_symbols"] <= feature < model.context_offset:
-            from .shared import pair_index
-            legal = {pair_index(a, b, model.config["max_symbols"])
-                     for a in range(len(model.symbols)) for b in range(a + 1, len(model.symbols))}
-            if feature - model.config["max_symbols"] not in legal:
+            from .shared import pair_coordinates
+            _, second = pair_coordinates(feature - model.config["max_symbols"], model.config["max_symbols"])
+            if second >= len(model.symbols):
                 raise ValueError("History order is unbound")
 
 
@@ -98,7 +97,10 @@ def validate_history(model):
             raise ValueError("Invalid search work accounting")
         if _finite_number(search["elapsed_seconds"], "search duration") < 0:
             raise ValueError("Negative search duration")
-        if (search["program"] is None) != (examined == 0):
+        fixed_fit = search.get("validation", {}).get("purpose") == "confidence"
+        if fixed_fit and examined == 0 and (pooled or eligible):
+            raise ValueError("Fixed-program fit claims alternative search work")
+        if not fixed_fit and (search["program"] is None) != (examined == 0):
             # An unsupported pool can examine hypotheses with insufficient joint support.
             if search["program"] is not None and not examined:
                 raise ValueError("No hypothesis examined")

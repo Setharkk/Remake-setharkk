@@ -1,0 +1,37 @@
+{
+  "audited_commit": "f6a1ea4f74ac546bed79eef562894320c358790e",
+  "probe_commit": "abdd3fde5327c9e11624fa7f9b28a06e20c3cac0",
+  "workflow_run": 37270906361,
+  "operating_systems": [
+    "Linux",
+    "Windows"
+  ],
+  "python_versions": {
+    "Linux": "3.11.16",
+    "Windows": "3.11.9"
+  },
+  "reproductions_identical": true,
+  "direct_wire_state_parity": {
+    "Linux": true,
+    "Windows": true
+  },
+  "unprofiled_direct_wire_state_parity": {
+    "Linux": true,
+    "Windows": true
+  },
+  "known_defects": {
+    "B1": "Source journal mutated by unpublished child; late receipt failure leaves unrestorable checkpoint",
+    "B2": "Source prototypes valid but transferred mean at anchor cut locus cannot update or restore",
+    "B3": "Existing criterion accepts first 12000 and confirmed 13000 despite confirmed limit 12000",
+    "B4": "Historical presence and temporal restorations accept forged neural update total"
+  },
+  "coverage_limit": {
+    "possible_boolean_route_unobserved": true,
+    "support": [
+      512,
+      0
+    ]
+  },
+  "engine_changed": false,
+  "performance_note": "CPU timings on separate CI runners, three unprofiled repetitions; no user GPU measurement and no production latency guarantee."
+}

@@ -1,0 +1,648 @@
+{
+  "audited_commit": "f6a1ea4f74ac546bed79eef562894320c358790e",
+  "probe_commit": "abdd3fde5327c9e11624fa7f9b28a06e20c3cac0",
+  "profiles": {
+    "bridge": {
+      "adapter": {
+        "profiled_seconds": 8.756276300000025,
+        "top_cumulative": [
+          {
+            "calls": 1,
+            "cumulative_seconds": 8.7562589,
+            "function": "plastic_revision_review.py:252:run_wire",
+            "primitive_calls": 1,
+            "self_seconds": 0.0043062000000000005
+          },
+          {
+            "calls": 4752576,
+            "cumulative_seconds": 8.4739871,
+            "function": "copy.py:128:deepcopy",
+            "primitive_calls": 11136,
+            "self_seconds": 4.459838
+          },
+          {
+            "calls": 960,
+            "cumulative_seconds": 8.4674122,
+            "function": "shared_adapter.py:33:_fork_learner",
+            "primitive_calls": 960,
+            "self_seconds": 0.0008169000000000001
+          },
+          {
+            "calls": 960,
+            "cumulative_seconds": 8.4665953,
+            "function": "plastic_revision.py:436:_transaction_copy",
+            "primitive_calls": 960,
+            "self_seconds": 0.0029556
+          },
+          {
+            "calls": 960,
+            "cumulative_seconds": 8.462118,
+            "function": "calibrated.py:129:_transaction_copy",
+            "primitive_calls": 960,
+            "self_seconds": 0.0029651
+          },
+          {
+            "calls": 28128,
+            "cumulative_seconds": 8.415632800000001,
+            "function": "copy.py:227:_deepcopy_dict",
+            "primitive_calls": 6528,
+            "self_seconds": 0.0977702
+          },
+          {
+            "calls": 184512,
+            "cumulative_seconds": 7.9662611000000005,
+            "function": "copy.py:201:_deepcopy_list",
+            "primitive_calls": 40512,
+            "self_seconds": 1.6887906000000001
+          },
+          {
+            "calls": 864,
+            "cumulative_seconds": 7.8215472,
+            "function": "adapter.py:106:submit_observation",
+            "primitive_calls": 864,
+            "self_seconds": 0.0341291
+          },
+          {
+            "calls": 960,
+            "cumulative_seconds": 1.5020208000000002,
+            "function": "consolidated.py:128:_transaction_copy",
+            "primitive_calls": 960,
+            "self_seconds": 0.0023154
+          },
+          {
+            "calls": 3840,
+            "cumulative_seconds": 1.3296121,
+            "function": "copy.py:259:_reconstruct",
+            "primitive_calls": 3840,
+            "self_seconds": 0.015060800000000001
+          },
+          {
+            "calls": 960,
+            "cumulative_seconds": 1.0336841,
+            "function": "renewable.py:73:_transaction_copy",
+            "primitive_calls": 960,
+            "self_seconds": 0.0016769
+          },
+          {
+            "calls": 960,
+            "cumulative_seconds": 0.9842112000000001,
+            "function": "shared.py:171:_transaction_copy",
+            "primitive_calls": 960,
+            "self_seconds": 0.0170002
+          },
+          {
+            "calls": 96,
+            "cumulative_seconds": 0.9053685,
+            "function": "adapter.py:186:submit_receipt",
+            "primitive_calls": 96,
+            "self_seconds": 0.0045981
+          },
+          {
+            "calls": 9512352,
+            "cumulative_seconds": 0.8236481000000001,
+            "function": "~:0:<method 'get' of 'dict' objects>",
+            "primitive_calls": 9512352,
+            "self_seconds": 0.8236481000000001
+          },
+          {
+            "calls": 5201952,
+            "cumulative_seconds": 0.4552257,
+            "function": "~:0:<built-in method builtins.id>",
+            "primitive_calls": 5201952,
+            "self_seconds": 0.4552257
+          }
+        ],
+        "total_calls": 29461673
+      },
+      "calibration_cache": 4096,
+      "checkpoint": {
+        "median_seconds_per_call": 0.016039589999996905,
+        "repetitions_per_sample": 10,
+        "samples": [
+          0.016039589999996905,
+          0.01609205999999972,
+          0.014557270000000243
+        ]
+      },
+      "direct": {
+        "profiled_seconds": 0.061728299999970204,
+        "top_cumulative": [
+          {
+            "calls": 1,
+            "cumulative_seconds": 0.0565362,
+            "function": "plastic_revision_review.py:248:run_direct",
+            "primitive_calls": 1,
+            "self_seconds": 0.0000843
+          },
+          {
+            "calls": 96,
+            "cumulative_seconds": 0.056451900000000006,
+            "function": "plastic_revision_review.py:37:advance",
+            "primitive_calls": 96,
+            "self_seconds": 0.0004668
+          },
+          {
+            "calls": 96,
+            "cumulative_seconds": 0.0337657,
+            "function": "plastic_revision.py:367:learn",
+            "primitive_calls": 96,
+            "self_seconds": 0.00036270000000000003
+          },
+          {
+            "calls": 96,
+            "cumulative_seconds": 0.0332779,
+            "function": "calibrated.py:95:learn",
+            "primitive_calls": 96,
+            "self_seconds": 0.0010564
+          },
+          {
+            "calls": 864,
+            "cumulative_seconds": 0.0222194,
+            "function": "calibrated.py:60:receive",
+            "primitive_calls": 864,
+            "self_seconds": 0.0014958
+          },
+          {
+            "calls": 96,
+            "cumulative_seconds": 0.020238100000000002,
+            "function": "consolidated.py:106:learn",
+            "primitive_calls": 96,
+            "self_seconds": 0.0001337
+          },
+          {
+            "calls": 864,
+            "cumulative_seconds": 0.0201525,
+            "function": "shared.py:220:receive",
+            "primitive_calls": 864,
+            "self_seconds": 0.0098659
+          },
+          {
+            "calls": 96,
+            "cumulative_seconds": 0.0201044,
+            "function": "shared.py:472:learn",
+            "primitive_calls": 96,
+            "self_seconds": 0.0017588
+          },
+          {
+            "calls": 1440,
+            "cumulative_seconds": 0.0172722,
+            "function": "spherical.py:90:probability",
+            "primitive_calls": 1440,
+            "self_seconds": 0.0028944
+          },
+          {
+            "calls": 288,
+            "cumulative_seconds": 0.016779000000000002,
+            "function": "shared.py:272:pending_probabilities",
+            "primitive_calls": 288,
+            "self_seconds": 0.0007258000000000001
+          },
+          {
+            "calls": 288,
+            "cumulative_seconds": 0.014431600000000001,
+            "function": "shared.py:278:<listcomp>",
+            "primitive_calls": 288,
+            "self_seconds": 0.0005735
+          },
+          {
+            "calls": 192,
+            "cumulative_seconds": 0.0132613,
+            "function": "spherical.py:100:update",
+            "primitive_calls": 192,
+            "self_seconds": 0.0017238000000000002
+          },
+          {
+            "calls": 192,
+            "cumulative_seconds": 0.013156200000000002,
+            "function": "calibrated.py:81:pending_probabilities",
+            "primitive_calls": 192,
+            "self_seconds": 0.0005007000000000001
+          },
+          {
+            "calls": 4320,
+            "cumulative_seconds": 0.012266,
+            "function": "spherical.py:93:<genexpr>",
+            "primitive_calls": 4320,
+            "self_seconds": 0.0013615
+          },
+          {
+            "calls": 2880,
+            "cumulative_seconds": 0.010904500000000001,
+            "function": "spherical.py:35:distance",
+            "primitive_calls": 2880,
+            "self_seconds": 0.0028078
+          }
+        ],
+        "total_calls": 94249
+      },
+      "direct_wire_state_equal": true,
+      "episodes": 96,
+      "fit_rows": 4096,
+      "fork": {
+        "median_seconds_per_call": 0.0013177799999994021,
+        "repetitions_per_sample": 50,
+        "samples": [
+          0.0013177799999994021,
+          0.0013189099999999598,
+          0.0013059180000004743
+        ]
+      },
+      "protected_bank": true,
+      "restore": {
+        "median_seconds_per_call": 0.1436702999999966,
+        "repetitions_per_sample": 3,
+        "samples": [
+          0.14301246666667566,
+          0.14451760000000982,
+          0.1436702999999966
+        ]
+      },
+      "source_steps": 6000,
+      "source_unchanged": true
+    },
+    "bridge_unprofiled": {
+      "all_direct_wire_states_equal": true,
+      "episodes_per_sample": 96,
+      "median_milliseconds_per_episode": {
+        "adapter": 13.94110312499978,
+        "direct": 0.15694375000011954
+      },
+      "median_seconds": {
+        "adapter": 1.3383458999999789,
+        "direct": 0.015066600000011476
+      },
+      "ratio_adapter_over_direct": 88.82866074621742,
+      "samples": [
+        {
+          "adapter": 1.3383458999999789,
+          "direct": 0.015066600000011476
+        },
+        {
+          "adapter": 1.3306165000000192,
+          "direct": 0.01524130000001378
+        },
+        {
+          "adapter": 1.3440545999999927,
+          "direct": 0.015048400000011952
+        }
+      ]
+    },
+    "dense16": {
+      "profile": {
+        "profiled_seconds": 0.26213940000002367,
+        "top_cumulative": [
+          {
+            "calls": 1,
+            "cumulative_seconds": 0.2621256,
+            "function": "plastic_revision_review.py:223:<lambda>",
+            "primitive_calls": 1,
+            "self_seconds": 0.0004940000000000001
+          },
+          {
+            "calls": 1,
+            "cumulative_seconds": 0.2616316,
+            "function": "shared.py:285:_search",
+            "primitive_calls": 1,
+            "self_seconds": 0.0201133
+          },
+          {
+            "calls": 5772,
+            "cumulative_seconds": 0.20993240000000002,
+            "function": "shared.py:336:consider",
+            "primitive_calls": 5772,
+            "self_seconds": 0.012242800000000002
+          },
+          {
+            "calls": 5772,
+            "cumulative_seconds": 0.19389910000000002,
+            "function": "shared.py:311:score",
+            "primitive_calls": 5772,
+            "self_seconds": 0.1045167
+          },
+          {
+            "calls": 239412,
+            "cumulative_seconds": 0.067204,
+            "function": "shared.py:326:<genexpr>",
+            "primitive_calls": 239412,
+            "self_seconds": 0.0540153
+          },
+          {
+            "calls": 31114,
+            "cumulative_seconds": 0.0215843,
+            "function": "shared.py:292:<genexpr>",
+            "primitive_calls": 31114,
+            "self_seconds": 0.0078831
+          },
+          {
+            "calls": 39818,
+            "cumulative_seconds": 0.0170492,
+            "function": "shared.py:67:set_bits",
+            "primitive_calls": 39818,
+            "self_seconds": 0.0145266
+          },
+          {
+            "calls": 183078,
+            "cumulative_seconds": 0.015584500000000001,
+            "function": "~:0:<method 'bit_count' of 'int' objects>",
+            "primitive_calls": 183078,
+            "self_seconds": 0.015584500000000001
+          },
+          {
+            "calls": 72667,
+            "cumulative_seconds": 0.010143000000000001,
+            "function": "~:0:<built-in method math.log>",
+            "primitive_calls": 72667,
+            "self_seconds": 0.010143000000000001
+          },
+          {
+            "calls": 12564,
+            "cumulative_seconds": 0.0035695,
+            "function": "shared.py:317:<listcomp>",
+            "primitive_calls": 12564,
+            "self_seconds": 0.0035695
+          },
+          {
+            "calls": 39306,
+            "cumulative_seconds": 0.0032123000000000004,
+            "function": "~:0:<method 'get' of 'dict' objects>",
+            "primitive_calls": 39306,
+            "self_seconds": 0.0032123000000000004
+          },
+          {
+            "calls": 18336,
+            "cumulative_seconds": 0.0026349000000000003,
+            "function": "shared.py:342:<genexpr>",
+            "primitive_calls": 18336,
+            "self_seconds": 0.0026349000000000003
+          },
+          {
+            "calls": 38794,
+            "cumulative_seconds": 0.0025226000000000003,
+            "function": "~:0:<method 'bit_length' of 'int' objects>",
+            "primitive_calls": 38794,
+            "self_seconds": 0.0025226000000000003
+          },
+          {
+            "calls": 1158,
+            "cumulative_seconds": 0.0020533,
+            "function": "~:0:<built-in method builtins.sorted>",
+            "primitive_calls": 1158,
+            "self_seconds": 0.0015396000000000001
+          },
+          {
+            "calls": 5772,
+            "cumulative_seconds": 0.0007125,
+            "function": "~:0:<built-in method math.isfinite>",
+            "primitive_calls": 5772,
+            "self_seconds": 0.0007125
+          }
+        ],
+        "total_calls": 708987
+      },
+      "rows": 512,
+      "search": {
+        "at": 0,
+        "attempt": 0,
+        "elapsed_seconds": 0.26162429999999404,
+        "eligible_features": 136,
+        "fit_records": 512,
+        "hypotheses_examined": 5772,
+        "pooled_features": 96,
+        "program": [
+          136
+        ],
+        "scope": null,
+        "score_source": "served"
+      },
+      "symbols": 16,
+      "tokens_per_episode": 16,
+      "true_order_bits_total": 30602
+    },
+    "dense64": {
+      "profile": {
+        "profiled_seconds": 0.9855114000000071,
+        "top_cumulative": [
+          {
+            "calls": 1,
+            "cumulative_seconds": 0.9854963000000001,
+            "function": "plastic_revision_review.py:223:<lambda>",
+            "primitive_calls": 1,
+            "self_seconds": 0.0006948000000000001
+          },
+          {
+            "calls": 1,
+            "cumulative_seconds": 0.9848015000000001,
+            "function": "shared.py:285:_search",
+            "primitive_calls": 1,
+            "self_seconds": 0.2295105
+          },
+          {
+            "calls": 516240,
+            "cumulative_seconds": 0.46466880000000005,
+            "function": "shared.py:292:<genexpr>",
+            "primitive_calls": 516240,
+            "self_seconds": 0.1366282
+          },
+          {
+            "calls": 549520,
+            "cumulative_seconds": 0.34335720000000003,
+            "function": "shared.py:67:set_bits",
+            "primitive_calls": 549520,
+            "self_seconds": 0.30185670000000003
+          },
+          {
+            "calls": 5772,
+            "cumulative_seconds": 0.2121985,
+            "function": "shared.py:336:consider",
+            "primitive_calls": 5772,
+            "self_seconds": 0.012385100000000001
+          },
+          {
+            "calls": 5772,
+            "cumulative_seconds": 0.19597350000000002,
+            "function": "shared.py:311:score",
+            "primitive_calls": 5772,
+            "self_seconds": 0.1052038
+          },
+          {
+            "calls": 241416,
+            "cumulative_seconds": 0.068173,
+            "function": "shared.py:326:<genexpr>",
+            "primitive_calls": 241416,
+            "self_seconds": 0.0550555
+          },
+          {
+            "calls": 549008,
+            "cumulative_seconds": 0.0496387,
+            "function": "~:0:<method 'get' of 'dict' objects>",
+            "primitive_calls": 549008,
+            "self_seconds": 0.0496387
+          },
+          {
+            "calls": 548496,
+            "cumulative_seconds": 0.0415005,
+            "function": "~:0:<method 'bit_length' of 'int' objects>",
+            "primitive_calls": 548496,
+            "self_seconds": 0.0415005
+          },
+          {
+            "calls": 196029,
+            "cumulative_seconds": 0.0167108,
+            "function": "~:0:<method 'bit_count' of 'int' objects>",
+            "primitive_calls": 196029,
+            "self_seconds": 0.0167108
+          },
+          {
+            "calls": 1158,
+            "cumulative_seconds": 0.010309200000000001,
+            "function": "~:0:<built-in method builtins.sorted>",
+            "primitive_calls": 1158,
+            "self_seconds": 0.0033061
+          },
+          {
+            "calls": 72834,
+            "cumulative_seconds": 0.010249300000000001,
+            "function": "~:0:<built-in method math.log>",
+            "primitive_calls": 72834,
+            "self_seconds": 0.010249300000000001
+          },
+          {
+            "calls": 3984,
+            "cumulative_seconds": 0.0036901000000000004,
+            "function": "shared.py:300:<lambda>",
+            "primitive_calls": 3984,
+            "self_seconds": 0.0022867
+          },
+          {
+            "calls": 12564,
+            "cumulative_seconds": 0.0036490000000000003,
+            "function": "shared.py:317:<listcomp>",
+            "primitive_calls": 12564,
+            "self_seconds": 0.0036490000000000003
+          },
+          {
+            "calls": 18336,
+            "cumulative_seconds": 0.002644,
+            "function": "shared.py:342:<genexpr>",
+            "primitive_calls": 18336,
+            "self_seconds": 0.002644
+          }
+        ],
+        "total_calls": 2759309
+      },
+      "rows": 512,
+      "search": {
+        "at": 0,
+        "attempt": 0,
+        "elapsed_seconds": 0.9847935000000234,
+        "eligible_features": 2032,
+        "fit_records": 512,
+        "hypotheses_examined": 5772,
+        "pooled_features": 96,
+        "program": [
+          2080
+        ],
+        "scope": null,
+        "score_source": "served"
+      },
+      "symbols": 64,
+      "tokens_per_episode": 64,
+      "true_order_bits_total": 515728
+    }
+  },
+  "python": "3.11.9",
+  "reproductions": {
+    "confirmed_deadline": {
+      "actual_delays": {
+        "plastic_revision": {
+          "confirmation_global_labels": 13000,
+          "first_admission_global_labels": null,
+          "full_competence_global_labels": 12000
+        }
+      },
+      "criteria_failures": [],
+      "protocol_confirmed_limit": 12000,
+      "synthetic_curve_first_success": 12000
+    },
+    "historical_restore": {
+      "DistinctionLearner": {
+        "forged_neural_update_total_accepted": true,
+        "neural_updates": 101
+      },
+      "TemporalLearner": {
+        "forged_neural_update_total_accepted": true,
+        "neural_updates": 102
+      }
+    },
+    "mean_optimizer_domain": {
+      "candidate_restorable": false,
+      "error": "Antipodal logarithm is not unique",
+      "initialization": {
+        "active_source_updates": 0,
+        "ambiguous_means": 0,
+        "at": 0,
+        "control_source_updates": 0,
+        "geodesic_mean_steps": 1,
+        "mapped_records": 16,
+        "mapped_routes": 1,
+        "optimizer_restarted": true,
+        "source": "plastic-geodesic-gated",
+        "source_prototype_reads": 8,
+        "transferred_candidate_points": 1,
+        "transferred_control_points": 0
+      },
+      "probability": 0.9999996280130163,
+      "replay_update_succeeds": false,
+      "restore_error": "Antipodal logarithm is not unique",
+      "sources_in_optimizer_domain": true,
+      "transferred_point": [
+        -1,
+        0,
+        1.3877787807814457e-17
+      ]
+    },
+    "transaction_isolation": {
+      "adapter_checkpoint_changed_after_failed_receipt": true,
+      "adapter_restore_error": "Variance records and completed looks differ",
+      "adapter_revision_unchanged": true,
+      "adapter_still_restorable": false,
+      "injected_error": "injected failure after candidate.learn",
+      "original_checkpoint_changed_after_unpublished_child_learn": true,
+      "original_steps_after": 639,
+      "original_steps_before": 639,
+      "original_still_restorable": false,
+      "restore_error": "Variance records and completed looks differ",
+      "shared_validation_object": true,
+      "variance_keys_after": {
+        "improvement": [
+          "128"
+        ],
+        "preservation": [],
+        "relevance": [
+          "128"
+        ]
+      },
+      "variance_keys_before": {
+        "improvement": [],
+        "preservation": [],
+        "relevance": []
+      }
+    },
+    "unobserved_route": {
+      "admitted": true,
+      "has_unobserved_boolean_route": true,
+      "initial_program": [
+        0
+      ],
+      "principal_labels": 512,
+      "program": [
+        0
+      ],
+      "route_support": [
+        512,
+        0
+      ]
+    }
+  },
+  "runner": "Windows"
+}

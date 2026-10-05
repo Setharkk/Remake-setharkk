@@ -1,0 +1,613 @@
+{
+  "audited_commit": "f6a1ea4f74ac546bed79eef562894320c358790e",
+  "scope": "first_piece, contracts, tests, validation tools, workflows and first-piece specifications; archived cortex_lab_v0/v1 not re-reviewed",
+  "files": [
+    {
+      "path": ".github/workflows/calibration.yml",
+      "blob_sha": "2d1dcbc3f9da26395dfe9365ee6d9437cff0965b",
+      "bytes": 1487,
+      "lines": 48
+    },
+    {
+      "path": ".github/workflows/consolidation.yml",
+      "blob_sha": "e95fb4a72ddb24f12688775cf06f81e1ce5cbc90",
+      "bytes": 1495,
+      "lines": 48
+    },
+    {
+      "path": ".github/workflows/cortex-intrinsic.yml",
+      "blob_sha": "5a5723ddd0ec28cbb6c900771965491522b1c83c",
+      "bytes": 1942,
+      "lines": 50
+    },
+    {
+      "path": ".github/workflows/cortex-lab.yml",
+      "blob_sha": "5457eebcd4f7ecb7636aeabe4f87e7b7aca1222c",
+      "bytes": 2092,
+      "lines": 52
+    },
+    {
+      "path": ".github/workflows/current-fixes.yml",
+      "blob_sha": "d913fa217a44098577f0b019ae48dd96c59c6dd2",
+      "bytes": 1303,
+      "lines": 44
+    },
+    {
+      "path": ".github/workflows/first-piece-review.yml",
+      "blob_sha": "a49b24279fef2d6dd2255d93cbbe7c913a38ed0d",
+      "bytes": 1128,
+      "lines": 36
+    },
+    {
+      "path": ".github/workflows/first-piece.yml",
+      "blob_sha": "f946e03094e291fbc9e0f6bfe4b01ec5b430b74d",
+      "bytes": 3241,
+      "lines": 79
+    },
+    {
+      "path": ".github/workflows/plastic-revision-cases.yml",
+      "blob_sha": "8080d918f390597ab067807d2e59e3a95ee60702",
+      "bytes": 1589,
+      "lines": 48
+    },
+    {
+      "path": ".github/workflows/plastic-revision.yml",
+      "blob_sha": "1ae588492115cacb6817daf5ca5a53dc449dd74c",
+      "bytes": 2258,
+      "lines": 70
+    },
+    {
+      "path": ".github/workflows/renewable.yml",
+      "blob_sha": "c6fedce1a508accb2af7b6bf1ad5d71ab6cacb25",
+      "bytes": 1376,
+      "lines": 46
+    },
+    {
+      "path": ".github/workflows/scale-final.yml",
+      "blob_sha": "1e862f918d346fb8959fbfb73906197e7fd32dcd",
+      "bytes": 1266,
+      "lines": 40
+    },
+    {
+      "path": ".github/workflows/scale.yml",
+      "blob_sha": "e07d6ed4dac87406867c2342c060891411a8d948",
+      "bytes": 1627,
+      "lines": 46
+    },
+    {
+      "path": ".github/workflows/temporal-final.yml",
+      "blob_sha": "1e22fe78c42fc49ee41017a62a642afdf667ef89",
+      "bytes": 1388,
+      "lines": 42
+    },
+    {
+      "path": "CALIBRATION_PROTOCOL.md",
+      "blob_sha": "9f5d15eedacf740ca441af6aabcbe189e2a97119",
+      "bytes": 5827,
+      "lines": 108
+    },
+    {
+      "path": "CODE_REVIEW_CURRENT.md",
+      "blob_sha": "ff2badeab8d7a17e1d31674c4d16c7feb7525883",
+      "bytes": 28296,
+      "lines": 204
+    },
+    {
+      "path": "CONSOLIDATION_PROTOCOL.md",
+      "blob_sha": "98837c49cc045734b6adccc82c384249a0bba6aa",
+      "bytes": 5836,
+      "lines": 100
+    },
+    {
+      "path": "CURRENT_FIXES.md",
+      "blob_sha": "e564c25d4b4e2c5824f39bf91a8c232f31af1350",
+      "bytes": 12044,
+      "lines": 125
+    },
+    {
+      "path": "FIRST_PIECE.md",
+      "blob_sha": "82f53a705d23aaf89bdf2c79a60bb5b0e23c0db3",
+      "bytes": 11731,
+      "lines": 262
+    },
+    {
+      "path": "FIRST_PIECE_SCALE.md",
+      "blob_sha": "8e9d4f00921c52736db4504d949253bda3a66cd2",
+      "bytes": 10364,
+      "lines": 89
+    },
+    {
+      "path": "FIRST_PIECE_TEMPORAL.md",
+      "blob_sha": "6a4dac8ab4b73385239acd1fd9930b4385902973",
+      "bytes": 9807,
+      "lines": 194
+    },
+    {
+      "path": "MEASUREMENT_PROTOCOL.md",
+      "blob_sha": "236db8011d2e6fb34a89a82064a3c3b95e49d09f",
+      "bytes": 8682,
+      "lines": 159
+    },
+    {
+      "path": "PLASTIC_REVISION.md",
+      "blob_sha": "da73331946a8766526a2bf980c01fd5939eb9feb",
+      "bytes": 4457,
+      "lines": 91
+    },
+    {
+      "path": "PLASTIC_REVISION_PROTOCOL.md",
+      "blob_sha": "8f2b4f0fa9919e734b7f5377e8241fcc156466bc",
+      "bytes": 14306,
+      "lines": 252
+    },
+    {
+      "path": "PLASTIC_REVISION_RESULTS.md",
+      "blob_sha": "dd5b00f79a7010be80a7567ba74247c23e49bd9b",
+      "bytes": 10420,
+      "lines": 189
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "a68acb905bdf8f27a877822535a1bb3ba88acdf5",
+      "bytes": 6885,
+      "lines": 93
+    },
+    {
+      "path": "RENEWABLE_SEARCH_PROTOCOL.md",
+      "blob_sha": "c681a79dcdeb97537bb996c639249363d084b35d",
+      "bytes": 4664,
+      "lines": 74
+    },
+    {
+      "path": "RESEARCH_RESET.md",
+      "blob_sha": "9194a6951b5022dbe6ffc9b375950bd0bb00b8bd",
+      "bytes": 6018,
+      "lines": 119
+    },
+    {
+      "path": "SCALING_PROTOCOL.md",
+      "blob_sha": "0ee1d63a3f9fb06595e128ee22d376cdc94e0b3b",
+      "bytes": 10827,
+      "lines": 87
+    },
+    {
+      "path": "SPEC.md",
+      "blob_sha": "b99b21be5a93bfefb47037699321e1b03a403cee",
+      "bytes": 10123,
+      "lines": 150
+    },
+    {
+      "path": "SYSTEM_ARCHITECTURE.md",
+      "blob_sha": "ab6f02c92a8070df591e7371e9dfe489e8a7c389",
+      "bytes": 19234,
+      "lines": 316
+    },
+    {
+      "path": "first_piece/.gitignore",
+      "blob_sha": "f72252fdc25f6559db72a239f539b51bfc0d7250",
+      "bytes": 29,
+      "lines": 4
+    },
+    {
+      "path": "first_piece/README.md",
+      "blob_sha": "b435ba2a62a848d0a82e01060883507214cf7764",
+      "bytes": 3178,
+      "lines": 73
+    },
+    {
+      "path": "first_piece/__init__.py",
+      "blob_sha": "14c0b2208f4256c475898a95f8c0ee6f1e099fc8",
+      "bytes": 71,
+      "lines": 2
+    },
+    {
+      "path": "first_piece/adapter.py",
+      "blob_sha": "00b4aed5317dc0c23ddb1d78a6f11646fbf7b99b",
+      "bytes": 22252,
+      "lines": 374
+    },
+    {
+      "path": "first_piece/audit.py",
+      "blob_sha": "93396e5d97dee788ddff1b2c2edca260670015a5",
+      "bytes": 6146,
+      "lines": 138
+    },
+    {
+      "path": "first_piece/calibrated.py",
+      "blob_sha": "bde750de7c82d9b1b3396c0529eb3d2aa36fcc42",
+      "bytes": 10888,
+      "lines": 236
+    },
+    {
+      "path": "first_piece/calibrated_adapter.py",
+      "blob_sha": "5bbf9098be486a86cfae6c7e715b5375361a5c16",
+      "bytes": 1535,
+      "lines": 39
+    },
+    {
+      "path": "first_piece/consolidated.py",
+      "blob_sha": "2f97a0ca6f725fbeb1f03531c7ce0e6b15c934a7",
+      "bytes": 10067,
+      "lines": 202
+    },
+    {
+      "path": "first_piece/consolidated_adapter.py",
+      "blob_sha": "8602b61dee69ae440dd023efc43886cb24e34c92",
+      "bytes": 1300,
+      "lines": 33
+    },
+    {
+      "path": "first_piece/consolidated_state.py",
+      "blob_sha": "8f177c3f40f97ce33da1033c25235658cd4409dd",
+      "bytes": 4241,
+      "lines": 80
+    },
+    {
+      "path": "first_piece/criterion.py",
+      "blob_sha": "f5f36143c390c9d49b20acffb0a5961570ec724a",
+      "bytes": 3779,
+      "lines": 82
+    },
+    {
+      "path": "first_piece/integration_probe.py",
+      "blob_sha": "ebc5765e2540c897087272a7ef3ad193333cbddf",
+      "bytes": 5170,
+      "lines": 124
+    },
+    {
+      "path": "first_piece/learner.py",
+      "blob_sha": "853b359d019b79c99a76542118ff7f833c7230f4",
+      "bytes": 17847,
+      "lines": 326
+    },
+    {
+      "path": "first_piece/learning_run.py",
+      "blob_sha": "44433a69ed1a6afdaf660bc30636f3fa9fcee623",
+      "bytes": 9730,
+      "lines": 208
+    },
+    {
+      "path": "first_piece/plastic_revision.py",
+      "blob_sha": "d30fdeb834918abbc6308301163016439fa121f3",
+      "bytes": 29055,
+      "lines": 541
+    },
+    {
+      "path": "first_piece/plastic_revision_adapter.py",
+      "blob_sha": "b1be054d3771626b4bae079f1f74c00fecd7308b",
+      "bytes": 2223,
+      "lines": 49
+    },
+    {
+      "path": "first_piece/plastic_revision_state.py",
+      "blob_sha": "f8c064ab333f0ce777c79ddbf75a165cf81846f5",
+      "bytes": 13535,
+      "lines": 216
+    },
+    {
+      "path": "first_piece/renewable.py",
+      "blob_sha": "33f808dd885ace6d97cae440cc1b0c612eb98168",
+      "bytes": 7934,
+      "lines": 159
+    },
+    {
+      "path": "first_piece/renewable_adapter.py",
+      "blob_sha": "1b7021d6160c6b9550a2ba9ab7ee962185f26185",
+      "bytes": 1171,
+      "lines": 29
+    },
+    {
+      "path": "first_piece/review_probe.py",
+      "blob_sha": "d312c34c41d08aef97e6fc444b8e10e6bcce5b3c",
+      "bytes": 6442,
+      "lines": 159
+    },
+    {
+      "path": "first_piece/scale_run.py",
+      "blob_sha": "7be091191bbe0e7fa82fdd468f9b2c2d5a11bbd2",
+      "bytes": 12125,
+      "lines": 223
+    },
+    {
+      "path": "first_piece/scale_world.py",
+      "blob_sha": "56dd0c5fc002090faab51575f32a6aee09be6df2",
+      "bytes": 1584,
+      "lines": 33
+    },
+    {
+      "path": "first_piece/shared.py",
+      "blob_sha": "7dc9bf6fcb7937199809fddb26d44064525869c6",
+      "bytes": 39226,
+      "lines": 729
+    },
+    {
+      "path": "first_piece/shared_adapter.py",
+      "blob_sha": "2667a83ef573da98477814feacfc083d870bb930",
+      "bytes": 2580,
+      "lines": 54
+    },
+    {
+      "path": "first_piece/shared_state.py",
+      "blob_sha": "cf72125ca39183abe36ecea3867f9debfedce2c5",
+      "bytes": 19071,
+      "lines": 310
+    },
+    {
+      "path": "first_piece/spherical.py",
+      "blob_sha": "f64ab00b385d4a1abe435c9f4c58a411abf549c2",
+      "bytes": 5798,
+      "lines": 146
+    },
+    {
+      "path": "first_piece/streaming.py",
+      "blob_sha": "8c5e7c7529f60b66529aa07615f60c502ece518a",
+      "bytes": 3819,
+      "lines": 83
+    },
+    {
+      "path": "first_piece/temporal.py",
+      "blob_sha": "5d6992db6fb500a6d1cff2ffc569a612dfb00c47",
+      "bytes": 24241,
+      "lines": 427
+    },
+    {
+      "path": "first_piece/temporal_adapter.py",
+      "blob_sha": "245f2c111b5fda4dfeb8f541a948e375c1cbb025",
+      "bytes": 817,
+      "lines": 22
+    },
+    {
+      "path": "first_piece/temporal_run.py",
+      "blob_sha": "c0721ffb79d757271cb95653471107ce301f2539",
+      "bytes": 10977,
+      "lines": 224
+    },
+    {
+      "path": "first_piece/temporal_world.py",
+      "blob_sha": "2ff2a1602248b1d71e135c18e31f138ff0a70e0c",
+      "bytes": 6505,
+      "lines": 120
+    },
+    {
+      "path": "first_piece/tests/test_adapter.py",
+      "blob_sha": "36764d92de33d8af5deeabeed67241148dc4db42",
+      "bytes": 12624,
+      "lines": 225
+    },
+    {
+      "path": "first_piece/tests/test_calibrated.py",
+      "blob_sha": "6976fa3f9b7d5c4c6e01d317a6963cb316221d30",
+      "bytes": 10188,
+      "lines": 213
+    },
+    {
+      "path": "first_piece/tests/test_consolidated.py",
+      "blob_sha": "953e7d844ab94306569cbc98b671af009b33489e",
+      "bytes": 10563,
+      "lines": 214
+    },
+    {
+      "path": "first_piece/tests/test_contracts.py",
+      "blob_sha": "28292824c61a7dab5cd68b35d566c805db01db33",
+      "bytes": 3862,
+      "lines": 83
+    },
+    {
+      "path": "first_piece/tests/test_current_fixes.py",
+      "blob_sha": "e139e07be24d2fd8ffddfb071956df3017023442",
+      "bytes": 10419,
+      "lines": 221
+    },
+    {
+      "path": "first_piece/tests/test_learning.py",
+      "blob_sha": "a609a547c9925be343c92421e6e5bbe558825954",
+      "bytes": 10285,
+      "lines": 218
+    },
+    {
+      "path": "first_piece/tests/test_piece.py",
+      "blob_sha": "d57f34a00be8659b1822f08a108125ab7a100e65",
+      "bytes": 5714,
+      "lines": 141
+    },
+    {
+      "path": "first_piece/tests/test_plastic_revision.py",
+      "blob_sha": "31d947139edddda6c8927d631fcf0a60120ced3b",
+      "bytes": 15986,
+      "lines": 307
+    },
+    {
+      "path": "first_piece/tests/test_renewable.py",
+      "blob_sha": "629f1af52cbc576a270b6031be770c8579f34de4",
+      "bytes": 8528,
+      "lines": 173
+    },
+    {
+      "path": "first_piece/tests/test_review.py",
+      "blob_sha": "896970d78fa2681af04311af5192bbdf3874fc88",
+      "bytes": 4483,
+      "lines": 86
+    },
+    {
+      "path": "first_piece/tests/test_shared.py",
+      "blob_sha": "f822df1119764e9b56d9a8a2ead3e9193806212e",
+      "bytes": 17436,
+      "lines": 346
+    },
+    {
+      "path": "first_piece/tests/test_temporal.py",
+      "blob_sha": "1bd8b18e404bf31ff1d3dd57527e605ea6a54db4",
+      "bytes": 11309,
+      "lines": 228
+    },
+    {
+      "path": "first_piece/world.py",
+      "blob_sha": "5c0b5bdcc70fd44139af69200700e33737821dbe",
+      "bytes": 3690,
+      "lines": 85
+    },
+    {
+      "path": "setharkk/__init__.py",
+      "blob_sha": "650f753e9e390e077cb2eb3980d31a84dd9e7f7e",
+      "bytes": 90,
+      "lines": 2
+    },
+    {
+      "path": "setharkk/contracts.py",
+      "blob_sha": "c482c9168bc4be91f1a428c90f876d796e1e4f7a",
+      "bytes": 5926,
+      "lines": 142
+    },
+    {
+      "path": "validation/calibration_probe.py",
+      "blob_sha": "6689307dd2c1156f0d5a951dc490ade59e7d8c14",
+      "bytes": 12118,
+      "lines": 205
+    },
+    {
+      "path": "validation/consolidation_probe.py",
+      "blob_sha": "d258d50c63e6d4fadd3b404fa1140a375fd220df",
+      "bytes": 9485,
+      "lines": 169
+    },
+    {
+      "path": "validation/current_fix_probe.py",
+      "blob_sha": "486d8a64a0bd034d9b9b143115e3a90e7ee03e02",
+      "bytes": 11957,
+      "lines": 258
+    },
+    {
+      "path": "validation/first_piece_full_review.py",
+      "blob_sha": "c058505d67f6324e73559bbb09db095bb5ef134e",
+      "bytes": 16229,
+      "lines": 359
+    },
+    {
+      "path": "validation/plastic_revision_group.py",
+      "blob_sha": "98807abca32d93a4469c21fc27c2a9a394635ee8",
+      "bytes": 2791,
+      "lines": 60
+    },
+    {
+      "path": "validation/plastic_revision_probe.py",
+      "blob_sha": "abb3c2aeed0f59aef048249d7c2f5efc6ca67515",
+      "bytes": 22449,
+      "lines": 374
+    },
+    {
+      "path": "validation/renewable_probe.py",
+      "blob_sha": "46a5888f3bccb6389863dd2aeaf332466f2e9e21",
+      "bytes": 11392,
+      "lines": 219
+    },
+    {
+      "path": "validation/scale_final_probe.py",
+      "blob_sha": "045541a1c113bfd3fc23e041d8588dcf577f74c9",
+      "bytes": 4436,
+      "lines": 86
+    },
+    {
+      "path": "validation/temporal_final_probe.py",
+      "blob_sha": "06587fb1a8668974299e87a0f878c6826697852e",
+      "bytes": 3079,
+      "lines": 62
+    }
+  ],
+  "categories": {
+    "runtime": [
+      "first_piece/.gitignore",
+      "first_piece/README.md",
+      "first_piece/__init__.py",
+      "first_piece/adapter.py",
+      "first_piece/audit.py",
+      "first_piece/calibrated.py",
+      "first_piece/calibrated_adapter.py",
+      "first_piece/consolidated.py",
+      "first_piece/consolidated_adapter.py",
+      "first_piece/consolidated_state.py",
+      "first_piece/criterion.py",
+      "first_piece/integration_probe.py",
+      "first_piece/learner.py",
+      "first_piece/learning_run.py",
+      "first_piece/plastic_revision.py",
+      "first_piece/plastic_revision_adapter.py",
+      "first_piece/plastic_revision_state.py",
+      "first_piece/renewable.py",
+      "first_piece/renewable_adapter.py",
+      "first_piece/review_probe.py",
+      "first_piece/scale_run.py",
+      "first_piece/scale_world.py",
+      "first_piece/shared.py",
+      "first_piece/shared_adapter.py",
+      "first_piece/shared_state.py",
+      "first_piece/spherical.py",
+      "first_piece/streaming.py",
+      "first_piece/temporal.py",
+      "first_piece/temporal_adapter.py",
+      "first_piece/temporal_run.py",
+      "first_piece/temporal_world.py",
+      "first_piece/world.py",
+      "setharkk/__init__.py",
+      "setharkk/contracts.py"
+    ],
+    "tests": [
+      "first_piece/tests/test_adapter.py",
+      "first_piece/tests/test_calibrated.py",
+      "first_piece/tests/test_consolidated.py",
+      "first_piece/tests/test_contracts.py",
+      "first_piece/tests/test_current_fixes.py",
+      "first_piece/tests/test_learning.py",
+      "first_piece/tests/test_piece.py",
+      "first_piece/tests/test_plastic_revision.py",
+      "first_piece/tests/test_renewable.py",
+      "first_piece/tests/test_review.py",
+      "first_piece/tests/test_shared.py",
+      "first_piece/tests/test_temporal.py"
+    ],
+    "validation": [
+      "validation/calibration_probe.py",
+      "validation/consolidation_probe.py",
+      "validation/current_fix_probe.py",
+      "validation/first_piece_full_review.py",
+      "validation/plastic_revision_group.py",
+      "validation/plastic_revision_probe.py",
+      "validation/renewable_probe.py",
+      "validation/scale_final_probe.py",
+      "validation/temporal_final_probe.py"
+    ],
+    "workflows": [
+      ".github/workflows/calibration.yml",
+      ".github/workflows/consolidation.yml",
+      ".github/workflows/cortex-intrinsic.yml",
+      ".github/workflows/cortex-lab.yml",
+      ".github/workflows/current-fixes.yml",
+      ".github/workflows/first-piece-review.yml",
+      ".github/workflows/first-piece.yml",
+      ".github/workflows/plastic-revision-cases.yml",
+      ".github/workflows/plastic-revision.yml",
+      ".github/workflows/renewable.yml",
+      ".github/workflows/scale-final.yml",
+      ".github/workflows/scale.yml",
+      ".github/workflows/temporal-final.yml"
+    ],
+    "spec_docs": [
+      "CALIBRATION_PROTOCOL.md",
+      "CODE_REVIEW_CURRENT.md",
+      "CONSOLIDATION_PROTOCOL.md",
+      "CURRENT_FIXES.md",
+      "FIRST_PIECE.md",
+      "FIRST_PIECE_SCALE.md",
+      "FIRST_PIECE_TEMPORAL.md",
+      "MEASUREMENT_PROTOCOL.md",
+      "PLASTIC_REVISION.md",
+      "PLASTIC_REVISION_PROTOCOL.md",
+      "PLASTIC_REVISION_RESULTS.md",
+      "README.md",
+      "RENEWABLE_SEARCH_PROTOCOL.md",
+      "RESEARCH_RESET.md",
+      "SCALING_PROTOCOL.md",
+      "SPEC.md",
+      "SYSTEM_ARCHITECTURE.md"
+    ]
+  }
+}

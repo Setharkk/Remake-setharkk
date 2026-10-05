@@ -5,6 +5,8 @@ conséquences de ses actions et choisit des expériences.
 
 L’état actuel mesuré est décrit dans le [rapport de révision plastique](PLASTIC_REVISION_RESULTS.md) : 139 tests sur Windows et Linux, adaptations successives et essais à 64 symboles et 16 contextes. Les rapports ci-dessous documentent les étapes précédentes et leurs périmètres respectifs.
 
+La [revue du code de format 7](CODE_REVIEW_PLASTIC.md) publie les défauts reproduits, les profils CPU et les écarts à la spécification. Deux défauts prioritaires concernent l’isolation des copies et le domaine géométrique du transfert ; ils restent à corriger.
+
 La [première pièce](FIRST_PIECE.md) contient maintenant un apprenant :
 mémoire alimentée événement par événement, prototypes neuronaux sur S²
 et distinction proposée depuis les résultats de ses actions. Un contrôle

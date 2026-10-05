@@ -210,6 +210,24 @@ class ResourceScaleTests(unittest.TestCase):
         self.assertEqual(old._adapter._learner.checkpoint(), new._adapter._learner.checkpoint())
         self.assertEqual(1, sum(map(len, new._coverage.buckets.values())))
 
+    def test_state_dependent_labels_take_priority_over_average_refinement(self):
+        from first_piece.adaptive_trace import symbol_point
+        core = ActionTraceLearner(n_actions=8, max_leaves=32, record_budget=1000000)
+        node = core.nodes[0]
+        node["protected"] = copy.deepcopy(node["bank"])
+        states = [symbol_point("cedar"), symbol_point("quartz")]
+        node["records"] = [[states[i%2], i%2, (i//2)%8,
+                            int((i//2)%8 == (0 if i%2 == 0 else 7))]
+                           for i in range(core.config["min_records"])]
+        self.assertTrue(core._structure_signal(0))
+        self.assertEqual("split", core._proposal_kind(0))
+        core.trial = {"kind": "split", "validation": "widths", "leaf": 0, "n": 128}
+        self.assertFalse(core._preempt_for_revision())
+        for row in node["records"]:
+            row[3] = 1
+        self.assertFalse(core._structure_signal(0))
+        self.assertEqual("revision", core._proposal_kind(0))
+
     def test_coverage_and_model_publish_together_after_partition_and_replay(self):
         service = ScalableActionService(seed=7)
         seq, seen = 0, set()

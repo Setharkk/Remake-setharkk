@@ -121,9 +121,41 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
                     return True
         return False
 
+    def _structure_signal(self, leaf):
+        """Past-only routing hint; prospective validation remains the admission proof."""
+        node = self.nodes[leaf]
+        if self.leaf_count() >= self.config["max_leaves"] or node["depth"] >= self.config["max_depth"]:
+            return False
+        rows = node["records"][-self.config["min_records"]:]
+        if len(rows) < self.config["min_records"]:
+            return False
+        first = rows[0][0]
+        second = max(rows, key=lambda row: distance(row[0], first))[0]
+        first = max(rows, key=lambda row: distance(row[0], second))[0]
+        if distance(first, second) < 1e-6:
+            return False
+        counts = [[[0,0] for _ in range(self.config["n_actions"])] for _ in range(2)]
+        for state,coin,action,outcome in rows:
+            route = 0 if distance(state,first) <= distance(state,second) else 1
+            counts[route][action][outcome] += 1
+        gain, contrast = 0.0, False
+        for left,right in zip(*counts):
+            nl,nr = sum(left),sum(right)
+            if min(nl,nr) < 8:
+                continue
+            p0,p1 = (left[1]+1)/(nl+2),(right[1]+1)/(nr+2)
+            pooled = (left[1]+right[1]+1)/(nl+nr+2)
+            contrast = contrast or abs(p0-p1) >= .15
+            gain += math.fsum(n*(log_probability(p,y)-log_probability(pooled,y))
+                              for pair,p in ((left,p0),(right,p1))
+                              for y,n in enumerate(pair))
+        return contrast and gain/len(rows) > .005*2/self.config["n_actions"]
+
     def _proposal_kind(self, leaf):
         node = self.nodes[leaf]
         if node["protected"] is None:
+            return "split"
+        if self._structure_signal(leaf):
             return "split"
         if self._revision_signal(leaf):
             return "revision"
@@ -170,7 +202,7 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
 
     def _preempt_for_revision(self):
         t = self.trial
-        if t is None or t.get("validation") == "legacy" or t["kind"] != "split" or not self._revision_signal(t["leaf"]):
+        if t is None or t.get("validation") == "legacy" or t["kind"] != "split" or not self._revision_signal(t["leaf"]) or self._structure_signal(t["leaf"]):
             return False
         self.decisions.append({"attempt":self.attempts,"at":self.steps,"leaf":t["leaf"],
             "kind":"split","n":t["n"],"decision":"superseded_by_revision"})

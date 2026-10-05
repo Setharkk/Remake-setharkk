@@ -79,3 +79,12 @@ inversions de signe) et leur confirmation future reste obligatoire. La fenêtre
 du calibrateur scalaire à quatre sommes vaut 256, indépendamment de N ;
 les fenêtres d'exemples neuronaux restent proportionnelles à N.
 La campagne initiale négative est conservée avec ses résultats bruts.
+
+La deuxième mesure a isolé deux autres verrous : un déclencheur Brier agrégé
+peut empêcher un raffinement de confiance pourtant utile, et un essai de
+partition devenu dépassé peut monopoliser l'unique validation.
+Une révision sélectionnée depuis les labels passés n'est donc plus conditionnée
+au déclencheur de nouvelle structure. Tous les 128 labels pertinents, un essai
+de partition est retiré si une révision des poids protégés devient nécessaire.
+Ce retrait n'admet rien et ne rend aucun risque ; le candidat suivant devra
+encore passer ses contrôles futurs. Les critères d'expérience restent inchangés.

@@ -1,0 +1,33 @@
+name: Plastic revision complete source audit
+on:
+  push:
+    paths:
+      - 'validation/plastic_revision_review.py'
+      - '.github/workflows/plastic-revision-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing engine regression suite
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Source audit reproductions and CPU profiles
+        run: python -m validation.plastic_revision_review --out "${{ runner.temp }}/plastic-review.json"
+      - name: Upload audit evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: plastic-review-${{ matrix.os }}
+          path: ${{ runner.temp }}/plastic-review.json
+          if-no-files-found: warn

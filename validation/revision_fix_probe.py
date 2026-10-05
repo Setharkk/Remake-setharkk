@@ -72,7 +72,7 @@ def paired_continuation(old):
     after = PlasticRevisionLearner(100, max_tasks=17, max_symbols=64)
     world = ScaleWorld(400, n_symbols=64, n_contexts=16)
     actions, labels = random.Random(8200000), random.Random(8300000)
-    max_gap, pending_import = 0.0, False
+    max_gap, pending_import = 0.0, set()
     for i in range(32000):
         events, target = world.episode(i % 16)
         action = actions.randrange(4)
@@ -80,15 +80,20 @@ def paired_continuation(old):
         p, served = feed(before, events, action, outcome)
         q, result = feed(after, events, action, outcome)
         max_gap = max(max_gap, max(abs(a-b) for a,b in zip(p,q)), abs(served-result))
-        if not pending_import and before.trial is not None and before.trial["n"] == 32:
-            imported = PlasticRevisionLearner.restore(
-                PlasticRevisionLearner.from_plastic_revision_checkpoint(before.checkpoint()))
-            if canonical(imported) != canonical(before):
-                raise AssertionError("Format-7 import changed predictive state")
-            pending_import = True
+        if before.trial is not None and before.trial["n"] == 32:
+            purpose = before._validation(before.attempts)["purpose"]
+            if purpose not in pending_import:
+                snapshot = before.checkpoint()
+                imported = PlasticRevisionLearner.restore(
+                    PlasticRevisionLearner.from_plastic_revision_checkpoint(snapshot))
+                expected = copy.deepcopy(snapshot)
+                expected["format"], expected["implementation"] = 8, PlasticRevisionLearner.IMPLEMENTATION
+                if imported.checkpoint() != expected:
+                    raise AssertionError("Format-7 import changed pending " + purpose + " state or journal")
+                pending_import.add(purpose)
         if (i+1) % 4000 == 0 and canonical(before) != canonical(after):
             raise AssertionError("Predictive state diverged at " + str(i+1))
-    if max_gap != 0 or not pending_import:
+    if max_gap != 0 or pending_import != {"structure", "confidence"}:
         raise AssertionError("Forecast parity or pending import failed")
     refinements = [s for s in after.searches if s["validation"]["purpose"] == "confidence"]
     for search in refinements:
@@ -96,7 +101,8 @@ def paired_continuation(old):
             raise AssertionError("Fixed-program refinement still searches alternatives")
     return {"labels": 32000, "max_forecast_difference": max_gap,
             "identical_predictive_state_except_declared_journal_work": canonical(before) == canonical(after),
-            "pending_format7_import_exact": pending_import,
+            "pending_format7_import_exact": True,
+            "pending_format7_import_purposes": sorted(pending_import),
             "confidence_refinements_with_zero_alternative_search": len(refinements)}
 
 def bridge_benchmark(old):

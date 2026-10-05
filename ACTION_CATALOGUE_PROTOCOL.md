@@ -96,3 +96,11 @@ admission ni remboursement du risque. Avant toute admission de révision,
 les labels récents doivent aussi garder la direction sélectionnée. Ce contrôle
 supplémentaire peut seulement refuser une admission ; il ne remplace pas la
 borne prospective. Un essai v2 importé garde ses règles jusqu'à clôture.
+
+La quatrième mesure a isolé un défaut d'ordonnancement : le raffinement d'une
+feuille déjà correcte peut retarder le changement de règle d'une autre feuille.
+Les contradictions fortes de la compétence protégée passent maintenant avant
+les raffinements de confiance. Un raffinement est retiré si une autre feuille
+présente une inversion, sauf si l'essai actif traite déjà une inversion.
+Le risque n'est jamais remboursé. Cette priorité utilise les labels passés
+et les probabilités protégées, sans connaître la phase ou la règle du laboratoire.

@@ -44,7 +44,8 @@ probabilistes défavorables, sont conservés dans
 La [comparaison](readiness_results/comparison.json) distingue les différences
 numériques tolérées des durées et tailles de sérialisation.
 Les [états de CI](readiness_results/workflow_status.json) identifient les
-runs du commit publié.
+runs du commit publié : les **neuf workflows réussissent**, avec les
+163 tests sous Windows/Linux et le protocole complet de cette étape.
 
 Python 3.11, bibliothèque standard uniquement, CPU des runners GitHub.
 Ces mesures ne constituent pas un profil de la carte RTX ou du PC de l'utilisateur.

@@ -20,16 +20,16 @@
     {
       "id": 37294955957,
       "name": "Protected competence and extended validation",
-      "status": "in_progress",
-      "conclusion": null,
+      "status": "completed",
+      "conclusion": "success",
       "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955957",
       "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
     },
     {
       "id": 37294955887,
       "name": "Probability calibration without competence erasure",
-      "status": "in_progress",
-      "conclusion": null,
+      "status": "completed",
+      "conclusion": "success",
       "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955887",
       "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
     },
@@ -52,8 +52,8 @@
     {
       "id": 37294955803,
       "name": "Renewable search and long session retention",
-      "status": "in_progress",
-      "conclusion": null,
+      "status": "completed",
+      "conclusion": "success",
       "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955803",
       "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
     },
@@ -68,13 +68,15 @@
     {
       "id": 37294955753,
       "name": "Plastic spherical reuse latency and scale",
-      "status": "in_progress",
-      "conclusion": null,
+      "status": "completed",
+      "conclusion": "success",
       "html_url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37294955753",
       "head_sha": "8d00725df14a121a3ca39a622e3b87462c13e6ed"
     }
   ],
+  "all_nine_workflows_success": true,
   "readiness_engineering_pass": true,
   "readiness_research_criteria_pass": true,
-  "tests_per_os": 163
+  "tests_per_os": 163,
+  "experimental_calibration_defect_resolved": false
 }

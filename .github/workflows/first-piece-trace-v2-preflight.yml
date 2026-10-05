@@ -1,0 +1,37 @@
+name: First piece trace v2 preflight
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'validation/trace_v2_candidate.json'
+      - 'validation/trace_v2_probe.py'
+      - '.github/workflows/first-piece-trace-v2-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Apply exact candidate
+        run: python -m validation.trace_v2_probe --apply validation/trace_v2_candidate.json
+      - name: Targeted behavioral tests
+        run: python -m unittest first_piece.tests.test_trace_v2 -v
+      - name: Full regression tests
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Fixed exposure protocol
+        run: python -m validation.trace_v2_probe --out trace-v2.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trace-v2-${{ matrix.os }}
+          path: trace-v2.json

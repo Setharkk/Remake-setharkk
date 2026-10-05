@@ -14,6 +14,11 @@ from .world import _tuples
 LAMBDAS = tuple(2.0**k/64 for k in range(-4,12))
 
 
+def record_reservation(leaves, window, contexts, calibration, symbols):
+    """Record slots plus bounded vocabulary/context metadata; not RAM bytes."""
+    return (leaves+3)*window+4*contexts*calibration+symbols+contexts
+
+
 def configuration(seed=0, *, n_actions=2, adaptive=True, max_leaves=8, max_depth=4,
                   window=None, min_records=None, cooldown=256, replay_passes=4, rate=.03,
                   max_tasks=8, max_symbols=64, calibration_window=None,
@@ -24,12 +29,12 @@ def configuration(seed=0, *, n_actions=2, adaptive=True, max_leaves=8, max_depth
     counter(record_budget, "record budget", minimum=1)
     if type(adaptive) is not bool:
         raise ValueError("Invalid adaptive policy")
-    limits = {"max_leaves":(max_leaves,1,8), "max_depth":(max_depth,1,4),
+    limits = {"max_leaves":(max_leaves,1,None), "max_depth":(max_depth,1,None),
               "cooldown":(cooldown,128,1024), "replay_passes":(replay_passes,1,4),
-              "max_tasks":(max_tasks,1,8), "max_symbols":(max_symbols,1,64)}
+              "max_tasks":(max_tasks,1,None), "max_symbols":(max_symbols,1,None)}
     for name, (value, low, high) in limits.items():
         counter(value,name,minimum=low)
-        if value > high:
+        if high is not None and value > high:
             raise ValueError("Trace structural budget exceeds validated range")
     window = 128*n_actions if window is None else window
     min_records = 64*n_actions if min_records is None else min_records
@@ -41,7 +46,7 @@ def configuration(seed=0, *, n_actions=2, adaptive=True, max_leaves=8, max_depth
     if min_records > window or min_records < 16*n_actions:
         raise ValueError("Fit memory cannot supply eight labels per action and branch")
     points = n_actions*(8*max_leaves+2)+2*max_leaves
-    records = (max_leaves+3)*window+4*max_tasks*calibration_window
+    records = record_reservation(max_leaves, window, max_tasks, calibration_window, max_symbols)
     if points > point_budget or records > record_budget:
         raise ValueError("Requested action catalogue exceeds resource budgets")
     counter(LOOKS[-1]*horizon_scale, "largest validation horizon", minimum=1)
@@ -270,8 +275,8 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
         if type(action) is not int or not 0 <= action < self.config["n_actions"] or type(outcome) is not int or outcome not in (0, 1):
             raise ValueError("Unsupported trace outcome")
         leaf, state, coin, context = self._leaf(self.state), list(self.state), self.coin, self.context
-        raw = self.raw_probabilities()[action]
-        probability = self.pending_probabilities()[action]
+        raw = self._served(leaf).probability(action,0)
+        probability = calibrated(self.cals.get((leaf,context), fresh_readout()), raw)
         node = self.nodes[leaf]
         if self.trial is not None and self.trial["leaf"] == leaf:
             t = self.trial
@@ -342,7 +347,7 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
         result.update(n_actions=c["n_actions"], allocated_s2_points=points,
                       work_horizons=list(self.horizons()),
                       reserved_s2_points=c["n_actions"]*(8*c["max_leaves"]+2)+2*c["max_leaves"],
-                      reserved_record_slots=(c["max_leaves"]+3)*c["window"]+4*c["max_tasks"]*c["calibration_window"],
+                      reserved_record_slots=record_reservation(c["max_leaves"], c["window"], c["max_tasks"], c["calibration_window"], c["max_symbols"]),
                       point_budget=c["point_budget"], record_budget=c["record_budget"],
                       minimum_gain=.01*2/c["n_actions"], brier_trigger=.18*2/c["n_actions"],
                       validation="predictable gain widths with declared exponential grid")
@@ -386,7 +391,9 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
         if 0 not in new.nodes or new.nodes[0]["depth"] != 0 or new.leaf_count() > new.config["max_leaves"]:
             raise ValueError("Invalid trace root or leaf budget")
         reached = set()
-        def visit(index,depth):
+        pending = [(0,0)]
+        while pending:
+            index, depth = pending.pop()
             if index in reached or index not in new.nodes:
                 raise ValueError("Trace tree cycle or missing child")
             reached.add(index)
@@ -397,13 +404,11 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
                 if node["centers"] is not None:
                     raise ValueError("Leaf has branch centers")
             else:
-                if type(node["children"]) is not list or len(node["children"]) != 2 or any(type(v) is not int for v in node["children"]) or len(node["centers"]) != 2 or node["records"]:
+                if type(node["children"]) is not list or len(node["children"]) != 2 or any(type(v) is not int for v in node["children"]) or type(node["centers"]) is not list or len(node["centers"]) != 2 or node["records"]:
                     raise ValueError("Invalid binary trace branch")
                 for center in node["centers"]:
                     point(center)
-                for child in node["children"]:
-                    visit(child,depth+1)
-        visit(0,0)
+                pending.extend((child,depth+1) for child in reversed(node["children"]))
         if reached != set(new.nodes) or len(new.nodes) != 2*new.admissions+1:
             raise ValueError("Trace topology differs from admissions")
         new.phase,new.state,new.context,new.coin = data["phase"],point(data["state"]),data["context"],data["coin"]

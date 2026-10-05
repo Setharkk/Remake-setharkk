@@ -601,7 +601,9 @@ class CooperativeService:
             revision = wire.counter(adapter._revision+int(learned),"model revision")
             ack = {"request_id":pending["request_id"],"learned":learned,"model_revision":revision}
             entry = {"request":copy.deepcopy(pending),"receipt":copy.deepcopy(receipt),"ack":ack}
+            publication = self._prepare_publication(work)
             adapter._learner,adapter._revision = work.core,revision
+            self._publish_auxiliary(publication)
             adapter._prediction,adapter._pending = None,None
             adapter._receipts[receipt["request_id"]] = entry
             while len(adapter._receipts) > adapter.receipt_window:
@@ -609,6 +611,14 @@ class CooperativeService:
             self._work = None
             return {"protocol":self.WORK_PROTOCOL,"state":"completed","ack":copy.deepcopy(ack),
                     "consumed_units":consumed,"total_units":work.units}
+
+    def _prepare_publication(self, work):
+        """Prepare auxiliary state before the served model is changed."""
+        return None
+
+    def _publish_auxiliary(self, publication):
+        """Assign prepared state under the same service lock; must not fail."""
+        pass
 
     def submit_receipt(self,message):
         status = self.begin_receipt(message)

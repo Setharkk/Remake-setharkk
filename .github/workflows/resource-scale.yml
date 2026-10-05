@@ -1,0 +1,57 @@
+name: Resource scaled first piece
+on:
+  push:
+    branches: [main, scale-first-piece]
+    paths:
+      - 'first_piece/**'
+      - 'validation/resource_scale_probe.py'
+      - '.github/workflows/resource-scale.yml'
+      - 'RESOURCE_SCALE_PROTOCOL.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  engineering:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Complete regression suite
+        run: python -m unittest discover -s first_piece/tests -v
+      - name: Frozen-reference cost and cooperative parity
+        run: python -m validation.resource_scale_probe --engineering --out resource-engineering.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resource-engineering-${{ matrix.os }}
+          path: resource-engineering.json
+  research:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        states: [8, 16]
+        seed: [0, 1, 2]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Declared multistate learning protocol
+        run: python -m validation.resource_scale_probe --case ${{ matrix.states }}:${{ matrix.seed }} --out resource-research.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resource-research-${{ matrix.os }}-${{ matrix.states }}-${{ matrix.seed }}
+          path: resource-research.json

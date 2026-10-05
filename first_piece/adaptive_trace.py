@@ -88,14 +88,14 @@ class AdaptiveTraceLearner:
             raise RuntimeError("Resolve the active episode")
         if kind == "token":
             token = identifier(event["token"],"symbol")
-            if token not in self.symbols and len(self.symbols) == 64:
+            if token not in self.symbols and len(self.symbols) >= self.config.get("max_symbols",64):
                 raise ValueError("Experimental vocabulary budget exhausted")
         elif event["surface"] != "sealed" or self.phase != "tokens":
             raise ValueError("Unsupported episode end")
         if self.phase == "idle":
             if kind != "token":
                 raise RuntimeError("Observe before end")
-            if task not in self.contexts and len(self.contexts) == 8:
+            if task not in self.contexts and len(self.contexts) >= self.config.get("max_tasks",8):
                 raise ValueError("Experimental context budget exhausted")
             self.contexts.setdefault(task,0)
             self.context,self.coin,self.phase = task,self.rng.randrange(2),"tokens"

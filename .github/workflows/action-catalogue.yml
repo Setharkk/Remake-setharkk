@@ -1,11 +1,11 @@
-name: Action catalogue preflight
+name: Action catalogue S2
 on:
   push:
     branches: [main]
     paths:
-      - 'validation/action_candidate.json'
+      - 'first_piece/**'
       - 'validation/action_probe.py'
-      - '.github/workflows/action-catalogue-preflight.yml'
+      - '.github/workflows/action-catalogue.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -22,14 +22,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Apply measured candidate
-        run: python -m validation.action_probe --apply validation/action_candidate.json
-      - name: Targeted action and migration tests
-        run: python -m unittest first_piece.tests.test_action_catalogue -v
       - name: Existing and extended regression suite
         run: python -m unittest discover -s first_piece/tests -v
-      - name: Predeclared action learning and noise protocol
-        run: python -m validation.action_probe --out actions.json
+      - name: Direct and cooperative multi-action parity
+        run: python -m validation.action_probe --quick --out actions.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:

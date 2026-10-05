@@ -388,3 +388,26 @@ cohérent jusqu'à publication du reçu complet. Le cortex peut donc allouer un 
 et persister un service en cours, en gardant le journal d'exécution externe.
 Ce branchement ne démontre pas la couverture des tâches propres au format 8,
 et n'ajoute pas de dialogue, d'objectifs autonomes ou d'exécution PC.
+
+
+## Catalogue configurable du moteur de trace
+
+[ActionTraceService](ACTION_CATALOGUE.md) ajoute le backend explicite
+first_piece.action-trace-s2.v3, format neuronal 3, continuation
+first_piece.action-cooperative.v3. Chaque action annoncée a une sortie S² ;
+les contrats, les identités des candidats et la mesure Bernoulli sont conservés.
+
+Le coordinateur lit action_count, point_budget, record_budget,
+validation_horizons et les autres capacités avant de fixer ses expériences.
+La couverture est indexée sur tout le catalogue et sur les résultats réels.
+La taille du catalogue est contrôlée avant allocation par des réserves
+de ressources, sans plafond constant de seize.
+
+Les copies de retour possèdent les champs mutables concernés et partagent
+les lignes passées immuables. Les continuations de partition et de replay
+restent reprenables par quota. Un import v2 est explicite et conserve les
+identités en attente ; l'essai importé garde sa politique jusqu'à clôture.
+
+Le catalogue demeure fixe. Les actions à arguments, leur génération dynamique,
+les continuations de plusieurs flux, la sélection d'expériences et le journal
+des effets physiques restent des responsabilités à construire.

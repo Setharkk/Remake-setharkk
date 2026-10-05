@@ -109,3 +109,6 @@ une révision prospective des poids protégés et un service coopératif optionn
 Le [protocole](FIRST_PIECE_TRACE_V2_PROTOCOL.md) fixe les budgets de mesure ;
 le [rapport](FIRST_PIECE_TRACE_V2_RESULTS.md) publie les résultats et les limites.
 Le moteur format 8 reste le défaut ; les capacités des deux backends sont explicites.
+
+
+Le [catalogue d'actions S² configurable](ACTION_CATALOGUE.md) ajoute un backend optionnel sans plafond constant de deux ou seize actions. Ses budgets sont contrôlés avant allocation ; le [protocole](ACTION_CATALOGUE_PROTOCOL.md) et les [mesures](ACTION_CATALOGUE_RESULTS.md) distinguent la reprise technique de l'apprentissage réel. Le catalogue demeure fixe pour chaque modèle.

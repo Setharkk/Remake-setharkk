@@ -202,3 +202,23 @@ porte sur les reçus du service ; le journal des effets physiques reste à la ch
 de l'exécuteur. Les critères et limites sont dans le
 [protocole](FIRST_PIECE_TRACE_V2_PROTOCOL.md) et le
 [rapport](FIRST_PIECE_TRACE_V2_RESULTS.md).
+
+
+## Catalogue d'actions sur S²
+
+Le [backend optionnel v3](ACTION_CATALOGUE.md) rend le nombre de sorties N
+configurable sans plafond de deux ou seize. Il contrôle avant allocation des
+budgets de points et de lignes ; les coûts et l'exploration augmentent avec N.
+Les fenêtres, les horizons et les seuils tiennent compte du nombre d'actions.
+La partition reste géodésique binaire et les résultats restent Bernoulli 0/1.
+
+Le checkpoint neuronal est de format 3, la continuation porte l'identité
+first_piece.action-cooperative.v3 et les messages communs restent version 1.
+L'import explicite v2 conserve prévisions, requêtes, fits et essais en cours.
+Le catalogue est fixe pour la vie du modèle ; cette extension ne génère pas
+spontanément des opérations et ne redimensionne pas un modèle entraîné.
+
+Le [protocole](ACTION_CATALOGUE_PROTOCOL.md) fixe avant mesure les critères,
+les deux familles de récompenses et le temps laissé à l'apprentissage.
+Le [rapport](ACTION_CATALOGUE_RESULTS.md) indique les résultats réellement
+obtenus, leurs coûts et les critères éventuellement non atteints.

@@ -11,7 +11,7 @@ vie du modèle ; une action paramétrée ou la création spontanée d'actions es
 de cette extension.
 
 Budgets par défaut : 65 536 points, 131 072 lignes conservées estimées.
-Réserve de points : N(6L+4)+2L pour L feuilles maximales.
+Réserve de points : N(8L+2)+2L pour L feuilles maximales.
 Réserve de lignes : (L+3)W+4TC pour fenêtre W, T contextes, calibration C.
 Les copies de checkpoint, l'objet Python et la mémoire de l'exécuteur ne sont pas
 des octets garantis par ces réserves ; les snapshots et temps sont mesurés.

@@ -202,7 +202,10 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
 
     def _preempt_for_revision(self):
         t = self.trial
-        if t is None or t.get("validation") == "legacy" or t["kind"] != "split" or not self._revision_signal(t["leaf"]) or self._structure_signal(t["leaf"]):
+        if t is None or t.get("validation") == "legacy" or t["kind"] != "split" or not self._revision_signal(t["leaf"]):
+            return False
+        productive = t.get("improvement",0.0)/max(1,t["n"]) > .01*2/self.config["n_actions"]
+        if not self._reversal_signal(t["leaf"]) and (productive or self._structure_signal(t["leaf"])):
             return False
         self.decisions.append({"attempt":self.attempts,"at":self.steps,"leaf":t["leaf"],
             "kind":"split","n":t["n"],"decision":"superseded_by_revision"})

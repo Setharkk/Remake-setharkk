@@ -228,6 +228,23 @@ class ResourceScaleTests(unittest.TestCase):
         self.assertFalse(core._structure_signal(0))
         self.assertEqual("revision", core._proposal_kind(0))
 
+    def test_productive_future_partition_is_not_retired_for_average_refinement(self):
+        core = ActionTraceLearner(n_actions=8)
+        node = core.nodes[0]
+        node["protected"] = copy.deepcopy(node["bank"])
+        node["records"] = [[list(core.state), i%2, i%8, 1]
+                           for i in range(core.config["min_records"])]
+        core.attempts = 3
+        core.trial = {"kind": "split", "validation": "widths", "leaf": 0,
+                      "n": 128, "improvement": 2.0}
+        self.assertFalse(core._structure_signal(0))
+        self.assertTrue(core._revision_signal(0))
+        self.assertFalse(core._preempt_for_revision())
+        self.assertEqual(3, core.attempts)
+        core.trial["improvement"] = -1.0
+        self.assertTrue(core._preempt_for_revision())
+        self.assertEqual(3, core.attempts)
+
     def test_coverage_and_model_publish_together_after_partition_and_replay(self):
         service = ScalableActionService(seed=7)
         seq, seen = 0, set()

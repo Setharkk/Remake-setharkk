@@ -1,0 +1,92 @@
+{
+  "base": "ba8f8e642f4af19620f72aaa73e719d5da6f40dd",
+  "candidate_commit": "1ab3e00593296e35a327ff8a0368783fccdede41",
+  "cases": {
+    "engineering": {
+      "episodes": 8192,
+      "exact_forecasts_and_checkpoints": true,
+      "max_tick_seconds": 0.006379871999996567,
+      "metrics": {
+        "admissions": 1,
+        "allocated_s2_points": 22,
+        "attempts": 1,
+        "calibration": "causal positive affine readout",
+        "calibration_records": 1024,
+        "contexts": 4,
+        "decisions": [
+          {
+            "alpha": 0.025,
+            "at": 256,
+            "attempt": 1,
+            "decision": "pending",
+            "kind": "split",
+            "leaf": 0,
+            "lower": -0.776397812614712,
+            "mean": 0.6836680972471765,
+            "n": 128,
+            "radius": 1.4600659098618884
+          },
+          {
+            "alpha": 0.025,
+            "at": 640,
+            "attempt": 1,
+            "decision": "pending",
+            "kind": "split",
+            "leaf": 0,
+            "lower": -0.04314520440255243,
+            "mean": 0.6868877505283918,
+            "n": 512,
+            "radius": 0.7300329549309442
+          },
+          {
+            "alpha": 0.025,
+            "at": 2176,
+            "attempt": 1,
+            "decision": "accept",
+            "kind": "split",
+            "leaf": 0,
+            "lower": 0.3204504428208836,
+            "mean": 0.6854669202863557,
+            "n": 2048,
+            "radius": 0.3650164774654721
+          }
+        ],
+        "implementation": "first_piece.adaptive-trace-s2.v2",
+        "leaves": 2,
+        "lifetime_alpha_upper_bound": 0.05,
+        "neural_updates": 9216,
+        "nodes": 3,
+        "retained_records": 512,
+        "revisions": 0,
+        "steps": 8192,
+        "symbols": 18,
+        "total_admissions": 1,
+        "trial_n": null,
+        "work_horizons": [
+          128,
+          512,
+          2048,
+          8192
+        ]
+      },
+      "quota": 128,
+      "restored_phase_keys": [
+        "('feedback', None)",
+        "('fit', ('mean', 0, 0, 0))",
+        "('fit', ('replay', 1, 0, 0))",
+        "('fit', ('replay', 1, 1, 1))",
+        "('fit', ('replay', 1, 2, 0))",
+        "('fit', ('replay', 1, 3, 1))"
+      ],
+      "seconds": 59.12676854,
+      "ticks": 8204,
+      "work_units": 9781
+    }
+  },
+  "engineering_pass": true,
+  "errors": {},
+  "os": "Linux",
+  "protocol": 2,
+  "python": "3.11.16",
+  "research_pass": null
+}

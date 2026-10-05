@@ -18,6 +18,151 @@
     "first_piece/trace_work.py": "11a183ae7ffb5079765d033e8e6de8357feaa1af"
   },
   "published_commit": "1ab3e00593296e35a327ff8a0368783fccdede41",
-  "status": "algorithm source verified; committed-source CI pending",
-  "algorithm_files_exact": true
+  "status": "verified",
+  "algorithm_files_exact": true,
+  "committed_source_trace_run_id": 37307405446,
+  "committed_source_jobs": {
+    "windows": 111754310658,
+    "linux": 111754311008
+  },
+  "committed_source_engineering_pass": true,
+  "committed_source_test_count_per_os": 174,
+  "final_tests_file": "935cc68743dc75e3a01e7fe290abdf758fae21b6",
+  "committed_default_engine_checks": [
+    {
+      "os": "Windows",
+      "job_id": 111754311079,
+      "episodes": 32000,
+      "exact_forecasts_and_checkpoints": true,
+      "full_fit_modes": [
+        {
+          "mode": "structure",
+          "fit_records": 4096,
+          "gradients": 32768,
+          "exact_checkpoint": true
+        },
+        {
+          "mode": "confidence",
+          "fit_records": 4096,
+          "gradients": 32768,
+          "exact_checkpoint": true
+        }
+      ],
+      "engineering_pass": true
+    },
+    {
+      "os": "Linux",
+      "job_id": 111754311340,
+      "episodes": 32000,
+      "exact_forecasts_and_checkpoints": true,
+      "full_fit_modes": [
+        {
+          "mode": "structure",
+          "fit_records": 4096,
+          "gradients": 32768,
+          "exact_checkpoint": true
+        },
+        {
+          "mode": "confidence",
+          "fit_records": 4096,
+          "gradients": 32768,
+          "exact_checkpoint": true
+        }
+      ],
+      "engineering_pass": true
+    }
+  ],
+  "all_source_workflows_success": true,
+  "source_workflows": [
+    {
+      "id": 37307405571,
+      "name": "First piece laboratory",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37307405571",
+      "head_sha": "1ab3e00593296e35a327ff8a0368783fccdede41"
+    },
+    {
+      "id": 37307405557,
+      "name": "Plastic spherical reuse latency and scale",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37307405557",
+      "head_sha": "1ab3e00593296e35a327ff8a0368783fccdede41"
+    },
+    {
+      "id": 37307405539,
+      "name": "First piece cooperative and representation readiness",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37307405539",
+      "head_sha": "1ab3e00593296e35a327ff8a0368783fccdede41"
+    },
+    {
+      "id": 37307405492,
+      "name": "Review priority corrections and predictive parity",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37307405492",
+      "head_sha": "1ab3e00593296e35a327ff8a0368783fccdede41"
+    },
+    {
+      "id": 37307405487,
+      "name": "Current first piece corrections",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37307405487",
+      "head_sha": "1ab3e00593296e35a327ff8a0368783fccdede41"
+    },
+    {
+      "id": 37307405485,
+      "name": "Protected competence and extended validation",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37307405485",
+      "head_sha": "1ab3e00593296e35a327ff8a0368783fccdede41"
+    },
+    {
+      "id": 37307405450,
+      "name": "Independent plastic revision evidence",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37307405450",
+      "head_sha": "1ab3e00593296e35a327ff8a0368783fccdede41"
+    },
+    {
+      "id": 37307405446,
+      "name": "First piece trace v2",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37307405446",
+      "head_sha": "1ab3e00593296e35a327ff8a0368783fccdede41"
+    },
+    {
+      "id": 37307405445,
+      "name": "Probability calibration without competence erasure",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37307405445",
+      "head_sha": "1ab3e00593296e35a327ff8a0368783fccdede41"
+    },
+    {
+      "id": 37307405416,
+      "name": "Renewable search and long session retention",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Setharkk/Remake-setharkk/actions/runs/37307405416",
+      "head_sha": "1ab3e00593296e35a327ff8a0368783fccdede41"
+    }
+  ],
+  "base_commit": "ba8f8e642f4af19620f72aaa73e719d5da6f40dd",
+  "unchanged_dependency_blobs": {
+    "first_piece/adaptive_trace.py": "2c6f04bd97a0c3339771ef191973a80da740dc5a",
+    "first_piece/adapter.py": "2bffcf5fc2721963a155c0e71c97f829be4994df",
+    "first_piece/shared.py": "613f4375efada1ec3912cfc4c9c67429d1662126",
+    "first_piece/plastic_revision.py": "9c37c05e4c9ee00fa09f09facf33466ed6c269dc",
+    "first_piece/spherical.py": "f64ab00b385d4a1abe435c9f4c58a411abf549c2",
+    "first_piece/world.py": "5c0b5bdcc70fd44139af69200700e33737821dbe",
+    "setharkk/contracts.py": "c482c9168bc4be91f1a428c90f876d796e1e4f7a"
+  }
 }

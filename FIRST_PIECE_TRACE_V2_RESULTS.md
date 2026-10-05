@@ -67,11 +67,17 @@ checkpoints toutes les 1 024 étapes : identiques au calcul direct sur chaque OS
 Il restaure des phases de moyenne et de replay. Les tests unitaires parcourent
 aussi les phases de distances initiales, regroupement, support et publication,
 ainsi que le replay de révision. Un reçu dupliqué ne change aucun état.
-Les contrôles des sources commitées sont en cours après publication.
+Les sources commitées 1ab3e00593296e35a327ff8a0368783fccdede41 passent également
+174 tests et la comparaison coopérative sur les deux OS. Les quatre fichiers du
+moteur et du service ont exactement les identités Git du candidat mesuré.
+Le service format 8 garde également ses prévisions et checkpoints exacts sur
+32 000 retours, 64 symboles et 16 contextes, sur chaque OS. Ses deux fits complets
+(structure et confiance) utilisent 4 096 lignes et 32 768 gradients, avec les mêmes
+checkpoints que le calcul direct. Les détails sont dans la preuve de sources.
 
 Pour un quota 128, le test consomme 9 781 unités en 8 204 appels. Le plus long
-appel advance observé est 5,24 ms sur Linux et 8,29 ms sur Windows. Ces mesures de
-runners GitHub ne sont pas une garantie de latence, et n'incluent pas les coûts
+appel advance observé est 5,24 ms sur Linux et 8,29 ms sur Windows. Sur les sources commitées, ces maxima sont respectivement 6,38 ms et 8,58 ms.
+Ces mesures de runners GitHub ne sont pas une garantie de latence, et n'incluent pas les coûts
 de begin_receipt, checkpoint, restore ou de sérialisation JSON.
 
 Les relevés échantillonnés atteignent 36 points de banques/centres sur S², 1 536
@@ -93,9 +99,11 @@ commitées ; le protocole de recherche complet reste reproductible par la second
 commande. Les résultats complets du candidat appliqué sont conservés dans
 [Linux](trace_v2_results/linux.json) et [Windows](trace_v2_results/windows.json).
 Les résultats de la première exécution complète sont également conservés.
+Les [contrôles Linux des sources commitées](trace_v2_results/committed-linux.json)
+et [Windows](trace_v2_results/committed-windows.json) concernent le commit publié.
 La [preuve de sources](trace_v2_results/source_proof.json) compare les identités
 Git des quatre fichiers du moteur/service appliqués en CI aux fichiers publiés.
-Le fichier de tests publié durcit aussi la vérification du quota et fournit un
+Les dix workflows du commit source ont terminé avec succès. Le fichier de tests publié durcit aussi la vérification du quota et fournit un
 message complet pour le rejet d'un ancien type d'observation ; il est revérifié
 sur le commit publié. Les checksums de travail ne prouvent pas l'origine historique
 des données.

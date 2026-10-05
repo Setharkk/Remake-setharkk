@@ -1,5 +1,6 @@
 """Read-only engine audit: reproducible defects and bounded CPU profiles."""
 import argparse
+import ast
 import copy
 import cProfile
 import json
@@ -11,7 +12,6 @@ import random
 import statistics
 import subprocess
 import time
-import tracemalloc
 from unittest.mock import patch
 
 from first_piece.adapter import FirstPieceAdapter
@@ -274,6 +274,75 @@ def bridge_profile():
             "restore": measured_repetitions(lambda: type(core).restore(core.checkpoint()), 3)}
 
 
+def confirmed_deadline():
+    # Execute the existing criterion statements rather than a reimplementation.
+    source = Path("validation/plastic_revision_probe.py").read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    function = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "run_case")
+    start = next(i for i, node in enumerate(function.body)
+                 if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "delays" for t in node.targets))
+    tail = function.body[start:]
+    statements = tail[:next(i for i, node in enumerate(tail) if isinstance(node, ast.Return))]
+    code = compile(ast.Module(body=statements, type_ignores=[]), "existing_deadline_criterion", "exec")
+    curve = [{"phase": "signal", "phase_global_labels": n,
+              "contexts": [{"policy_success": 1.0 if n >= 12000 else .5} for _ in range(4)]}
+             for n in range(1000, 15000, 1000)]
+    failures = []
+    def check(condition, message):
+        if not condition:
+            failures.append(message)
+    scope = {"cores": {"plastic_revision": None}, "curves": {"plastic_revision": curve},
+             "journals": {"plastic_revision": {"decisions": []}}, "kind": "noise_then_signal",
+             "seed": 0, "check": check}
+    exec(code, scope)
+    return {"synthetic_curve_first_success": 12000, "protocol_confirmed_limit": 12000,
+            "actual_delays": scope["delays"], "criteria_failures": failures}
+
+
+def bridge_unprofiled():
+    source = train(PlasticRevisionLearner(100, max_tasks=17, max_symbols=64),
+                   ScaleWorld(400, n_symbols=64, n_contexts=16), 6000)
+    checkpoint = source.checkpoint()
+    world = ScaleWorld(400, n_symbols=64, n_contexts=16)
+    world.rng = random.Random(195)
+    inputs, actions = [], random.Random(281)
+    for i in range(96):
+        events, target = world.episode(i % 16)
+        action = actions.randrange(4)
+        inputs.append((events, action, int(action == target)))
+    samples, parity = [], []
+    for sample in range(3):
+        direct = type(source).restore(checkpoint)
+        adapter = PlasticRevisionAdapter(learner_options={"max_tasks": 17, "max_symbols": 64})
+        adapter._learner = type(source).restore(checkpoint)
+        adapter._revision = source.steps
+        adapter._slots = {f"ctx:{slot}": slot for slot in sorted(source.tasks)}
+        times = {}
+        for mode in (("direct", "adapter") if sample % 2 == 0 else ("adapter", "direct")):
+            started = time.perf_counter()
+            if mode == "direct":
+                for events, action, outcome in inputs:
+                    advance(direct, events, action, outcome)
+            else:
+                sequence = 0
+                for events, action, outcome in inputs:
+                    for event in events:
+                        prediction = adapter.submit_observation(wire_symbol(
+                            sequence, "sealed" if event["kind"] == "surface" else event["token"],
+                            context=f"ctx:{event['task']}", end=event["kind"] == "surface"))
+                        sequence += 1
+                    request = adapter.register_action(agent_proposal(prediction, action), executor_id="audit:executor")
+                    adapter.submit_receipt(observed_receipt(request, outcome))
+            times[mode] = time.perf_counter() - started
+        samples.append(times)
+        parity.append(canonical(direct) == canonical(adapter._learner))
+    medians = {mode: statistics.median(s[mode] for s in samples) for mode in ("direct", "adapter")}
+    return {"episodes_per_sample": len(inputs), "samples": samples, "median_seconds": medians,
+            "median_milliseconds_per_episode": {k: v*1000/len(inputs) for k, v in medians.items()},
+            "ratio_adapter_over_direct": medians["adapter"]/medians["direct"],
+            "all_direct_wire_states_equal": all(parity)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", required=True)
@@ -284,7 +353,7 @@ def main():
               "runner": platform.system(), "python": platform.python_version(),
               "reproductions": {}, "profiles": {}}
     probes = {"transaction_isolation": fork_isolation, "mean_optimizer_domain": mean_cut_locus,
-              "historical_restore": historical_restore, "unobserved_route": unobserved_route}
+              "historical_restore": historical_restore, "unobserved_route": unobserved_route, "confirmed_deadline": confirmed_deadline}
     for name, probe in probes.items():
         try:
             result["reproductions"][name] = probe()
@@ -293,7 +362,7 @@ def main():
         print("REVIEW_PROBE " + name + " " + json.dumps(result["reproductions"][name], sort_keys=True), flush=True)
     for name, probe in {"bridge": bridge_profile,
                         "dense16": lambda: dense_search(16, 512),
-                        "dense64": lambda: dense_search(64, 512)}.items():
+                        "dense64": lambda: dense_search(64, 512), "bridge_unprofiled": bridge_unprofiled}.items():
         try:
             result["profiles"][name] = probe()
         except Exception as error:

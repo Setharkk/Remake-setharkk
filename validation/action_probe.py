@@ -162,6 +162,7 @@ def main():
     parser.add_argument("--apply")
     parser.add_argument("--out",default="actions.json")
     parser.add_argument("--quick",action="store_true")
+    parser.add_argument("--case",help="N:seed:sparse for one unchanged full research case")
     args = parser.parse_args()
     if args.apply:
         apply_bundle(args.apply)
@@ -174,6 +175,11 @@ def main():
         cases += [(f"n{n}_seed{s}_sparse{int(sparse)}",
                    lambda count=n,seed=s,rare=sparse:research(count,seed,rare))
                   for n in (4,8,32) for s in range(3) for sparse in (False,True)]
+    if args.case:
+        n,seed,sparse = map(int,args.case.split(":"))
+        if n not in (4,8,32) or seed not in (0,1,2) or sparse not in (0,1):
+            raise ValueError("Case outside frozen protocol")
+        cases = [(f"n{n}_seed{seed}_sparse{sparse}",lambda:research(n,seed,bool(sparse)))]
     for name,fn in cases:
         try:
             report["cases"][name] = fn()
@@ -182,7 +188,7 @@ def main():
             print("ACTION_ERROR="+json.dumps({name:report["errors"][name]}),flush=True)
     report["engineering_pass"] = not report["errors"]
     report["research_pass"] = None if args.quick else all(
-        case["research_pass"] for case in report["cases"].values() if "research_pass" in case) and len(report["cases"]) == 21
+        case["research_pass"] for case in report["cases"].values() if "research_pass" in case) and len(report["cases"]) == (1 if args.case else 21)
     Path(args.out).write_text(json.dumps(report,sort_keys=True,indent=2)+"\n",encoding="utf-8")
     print("ACTION_FULL_JSON="+json.dumps(report,sort_keys=True),flush=True)
     if report["errors"]:

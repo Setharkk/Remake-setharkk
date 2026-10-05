@@ -16,7 +16,7 @@ Réserve de lignes : (L+3)W+4TC pour fenêtre W, T contextes, calibration C.
 Les copies de checkpoint, l'objet Python et la mémoire de l'exécuteur ne sont pas
 des octets garantis par ces réserves ; les snapshots et temps sont mesurés.
 
-Par défaut W=128N, minimum de fit=64N, C=max(256,64N).
+Par défaut W=128N, minimum de fit=64N, C=256.
 Les horizons sont (128,512,2048,8192)*ceil(N/2).
 Le seuil de déclenchement Brier est 0,18*2/N ; le gain minimum est 0,01*2/N.
 Les poids neuronaux et mises à jour demeurent intrinsèques sur S².
@@ -29,8 +29,9 @@ min_λ [log(4*K*4*16/α)/λ + λV/8]/n, avec K comparaisons et la grille de
 16 valeurs λ=2^k/64, k=-4..11 déclarées. Cette grille évite de choisir après mesure
 un paramètre libre sans en payer le risque. α_j=0,05/[j(j+1)] reste cumulatif.
 Les calibrations utilisent uniquement les labels antérieurs à chaque prévision.
-Une révision demande aussi un changement de direction sélectionné sur le passé :
-sortie ≤0,25 vers ≥0,75, ou l'inverse. Les résultats futurs de ces actions doivent
+Une révision demande aussi des assertions sélectionnées sur le passé :
+sortie candidate ≥0,75 ou ≤0,25, déplacée d'au moins 0,05. Cela couvre
+les changements de règle et le renforcement de poids encore peu confiants. Les résultats futurs de ces actions doivent
 confirmer un taux >0,6 ou <0,4 avec une borne de Hoeffding et allocation du risque
 aux actions/horizons. Cette condition distingue une règle nouvelle d'une simple
 réduction de confiance sous bruit. Une importation d'un essai v2 en cours garde
@@ -66,3 +67,15 @@ en cours vérifiée. Les budgets et le nombre d'actions sont validés à la rest
 
 Les expériences ne prouvent pas la capacité de tâches générales, l'intérêt de S²,
 ou un catalogue infini. Le temps par prévision et l'exploration augmentent avec N.
+
+## Correction après la première campagne
+
+Les critères, graines, observations et nombres de résultats ci-dessus restent
+inchangés. Le premier candidat a montré un filtre de révision incapable de
+renforcer une compétence correcte mais peu confiante, et une calibration trop
+lente lorsqu'elle était dimensionnée comme les exemples par action.
+Le filtre sélectionne maintenant des assertions de résultat (pas seulement des
+inversions de signe) et leur confirmation future reste obligatoire. La fenêtre
+du calibrateur scalaire à quatre sommes vaut 256, indépendamment de N ;
+les fenêtres d'exemples neuronaux restent proportionnelles à N.
+La campagne initiale négative est conservée avec ses résultats bruts.

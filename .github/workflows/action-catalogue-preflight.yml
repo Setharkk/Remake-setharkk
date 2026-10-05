@@ -1,0 +1,54 @@
+name: Action catalogue correction preflight
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'validation/action_candidate.json'
+      - 'validation/action_probe.py'
+      - '.github/workflows/action-catalogue-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  engineering:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m validation.action_probe --apply validation/action_candidate.json
+      - run: python -m unittest first_piece.tests.test_action_catalogue -v
+      - run: python -m validation.action_probe --quick --out actions.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: engineering-${{ matrix.os }}
+          path: actions.json
+  research:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        n: [4, 8, 32]
+        seed: [0, 1, 2]
+        sparse: [0, 1]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m validation.action_probe --apply validation/action_candidate.json
+      - run: python -m validation.action_probe --case ${{ matrix.n }}:${{ matrix.seed }}:${{ matrix.sparse }} --out actions.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: research-${{ matrix.os }}-${{ matrix.n }}-${{ matrix.seed }}-${{ matrix.sparse }}
+          path: actions.json

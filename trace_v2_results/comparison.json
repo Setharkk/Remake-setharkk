@@ -3,7 +3,7 @@
   "all_prespecified_criteria_pass": true,
   "linux_tests": 174,
   "windows_tests": 174,
-  "linux_max_tick_seconds": 0.008287699999982578,
-  "windows_max_tick_seconds": 0.005237298999986706,
+  "linux_max_tick_seconds": 0.005237298999986706,
+  "windows_max_tick_seconds": 0.008287699999982578,
   "max_cross_os_numeric_difference": 6.661338147750939e-16
 }

@@ -70,7 +70,7 @@ ainsi que le replay de révision. Un reçu dupliqué ne change aucun état.
 Les contrôles des sources commitées sont en cours après publication.
 
 Pour un quota 128, le test consomme 9 781 unités en 8 204 appels. Le plus long
-appel advance observé est 8,29 ms sur Linux et 5,24 ms sur Windows. Ces mesures de
+appel advance observé est 5,24 ms sur Linux et 8,29 ms sur Windows. Ces mesures de
 runners GitHub ne sont pas une garantie de latence, et n'incluent pas les coûts
 de begin_receipt, checkpoint, restore ou de sérialisation JSON.
 

@@ -79,3 +79,22 @@ sans déplacer les horizons ni réduire le nombre d'états.
 Ce protocole augmente la diversité des séquences et des règles d'action.
 Il ne mesure ni un monde visuel, ni une mémoire temporelle arbitraire, ni
 un apprentissage à 128 actions, ni des compétences générales sur PC.
+
+## Corrections de l'algorithme sous le même protocole
+
+Les premiers candidats et leurs échecs sont conservés dans les résultats.
+Un indice géométrique et statistique sur les labels passés peut proposer une
+partition plutôt qu'un raffinement de moyenne ; il ne constitue pas une admission.
+Une partition dont le gain prospectif reste positif n'est pas retirée seulement
+pour affiner la moyenne, sauf inversion observée de la règle.
+
+Les nouveaux services utilisent une calibration hiérarchique : quand une feuille
+a moins de 32 résultats, les statistiques causales du même contexte peuvent servir
+de lecture de secours. Les autres contextes ne contribuent pas à cette lecture.
+La pente positive conserve le classement des actions. Les anciens checkpoints
+gardent leur lecture par feuille, et les prévisions en attente sont préservées.
+
+Ces corrections ne changent ni les durées, ni les graines, ni les seuils
+d'évaluation déclarés ci-dessus. La calibration n'est pas une preuve d'incertitude
+épistémique. Les comparaisons au code gelé portent sur la lecture historique
+et des épisodes sans recherche adaptative ; elles isolent l'optimisation du retour.

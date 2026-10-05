@@ -56,7 +56,7 @@ def research(states, seed):
     from first_piece.action_trace import ActionTraceLearner
     n = CASES[states]
     core = ActionTraceLearner(seed, n_actions=n, max_tasks=32, max_symbols=256,
-        max_leaves=32, max_depth=12, record_budget=1000000)
+        max_leaves=32, max_depth=12, record_budget=1000000, calibration_scope="hierarchical")
     rng, reports, total, peak_json = random.Random(800000+seed), [], 0, 0
     started = time.perf_counter()
     for phase, duration, signal, reverse in PHASES:
@@ -140,7 +140,7 @@ def engineering():
         results.append({"actions":n,"episodes":2048,"exact_neural_state":True,
             "receipt_mean_seconds":{k:math.fsum(v)/len(v) for k,v in timings.items()},
             "receipt_max_seconds":{k:max(v) for k,v in timings.items()}})
-    direct = ActionTraceLearner(4,n_actions=32)
+    direct = ActionTraceLearner(4,n_actions=32,calibration_scope="hierarchical")
     service = ScalableActionService(seed=4,actions=actions(32))
     sequence, restored, peak = 0,set(),0.0
     for i in range(4096):

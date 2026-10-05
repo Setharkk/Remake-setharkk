@@ -22,7 +22,9 @@ def record_reservation(leaves, window, contexts, calibration, symbols):
 def configuration(seed=0, *, n_actions=2, adaptive=True, max_leaves=8, max_depth=4,
                   window=None, min_records=None, cooldown=256, replay_passes=4, rate=.03,
                   max_tasks=8, max_symbols=64, calibration_window=None,
-                  point_budget=65536, record_budget=131072, horizon_scale=None):
+                  point_budget=65536, record_budget=131072, horizon_scale=None, calibration_scope=None):
+    if calibration_scope not in (None, "leaf", "hierarchical"):
+        raise ValueError("Invalid calibration scope")
     counter(seed, "seed")
     counter(n_actions, "action count", minimum=2)
     counter(point_budget, "point budget", minimum=1)
@@ -54,7 +56,8 @@ def configuration(seed=0, *, n_actions=2, adaptive=True, max_leaves=8, max_depth
     return {"seed":seed, "n_actions":n_actions, "adaptive":adaptive, "rate":rate,
             **{name: spec[0] for name,spec in limits.items()},
             "window":window, "min_records":min_records, "calibration_window":calibration_window,
-            "point_budget":point_budget, "record_budget":record_budget, "horizon_scale":horizon_scale}
+            "point_budget":point_budget, "record_budget":record_budget, "horizon_scale":horizon_scale,
+            **({} if calibration_scope is None else {"calibration_scope":calibration_scope})}
 
 
 def gain_width(p, q):
@@ -89,6 +92,24 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
             raise RuntimeError("No pending trace forecast")
         bank = self._served(self._leaf(self.state))
         return [bank.probability(a,0) for a in range(self.config["n_actions"])]
+
+    def _readout_for(self, leaf, context):
+        cal = self.cals.get((leaf,context), fresh_readout())
+        if self.config.get("calibration_scope","leaf") != "hierarchical" or len(cal["rows"]) >= 32:
+            return cal
+        history = self.history.get(context,[])
+        if len(history) < 32:
+            return cal
+        readouts = [self.cals[(index,context)] for index in self.nodes
+                    if (index,context) in self.cals]
+        # The shared rows are used only for their count; sums come from causal readouts.
+        return {"rows":history,
+                "sums":[math.fsum(item["sums"][k] for item in readouts) for k in range(4)]}
+
+    def pending_probabilities(self):
+        raw = self.raw_probabilities()
+        cal = self._readout_for(self._leaf(self.state), self.context)
+        return [calibrated(cal,p) for p in raw]
 
     def _propose(self, leaf):
         from .action_work import ActionFitWork
@@ -311,7 +332,7 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
             raise ValueError("Unsupported trace outcome")
         leaf, state, coin, context = self._leaf(self.state), list(self.state), self.coin, self.context
         raw = self._served(leaf).probability(action,0)
-        probability = calibrated(self.cals.get((leaf,context), fresh_readout()), raw)
+        probability = calibrated(self._readout_for(leaf,context), raw)
         node = self.nodes[leaf]
         if self.trial is not None and self.trial["leaf"] == leaf:
             t = self.trial

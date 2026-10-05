@@ -15,7 +15,12 @@ class ScalableActionService(ActionTraceService):
                  coverage_max_age=None, **adapter_options):
         wire.counter(minimum_observations, "minimum observations", minimum=1)
         wire.counter(coverage_window, "coverage window", minimum=minimum_observations)
-        options = copy.deepcopy(adapter_options.get("learner_options") or {})
+        supplied = adapter_options.get("learner_options")
+        if supplied is not None and (type(supplied) is not dict or "seed" in supplied):
+            raise ValueError("Invalid learner options")
+        options = {} if supplied is None else copy.deepcopy(supplied)
+        options.setdefault("calibration_scope", "hierarchical")
+        adapter_options["learner_options"] = copy.deepcopy(options)
         actions = adapter_options.get("actions", ("lab.action.0", "lab.action.1"))
         if not isinstance(actions, (tuple, list)):
             raise ValueError("Invalid action catalogue")
@@ -75,6 +80,7 @@ class ScalableActionService(ActionTraceService):
             core = self._adapter._learner
             result.update(service_checkpoint_format=2,
                           max_depth=core.config["max_depth"],
+                          calibration_scope=core.config.get("calibration_scope","leaf"),
                           coverage_window=self._coverage.window,
                           coverage_max_age_model_revisions=self._coverage.max_age,
                           coverage_reserved_record_slots=self._coverage.reserved_slots,
@@ -103,6 +109,7 @@ class ScalableActionService(ActionTraceService):
         adapter = cls.ADAPTER_CLASS.restore(snapshot["adapter"])
         ledger = CoverageLedger.restore(snapshot["coverage"], adapter._learner)
         options = {k: v for k, v in adapter._learner.config.items() if k != "seed"}
+        options.setdefault("calibration_scope", None)  # Preserve legacy probabilities explicitly.
         new = cls(minimum_observations=snapshot["minimum_observations"],
                   coverage_window=ledger.window, coverage_max_age=ledger.max_age,
                   actions=adapter.actions, learner_options=options,
@@ -126,6 +133,7 @@ class ScalableActionService(ActionTraceService):
     def from_adapter_checkpoint(cls, snapshot, *, minimum_observations=32, **coverage_options):
         adapter = cls.ADAPTER_CLASS.restore(snapshot)
         options = {k: v for k, v in adapter._learner.config.items() if k != "seed"}
+        options.setdefault("calibration_scope", None)  # Preserve legacy probabilities explicitly.
         new = cls(minimum_observations=minimum_observations, actions=adapter.actions,
                   seed=adapter._learner.config["seed"], learner_options=options, **coverage_options)
         new._adapter = adapter

@@ -245,6 +245,22 @@ class ResourceScaleTests(unittest.TestCase):
         self.assertTrue(core._preempt_for_revision())
         self.assertEqual(3, core.attempts)
 
+    def test_sparse_leaf_calibration_uses_only_its_context_and_keeps_ranking(self):
+        from first_piece.adaptive_trace_v2 import fresh_readout, add_readout, calibrated
+        core = ActionTraceLearner(calibration_scope="hierarchical")
+        core.nodes[1] = core._node(1)
+        core.history[0] = [None]*64
+        core.cals = {(0,0):fresh_readout(), (1,0):fresh_readout()}
+        for i in range(64):
+            add_readout(core.cals[(0 if i<4 else 1,0)],
+                        .99 if i%2 else .01, int(i%4<2))
+        leaf_cal = core._readout_for(0,0)
+        self.assertLess(abs(calibrated(leaf_cal,.99)-.5), .01)
+        self.assertGreater(calibrated(leaf_cal,.99),calibrated(leaf_cal,.01))
+        self.assertEqual(.99,calibrated(core._readout_for(0,7),.99))
+        core.config["calibration_scope"] = "leaf"
+        self.assertEqual(.99,calibrated(core._readout_for(0,0),.99))
+
     def test_coverage_and_model_publish_together_after_partition_and_replay(self):
         service = ScalableActionService(seed=7)
         seq, seen = 0, set()

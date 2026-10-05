@@ -4,6 +4,7 @@ on:
     paths:
       - 'validation/recovery_bundle.json'
       - '.github/workflows/cooperative-recovery-review.yml'
+      - 'validation/recovery_probe.py'
 permissions:
   contents: read
 jobs:
@@ -19,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Reproduce interrupted feedback on published reference
+        run: python -m validation.recovery_probe
       - name: Apply exact recovery candidate
         run: python -m validation.readiness_probe --apply validation/recovery_bundle.json
       - name: Recovery and all continuation invariants

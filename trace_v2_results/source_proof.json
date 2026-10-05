@@ -164,5 +164,6 @@
     "first_piece/spherical.py": "f64ab00b385d4a1abe435c9f4c58a411abf549c2",
     "first_piece/world.py": "5c0b5bdcc70fd44139af69200700e33737821dbe",
     "setharkk/contracts.py": "c482c9168bc4be91f1a428c90f876d796e1e4f7a"
-  }
+  },
+  "default_engine_comparison_normalization": "search elapsed_seconds only; trace v2 checkpoint comparisons are unnormalized"
 }

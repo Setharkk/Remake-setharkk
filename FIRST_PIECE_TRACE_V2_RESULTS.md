@@ -71,7 +71,9 @@ Les sources commitées 1ab3e00593296e35a327ff8a0368783fccdede41 passent égaleme
 174 tests et la comparaison coopérative sur les deux OS. Les quatre fichiers du
 moteur et du service ont exactement les identités Git du candidat mesuré.
 Le service format 8 garde également ses prévisions et checkpoints exacts sur
-32 000 retours, 64 symboles et 16 contextes, sur chaque OS. Ses deux fits complets
+32 000 retours, 64 symboles et 16 contextes, sur chaque OS. Cette comparaison
+normalise uniquement les champs de chronométrage des journaux de recherche ;
+les poids, compteurs, prévisions et données conservées sont comparés. Ses deux fits complets
 (structure et confiance) utilisent 4 096 lignes et 32 768 gradients, avec les mêmes
 checkpoints que le calcul direct. Les détails sont dans la preuve de sources.
 

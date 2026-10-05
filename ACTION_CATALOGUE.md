@@ -32,7 +32,7 @@ L'encodeur, la récurrence par exp/log riemanniens, le partitionnement géodési
 le replay intrinsèque, les poids protégés et la lecture calibrée sont conservés.
 
 Pour N actions : fenêtre W=128N, minimum de fit=64N,
-calibration C=max(256,64N), horizons (128,512,2048,8192)×ceil(N/2).
+calibration C=256, horizons (128,512,2048,8192)×ceil(N/2).
 Le constructeur réserve N(8L+2)+2L points et (L+3)W+4TC lignes,
 où L est le nombre maximal de feuilles et T celui des contextes.
 Les budgets par défaut sont 65 536 points et 131 072 lignes.
@@ -56,7 +56,11 @@ Le déclencheur Brier et le gain minimal sont divisés par N/2 afin de ne pas
 diluer une amélioration portant sur une seule action. La validation future
 utilise les largeurs de gains calculées avant les labels et une grille
 exponentielle déclarée, avec risque sommable à vie. Une révision exige aussi
-la confirmation future des changements de direction des actions concernées.
+la confirmation future des assertions de résultat sélectionnées sur le passé,
+y compris lorsqu'elle renforce une compétence sans inverser son classement.
+Une assertion contredite clôt l'essai. Les labels récents doivent toujours
+soutenir ces assertions avant publication. Un essai de partition dépassé peut
+être retiré au profit d'une révision, sans restituer le risque statistique.
 Le [protocole](ACTION_CATALOGUE_PROTOCOL.md) décrit les hypothèses et critères ;
 le [rapport](ACTION_CATALOGUE_RESULTS.md) contient les mesures et les échecs.
 
@@ -87,6 +91,12 @@ python -m validation.action_probe --out actions.json
 La sonde complète teste 4, 8 et 32 actions sur trois graines, avec deux familles
 de récompenses, du bruit, une reprise et une inversion. `--quick`
 exécute seulement la comparaison directe/service sur 8 192 résultats par catalogue.
+
+La couverture utilise une fenêtre récente par contexte. À grand N, toutes
+les actions ne peuvent pas simultanément atteindre le seuil de couverture
+par défaut dans cette fenêtre ; les nombres observés sont publiés sans les
+confondre avec une confiance épistémique. Le coordinateur devra lire ces
+nombres et leur périmètre, ou configurer la fenêtre et le seuil explicitement.
 
 Les coûts de prévision et l'exploration augmentent avec N. Huit contextes,
 64 symboles, huit feuilles, quatre niveaux, un flux et une action en attente

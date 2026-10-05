@@ -144,9 +144,9 @@ class ActionFitWork:
             if self.kind == "revision":
                 for action in range(core.config["n_actions"]):
                     before,after = reference.probability(action,0),self.candidate.probability(action,0)
-                    if before <= .25 and after >= .75:
+                    if abs(after-before) >= .05 and after >= .75:
                         flips.append([action,1])
-                    elif before >= .75 and after <= .25:
+                    elif abs(after-before) >= .05 and after <= .25:
                         flips.append([action,-1])
             if self.kind == "revision" and not flips:
                 core.decisions.append({"attempt":core.attempts,"at":core.steps,"leaf":self.leaf,

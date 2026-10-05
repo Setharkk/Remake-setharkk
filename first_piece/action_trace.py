@@ -33,7 +33,7 @@ def configuration(seed=0, *, n_actions=2, adaptive=True, max_leaves=8, max_depth
             raise ValueError("Trace structural budget exceeds validated range")
     window = 128*n_actions if window is None else window
     min_records = 64*n_actions if min_records is None else min_records
-    calibration_window = max(256,64*n_actions) if calibration_window is None else calibration_window
+    calibration_window = 256 if calibration_window is None else calibration_window
     horizon_scale = (n_actions+1)//2 if horizon_scale is None else horizon_scale
     for name, value, low in (("window",window,128), ("min_records",min_records,128),
                             ("calibration_window",calibration_window,32), ("horizon_scale",horizon_scale,1)):
@@ -112,7 +112,7 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
         for action,(n,positive) in enumerate(counts):
             if n >= 8:
                 old = node["protected"].probability(action,0)
-                if (old >= .75 and positive/n <= .25) or (old <= .25 and positive/n >= .75):
+                if (positive/n >= .75 and old < .95) or (positive/n <= .25 and old > .05):
                     return True
         return False
 
@@ -124,6 +124,55 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
             return "revision"
         room = self.leaf_count() < self.config["max_leaves"] and node["depth"] < self.config["max_depth"]
         return "split" if room else "revision"
+
+    def _reversal_signal(self, leaf):
+        node = self.nodes[leaf]
+        if node["protected"] is None:
+            return False
+        counts = [[0,0] for _ in range(self.config["n_actions"])]
+        for state,coin,action,outcome in node["records"][-self.config["min_records"]:]:
+            counts[action][0] += 1
+            counts[action][1] += outcome
+        for action,(n,y) in enumerate(counts):
+            if n >= 8:
+                old = node["protected"].probability(action,0)
+                if (old >= .75 and y/n <= .25) or (old <= .25 and y/n >= .75):
+                    return True
+        return False
+
+    def _proposal_leaf(self, current):
+        eligible = [leaf for leaf,node in self.nodes.items() if node["children"] is None
+                    and len(node["records"]) >= self.config["min_records"]
+                    and self.steps >= self.next_checks.get(leaf,0)]
+        changed = [leaf for leaf in eligible if self._reversal_signal(leaf)]
+        return min(changed) if changed else current if current in eligible else None
+
+    def _preempt_for_urgent_revision(self):
+        t = self.trial
+        if t is None or t["validation"] == "legacy" or self._reversal_signal(t["leaf"]):
+            return False
+        changed = [leaf for leaf,node in self.nodes.items() if node["children"] is None
+                   and leaf != t["leaf"] and len(node["records"]) >= self.config["min_records"]
+                   and self._reversal_signal(leaf)]
+        if not changed:
+            return False
+        self.decisions.append({"attempt":self.attempts,"at":self.steps,"leaf":t["leaf"],
+            "kind":t["kind"],"n":t["n"],"decision":"superseded_by_rule_change"})
+        self.decisions = self.decisions[-48:]
+        self.trial = None
+        self.next_trial = self.steps+self.config["cooldown"]
+        return True
+
+    def _preempt_for_revision(self):
+        t = self.trial
+        if t is None or t.get("validation") == "legacy" or t["kind"] != "split" or not self._revision_signal(t["leaf"]):
+            return False
+        self.decisions.append({"attempt":self.attempts,"at":self.steps,"leaf":t["leaf"],
+            "kind":"split","n":t["n"],"decision":"superseded_by_revision"})
+        self.decisions = self.decisions[-48:]
+        self.trial = None
+        self.next_trial = self.steps+self.config["cooldown"]
+        return True
 
     def _polarity_supported(self):
         t = self.trial
@@ -143,6 +192,35 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
                 return False
         return True
 
+    def _assertions_contradicted(self):
+        t = self.trial
+        if t["kind"] != "revision" or t["validation"] == "legacy":
+            return False
+        alpha = .05/(self.attempts*(self.attempts+1))
+        penalty = math.log(4*max(1,len(t["flips"]))*len(LOOKS)/alpha)
+        for action,direction in t["flips"]:
+            n = t["support"][0][action]
+            if n:
+                mean = t["outcome_support"][0][action]/n
+                radius = math.sqrt(penalty/(2*n))
+                if (direction == 1 and mean+radius < .6) or (direction == -1 and mean-radius > .4):
+                    return True
+        return False
+
+    def _recent_assertions_supported(self):
+        t = self.trial
+        if t["kind"] != "revision" or t["validation"] == "legacy":
+            return True
+        counts = [[0,0] for _ in range(self.config["n_actions"])]
+        for state,coin,action,outcome in self.nodes[t["leaf"]]["records"][-self.config["min_records"]:]:
+            counts[action][0] += 1
+            counts[action][1] += outcome
+        for action,direction in t["flips"]:
+            n,y = counts[action]
+            if n < 8 or (direction == 1 and y/n < .75) or (direction == -1 and y/n > .25):
+                return False
+        return bool(t["flips"])
+
     def _judge(self):
         t = self.trial
         alpha = .05/(self.attempts*(self.attempts+1))
@@ -154,7 +232,7 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
         lower = mean-radius
         support = min(t["support"][0]) >= 16 if comparisons == 1 else (
             min(min(row) for row in t["support"]) >= 8 and min(map(sum, t["support"])) >= 16)
-        decision = "accept" if lower > minimum_gain and support and self._polarity_supported() else (
+        decision = "contradicted" if self._assertions_contradicted() else "accept" if lower > minimum_gain and support and self._polarity_supported() and self._recent_assertions_supported() else (
             "futile" if mean <= minimum_gain else "inconclusive" if t["n"] == self.horizons()[-1] else "pending")
         self.decisions.append({"attempt": self.attempts, "at": self.steps, "leaf": t["leaf"],
                               "kind": t["kind"], "n": t["n"], "lower": lower, "mean": mean,
@@ -223,17 +301,24 @@ class ActionTraceLearner(AdaptiveTraceLearnerV2):
         self.steps += 1
         self.contexts[context] += 1
         proposal = None
+        if self.trial is not None and self.steps%128 == 0:
+            self._preempt_for_urgent_revision()
+        if self.trial is not None and self.trial["leaf"] == leaf and self.trial["n"]%128 == 0:
+            self._preempt_for_revision()
         if self.trial is not None and self.trial["leaf"] == leaf and self.trial["n"] in self.horizons():
             self._judge()
-        elif self.trial is None and self.config["adaptive"] and self.steps >= self.next_trial and self.steps >= self.next_checks.get(leaf, 0) and len(node["records"]) >= self.config["min_records"]:
-            self.next_checks[leaf] = self.steps+self.config["cooldown"]
-            kind = self._proposal_kind(leaf)
-            recent = node["records"][-self.config["min_records"]:]
-            bank = node["protected"] or node["bank"]
-            loss = math.fsum((bank.probability(a, 0)-y)**2 for _, _, a, y in recent)/len(recent)
-            possible = kind == "revision" or (self.leaf_count() < self.config["max_leaves"] and node["depth"] < self.config["max_depth"])
-            if loss > .18*2/self.config["n_actions"] and possible and (kind != "revision" or self._revision_signal(leaf)):
-                proposal = (leaf, kind)
+        elif self.trial is None and self.config["adaptive"] and self.steps >= self.next_trial:
+            target = self._proposal_leaf(leaf)
+            if target is not None:
+                self.next_checks[target] = self.steps+self.config["cooldown"]
+                kind = self._proposal_kind(target)
+                target_node = self.nodes[target]
+                recent = target_node["records"][-self.config["min_records"]:]
+                bank = target_node["protected"] or target_node["bank"]
+                loss = math.fsum((bank.probability(a, 0)-y)**2 for _, _, a, y in recent)/len(recent)
+                possible = kind == "revision" or (self.leaf_count() < self.config["max_leaves"] and target_node["depth"] < self.config["max_depth"])
+                if (loss > .18*2/self.config["n_actions"] or kind == "revision") and possible and (kind != "revision" or self._revision_signal(target)):
+                    proposal = (target, kind)
         self.finish_evaluation()
         if proposal is not None:
             from .action_work import ActionFitWork

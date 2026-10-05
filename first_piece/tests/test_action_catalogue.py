@@ -57,7 +57,7 @@ class ActionCatalogueTests(unittest.TestCase):
 
     def test_resource_budgets_reject_before_bank_allocation(self):
         for options in ({"n_actions":32,"point_budget":100},
-                        {"n_actions":64},{"n_actions":4,"window":256,"min_records":512},
+                        {"n_actions":128},{"n_actions":4,"window":256,"min_records":512},
                         {"n_actions":32,"min_records":128}):
             with patch.object(ActionSpherePredictor,"__init__",side_effect=AssertionError("allocated")):
                 with self.assertRaises(ValueError):
@@ -206,3 +206,113 @@ class ActionCatalogueTests(unittest.TestCase):
         clone = ActionTraceService.restore(json.loads(json.dumps(service.checkpoint())))
         self.assertEqual(p,clone.current_prediction())
         self.assertEqual(128,clone.capabilities()["action_count"])
+
+class RevisionEvidenceTests(unittest.TestCase):
+    def test_confidence_refinement_can_be_proposed_without_sign_flip(self):
+        core = ActionTraceLearner(n_actions=4)
+        node = core.nodes[0]
+        node["protected"] = copy.deepcopy(node["bank"])
+        node["records"] = [[list(core.state),i%2,i%4,1] for i in range(256)]
+        self.assertTrue(core._revision_signal(0))
+        self.assertEqual("revision",core._proposal_kind(0))
+
+    def test_noise_cannot_confirm_strengthened_action_assertion(self):
+        core = ActionTraceLearner(n_actions=4)
+        core.attempts = 1
+        core.trial = {"kind":"revision","validation":"widths","flips":[[3,1]],
+                      "support":[[0,0,0,4096],[0]*4],
+                      "outcome_support":[[0,0,0,2048],[0]*4]}
+        self.assertFalse(core._polarity_supported())
+        core.trial["outcome_support"][0][3] = 4096
+        self.assertTrue(core._polarity_supported())
+
+    def test_confidence_fit_is_not_blocked_by_aggregate_brier_trigger(self):
+        core = ActionTraceLearner(n_actions=4)
+        node = core.nodes[0]
+        for action in range(4):
+            y = int(action == 0)
+            for _ in range(2000):
+                p = node["bank"].probability(action,0)
+                if (y and p >= .90) or (not y and p <= .10):
+                    break
+                node["bank"].update(action,y,0)
+        node["protected"] = copy.deepcopy(node["bank"])
+        node["records"] = [[list(core.state),i%2,i%4,int(i%4 == 0)] for i in range(256)]
+        loss = sum((node["protected"].probability(a,0)-y)**2 for _,_,a,y in node["records"])/256
+        self.assertLess(loss,.09)
+        self.assertTrue(core._revision_signal(0))
+        core.steps,core.contexts[0] = 256,256
+        feed(core,trace(0))
+        deferred = []
+        core.learn(0,1,defer=deferred.append)
+        self.assertEqual(1,len(deferred))
+        self.assertEqual("revision",deferred[0].kind)
+
+    def test_stale_split_retires_without_refunding_risk(self):
+        core = ActionTraceLearner(n_actions=4)
+        node = core.nodes[0]
+        node["protected"] = copy.deepcopy(node["bank"])
+        node["records"] = [[list(core.state),i%2,i%4,1] for i in range(256)]
+        core.attempts = 3
+        core.trial = {"kind":"split","leaf":0,"n":128}
+        self.assertTrue(core._preempt_for_revision())
+        self.assertIsNone(core.trial)
+        self.assertEqual(3,core.attempts)
+        self.assertEqual("superseded_by_revision",core.decisions[-1]["decision"])
+        self.assertFalse(core._preempt_for_revision())
+
+    def test_contradicted_assertion_closes_instead_of_waiting_for_maximum_horizon(self):
+        core = ActionTraceLearner(n_actions=4)
+        core.attempts = 1
+        core.trial = {"kind":"revision","validation":"widths","flips":[[3,1]],
+                      "support":[[0,0,0,4096],[0]*4],
+                      "outcome_support":[[0,0,0,0],[0]*4]}
+        self.assertTrue(core._assertions_contradicted())
+        core.trial["outcome_support"][0][3] = 4096
+        self.assertFalse(core._assertions_contradicted())
+
+    def test_recent_labels_guard_pending_evidence_and_legacy_trial_is_not_preempted(self):
+        core = ActionTraceLearner(n_actions=4)
+        node = core.nodes[0]
+        node["protected"] = copy.deepcopy(node["bank"])
+        node["records"] = [[list(core.state),i%2,i%4,1] for i in range(256)]
+        core.trial = {"kind":"revision","validation":"widths","leaf":0,"flips":[[3,1]]}
+        self.assertTrue(core._recent_assertions_supported())
+        for row in node["records"]:
+            row[3] = 0
+        self.assertFalse(core._recent_assertions_supported())
+        core.trial = {"kind":"split","validation":"legacy","leaf":0,"n":128}
+        self.assertFalse(core._preempt_for_revision())
+        self.assertIsNotNone(core.trial)
+
+    def priority_core(self):
+        core = ActionTraceLearner(n_actions=4)
+        core.nodes[0]["children"] = [1,2]
+        core.nodes[0]["centers"] = [[1.,0.,0.],[0.,1.,0.]]
+        for leaf in (1,2):
+            node = core._node(1)
+            for action in range(4):
+                for _ in range(128):
+                    node["bank"].update(action,1,0)
+            node["protected"] = copy.deepcopy(node["bank"])
+            node["records"] = [[list(core.state),i%2,i%4,int(leaf == 1)] for i in range(256)]
+            core.nodes[leaf] = node
+        core.steps = 1024
+        return core
+
+    def test_rule_change_in_another_leaf_has_priority_over_confidence_refinement(self):
+        core = self.priority_core()
+        self.assertFalse(core._reversal_signal(1))
+        self.assertTrue(core._reversal_signal(2))
+        self.assertEqual(2,core._proposal_leaf(1))
+        core.next_checks[2] = core.steps+256
+        self.assertEqual(1,core._proposal_leaf(1))
+
+    def test_refinement_cannot_starve_another_leaf_rule_change_or_refund_risk(self):
+        core = self.priority_core()
+        core.attempts = 3
+        core.trial = {"kind":"revision","validation":"widths","leaf":1,"n":128}
+        self.assertTrue(core._preempt_for_urgent_revision())
+        self.assertIsNone(core.trial)
+        self.assertEqual(3,core.attempts)
+        self.assertEqual("superseded_by_rule_change",core.decisions[-1]["decision"])
